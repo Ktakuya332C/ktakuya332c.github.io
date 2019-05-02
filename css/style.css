@@ -1,0 +1,212 @@
+@charset "UTF-8"
+
+/**** ページ全体に関わるスタイル ****/
+body {
+  color: #333;
+  font-size: 1.2rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+a:link, a:visited, a:hover, a:active {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px dotted #333;
+}
+p {
+  line-height: 1.2rem;
+  margin: 10px 0px;
+}
+.container {
+  min-width: 600px;
+  width: 70%;
+  margin: 30px auto 50px;
+  background-image: url('../images/mark.svg');
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+.border {
+  height: 2px;
+  color: #455890;
+  background-color: #455890;
+  border: none;
+}
+.code-container {
+  line-height: 1.2rem;
+  text-align: left;
+  background-color: rgba(250, 250, 250, 1.0);
+  border-radius: 10px;
+  overflow-x: scroll;
+}
+.code-container pre {
+  display: inline-block;
+  text-align: left;
+  background-color: inherit;
+}
+.code-container pre code {
+  background-color: inherit;
+}
+
+/**** ヘッダーに関わるスタイル ****/
+.header {
+  width: 100%;
+  margin: 60px 0px 20px;
+}
+.logo {
+  margin: 0px 0px 20px;
+}
+.logo a {
+  font-size: 4.0rem;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  text-decoration: none;
+  border-bottom: 0px;
+}
+.desc {
+  font-weight: bold;
+}
+
+/**** メインコンテンツに関わるスタイル ****/
+.main {
+  width: 100%;
+}
+
+/**** トップページコンテンツに関わるスタイル ****/
+.article-list {
+  margin: 40px 0px 40px;
+  list-style-type: none;
+}
+.article-list .article-item a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 0px;
+  border-bottom: 0px;
+}
+.article-list .article-item a:hover {
+  color: #F2742F;
+}
+.article-list .year {
+  display: inline-block;
+  width: 8%;
+  font-size: 1.0rem;
+  color: #aaa;
+}
+.article-list .date {
+  display: inline-block;
+  width: 12%;
+  font-size: 1.0rem;
+  color: #aaa;
+}
+.article-list .title {
+  display: inline-block;
+  width: 80%;
+  font-size: 1.0rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**** 各記事のスタイル ****/
+.article-wrapper {
+  margin: 50px 20px 50px;
+}
+.article-wrapper .header {
+  margin: 50px 0px 50px;
+}
+.article-wrapper .header .title {
+  font-size: 2.0rem;
+  padding: 5px 0px;
+}
+.article-wrapper .header .date {
+  font-size: 1.0rem;
+  color: #aaa;
+  padding: 0px 5px;
+}
+.article-wrapper .content {
+  font-size: 1.0rem;
+  line-height: 1.8rem;
+  color: #444;
+}
+.article-wrapper .content .section-title {
+  font-size: 1.5rem;
+  color: #333;
+  padding-left: 0.5rem;
+  margin: 30px 0px 20px;
+  border-left: 5px solid rgba(69, 88, 144, .5);
+}
+.article-wrapper .content .content-paragraph {
+  margin: 10px 0px;
+}
+.article-wrapper .content .content-ul {
+  margin: 10px 0px;
+}
+.article-wrapper .content .content-ul-item {
+  list-style: circle;
+  list-style-position: inside;
+  padding-left: 1.0rem;
+}
+.article-wrapper .content .content-ol {
+  margin: 10px 0px;
+}
+.article-wrapper .content .content-ol-item {
+  list-style-position: inside;
+  padding-left: 1.0rem;
+}
+.article-wrapper .content .content-def {
+  margin: 10px 0px 10px 0px;
+  padding: 5px 10px 5px 10px;
+  border: 1.5px solid rgba(149, 168, 224, .5);
+  border-radius: 5px;
+}
+.article-wrapper .content .content-def-name {
+  font-weight: bold;
+  font-style: italic;
+  color: #6578a0;
+}
+.article-wrapper .content .inline-code {
+  background-color: rgba(250, 250, 250, 1.0);
+  border-radius: 5px;
+  font-family: monospace;
+  padding: 0.2rem;
+}
+.article-wrapper .content .content-table {
+  border-collapse: collapse;
+  margin: 10px 0px;
+}
+.article-wrapper .content .content-th {
+  color: #6578a0;
+  padding: 0px 10px 10px 10px;
+  border-bottom: 2px solid rgba(149, 168, 224, .5);
+}
+.article-wrapper .content .content-td {
+  border-bottom: 1px dashed #333;
+  padding: 5px;
+}
+.article-wrapper .content .content-td {
+  border-bottom: 1px dashed #333;
+  padding: 5px;
+}
+.article-wrapper .content .content-tr:last-child {
+  border-bottom: 2px solid rgba(149, 168, 224, .5);
+}
+.article-wrapper .content .content-figure {
+  margin: 30px 0px;
+  width: 70%;
+}
+.article-wrapper .content .content-img {
+  width: 100%;
+}
+.article-wrapper .content .content-quote {
+  color: #888;
+  padding-left: 1.0rem;
+  border-left: 2px solid rgba(149, 168, 224, .5);
+}
+
+/**** フッターに関わるスタイル ****/
+.footer {
+  width: 100%;
+}
+.footer .copyright {
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

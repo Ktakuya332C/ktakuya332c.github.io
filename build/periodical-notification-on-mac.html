@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Principles</title>
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/vs.css">
+<script src="../js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+<div class="container">
+<header class="header">
+<h1 class="logo">
+<a href="/">Principles</a>
+</h1>
+<p class="desc">エンジニアKtakuyaのブログ</p>
+</header>
+<hr class="border">
+<main class="main">
+<div class="article-wrapper">
+<div class="header">
+<h2 class="title">Macで簡単に定期通知をする
+</h2>
+<p class="date">2019-02-11
+</p>
+</div>
+<div class="content">
+<div class="content-paragraph">座りっぱなしは良くないので、Mac上で一時間に一回くらいお知らせをしてくれるようなアプリがないかなと探していたら、デフォルトの機能で簡単にできることがわかったのでメモ。主にこのページを参考にしている。
+<ul class="content-ul"><li class="content-ul-item"><a href="https://liginc.co.jp/295876">MACにオリジナルの通知アラートを設定!遊びながらcrontabの使い方を習得しよう</a></li></ul></div>
+<div class="content-paragraph">デスクトップへの通知はosascriptと呼ばれるコマンドを使えばいいらしい。基本的には Apple Script を呼び出すためのコマンドらしいのだが、とりあえず気にせず使ってみる。Terminalで次のコマンドを打つと、確かに右上からnotificationが出てくる。
+<div class="code-container">
+<pre><code>$ osascript -e &apos;display notification &quot;一時間経ちました&quot; with title &quot;お疲れ様です&quot;&apos;</code></pre>
+</div>これをcrontabに設定してしまえば良いらしい。とりあえず座っていることの多い時間帯、10時から18時まで一時間に一回通知をしてみよう
+<div class="code-container">
+<pre><code>$ crontab -e
+$ crontab -l
+0 10-18 * * * osascript -e &apos;display notification &quot;一時間経ちました&quot; with title &quot;お疲れ様です&quot;&apos; &gt; /tmp/hourly-notification.log 2&gt;&amp;1</code></pre>
+</div>これで10時から18時の間毎時通知がくるはず。このnotificationで座りっぱなしが解消されればありがたい。</div>
+</div>
+</div>
+</main>
+<hr class="border">
+<footer class="footer">
+<p class="copyright">Copyright@2019 Ktakuya. All rights reserved.</p>
+</footer>
+</div>
+</body>
+</html>
