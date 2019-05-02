@@ -36,7 +36,7 @@
 <div class="content-paragraph">それぞれのファイルの役割は
 <ul class="content-ul"><li class="content-ul-item">boot.S: BIOSから最初に呼び出されるスクリプト。16-bit real mode から 32-bit protected mode に動作方法を変換し、main.cのbootmain関数を呼び出す</li><li class="content-ul-item">main.c: 無限ループをする関数bootmainを定義しているスクリプト。</li><li class="content-ul-item">sign.pl: 任意のバイナリファイルを読み取り、510バイト以下なら510バイトになるように0を付け足した上で最後にbootloaderであることを示すマジックナンバーであるAA55を付け足すスクリプト。</li></ul></div>
 <h1 class="section-title">調査準備</h1>
-<div class="content-paragraph">まず、<a href="/debug-bootloader-on-mac">Macでbootloader周辺をデバッグする方法</a>の通りに環境構築を行う。</div>
+<div class="content-paragraph">まず、<a href="/build/debug-bootloader-on-mac.html">Macでbootloader周辺をデバッグする方法</a>の通りに環境構築を行う。</div>
 <div class="content-paragraph">次に、今回調査を行うためのスクリプトをコンパイルする。まずはassemblyのスクリプトであるboot.Sをコンパイルする。
 <div class="code-container">
 <pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o</code></pre>

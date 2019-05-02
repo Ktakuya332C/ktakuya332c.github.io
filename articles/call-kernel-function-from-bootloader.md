@@ -21,7 +21,7 @@ bootloaderからcのkernel関数を呼び出す
 # 実行方法
 
 
-開発環境は\a{この記事}{/debug-bootloader-on-mac}にしたがって整備しておく。
+開発環境は\a{この記事}{\rel{debug-bootloader-on-mac.html}}にしたがって整備しておく。
 
 
 次に上記の実装をコピペしてVagrantによる仮想環境上に置いておく。

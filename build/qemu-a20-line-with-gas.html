@@ -61,7 +61,7 @@ spin:
   .byte 0xaa</code></pre>
 </div></div>
 <h1 class="section-title">調査内容</h1>
-<div class="content-paragraph"><a href="/debug-bootloader-on-mac">Macでbootloader周辺をデバッグする方法</a>の通りに環境構築を行った後に、次のように先の調査コードをコンパイルして行く。
+<div class="content-paragraph"><a href="/build/debug-bootloader-on-mac">Macでbootloader周辺をデバッグする方法</a>の通りに環境構築を行った後に、次のように先の調査コードをコンパイルして行く。
 <div class="code-container">
 <pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ vim boot.S # 上記の調査用コードを書く
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o

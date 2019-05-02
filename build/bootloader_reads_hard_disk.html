@@ -188,7 +188,7 @@ outb %al, %dx</code></pre>
 repne insl</code></pre>
 </div></div>
 <h1 class="section-title">調査内容</h1>
-<div class="content-paragraph"><a href="/debug-bootloader-on-mac">Macでbootloader周辺をデバッグする方法</a>の通りに環境を用意し、上記のスクリプトをコンパイルした上でデバッグモードで実行する。
+<div class="content-paragraph"><a href="/build/debug-bootloader-on-mac.html">Macでbootloader周辺をデバッグする方法</a>の通りに環境を用意し、上記のスクリプトをコンパイルした上でデバッグモードで実行する。
 <div class="code-container">
 <pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 07c00 --oformat=binary --entry start boot.o  -o boot.bin

@@ -21,7 +21,7 @@ bootloader内でassemblyからC言語のコードを呼ぶことができたの�
 # 調査準備
 
 
-まず、\a{Macでbootloader周辺をデバッグする方法}{/debug-bootloader-on-mac}の通りに環境構築を行う。
+まず、\a{Macでbootloader周辺をデバッグする方法}{\rel{debug-bootloader-on-mac.html}}の通りに環境構築を行う。
 
 
 次に、今回調査を行うためのスクリプトをコンパイルする。まずはassemblyのスクリプトであるboot.Sをコンパイルする。

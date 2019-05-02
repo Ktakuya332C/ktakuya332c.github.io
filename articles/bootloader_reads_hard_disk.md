@@ -184,7 +184,7 @@ repne insl
 # 調査内容
 
 
-\a{Macでbootloader周辺をデバッグする方法}{/debug-bootloader-on-mac}の通りに環境を用意し、上記のスクリプトをコンパイルした上でデバッグモードで実行する。
+\a{Macでbootloader周辺をデバッグする方法}{\rel{debug-bootloader-on-mac.html}}の通りに環境を用意し、上記のスクリプトをコンパイルした上でデバッグモードで実行する。
 \code{
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 07c00 --oformat=binary --entry start boot.o  -o boot.bin

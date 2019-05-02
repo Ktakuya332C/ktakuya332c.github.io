@@ -41,7 +41,7 @@ spin:
 # 調査内容
 
 
-\a{Macでbootloader周辺をデバッグする方法}{/debug-bootloader-on-mac}の通りに環境構築を行った後に、次のように先の調査コードをコンパイルして行く。
+\a{Macでbootloader周辺をデバッグする方法}{\rel{debug-bootloader-on-mac}}の通りに環境構築を行った後に、次のように先の調査コードをコンパイルして行く。
 \code{
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ vim boot.S # 上記の調査用コードを書く
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o
