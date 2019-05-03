@@ -33,3 +33,4 @@
 {\a{Writing an OS in Rust}{https://os.phil-opp.com/}}
 {\a{favicon.io}{https://favicon.io/}}
 {\a{The R Journal}{https://journal.r-project.org/}}
+{\a{quantopian}{https://www.quantopian.com/}}
