@@ -61,7 +61,10 @@ def process_macro(content_text, cur):
   
   # Process macro
   html = ""
-  if tag_name == '\\code':
+  if tag_name == '\\debug':
+    assert len(args) == 1, "\\debug takes only 1 argument, got {}".format(args)
+    html = args[0]
+  elif tag_name == '\\code':
     assert len(args) == 1, "\\code takes only 1 argument, got {}".format(args)
     html = code_tag(args[0])
   elif tag_name == '\\ul':

@@ -25,3 +25,10 @@ $ python main.py
   * `\emp`関数は引数をひとつとり、通常のMarkdownでのbacktickと同じ働きをする
   * `\table`関数はコンマ区切りの引数をいくつかとり、それらを並べたテーブルを表示する
   * `\fig`関数は画像へのリンクURLをとり、その画像を表示する
+
+## Unittestの実行
+`tests/`以下に含まれるunittestを実行するには
+```
+$ python -m unittest discover tests
+```
+とすれば良い。
