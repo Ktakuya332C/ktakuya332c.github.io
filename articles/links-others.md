@@ -34,3 +34,4 @@
 {\a{favicon.io}{https://favicon.io/}}
 {\a{The R Journal}{https://journal.r-project.org/}}
 {\a{quantopian}{https://www.quantopian.com/}}
+{\a{Readings in Database Systems}{http://www.redbook.io/}}
