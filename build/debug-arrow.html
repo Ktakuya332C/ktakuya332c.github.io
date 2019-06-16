@@ -183,6 +183,12 @@ $8 = {
   ob_ival = 1
 }</code></pre>
 </div><span class="inline-code">sequence_source</span>は3つの要素が入っているリストで、一つ目の要素は1であることがわかった。</div>
+<h1 class="section-title">その他</h1>
+<div class="content-paragraph">一度仮想環境から出て、再度入り直した際には環境変数を少し設定し直しておかないとpyarrowをインポートすることはできない。とりあえず
+<div class="code-container">
+<pre><code>export ARROW_HOME=arrow/cpp/dist
+export LD_LIBRARY_PATH=$(ARROW_HOME)/lib</code></pre>
+</div>としておけば問題はない。</div>
 <h1 class="section-title">参考文献</h1>
 <div class="content-paragraph"><ol class="content-ol"><li class="content-ol-item"><a href="https://github.com/apache/arrow/blob/master/docs/source/developers/python.rst">pyarrowの公式開発者用ドキュメント</a></li></ol></div>
 </div>
