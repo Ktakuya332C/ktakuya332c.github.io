@@ -42,6 +42,10 @@ sudo apt install -y \
     libboost-regex-dev \
     flex bison
 }
+本体のコードを取ってきて
+\code{
+git clone https://github.com/apache/arrow.git
+}
 ついでに必要なpythonのライブラリも導入してしまう。
 \code{
 pip install -r arrow/python/requirements-build.txt
