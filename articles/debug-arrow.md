@@ -201,8 +201,8 @@ $8 = {
 
 一度仮想環境から出て、再度入り直した際には環境変数を少し設定し直しておかないとpyarrowをインポートすることはできない。とりあえず
 \code{
-export ARROW_HOME=arrow/cpp/dist
-export LD_LIBRARY_PATH=$(ARROW_HOME)/lib
+export ARROW_HOME=$(pwd)/arrow/cpp/dist
+export LD_LIBRARY_PATH=$ARROW_HOME/lib
 }
 としておけば問題はない。
 
