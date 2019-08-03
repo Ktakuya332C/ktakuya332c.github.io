@@ -53,7 +53,7 @@ pip install -r arrow/python/requirements-build.txt
 そしてarrowのC++ライブラリをデバッグフラグ付き(\emp{DCMAKE_BUILD_TYPE=debug})でビルドする。
 \code{
 pushd arrow/cpp
-  mkdir dist build
+  mkdir -p dist build
   export ARROW_HOME=$(pwd)/dist
   export LD_LIBRARY_PATH=$(pwd)/dist/lib
   pushd build
