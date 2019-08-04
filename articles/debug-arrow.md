@@ -207,8 +207,24 @@ export LD_LIBRARY_PATH=$ARROW_HOME/lib
 としておけば問題はない。
 
 
+またMacOS上でコンパイルした時は、どうもpythonのライブラリからcppのライブラリへのリンクがうまく通らない様子。なのでそのような時はリンクしている先のcppライブラリのパスを確認して
+\code{
+$ otool -L pyarrow/lib.cpython-37m-darwin.so
+pyarrow/lib.cpython-37m-darwin.so:
+	@rpath/libarrow.100.dylib (compatibility version 100.0.0, current version 100.0.0)
+	@rpath/libarrow_python.100.dylib (compatibility version 100.0.0, current version 100.0.0)
+	/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 400.9.4)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1252.200.5)
+}
+リンクされていなさそうなライブラリを絶対パスに書き換えてやると良いかもしれない。
+\code{
+$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
+$ install_name_tool -change @rpath/libarrow_python.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
+}
+
 # 参考文献
 
 
 \ol
 {\a{pyarrowの公式開発者用ドキュメント}{https://github.com/apache/arrow/blob/master/docs/source/developers/python.rst}}
+{\a{Fun with rpath, otool, install_name_tool}{https://medium.com/@donblas/fun-with-rpath-otool-and-install-name-tool-e3e41ae86172}}

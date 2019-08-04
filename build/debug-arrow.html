@@ -65,7 +65,7 @@ sudo apt upgrade -y</code></pre>
 </div>そしてarrowのC++ライブラリをデバッグフラグ付き(<span class="inline-code">DCMAKE_BUILD_TYPE=debug</span>)でビルドする。
 <div class="code-container">
 <pre><code>pushd arrow/cpp
-  mkdir dist build
+  mkdir -p dist build
   export ARROW_HOME=$(pwd)/dist
   export LD_LIBRARY_PATH=$(pwd)/dist/lib
   pushd build
@@ -189,8 +189,20 @@ $8 = {
 <pre><code>export ARROW_HOME=$(pwd)/arrow/cpp/dist
 export LD_LIBRARY_PATH=$ARROW_HOME/lib</code></pre>
 </div>としておけば問題はない。</div>
-<h1 class="section-title">参考文献</h1>
-<div class="content-paragraph"><ol class="content-ol"><li class="content-ol-item"><a href="https://github.com/apache/arrow/blob/master/docs/source/developers/python.rst">pyarrowの公式開発者用ドキュメント</a></li></ol></div>
+<div class="content-paragraph">またMacOS上でコンパイルした時は、どうもpythonのライブラリからcppのライブラリへのリンクがうまく通らない様子。なのでそのような時はリンクしている先のcppライブラリのパスを確認して
+<div class="code-container">
+<pre><code>$ otool -L pyarrow/lib.cpython-37m-darwin.so
+pyarrow/lib.cpython-37m-darwin.so:
+	@rpath/libarrow.100.dylib (compatibility version 100.0.0, current version 100.0.0)
+	@rpath/libarrow_python.100.dylib (compatibility version 100.0.0, current version 100.0.0)
+	/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 400.9.4)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1252.200.5)</code></pre>
+</div>リンクされていなさそうなライブラリを絶対パスに書き換えてやると良いかもしれない。
+<div class="code-container">
+<pre><code>$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
+$ install_name_tool -change @rpath/libarrow_python.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so</code></pre>
+</div># 参考文献</div>
+<div class="content-paragraph"><ol class="content-ol"><li class="content-ol-item"><a href="https://github.com/apache/arrow/blob/master/docs/source/developers/python.rst">pyarrowの公式開発者用ドキュメント</a></li><li class="content-ol-item"><a href="https://medium.com/@donblas/fun-with-rpath-otool-and-install-name-tool-e3e41ae86172">Fun with rpath, otool, install_name_tool</a></li></ol></div>
 </div>
 </div>
 </main>
