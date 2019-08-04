@@ -218,7 +218,7 @@ pyarrow/lib.cpython-37m-darwin.so:
 }
 リンクされていなさそうなライブラリを絶対パスに書き換えてやると良いかもしれない。
 \code{
-$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
+$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow.100.dylib pyarrow/lib.cpython-37m-darwin.so
 $ install_name_tool -change @rpath/libarrow_python.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
 }
 

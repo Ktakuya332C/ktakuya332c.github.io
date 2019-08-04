@@ -199,7 +199,7 @@ pyarrow/lib.cpython-37m-darwin.so:
 	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1252.200.5)</code></pre>
 </div>リンクされていなさそうなライブラリを絶対パスに書き換えてやると良いかもしれない。
 <div class="code-container">
-<pre><code>$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so
+<pre><code>$ install_name_tool -change @rpath/libarrow.100.dylib $LD_LIBRARY_PATH/libarrow.100.dylib pyarrow/lib.cpython-37m-darwin.so
 $ install_name_tool -change @rpath/libarrow_python.100.dylib $LD_LIBRARY_PATH/libarrow_python.100.dylib pyarrow/lib.cpython-37m-darwin.so</code></pre>
 </div># 参考文献</div>
 <div class="content-paragraph"><ol class="content-ol"><li class="content-ol-item"><a href="https://github.com/apache/arrow/blob/master/docs/source/developers/python.rst">pyarrowの公式開発者用ドキュメント</a></li><li class="content-ol-item"><a href="https://medium.com/@donblas/fun-with-rpath-otool-and-install-name-tool-e3e41ae86172">Fun with rpath, otool, install_name_tool</a></li></ol></div>
