@@ -70,3 +70,7 @@
 {\a{卒業論文、修士論文関連のエントリー}{http://next49.hatenadiary.jp/entry/20080105/p3}}
 {\a{圧倒的に生産性の高い人の研究スタイル}{http://d.hatena.ne.jp/kaz_ataka/20081018/1224287687}}
 {\a{書きなぐれ、その後レヴィ=ストロースのように推敲しよう}{https://readingmonkey.blog.fc2.com/blog-entry-461.html}}
+{\a{松尾ぐみの論文の書き方}{http://ymatsuo.com/japanese/ronbun_jpn.html}}
+{\a{松尾ぐみの論文の書き方:英語論文}{http://ymatsuo.com/japanese/ronbun_eng.html}}
+{\a{村上春樹はどのように読みやすい文章を書くのか？}{http://www.tjsg-kokoro.com/2014/05/13/murakamiharuki/}}
+{\a{指南役さんの文章推敲論}{https://togetter.com/li/75337}}
