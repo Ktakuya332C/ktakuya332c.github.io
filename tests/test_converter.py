@@ -19,7 +19,7 @@ class TestConverter(unittest.TestCase):
             '\n{これはテスト',
         ]
         for text in cases_true:
-            target = Converter(text, None)
+            target = Converter(text, func_map=None)
             self.assertTrue(target._exist_arg(), f'{text}の場合が失敗しました')
 
         # 異常系
@@ -33,11 +33,11 @@ class TestConverter(unittest.TestCase):
             ' テスト}これはテスト'
         ]
         for text in cases_false:
-            target = Converter(text, None)
+            target = Converter(text, func_map=None)
             self.assertFalse(target._exist_arg(), f'{text}の場合が失敗しました')
 
         # 冪等性
-        target = Converter('{これはテストです}', None)
+        target = Converter('{これはテストです}', func_map=None)
         for _ in range(3):
             self.assertTrue(target._exist_arg(), f'{text}の場合が失敗しました')
 
@@ -56,7 +56,7 @@ class TestConverter(unittest.TestCase):
             (r'{これは@math{\sum_{n=1}^{10} n = 55}です}', r'これは@math{\sum_{n=1}^{10} n = 55}です')
         ]
         for text, expected in cases_normal:
-            target = Converter(text, None)
+            target = Converter(text, func_map=None)
             self.assertEqual(target._read_arg_verbatim(), expected)
 
         # 異常系
@@ -70,7 +70,7 @@ class TestConverter(unittest.TestCase):
             ' }これはテストです',
         ]
         for text in cases_error:
-            target = Converter(text, None)
+            target = Converter(text, func_map=None)
             with self.assertRaises(CompileError):
                 target._read_arg_verbatim()
 
@@ -95,7 +95,7 @@ class TestConverter(unittest.TestCase):
             ('{これは@c{これは{かっこ}テスト}です}', 'これは<c>これは{かっこ}テスト</c>です'),
         ]
         for text, expected in cases_normal:
-            target = Converter(text, func_map)
+            target = Converter(text, func_map=func_map)
             self.assertEqual(target._read_arg(), expected)
 
         # 異常系
@@ -111,18 +111,18 @@ class TestConverter(unittest.TestCase):
             '{これは @aです}'
         ]
         for text in cases_error:
-            target = Converter(text, func_map)
+            target = Converter(text, func_map=func_map)
             with self.assertRaises(CompileError):
                 target._read_arg()
 
     def test_convert(self):
 
         # _read_args関数でほとんどテスト済みなので、簡単な正常系のみ
-        target = Converter('{これはテストです}', None)
+        target = Converter('{これはテストです}', func_map=None)
         self.assertEqual(target._convert(), 'これはテストです')
 
     def test_execute(self):
-        target = Converter('これはテストです', None)
+        target = Converter('これはテストです', func_map=None)
         self.assertEqual(target.execute(), 'これはテストです')
 
 

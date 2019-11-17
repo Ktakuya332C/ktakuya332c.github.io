@@ -162,7 +162,7 @@ def quote_func(args: List[str]) -> str:
 # ----
 # それぞれの関数名について、その実際の関数とその関数が引数を解釈するかどうかを表す真偽値を対応させる辞書
 # ----
-func_map: FuncMapType = {
+default_func_map: FuncMapType = {
     'a': (a_func, True),
     'p': (p_func, True),
     'incode': (incode_func, False),

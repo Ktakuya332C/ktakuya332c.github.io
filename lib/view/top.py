@@ -28,7 +28,8 @@ def _gen_contents(articles: List[Article], build_dir: str):
     html: str = '<ul class="article-list">'
     prev_year: int = -1
     for article in articles:
-        html += _gen_content(article, build_dir, prev_year != article.date.year)
+        html += _gen_content(article, build_dir,
+                             prev_year != article.date.year)
         prev_year = article.date.year
     html += '</ul>'
     return html

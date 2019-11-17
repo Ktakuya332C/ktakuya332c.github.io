@@ -1,7 +1,8 @@
 import sys
 from typing import List, Callable
 from lib.errors import CompileError
-from lib.compiler.functions import FuncType, FuncMapType, func_map, root_func
+from lib.compiler.functions import FuncType, FuncMapType
+from lib.compiler.functions import default_func_map, root_func
 
 
 class Converter:
@@ -14,7 +15,7 @@ class Converter:
     def __init__(self,
                  text: str,
                  trace_on: bool = False,
-                 func_map: FuncMapType = func_map):
+                 func_map: FuncMapType = default_func_map):
         self.text = text
         self.text_length = len(text)
         self.cursor = 0
