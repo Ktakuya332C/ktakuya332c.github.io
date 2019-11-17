@@ -149,11 +149,6 @@ def subsection_func(args: List[str]) -> str:
     return '<h1 class="subsection-title">' + args[0] + '</h1>'
 
 
-def quote_func(args: List[str]) -> str:
-    _assert_n_args('rel', args, 1)
-    return '<div class="content-quote"><p>' + args[0] + '</p></div>'
-
-
 def blmath_func(args: List[str]) -> str:
     _assert_n_args('blmath', args, 1)
     return '$$' + args[0] + '$$'
