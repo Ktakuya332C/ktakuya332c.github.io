@@ -34,7 +34,7 @@ def read_article(article_path: str, trace_on: bool = False) -> Article:
 
 
 def read_articles(dir_path: str,
-                  extension: str = 'md',
+                  extension: str = 'txt',
                   trace_on: bool = False) -> List[Article]:
 
     # 指定した拡張子のファイルを探す
