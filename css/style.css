@@ -132,6 +132,11 @@ p {
   margin: 30px 0px 20px;
   border-left: 5px solid rgba(69, 88, 144, .5);
 }
+.article-wrapper .content .subsection-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 10px 0px 10px;
+}
 .article-wrapper .content .content-paragraph {
   margin: 10px 0px;
 }

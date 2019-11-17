@@ -174,7 +174,7 @@ default_func_map: FuncMapType = {
     'table': (table_func, True),
     'rel': (rel_func, True),
     'section': (section_func, True),
-    'subsection': (section_func, True),
+    'subsection': (subsection_func, True),
     'inmath': (inmath_func, False),
     'blmath': (blmath_func, False),
     'quote': (quote_func, True),
