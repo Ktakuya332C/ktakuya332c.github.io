@@ -7,8 +7,8 @@
 
 @ol
   {@a{Markov決定過程とBelleman方程式}{@rel{/build/mdp-and-belleman-equation.html}}}
-  {@a{モデルありの強化学習}{@rel{/build/model-dependent-reinforcement-learning.html}}}
-  {@a{モデルなしの強化学習}{@rel{/build/model-free-reinforcement-learning.html}}}
+  {モデルありの強化学習(To be written ...)}
+  {モデルなしの強化学習(To be written ...)}
 
 @p{今の所は適当に基礎をまとめてあるだけなので、最近の発展の内容は書いていない。ただし比較的重要な基礎はまとめてあるつもり。このブログ全体に言えることだが、自分用にまとめてあるだけなので他の人が見て面白いかはよくわからない。これらをまとめる時に参考にした文献を一応並べておく。}
 
