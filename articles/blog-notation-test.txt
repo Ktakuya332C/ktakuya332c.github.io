@@ -1,0 +1,70 @@
+ブログ記法のテスト
+2019-11-17
+
+@p{新しく作ったブログ記法のテストを行っておく。関数をかたっぱしから呼んでいってうまく動いているかを試す。}
+
+@section{inline系の関数}
+
+@subsection{引数の中身を解釈する関数}
+
+@p{先ずは@incode{@a}}
+@p{これは@a{リンク}{http://example.com}です。}
+
+@p{次に@incode{@rel}}
+@p{この記事のパスは@rel{/build/blog-notation-test.html}です。}
+
+@subsection{引数の中身を解釈しない関数}
+
+@p{次は@incode{@incode}}
+@p{これは@incode{a = 1}です。}
+
+@p{次は@incode{@inmath}}
+@p{アインシュタインは@inmath{E = mc^2}を発見しました。}
+
+@section{ブロック系の関数}
+
+@subsection{引数の中身を解釈する関数}
+
+@p{次に@incode{@ul}}
+@ul
+  {アイテム}
+  {その他のアイテム}
+
+@p{次に@incode{@ol}}
+@ol
+  {一つ目のアイテム}
+  {二つ目のアイテム}
+
+@p{次に@incode{@def}}
+@def{定義名}{
+  @p{定義の内容一行目}
+  @p{定義の内容二行目}
+}
+
+@p{次に@incode{@fig}}
+@fig{@rel{/static/blog-notation-test/cat.jpg}}
+
+@p{次に@incode{@table}}
+@table
+  {行頭1,行頭2}
+  {列1の1つめ,列1の2つ目}
+  {列2の1つめ,列2の2つ目}
+
+@p{次は@incode{@quote}}
+@quote{自分で、すぐ自分を許せる人間は、大した仕事をやらない。}
+
+@subsection{引数の中身を解釈しない関数}
+
+@p{次は@incode{@blcode}}
+@blcode{
+#include <iostream>
+
+int main() {
+  std::cout << "Hello World" << std::endl;
+}
+}
+
+@p{次は@incode{@blmath}}
+@blmath{
+e^{i\pi} + 1 = 0
+}
