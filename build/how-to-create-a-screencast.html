@@ -1,0 +1,55 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><title>Memorandum</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Memorandum</a>
+    </h1>
+    <p class="desc">エンジニアKtakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">Screencastの作り方</h2>
+                                <p class="date">2018-09-30</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">Online Hackathon に参加しようと思い立ったのだが、多くの Online Hackathon が、作った成果物の紹介ビデオを要求していることがわかった。紹介ビデオなのでGoogleが作っているようなすごいビデオが必要というわけでないことはわかるのだが、しかしそうは言ってもあまりにできがひどいと評価は下がるだろう。ということで、まだ作品も作っていなければどのHackathonに出るかも決まっていないのに、その作品の紹介ビデオの作り方を調べ始めた。</p>
+
+<p class="content-paragraph">Online Hackathon ではどんな感じのビデオが要求されているのか見てみると、<a href="https://hacklolla2011.devpost.com/submissions/3491-veokami-for-lollapalooza">こんな感じのビデオ</a>が要求されているようだ。作ったものを操作しながらその説明をする動画らしい。となると要求されるのは</p>
+
+<ol class="content-ol"><li class="content-ol-item">成果物を操作した動画と</li><li class="content-ol-item">その成果物を説明する音声</li><li class="content-ol-item">それらを合わせる道具</li></ol>
+の二つだろう。
+
+<h1 class="section-title">動画の取り方</h1>
+
+<p class="content-paragraph">動画の問題は比較的簡単に片付いた。MacにはQuickTimePlayerという素晴らしい製品がデフォルトでついてくるので、それを使用して記録すれば良い。使って見たところ比較的スムーズに記録することができたので、大した問題もなく進みそうだ。</p>
+
+<h1 class="section-title">音声の取り方</h1>
+
+<p class="content-paragraph">Online Hackathon と言うだけあってOnlineで開催されるので、当然公用語は英語。なので英語で音声を取らなくてはならない。残念ながら自分の声はそれほど聞き取りづらいものではない上に英語の発音が十分に綺麗と言うわけではない。となれば他の人の手を借りるかだが、わざわざ他の人に音声だけとってもらうのは手間だ。</p>
+
+<p class="content-paragraph">と言うことで自分は音声合成で代用することにした。Googleの Cloud Text to Speech などの質は非常に良いと噂なので、多分自分が直接声を吹き込むよりはマシな音声ができるはずだ。Googleの音声合成は簡単に使える仕様になっていなかったのでとりあえず<a href="https://text-to-speech-demo.ng.bluemix.net/">IBMのもの</a>で試してみると、それなりにはなったので大丈夫だろう。噂ではGoogleのものの方はとても良いらしいので試してみる価値はある。</p>
+
+<p class="content-paragraph">特にSSMLフォーマットと呼ばれるフォーマットは、<span class="inline-code">&lt;break time=&quot;1s&quot;/&gt;</span>などと入れることによって言葉を発しない時間を入れることができてちょうど良い。アプリを操作したり、アプリが何かをロードしたりする時間を調整するのにぴったりだ。</p>
+
+<h1 class="section-title">動画と音声を合成する</h1>
+
+<p class="content-paragraph">動画と音声の合成はiMovieで行うことにした。全体の流れはこうだ。まず音声をTTSで作成する。この時に、アプリを動かすことを想像しながら言葉を発しない時間をちょうどよく入れて作成する。あと、動画を取る時に大変なので頭に10秒くらいの空白を入れておく。次に、作成した音声を流しながらQuickTimePlayerの Screen Recording 機能で動画を作成する。最後にiMovieでそれらを合わせて切り貼りすれば完成だ。それなりにいいものができる気はするし、実際やってみるとまあまあのものは出来上がる。</p>
+
+<p class="content-paragraph">とりあえず今のところはこれくらいで作れることは確認して、実際のHackathonの内容に移った方が生産的だろう。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2019 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

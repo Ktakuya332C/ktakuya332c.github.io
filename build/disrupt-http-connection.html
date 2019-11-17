@@ -1,0 +1,46 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><title>Memorandum</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Memorandum</a>
+    </h1>
+    <p class="desc">エンジニアKtakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">HTTPリクエストの遮断の仕方</h2>
+                                <p class="date">2018-09-30</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">backendがデータベースに接続できなかった場合のテストを行いたかったのだが、接続できなかった場合のテストとはどうするのかよくわからなかった。適当にデータベースのパスワードを変更したりして接続を落としたりしていたが、普通はデータベースに接続できないエラーっていうのはそういうものではなくネットワークの異常によって起こるものであろうから、少し違和感を感じていた。</p>
+
+<p class="content-paragraph">この違和感をぬぐい去るために、データベースにアクセスできないという状況を意図的かつ簡単に作り出す方法はないものか考えてみた。基本的にデータベースにアクセスできないエラーは大抵の場合はネットワークのエラーであろうから、それを模倣できれば良い。Google先生に聞いてみるとどうもiptablesというコマンドでそれと似たようなことができるらしい。</p>
+
+<p class="content-paragraph">iptablesコマンドは基本的には簡易的なfirewallを作り出せるもので、様々な設定をすることでipアドレスやportに依存してネットワークのアクセスを拒否したり許可したりすることができる。<a href="https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/">このサイト</a>も同じくわかりやすいが、少し違う点も説明してくれている。</p>
+
+<p class="content-paragraph">今回はデータベースに繋げなくなれば良いので、そのデータベースが動いているのであろうポートを指定して繋げなくしてやろう。そうすればbackendがデータベースに接続しようとした時には、その接続先ポートにアクセスできなくなっているのでエラーが返ってくるはずだ。例えば、データベースが8000番ポートで動いている時にそこへのbackendからのアクセスを止めたい場合は</p>
+
+<div class="code-container"><pre><code>sudo iptables -A OUTPUT -p tcp --dport 8000 -j REJECT</code></pre></div>
+
+<p class="content-paragraph">とすれば良い。こうすることでbackendからはどんなサーバーの8000番ポートへのtcp接続もできなくなるので、明らかに8000番ポートで動いているデータベースには繋げなくなる。この設定を戻したいときは、</p>
+
+<div class="code-container"><pre><code>sudo iptables -D OUTPUT -p tcp --dport 8000 -j REJECT</code></pre></div>
+
+<p class="content-paragraph">としてやれば元どおりだ。この方法の利点は別の接続には影響を与えない点だ。例えばbackendサーバーが RESTful API をfrontendサーバーに対して表出していたとしても、それらの通信はhttpなら80番ポートで行われるためになんの影響の与えない。これでデータベースへの接続だけを止めるということができるようになる。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2019 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
