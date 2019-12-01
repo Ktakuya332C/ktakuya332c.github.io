@@ -12,6 +12,7 @@
   {FiveThirtyEightの @a{Nate Silver さん}{https://en.wikipedia.org/wiki/Nate_Silver}は、個人で活動しているときに選挙予測や、野球選手のパフォーマンス予測などをやっていたらしい。}
   {ガンの生存率が高い医局を探すみたいなことを統計モデリングでやったらしい@a{発表資料}{http://statmodeling.hatenablog.com/entry/tokyor070}}
   {似たようなものでICUでの生存率をモデリングしたらしい@a{ブログ記事}{https://blog.insightdatascience.com/deep-prognosis-predicting-mortality-in-the-icu-900ffc8790a6}}
+  {自衛隊のイラク日報の検索エンジンを作ったらしいことを伝える@a{記事}{https://forest.watch.impress.co.jp/docs/serial/yajiuma/1117745.html}}
 
 @p{他にも検索エンジンの理論を応用したという意味で@a{arxivのcollocation検索エンジン}{https://hypcol.marutank.net/}を作った人などもいるし、bitflyerなどで株の取引をやっている人などはよくいるだろう。}
 
