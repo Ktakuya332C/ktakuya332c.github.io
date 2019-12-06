@@ -37,6 +37,7 @@
 {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
 {@a{読書日記}{http://elsur.jpn.org/mt/}}
 {@a{データ分析について色々考えてみたブログ}{https://custle.hatenablog.com/}}
+{@a{かものはしの分析ブログ}{http://kamonohashiperry.com/}}
 {@a{statmodeling memorandum}{http://statmodeling.hatenablog.com/archive}}
 {@a{free range statistics}{http://freerangestats.info/}}
 {@a{statistical modeling, causal inference, and social science}{http://andrewgelman.com/}}
