@@ -6,6 +6,7 @@
 
 @ul
 {@a{StackOverflow}{https://stackoverflow.com/}}
+{@a{ServerFault}{https://serverfault.com/}}
 {@a{Cross Validated}{https://stats.stackexchange.com/}}
 {@a{Apache Arrow Open Issues}{https://issues.apache.org/jira/projects/ARROW/issues}}
 {@a{Apache Parquet Open Issues}{https://issues.apache.org/jira/projects/PARQUET/issues}}
