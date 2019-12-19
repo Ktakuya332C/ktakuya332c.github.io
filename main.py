@@ -10,7 +10,7 @@ root_from_build = '../'
 index_path = 'index.html'
 root_from_index = './'
 title_str = 'Memorandum'
-desc_str = 'エンジニアKtakuyaのブログ'
+desc_str = 'Ktakuyaのブログ'
 footer_str = 'Copyright@2019 Ktakuya. All rights reserved.'
 trace_on = False
 try:
