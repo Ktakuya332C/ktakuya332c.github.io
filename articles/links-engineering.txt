@@ -36,13 +36,3 @@
 {@a{Yelp Engineering and Product Blog}{https://engineeringblog.yelp.com/}}
 {@a{エムスリーテックブログ}{https://www.m3tech.blog/}}
 {@a{リクルートテクノロジーズ メンバーズブログ}{https://recruit-tech.co.jp/blog/}}
-
-@p{技術カンファレンスを時期ごとに集めてみた。時期が毎年異なるので、4半期ごとに集める。}
-
-@p{Q1(4月から6月)}
-
-@p{Q2(7月から9月)}
-
-@p{Q3(10月から12月)}
-
-@p{Q4(1月から3月)}
