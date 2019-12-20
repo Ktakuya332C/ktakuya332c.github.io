@@ -1,7 +1,7 @@
 企業の Tech Blog へのリンク
 2019-12-19
 
-@p{企業の Tech Blog へのリンク。ほとんどは{@a{engineering-blogs}{https://github.com/kilimchoi/engineering-blogs}レポジトリを参考にして集めた。}
+@p{企業の Tech Blog へのリンク。ほとんどは@a{engineering-blogs}{https://github.com/kilimchoi/engineering-blogs}レポジトリを参考にして集めた。}
 
 @ul
 {@a{Airbnb Engineering & Data Science}{https://medium.com/airbnb-engineering}}
