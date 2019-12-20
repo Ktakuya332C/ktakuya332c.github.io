@@ -1,87 +1,48 @@
-エンジニアリング関連のリンク集
-2018-09-30
+企業の Tech Blog へのリンク
+2019-12-19
 
+@p{企業の Tech Blog へのリンク。ほとんどは{@a{engineering-blogs}{https://github.com/kilimchoi/engineering-blogs}レポジトリを参考にして集めた。}
 
-@p{企業の一般の技術ブログは以下}
 @ul
-{@a{multithreaded, Stitch Fix}{https://multithreaded.stitchfix.com/}}
-{@a{developers blog, CyberAgent}{https://developers.cyberagent.co.jp/blog/}}
-{@a{uber engineering blog, Uber}{https://eng.uber.com/}}
-{@a{tech blog, eBay}{https://www.ebayinc.com/stories/blogs/tech/}}
-{@a{yahoo! japan tech blog, Yahoo! Japan}{https://techblog.yahoo.co.jp/}}
-{@a{recruit technologies member's blog, Recruit}{https://recruit-tech.co.jp/blog/}}
-{@a{engineering blog, yelp}{https://engineeringblog.yelp.com/}}
-{@a{a trip advisor blog, TripAdvisor}{http://engineering.tripadvisor.com/}}
-{@a{the netflix tech blog}{https://medium.com/netflix-techblog}}
-{@a{porn hub insights, Pornhub}{https://www.pornhub.com/insights/}}
-{@a{yandex blog}{https://yandex.com/company/blog}}
+{@a{Airbnb Engineering & Data Science}{https://medium.com/airbnb-engineering}}
+{@a{Cloudera Blog}{https://blog.cloudera.com/}}
+{@a{Cyber Agent Developers Blog}{https://developers.cyberagent.co.jp/blog/}}
+{@a{Docker Engineering Blog}{https://engineering.docker.com/}}
+{@a{Dropbox Tech Blog}{https://blogs.dropbox.com/tech/}}
+{@a{Engineering - Stack Overflow Blog}{https://stackoverflow.blog/engineering/}}
+{@a{Engineering Blog - The Databricks Blog}{https://databricks.com/blog/category/engineering}}
+{@a{Engineering at Quora}{https://www.quora.com/q/quoraengineering}}
+{@a{Facebook Engineering}{https://engineering.fb.com/}}
+{@a{Github Engineering}{https://githubengineering.com/}}
+{@a{Google AI Blog}{https://ai.googleblog.com/}}
+{@a{Google Cloud Blog}{https://cloud.google.com/blog/}}
+{@a{Google Developers Blog}{https://developers.googleblog.com/}}
+{@a{Indeed Engineering Blog}{https://engineering.indeedblog.com/blog/}}
+{@a{LINE ENGINEERING}{https://engineering.linecorp.com/en/blog/}}
+{@a{LinkedIn Engineering}{https://engineering.linkedin.com/blog}}
+{@a{Lyft Engineering}{https://eng.lyft.com/}}
+{@a{Medium Engineering}{https://medium.engineering/}}
+{@a{Mercari Engineering Blog}{https://tech.mercari.com/}}
+{@a{NYT Open}{https://open.nytimes.com/}}
+{@a{Netflix TechBlog}{https://medium.com/netflix-techblog}}
+{@a{Pinterest Engineering}{https://medium.com/%40Pinterest_Engineering}}
+{@a{RCO アドテクLabブログ}{https://www.rco.recruit.co.jp/career/engineer/blog/}}
+{@a{Tech Blog - eBay Inc.}{https://tech.ebayinc.com/}}
+{@a{TripAdvisor Engineering and Product Blog}{https://www.tripadvisor.com/engineering/}}
+{@a{Twitter Engineering}{https://blog.twitter.com/engineering/en_us.html}}
+{@a{Uber Engineering Blog}{https://eng.uber.com/}}
+{@a{Yahoo! JAPAN Tech Blog}{https://techblog.yahoo.co.jp/}}
+{@a{Yandex - Company blog}{https://yandex.com/company/blog}}
+{@a{Yelp Engineering and Product Blog}{https://engineeringblog.yelp.com/}}
+{@a{エムスリーテックブログ}{https://www.m3tech.blog/}}
+{@a{リクルートテクノロジーズ メンバーズブログ}{https://recruit-tech.co.jp/blog/}}
 
-@p{企業のデータサイエンス関連のブログは以下}
-@ul
-{@a{airbnb engineering and data science, Airbnb}{https://medium.com/airbnb-engineering}}
-{@a{ad-tech lab blog, Recruit}{https://www.rco.recruit.co.jp/career/engineer/blog/}}
-{@a{apple machine learning journal, Apple}{https://machinelearning.apple.com/}}
-{@a{abeja arts blog, ABEJA}{https://tech-blog.abeja.asia/}}
-{@a{blog, select}{https://select-statistics.co.uk/category/blog/}}
-{@a{no free hunch, Kaggle}{http://blog.kaggle.com/}}
-{@a{the unofficial google data science blog, Google}{http://www.unofficialgoogledatascience.com/}}
-{@a{google ai blog, Google}{https://ai.googleblog.com/}}
-{@a{zillow artificial intelligence, Zillow}{https://www.zillow.com/data-science/}}
+@p{技術カンファレンスを時期ごとに集めてみた。時期が毎年異なるので、4半期ごとに集める。}
 
+@p{Q1(4月から6月)}
 
-@p{個人のデータサイエンス関連の技術ブログは以下}
-@ul
-{@a{六本木で働くデータサイエンティストのブログ}{https://tjo.hatenablog.com/}}
-{@a{作って遊ぶ機械学習}{http://machine-learning.hatenablog.com/}}
-{@a{大トロ}{http://blog.otoro.net/}}
-{@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
-{@a{読書日記}{http://elsur.jpn.org/mt/}}
-{@a{データ分析について色々考えてみたブログ}{https://custle.hatenablog.com/}}
-{@a{かものはしの分析ブログ}{http://kamonohashiperry.com/}}
-{@a{statmodeling memorandum}{http://statmodeling.hatenablog.com/archive}}
-{@a{free range statistics}{http://freerangestats.info/}}
-{@a{statistical modeling, causal inference, and social science}{http://andrewgelman.com/}}
-{@a{unrepresentative agent}{http://unrepresentativeagent.blogspot.com/}}
-{@a{darren wilkinson's research blog}{https://darrenjw.wordpress.com/}}
-{@a{Econoinformatics: Economics & Big Data}{http://econinformatics.com/blog/}}
+@p{Q2(7月から9月)}
 
+@p{Q3(10月から12月)}
 
-@p{個人のデータ可視化関連の技術ブログは以下}
-@ul
-{@a{flowingdata}{http://flowingdata.com/}}
-{@a{information is beautiful}{https://informationisbeautiful.net/}}
-{@a{story telling with data}{http://www.storytellingwithdata.com/}}
-{@a{the data duo}{https://thedataduo.com/}}
-{@a{the functional art}{http://www.thefunctionalart.com/}}
-{@a{viswiz}{http://www.vizwiz.com/}}
-{@a{visualising data}{http://www.visualisingdata.com/}}
-
-
-@p{データ分析コンペは以下}
-@ul
-{@a{kaggle}{https://www.kaggle.com/}}
-{@a{signate}{https://signate.jp/}}
-{@a{全球AI挑战赛}{https://challenger.ai/}}
-{@a{dream challenge}{http://dreamchallenges.org/}}
-
-
-@p{競技プログラミング関連は以下}
-@ul
-{@a{atcoder}{http://atcoder.jp/}}
-{@a{topcoder}{https://www.topcoder.com/}}
-{@a{codeforece}{http://codeforces.com/}}
-{@a{aizu online judge}{http://judge.u-aizu.ac.jp/}}
-{@a{project euler}{https://projecteuler.net/}}
-{@a{hackerrank}{https://www.hackerrank.com/}}
-{@a{leetcode}{https://leetcode.com/}}
-
-
-@p{CTF(Catch The Flag)関連は以下}
-@ul
-{@a{ctftime}{https://ctftime.org/}}
-{@a{ctf field guide}{https://trailofbits.github.io/ctf/index.html}}
-
-
-@p{そのほか有用なリンクをまとめてくれているサイト}
-@ul
-{@a{トップレベルのコンピュータエンジニアなら普段からチェックして当然の技術系メディアN選}{https://kuenishi.hatenadiary.jp/entry/2018/04/13/022908}}
+@p{Q4(1月から3月)}
