@@ -36,13 +36,7 @@
 {@a{quantopian}{https://www.quantopian.com/}}
 {@a{Readings in Database Systems}{http://www.redbook.io/}}
 {@a{pwnable.kr}{http://pwnable.kr/}}
-
-@p{CTF(Catch The Flag)関連は以下}
-@ul
+{@a{Software Engineering Radio}{https://www.se-radio.net/}}
 {@a{ctftime}{https://ctftime.org/}}
 {@a{ctf field guide}{https://trailofbits.github.io/ctf/index.html}}
-
-
-@p{そのほか有用なリンクをまとめてくれているサイト}
-@ul
 {@a{トップレベルのコンピュータエンジニアなら普段からチェックして当然の技術系メディアN選}{https://kuenishi.hatenadiary.jp/entry/2018/04/13/022908}}
