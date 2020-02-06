@@ -1,2 +1,3 @@
-FROM python:3
+FROM python
 WORKDIR /home
+CMD ["bash"]
