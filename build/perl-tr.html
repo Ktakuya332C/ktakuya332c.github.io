@@ -22,70 +22,70 @@
 
 <h1 class="section-title">基本的な使い方まとめ</h1>
 <p class="content-paragraph"><span class="inline-code">tr</span>演算子は当てはまる文字を対応する文字に変換する機能の様子。例えば</p>
-$$-bash$ perl -e '
-$string = "this is a pen";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;this is a pen&quot;;
 $string =~ tr/a-z/A-Z/;
-print "$string\n";
-'
-THIS IS A PEN$$
+print &quot;$string\n&quot;;
+&apos;
+THIS IS A PEN</code></pre></div>
 <p class="content-paragraph">という感じで、一文字一文字を対応する文字に変換することができる機能な様子。他にも</p>
-$$-bash$ perl -e '
-$string = "this is a pen";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;this is a pen&quot;;
 $string =~ tr/a-z/A/;
-print "$string\n";
-'
-AAAA AA A AAA$$
+print &quot;$string\n&quot;;
+&apos;
+AAAA AA A AAA</code></pre></div>
 <p class="content-paragraph">などとして、全ての文字を一つの文字に置き換えることもできる模様。</p>
 <p class="content-paragraph">変換後の文字を、変換前の文字の数と同じでもなく、一つでもない、適当な数置いてみるとどうなるか気になったのでやってみると、</p>
-$$-bash$ perl -e '
-$string = "abcdefghi";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;abcdefghi&quot;;
 $string =~ tr/a-z/AB/;
-print "$string\n";
-'
-ABBBBBBBB$$
+print &quot;$string\n&quot;;
+&apos;
+ABBBBBBBB</code></pre></div>
 <p class="content-paragraph">となり、どうも変換前の文字の対応が決定されていないときは最後の文字が使われるらしい。</p>
 
 <h1 class="section-title">オプション</h1>
 <p class="content-paragraph"><span class="inline-code">qw</span>コマンドと同じく<span class="inline-code">tr</span>コマンドにもオプションがいくつかあるらしい。</p>
 <p class="content-paragraph">まずは<span class="inline-code">c</span>オプションを取り上げると、このオプションは補集合を表すらしく、変換前の文字を補集合で設定できるらしい。<span class="inline-code">abc</span>に含まれる文字以外を<span class="inline-code">A</span>に変換せよというコマンドを打ってみると</p>
-$$-bash$ perl -e '
-$string = "abcdefghi";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;abcdefghi&quot;;
 $string =~ tr/abc/A/c;
-print "$string\n";
-'
-abcAAAAAA$$
+print &quot;$string\n&quot;;
+&apos;
+abcAAAAAA</code></pre></div>
 <p class="content-paragraph">となり、期待通りになった。</p>
 <p class="content-paragraph"><span class="inline-code">d</span>オプションは、変換前の文字に対して対応する変換後の文字がなかったらその文字を削除する様子。</p>
-$$-bash$ perl -e '
-$string = "abcdefghi";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;abcdefghi&quot;;
 $string =~ tr/a-z/AB/d;
-print "$string\n";
-'
-AB$$
+print &quot;$string\n&quot;;
+&apos;
+AB</code></pre></div>
 <p class="content-paragraph">確かに、<span class="inline-code">d</span>オプションをつけない時は<span class="inline-code">B</span>が繰り返されていたが、今回は繰り返されていた文字が消えた。</p>
 <p class="content-paragraph"><span class="inline-code">s</span>オプションは置換された文字が連続した時に圧縮するオプションらしく、例えば</p>
-$$-bash$ perl -e '
-$string = "abcdefghi";
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;abcdefghi&quot;;
 $string =~ tr/a-z/A/s;
-print "$string\n";
-'
-A$$
+print &quot;$string\n&quot;;
+&apos;
+A</code></pre></div>
 <p class="content-paragraph">となるようす。全部<span class="inline-code">A</span>に置換されて、それらが圧縮された感じ。</p>
 
 <h1 class="section-title">最後に</h1>
 
 <p class="content-paragraph"><span class="inline-code">tr</span>が使われていたのはこういう感じ</p>
-$$$string =~ tr,\n\t , ,s$$
+<div class="code-container"><pre><code>$string =~ tr,\n\t , ,s</code></pre></div>
 <p class="content-paragraph">だったのだが、今なら意味がわかる。要するに空白っぽい文字を全部一つの空白にまとめましょうという意味。なので実際に使うとしたら</p>
-$$-bash$ perl -e '
-$string = "
+<div class="code-container"><pre><code>-bash$ perl -e &apos;
+$string = &quot;
 This  is a pen
 Those   are   pens
-";
+&quot;;
 $string =~ tr,\n\t , ,s;
-print "$string\n";
-'
- This is a pen Those are pens$$
+print &quot;$string\n&quot;;
+&apos;
+ This is a pen Those are pens</code></pre></div>
 <p class="content-paragraph">となって、確かに空白っぽい文字が全部一つの空白に変換されている。</p>
                             </div>
                         </div>
