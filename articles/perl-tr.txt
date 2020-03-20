@@ -1,0 +1,88 @@
+perlのtr演算子
+2020-03-20
+
+@p{perlのtr演算子を使っているコードを見たのだが、いまいち意味がわからなかったので使い方をメモして置く。}
+
+@section{基本的な使い方まとめ}
+@p{@incode{tr}演算子は当てはまる文字を対応する文字に変換する機能の様子。例えば}
+@blmath{
+-bash$ perl -e '
+$string = "this is a pen";
+$string =~ tr/a-z/A-Z/;
+print "$string\n";
+'
+THIS IS A PEN
+}
+@p{という感じで、一文字一文字を対応する文字に変換することができる機能な様子。他にも}
+@blmath{
+-bash$ perl -e '
+$string = "this is a pen";
+$string =~ tr/a-z/A/;
+print "$string\n";
+'
+AAAA AA A AAA
+}
+@p{などとして、全ての文字を一つの文字に置き換えることもできる模様。}
+@p{変換後の文字を、変換前の文字の数と同じでもなく、一つでもない、適当な数置いてみるとどうなるか気になったのでやってみると、}
+@blmath{
+-bash$ perl -e '
+$string = "abcdefghi";
+$string =~ tr/a-z/AB/;
+print "$string\n";
+'
+ABBBBBBBB
+}
+@p{となり、どうも変換前の文字の対応が決定されていないときは最後の文字が使われるらしい。}
+
+@section{オプション}
+@p{@incode{qw}コマンドと同じく@incode{tr}コマンドにもオプションがいくつかあるらしい。}
+@p{まずは@incode{c}オプションを取り上げると、このオプションは補集合を表すらしく、変換前の文字を補集合で設定できるらしい。@incode{abc}に含まれる文字以外を@incode{A}に変換せよというコマンドを打ってみると}
+@blmath{
+-bash$ perl -e '
+$string = "abcdefghi";
+$string =~ tr/abc/A/c;
+print "$string\n";
+'
+abcAAAAAA
+}
+@p{となり、期待通りになった。}
+@p{@incode{d}オプションは、変換前の文字に対して対応する変換後の文字がなかったらその文字を削除する様子。}
+@blmath{
+-bash$ perl -e '
+$string = "abcdefghi";
+$string =~ tr/a-z/AB/d;
+print "$string\n";
+'
+AB
+}
+@p{確かに、@incode{d}オプションをつけない時は@incode{B}が繰り返されていたが、今回は繰り返されていた文字が消えた。}
+@p{@incode{s}オプションは置換された文字が連続した時に圧縮するオプションらしく、例えば}
+@blmath{
+-bash$ perl -e '
+$string = "abcdefghi";
+$string =~ tr/a-z/A/s;
+print "$string\n";
+'
+A
+}
+@p{となるようす。全部@incode{A}に置換されて、それらが圧縮された感じ。}
+
+@section{最後に}
+
+@p{@incode{tr}が使われていたのはこういう感じ}
+@blmath{
+$string =~ tr,\n\t , ,s
+}
+@p{だったのだが、今なら意味がわかる。要するに空白っぽい文字を全部一つの空白にまとめましょうという意味。なので実際に使うとしたら}
+@blmath{
+-bash$ perl -e '
+$string = "
+This  is a pen
+Those   are   pens
+";
+$string =~ tr,\n\t , ,s;
+print "$string\n";
+'
+ This is a pen Those are pens
+}
+@p{となって、確かに空白っぽい文字が全部一つの空白に変換されている。}

@@ -1,3 +1,3 @@
 FROM python
-WORKDIR /home
+WORKDIR /root
 CMD ["bash"]

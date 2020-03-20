@@ -66,7 +66,7 @@ $$f(X, Y | Z) = f(X | Z) f(Y | Z)$$
 <p class="content-paragraph">以下では有限グラフしか考えないため、普通にグラフと言った場合には有限グラフのことを指すこととする。</p>
 
 <p class="content-paragraph">グラフの一部に注目することもあるため、そのための用語を定義しておく。</p>
-<div class="content-def"><p><span class="content-def-name">部分グラフ</span></p><p class="content-paragraph">グラフ$G=(V, E)$に対して、その頂点集合の部分集合$X$と矢線の両端がどちらも$X$に含まれるような矢線の集合</p>
+<div class="content-def"><p><span class="content-def-name">部分グラフ</span></p><p class="content-paragraph">グラフ$G=(V, E)$に対して、その頂点集合の部分集合$X$と、矢線の両端がどちらも$X$に含まれるような矢線の集合</p>
 $$E_X = \{(v_1, v_2) \in E | v_1 \in X \land v_2 \in X\}$$
 <p class="content-paragraph">の組$(X, E_X)$を部分グラフと言い$G(X)$と表す。</p></div>
 
@@ -76,15 +76,15 @@ $$E_X = \{(v_1, v_2) \in E | v_1 \in X \land v_2 \in X\}$$
 
 <p class="content-paragraph">次にグラフの頂点集合の性質についての定義をおさらいする。</p>
 
-<div class="content-def"><p><span class="content-def-name">グラフの頂点系列の性質についての定義</span></p><ul class="content-ul"><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親か子である場合、$T$を長さ$K$の道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の道と呼ぶ。</li><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親である場合、$T$を長さ$K$の有向道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の有向道と呼ぶ。</li><li class="content-ul-item">長さ1以上の有向道$T=(t_1, t_2, \cdots, t_{K+1})$において、$t_1$を始点、$t_{K+1}$を終点と呼ぶ。長さ$0$の有向道$T=(t_1)$については始点も終点も$t_1$である。</li><li class="content-ul-item">グラフ$G$における、二つの頂点$v_1, v_2$の間に存在する全ての道の集合を$path(v_1, v_2 : G)$と表す。また、二つの頂点$v_1, v_2$の間に存在する長さが$1$以上の道全ての集合を$tpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$path(v_1, v_2), tpath(v_1, v_2)$とも書く。</li><li class="content-ul-item">グラフ$G$における、始点と終点をそれぞれ$v_1, v_2$とする全ての有向道の集合を$dpath(v_1, v_2 : G)$と表す。また、始点と終点をそれぞれ$v_1, v_2$とする長さが$1$以上の有向道全ての集合を$tdpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$dpath(v_1, v_2), tdpath(v_1, v_2)$とも書く。</li></ul></div>
+<div class="content-def"><p><span class="content-def-name">グラフの頂点系列の性質についての定義</span></p><ul class="content-ul"><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親か子である場合、$T$を長さ$K$の道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の道と呼ぶ。</li><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親である場合、$T$を長さ$K$の有向道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の有向道と呼ぶ。</li><li class="content-ul-item">長さ1以上の有向道$T=(t_1, t_2, \cdots, t_{K+1})$において、$t_1$を始点、$t_{K+1}$を終点と呼ぶ。長さ$0$の有向道$T=(t_1)$については始点も終点も$t_1$であるとする。</li><li class="content-ul-item">グラフ$G$における、二つの頂点$v_1, v_2$の間に存在する全ての道の集合を$path(v_1, v_2 : G)$と表す。また、二つの頂点$v_1, v_2$の間に存在する長さが$1$以上の道全ての集合を$tpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$path(v_1, v_2), tpath(v_1, v_2)$とも書く。</li><li class="content-ul-item">グラフ$G$における、始点と終点をそれぞれ$v_1, v_2$とする全ての有向道の集合を$dpath(v_1, v_2 : G)$と表す。また、始点と終点をそれぞれ$v_1, v_2$とする長さが$1$以上の有向道全ての集合を$tdpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$dpath(v_1, v_2), tdpath(v_1, v_2)$とも書く。</li></ul></div>
 
 <p class="content-paragraph">道上の頂点は合流点と非合流点に分類できる。</p>
 <div class="content-def"><p><span class="content-def-name">合流点</span></p><p class="content-paragraph">長さ$2$以上の道$T = (t_1, t_2, \cdots, t_K, t_{K+1})$上の$i=2,3,\cdots, K$番目の頂点$t_i$について</p>
 $$(t_{i-1}, t_i) \in E \land (t_{i+1}, t_i) \in E$$
 <p class="content-paragraph">が成り立つ場合、その頂点を道$T$の合流点であるという。また、道$T$上の合流点以外の頂点を非合流点と呼ぶ。</p></div>
 
-<p class="content-paragraph">また、有向道の定義を使って親や子の定義を拡張した先祖や子孫という概念を定義できる。</p>
-<div class="content-def"><p><span class="content-def-name">先祖と子孫</span></p><ul class="content-ul"><li class="content-ul-item">2つの頂点$x, y$の間に有向道$T \in dpath(x, y)$が存在する時、$x$は$y$の先祖であるといい、逆に$y$は$x$の子孫であるという。ある頂点$x$の先祖の集合を$an(x : G)$と書き、子孫の集合を$de(x : G)$とかく。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(x)$や$de(x)$とかく。</li><li class="content-ul-item">頂点集合$X$に含まれる要素の先祖の集合の合併を$an(X : G)$と書き、子孫の集合の合併を$de(x : G)$と書く。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(X)$や$de(X)$とかく。</li><li class="content-ul-item">ある頂点集合$A$がそれ自身の先祖の集合と一致する場合$A = an(A)$、その頂点集合は先祖的であるという。</li><li class="content-ul-item">ある頂点集合$X$を含む最小の先祖的な集合$A$を、$X$に対する最小先祖集合と呼ぶ。</li></ul></div>
+<p class="content-paragraph">また、有向道の定義を使って親や子の定義を拡張した、先祖や子孫という概念を定義できる。</p>
+<div class="content-def"><p><span class="content-def-name">先祖と子孫</span></p><ul class="content-ul"><li class="content-ul-item">2つの頂点$x, y$の間に有向道$T \in dpath(x, y)$が存在する時、$x$は$y$の先祖であるといい、逆に$y$は$x$の子孫であるという。ある頂点$x$の先祖の集合を$an(x : G)$と書き、子孫の集合を$de(x : G)$とかく。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(x)$や$de(x)$とかく。</li><li class="content-ul-item">頂点集合$X$に含まれる要素の先祖の集合の合併を$an(X : G)$と書き、子孫の集合の合併を$de(X : G)$と書く。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(X)$や$de(X)$とかく。</li><li class="content-ul-item">ある頂点集合$A$がそれ自身の先祖の集合と一致する場合$A = an(A)$、その頂点集合は先祖的であるという。</li><li class="content-ul-item">ある頂点集合$X$を含む最小の先祖的な集合$A$を、$X$に対する最小先祖集合と呼ぶ。</li></ul></div>
 <p class="content-paragraph">ここで、長さ$0$の有向道$(x) \in dpath(x, x)$が存在することから、ある頂点$x$の子孫や先祖には自分自身も含まれる</p>$$x \in de(x), x \in an(x)$$
 <p class="content-paragraph">ことに注意する。</p>
 
