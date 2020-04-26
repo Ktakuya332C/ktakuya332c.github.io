@@ -28,7 +28,7 @@ wikisearch search '天気'
 @p{内部設計としては次のクラス図とシークエンス図のみを提供する。どちらも基本的にはUML記法を採用しているつもりだが、しっかりと学んだわけではないので抜けや間違いがある可能性が高い。いずれしっかりと理解していけると思うのでその時に随時直していく予定。}
 
 @subsection{クラス図}
-@fig{@rel{static/design-search-engine/class_diagram.png}}
+@fig{70}{@rel{static/design-search-engine/class_diagram.png}}
 @p{このクラス図を書くにあたっては Clean Architecture のSOLID原則を可能な限り守れるように考えた。検索エンジンとしてその存在自体が不必要になることはないであろう、DocumentやPostingなどのデータ構造を最も多く使用される構造体として設計し、データベースとして何を使うかなどの選定については可能な限り後回しにできるように選んだ。そのほかの点については}
 @ul
   {@incode{KeyValueDB}インターフェイスを@incode{DocumentDB}と@incode{IndexDB}のそれぞれに用意した。この点は共通化してしまっても良いかどうかとても悩んだのだが、@incode{DocumentDB}と@incode{IndexDB}の使用するDBが同じインターフェイスを持っている必要性は必ずしもないので、たまたま今回は同じ内容のインターフェイスを持ってしまってはいるが、分離することにした。これによってSOLIDE原則の解放閉鎖の原則(OCP)を守れれるようになっているのではないかと思う。}
@@ -37,9 +37,9 @@ wikisearch search '天気'
 @subsection{シークエンス図}
 
 @p{まずは日本語wikipediaデータに対してindexを作成する際のシークエンス図を書いてみる。}
-@fig{@rel{static/design-search-engine/sequence_diagram_load.png}}
+@fig{70}{@rel{static/design-search-engine/sequence_diagram_load.png}}
 @p{次にそのindexを使って検索をする場合のシークエンス図を書いてみる。}
-@fig{@rel{static/design-search-engine/sequence_diagram_search.png}}
+@fig{70}{@rel{static/design-search-engine/sequence_diagram_search.png}}
 @p{どちらもシークエンス図もそれほど複雑ではなく、誰が考えても同じようなものになるとは思う。}
 
 

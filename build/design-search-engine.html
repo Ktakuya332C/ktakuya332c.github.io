@@ -38,16 +38,16 @@
 <p class="content-paragraph">内部設計としては次のクラス図とシークエンス図のみを提供する。どちらも基本的にはUML記法を採用しているつもりだが、しっかりと学んだわけではないので抜けや間違いがある可能性が高い。いずれしっかりと理解していけると思うのでその時に随時直していく予定。</p>
 
 <h1 class="subsection-title">クラス図</h1>
-<figure class="content-figure"><img class="content-img" src="../static/design-search-engine/class_diagram.png"></figure>
+<figure class="content-figure" style="width:70%"><img class="content-img" src="../static/design-search-engine/class_diagram.png"></figure>
 <p class="content-paragraph">このクラス図を書くにあたっては Clean Architecture のSOLID原則を可能な限り守れるように考えた。検索エンジンとしてその存在自体が不必要になることはないであろう、DocumentやPostingなどのデータ構造を最も多く使用される構造体として設計し、データベースとして何を使うかなどの選定については可能な限り後回しにできるように選んだ。そのほかの点については</p>
 <ul class="content-ul"><li class="content-ul-item"><span class="inline-code">KeyValueDB</span>インターフェイスを<span class="inline-code">DocumentDB</span>と<span class="inline-code">IndexDB</span>のそれぞれに用意した。この点は共通化してしまっても良いかどうかとても悩んだのだが、<span class="inline-code">DocumentDB</span>と<span class="inline-code">IndexDB</span>の使用するDBが同じインターフェイスを持っている必要性は必ずしもないので、たまたま今回は同じ内容のインターフェイスを持ってしまってはいるが、分離することにした。これによってSOLIDE原則の解放閉鎖の原則(OCP)を守れれるようになっているのではないかと思う。</li><li class="content-ul-item"><span class="inline-code">Indexer</span>と<span class="inline-code">Searcher</span>のどちらにも存在する、<span class="inline-code">IndexDB</span>という名前のインターフェイスはインターフェイス分離の原則(ISP)に従って、それぞれ<span class="inline-code">Indexer</span>と<span class="inline-code">Searcher</span>が独自のものを持つように設計した。これによって<span class="inline-code">Indexer</span>と<span class="inline-code">Searcher</span>が別のDBを持つことにして、その間をバッチ処理で繋ぐようになったりした時にも既存のクラスには変更を及ぼさずに行うことができる。</li></ul>
 
 <h1 class="subsection-title">シークエンス図</h1>
 
 <p class="content-paragraph">まずは日本語wikipediaデータに対してindexを作成する際のシークエンス図を書いてみる。</p>
-<figure class="content-figure"><img class="content-img" src="../static/design-search-engine/sequence_diagram_load.png"></figure>
+<figure class="content-figure" style="width:70%"><img class="content-img" src="../static/design-search-engine/sequence_diagram_load.png"></figure>
 <p class="content-paragraph">次にそのindexを使って検索をする場合のシークエンス図を書いてみる。</p>
-<figure class="content-figure"><img class="content-img" src="../static/design-search-engine/sequence_diagram_search.png"></figure>
+<figure class="content-figure" style="width:70%"><img class="content-img" src="../static/design-search-engine/sequence_diagram_search.png"></figure>
 <p class="content-paragraph">どちらもシークエンス図もそれほど複雑ではなく、誰が考えても同じようなものになるとは思う。</p>
 
 

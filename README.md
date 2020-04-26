@@ -43,7 +43,7 @@ $ python main.py
 | `@ul` | `@ul{アイテム}{他のアイテム}` | 順序なしリスト |
 | `@ol` | `@ol{一つ目}{二つ目}` | 順序ありリスト |
 | `@def` | `@def{定義名}{定義内容}` | 定義 |
-| `@fig` | `@fig{@rel{/static/example.png}}` | 画像 |
+| `@fig` | `@fig{サイズ(e.g. 70)}{@rel{/static/example.png}}` | 画像 |
 | `@table` | `@table{項目1,項目2}{データ1,データ2}` | テーブル |
 | `@section` | `@section{セクション}` | セクション |
 | `@subsection` | `@subsection{サブセクション}` | サブセクション |

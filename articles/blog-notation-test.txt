@@ -42,7 +42,7 @@
 }
 
 @p{次に@incode{@fig}}
-@fig{@rel{/static/blog-notation-test/cat.jpg}}
+@fig{70}{@rel{/static/blog-notation-test/cat.jpg}}
 
 @p{次に@incode{@table}}
 @table
