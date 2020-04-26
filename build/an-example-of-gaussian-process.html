@@ -50,7 +50,7 @@ $$\begin{aligned}
 &= \int \prod_{i=1}^k dX_{t_i} p(\{X_{t_i}\}_{i=1}^k) \exp(\sum_{i=1}^k s_i X_{t_i}) \\
 &= \int d\xi_1 \int d\xi_2 p_\mathcal{N}(\xi_1) p_\mathcal{N}(\xi_2) \exp(\sum_{i=1}^k s_i (\cos(t_i) \xi_1 + \sin(t_i) \xi_2)) \\
 &= \int d\xi_1 p_\mathcal{N}(\xi_1) \exp(\xi_1 \sum_{i=1}^k s_i \cos(t_i)) \int d\xi_2 p_\mathcal{N}(\xi_2) \exp(\xi_2 \sum_{i=1}^k s_i \sin(t_i)) \\
-&= \exp(\frac{1}{2}(\sum_{i=1}^k s_i \cos(t_i))) \exp(\frac{1}{2}(\sum_{i=1}^k s_i \sin(t_i))) \\
+&= \exp(\frac{1}{2}(\sum_{i=1}^k s_i \cos(t_i))^2) \exp(\frac{1}{2}(\sum_{i=1}^k s_i \sin(t_i))^2) \\
 &= \exp(\frac{1}{2} \sum_{i=1}^k \sum_{j=1}^k s_i s_j (\cos(t_i) \cos(t_j) + \sin(t_i) \sin(t_j))) \\
 &= \exp(\frac{1}{2} \sum_{i=1}^k \sum_{j=1}^k s_i s_j \cos(t_i - t_j))
 \end{aligned}$$
