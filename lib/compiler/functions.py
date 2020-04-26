@@ -105,7 +105,8 @@ def def_func(args: List[str]) -> str:
 
 def fig_func(args: List[str]) -> str:
     _assert_n_args('fig', args, 2)
-    html: str = '<figure class="content-figure" style="width:' + args[0] + '%">'
+    html: str = ('<figure class="content-figure" style="width:' +
+                 args[0] + '%">')
     html += '<img class="content-img" src="' + args[1] + '">'
     html += '</figure>'
     return html
