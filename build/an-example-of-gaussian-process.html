@@ -1,0 +1,68 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Preloading</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">ガウス過程の簡単な例</h2>
+                                <p class="date">2020-04-26</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">確率微分方程式らへんの話を今まで雰囲気でやっていたので、細かいところまで議論できるように準備しておくかと最近まとめ始めているが、ウィーナー過程だのガウス過程だのそこら辺をしっかりと押さえて議論してこなかったので、色々とまとめることが多そう。</p>
+
+<p class="content-paragraph">とりあえず今回の記事では、ガウス過程についておさらいすることにして、本当は連続性の証明とかいきなりできるといいなと思ったのだがそれもある程度慣れてきたらのほうが良さそうだったので、とりあえず一つ例を作ってお茶を濁すことにした。</p>
+
+<h1 class="section-title">ガウス過程の定義</h1>
+
+<p class="content-paragraph">ガウス過程の定義自体に測度論的な話が大量に必要なのかなと勝手に想像していたが、そういうわけでもなく比較的簡単に定義できる様子。</p>
+
+<div class="content-def"><p><span class="content-def-name">ガウス過程</span></p><p class="content-paragraph">ガウス過程とは、添え字集合$T$で特徴付けられている確率変数の集合$\{X_t\}_{t \in T}$であって、任意の有限個の添え字$t_1, t_2, \cdots, t_k$に対応する確率変数</p>
+$$(X_{t_1}, X_{t_2}, \cdots, X_{t_k})$$
+<p class="content-paragraph">の同時分布が多変量正規分布に従うものを指す。</p></div>
+
+<p class="content-paragraph">基本的には添え字集合を$\mathbb{R}$などととることが多いのだと思うが、定義上では特にそこは指定されていない様子。</p>
+
+<h1 class="section-title">ガウス過程の例</h1>
+
+<p class="content-paragraph">wikipediaに書かれていた例として、</p>
+$$X_t = \cos(t) \xi_1 + \sin(t) \xi_2$$
+<p class="content-paragraph">で、$\xi_1$と$\xi_2$が標準正規分布に従うとき</p>
+$$\xi_1, \xi_2 \sim \mathcal{N}(0, 1)$$
+<p class="content-paragraph">$\{X_t\}_{t \in \mathbb{R}}$がガウス過程になると書かれていたので、それを示してみようと思う。</p>
+
+<p class="content-paragraph">ガウス過程かどうかを判断するためには、有限個の時刻$t_1, t_2, \cdots, t_k \in \mathbb{R}$をとって、それらの時刻における確率変数の集合</p>
+$$(X_{t_1}, X_{t_2}, \cdots, X_{t_k})$$
+<p class="content-paragraph">の同時分布が多変量正規分布になっているかどうかを調べれば良い。これらの変数の同時分布は、一変数の標準正規分布を$p_\mathcal{N}$と表して、</p>
+$$p(\{X_{t_i}\}_{i=1}^k) = \int d\xi_1 \int d\xi_2 p_\mathcal{N}(\xi_1) p_\mathcal{N}(\xi_2) \prod_{i=1}^k \delta(X_{t_i} - \cos(t_i) \xi_1 - \sin(t_i) \xi_2)$$
+<p class="content-paragraph">と表せる。直接この分布の性質を探っていくのは難しそうなので、この分布の積率母関数を計算していくことにすると</p>
+$$\begin{aligned}
+&\quad E[\exp(\sum_{i=1}^k s_i X_{t_i})] \\
+&= \int \prod_{i=1}^k dX_{t_i} p(\{X_{t_i}\}_{i=1}^k) \exp(\sum_{i=1}^k s_i X_{t_i}) \\
+&= \int d\xi_1 \int d\xi_2 p_\mathcal{N}(\xi_1) p_\mathcal{N}(\xi_2) \exp(\sum_{i=1}^k s_i (\cos(t_i) \xi_1 + \sin(t_i) \xi_2)) \\
+&= \int d\xi_1 p_\mathcal{N}(\xi_1) \exp(\xi_1 \sum_{i=1}^k s_i \cos(t_i)) \int d\xi_2 p_\mathcal{N}(\xi_2) \exp(\xi_2 \sum_{i=1}^k s_i \sin(t_i)) \\
+&= \exp(\frac{1}{2}(\sum_{i=1}^k s_i \cos(t_i))) \exp(\frac{1}{2}(\sum_{i=1}^k s_i \sin(t_i))) \\
+&= \exp(\frac{1}{2} \sum_{i=1}^k \sum_{j=1}^k s_i s_j (\cos(t_i) \cos(t_j) + \sin(t_i) \sin(t_j))) \\
+&= \exp(\frac{1}{2} \sum_{i=1}^k \sum_{j=1}^k s_i s_j \cos(t_i - t_j))
+\end{aligned}$$
+<p class="content-paragraph">となって、多変量正規分布の積率母関数となるので、$\{X_t\}_{t \in \mathbb{R}}$はガウス過程と言える。久々に三角関数の合成の式を使った気がする。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2020 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
