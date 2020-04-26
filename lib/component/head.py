@@ -22,9 +22,21 @@ def _gen_katex() -> str:
     return html
 
 
+def _gen_google_analytics() -> str:
+    html: str = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script>'
+    html += '<script>'
+    html += 'window.dataLayer = window.dataLayer || [];'
+    html += 'function gtag(){dataLayer.push(arguments);}'
+    html += 'gtag("js", new Date());'
+    html += 'gtag("config", "UA-164492761-1");'
+    html += '</script>'
+    return html
+
+
 def gen(root: str, title_str: str) -> str:
     html: str = '<head>'
     html += '<meta charset="UTF-8">'
+    html += _gen_google_analytics()
     html += _gen_title(title_str)
     html += _gen_styles(root)
     html += _gen_highlight(root)
