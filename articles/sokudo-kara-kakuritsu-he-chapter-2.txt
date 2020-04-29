@@ -1,0 +1,116 @@
+「測度から確率へ」の第2章のまとめ
+2020-04-29
+
+@p{測度論が色々な場面で使われているのを見つつも基礎から学んだことがなかったので、最近この教科書}
+@ul{@a{はじめての確率論 測度から確率へ}{https://www.kyoritsu-pub.co.jp/bookdetail/9784320014732}}
+@p{で基礎から学んでみている。ただ読んでいくだけでも面白いのだが、せっかくなのでブログにまとめつつ読んでいこうと思う。}
+
+@section{第2章の概観}
+
+@p{この本の第1章は、確率論を議論するにあたって測度論のような理論がなぜ必要なのかを説明している章になっている。特に複雑なことは言っていないので、ブログにまとめを書くことはしない。}
+@p{今回まとめる予定の第2章は、これからの議論のための土台づくりのような章になっている。大まかにいって}
+@ol
+  {@inmath{\sigma}-集合体の定義とその性質}
+  {@inmath{\sigma}-集合体の具体例の紹介}
+@p{の二つの内容から構成されているが、それら以外にも少し後の章のための伏線のような事実がいくつか紹介されている。}
+
+@section{@inmath{\sigma}-集合体の定義とその性質}
+
+@p{いきなりだが@inmath{\sigma}-集合体の定義を紹介する。}
+@def{@inmath{\sigma}-集合体}{
+@p{空でない集合@inmath{\Omega}の部分集合族@inmath{\mathcal{B}}が@inmath{\Omega}上の@inmath{\sigma}-集合体であるとは、@inmath{\mathcal{B}}が次の三つの条件を満たすことを指す。}
+@ol
+  {@inmath{\Omega \in \mathcal{B}}}
+  {@inmath{A \in \mathcal{B} \Rightarrow A^C \in \mathcal{B}}}
+  {任意の@inmath{k \in \mathbb{N}}に対して@inmath{A_k \in \mathcal{B}}ならば、@inmath{\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}}}
+}
+@p{この定義から簡単にわかる@inmath{\sigma}-集合体の性質として、例えば次のようなものがある。}
+@def{@inmath{\sigma}-集合体の性質}{
+@p{任意の@inmath{k \in \mathbb{N}}に対して@inmath{A_k \in \mathcal{B}}である時、以下が成り立つ。}
+@ol
+  {@inmath{\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}}}
+  {@inmath{\limsup_{k \rightarrow \infty} A_k \in \mathcal{B}}}
+  {@inmath{\liminf_{k \rightarrow \infty} A_k \in \mathcal{B}}}
+@p{ただしここで、}
+@blmath{\begin{aligned}
+\limsup_{k \rightarrow \infty} A_k &= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k \\
+\liminf_{k \rightarrow \infty} A_k &= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k
+\end{aligned}}
+@p{である。}
+}
+@p{1つ目の性質は、次のように順を追って証明することができる。}
+@ol
+  {@inmath{A_k \in \mathcal{B}}より、@inmath{A_k^C \in \mathcal{B}}}
+  {@inmath{A_k^C \in \mathcal{B}}より、@inmath{\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}}}
+  {@inmath{\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}}より、@inmath{\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}}}
+@p{2つ目と3つ目の性質は、すでに@inmath{\sigma}-集合体は可算個の合併と交叉に閉じていることがわかっているので明らか。}
+
+@p{すぐに@inmath{\sigma}-集合体の具体例を紹介したいところだが、いくつかの例を作るために次の性質を示しておく必要がある。}
+@def{@inmath{\sigma}-集合体の生成}{
+@p{@inmath{\Omega}に対する任意の部分集合族@inmath{S}に対して、それを含む最小の@inmath{\sigma}-集合体が唯一存在する。}
+@p{このような@inmath{\sigma}-集合体を、@inmath{S}から生成される@inmath{\sigma}-集合体と呼び、@inmath{\sigma[S]}と書く。}
+}
+@p{どんな部分集合族@inmath{S}も@inmath{\Omega}の冪集合@inmath{2^{\Omega}}には必ず含まれるので、@inmath{S}を含む@inmath{\sigma}-集合体は最低でも一つは存在する。@inmath{S}を含む@inmath{\sigma}-集合体の全体を@inmath{\{\mathcal{B}_{\lambda} : \lambda \in \Lambda\}}と表すことにすると、}
+@blmath{\begin{aligned}
+\mathcal{B}_1 = \bigcap_{\lambda \in \Lambda} \mathcal{B}_{\lambda}
+\end{aligned}}
+@p{は、@inmath{S}を含む任意の@inmath{\sigma}-集合体に含まれる。さらにこの集合族は@inmath{\sigma}-集合体となる条件三つを満たす。}
+@ol
+  {@inmath{\Omega \in \mathcal{B}_1}}
+  {@inmath{A \in \mathcal{B}_1}ならば、@inmath{A^C \in \mathcal{B}_1}}
+  {任意の@inmath{k \in \mathbb{N}}に対して@inmath{A_k \in \mathcal{B}_1}ならば、@inmath{\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_1}}
+@p{よって、@inmath{\mathcal{B}_1}は@inmath{S}を含む最小の@inmath{\sigma}-集合体である。また、もし他に同じく@inmath{S}を含む最小の@inmath{\sigma}-集合体として@inmath{\mathcal{B}_2}が存在したとすれば、@inmath{\mathcal{B}_1}の定義から}
+@blmath{
+\mathcal{B}_1 \subset \mathcal{B}_2
+}
+@p{となるが、@inmath{\mathcal{B}_2}の最小性から同様に@inmath{\mathcal{B}_2 \subset \mathcal{B}_1}となり、結果的に@inmath{\mathcal{B}_1 = \mathcal{B}_2}となるため、唯一である。}
+
+
+@section{@inmath{\sigma}-集合体の具体例の紹介}
+
+@p{この本では@inmath{\sigma}-集合体の具体例をいくつか紹介している。}
+@def{可算集合とその補集合で構成される@inmath{\sigma}-集合体}{
+@p{@inmath{\Omega}を空でない集合として}
+@blmath{
+\mathcal{B}_{\#}(\Omega) = \{A \in \Omega : AまたはAの補集合が高々可算\}
+}
+@p{とすると、@inmath{\mathcal{B}_{\#}(\Omega)}は@inmath{\Omega}上の@inmath{\sigma}-集合体である。}
+}
+@p{@inmath{\sigma}-集合体であることは}
+@ol
+  {@inmath{\phi \in \mathcal{B}_{\#}(\Omega)}より、@inmath{\Omega \in \mathcal{B}_{\#}(\Omega)}}
+  {@inmath{A \in \mathcal{B}_{\#}(\Omega)}なら@inmath{A^C \in \mathcal{B}_{\#}(\Omega)}は、明らか}
+  {任意の@inmath{k \in \mathbb{N}}に対して@inmath{A_k \in \mathcal{B}_{\#}(\Omega)}の時、@inmath{A_k}が全て可算集合ならその可算個の合併@inmath{\bigcup_{k=1}^{\infty} A_k}も可算集合。もし一つでも補集合が可算なものがあれば、@inmath{(\bigcup_{k=1}^{\infty} A_k)^C = \bigcap_{k=1}^{\infty} A_k^C}が可算になる。よっていずれにしろ、@inmath{\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_{\#}(\Omega)}}
+@p{として確認できる。}
+
+@def{ボレル集合体}{
+@p{距離空間@inmath{E=(E, \bm{d})}を考える。@inmath{E}の開集合全体@inmath{\mathcal{O}}から生成される@inmath{\sigma}-集合体をボレル集合体と呼び、
+@blmath{
+\mathcal{B}(E) = \sigma[\mathcal{O}]
+}
+と書く。また、その要素をボレル集合と呼ぶ。}
+}
+@p{ボレル集合の要素としては}
+@ul
+  {@inmath{E}の開部分集合全体}
+  {@inmath{E}の閉部分集合全体}
+  {@inmath{E}の可算集合全体}
+  {@inmath{E}の有限集合全体}
+@p{などが含まれる。}
+
+@def{@inmath{d}次元ボレル集合体}{
+@p{距離空間@inmath{E}として@inmath{d}次元ユークリッド空間@inmath{\mathbb{R}^d}を取った場合のボレル集合を@inmath{\bm{B}_d}と書き}
+@blmath{
+\bm{B}_d = \mathcal{B}(\mathbb{R}^d)
+}
+@p{@inmath{d}次元ボレル集合体と呼ぶ、また、その要素を@inmath{d}次元ボレル集合と呼ぶ。}
+}
+@p{「@inmath{d}次元」と入ると一般の距離空間ではなく@inmath{d}次元ユークリッド空間を対象にすることに注意。}
+
+@section{備考}
+
+@p{この本の2章ではここで記載した内容以外に}
+@ul
+  {@inmath{d}次元ボレル集合体の幾つかの性質の紹介}
+  {ボレル集合体と連続関数の関係}
+@p{について紹介しているのだが、きりが良いので一度ここでこの記事は終わりとして、それらは他の記事に回すことにする。}
