@@ -1,0 +1,99 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Preloading</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">ボレル-カンテリの補題</h2>
+                                <p class="date">2020-05-02</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">相変わらず「測度から確率へ」を読み進めていて、今は第3章の「確率測度」の項目を読み進めている。第3章の内容は大きく分けて</p>
+<ul class="content-ul"><li class="content-ul-item">確率測度の定義とその一般的な性質</li><li class="content-ul-item">$d$次元ボレル集合体の上に定義される確率測度の性質</li><li class="content-ul-item">完備化とルベーグ測度の導入</li></ul>
+<p class="content-paragraph">になっているようで、やはり第2章と同じく、これからの議論を進めるために色々な場所の準備を進めている感じになっている。</p>
+
+<p class="content-paragraph">今回はその中でも、確率測度の定義と性質の部分をまとめてみて、そのパートの最後に述べられている「ボレル-カンテリの定理」までを少し説明しようかと思う。</p>
+
+<h1 class="section-title">確率測度の定義と性質</h1>
+
+<p class="content-paragraph">確率測度はこの本では次のように定義されている。</p>
+<div class="content-def"><p><span class="content-def-name">確率測度</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$を考える。$\mathcal{B}$上の実数値関数$\bm{P}$が三つの条件</p>
+<ol class="content-ol"><li class="content-ol-item">任意の可測集合$A$に対して、$0 \le \bm{P}(A) \le 1$</li><li class="content-ol-item">$\bm{P}(\phi) = 0$</li><li class="content-ol-item">互いに交わらない可測集合族$\{A_k\}_{k=1}^{\infty}$が与えられた時、$\bm{P}(\bigcup_{k=1}^{\infty} A_k) = \sum_{k=1}^{\infty} \bm{P}(A_k)$</li></ol>
+<p class="content-paragraph">を満たす時、$\bm{P}$を確率測度と呼び、組$(\Omega, \mathcal{B}, \bm{P})$を確率空間と呼ぶ。</p></div>
+<p class="content-paragraph">確率を特徴付けるのに十分かどうかはすぐにはわからないが、確率の特徴として正しそうであることはすぐにわかる感じになっている。</p>
+
+<p class="content-paragraph">このように定義した確率測度についていくつかその性質が紹介されている。</p>
+<div class="content-def"><p><span class="content-def-name">確率測度の性質</span></p><p class="content-paragraph">$(\Omega, \mathcal{B}, \bm{P})$を確率空間とする。この時、</p>
+<ol class="content-ol"><li class="content-ol-item">任意の可測集合$A \subset B$に対して、$\bm{P}(A) \le \bm{P}(B)$</li><li class="content-ol-item">任意の可測集合族$\{A_k\}_{k=1}^{\infty}$に対して、$\bm{P}(\bigcup_{k=1}^{\infty} A_k) \le \sum_{k=1}^{\infty} \bm{P}(A_k)$</li></ol></div>
+<p class="content-paragraph">一つ目の照明はとても簡単。</p>
+$$\bm{P}(B) = \bm{P}(A) + \bm{P}(B-A) \ge \bm{P}(A)$$
+<p class="content-paragraph">二つ目の証明は</p>
+$$\begin{aligned}
+B_1 &= A_1 \\
+B_k &= A_k - \bigcup_{l=1}^{k-1} A_l
+\end{aligned}$$
+<p class="content-paragraph">という可測集合に注目することさえ見つけられれば証明は簡単。</p>
+$$\bm{P}(\bigcup_{k=1}^{\infty} A_k) = \bm{P}(\bigcup_{k=1}^{\infty} B_k) = \sum_{k=1}^{\infty} \bm{P}(B_k) \le \sum_{k=1}^{\infty} \bm{P}(A_k)$$
+
+<p class="content-paragraph">その他にも例えば、$\lim$と組み合わせたときの性質が紹介されていたり</p>
+<div class="content-def"><p><span class="content-def-name">単調増加する可測集合の確率測度</span></p><p class="content-paragraph">可測集合族$\{A_k\}_{k=1}^{\infty}$が単調増加($A_1 \subset A_2 \subset \cdots$)する時</p>
+$$\bm{P}(\bigcup_{k=1}^{\infty} A_k) = \lim_{k \rightarrow \infty} \bm{P}(A_k)$$
+<p class="content-paragraph">が成り立つ。</p></div>
+<p class="content-paragraph">先ほどと同様に</p>
+$$B_1 = A_1, B_k = A_k - A_{k-1}$$
+<p class="content-paragraph">と定義すると、</p>
+$$\bm{P}(\bigcup_{k=1}^{\infty} A_k) = \sum_{k=1}^{\infty} \bm{P}(B_k) = \lim_{n \rightarrow \infty} \bm{P}(\bigcup_{k=1}^n B_k) = \lim_{k \rightarrow \infty} \bm{P}(A_k)$$
+<p class="content-paragraph">となり証明終了。</p>
+
+<p class="content-paragraph">$\limsup$との性質が紹介されていたりした。</p>
+<div class="content-def"><p><span class="content-def-name">$\limsup$と確率測度の関係</span></p><p class="content-paragraph">任意の可測集合族$\{A_k\}_{k=1}^{\infty}$に対して</p>
+$$\limsup_{k \rightarrow \infty} \bm{P}(A_k) \le \bm{P}(\limsup_{k \rightarrow \infty} A_k)$$
+<p class="content-paragraph">が成り立つ。</p></div>
+<p class="content-paragraph">まずは$\limsup$を分解して</p>
+$$\limsup_{k \rightarrow \infty} A_k = \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k = \bigcap_{n=1}^{\infty} B_n$$
+<p class="content-paragraph">と書くことにすると、$B_n$は単調減少していくことになる。先ほど単調増加について証明したことは単調現象の場合にも当てはまるので、</p>
+$$\bm{P}(\limsup_{k \rightarrow \infty} A_k) = \lim_{n \rightarrow \infty} \bm{P}(B_n)$$
+<p class="content-paragraph">また、任意の$k \ge n$に対して$A_k \subset B_n$なので、</p>
+$$k \ge n, \bm{P}(A_k) \le \bm{P}(B_n) \Rightarrow \sup_{k \ge n} \bm{P}(A_k) \le \bm{P}(B_n)$$
+<p class="content-paragraph">これらを合わせれば題意が得られる。</p>
+$$\limsup_{k \rightarrow \infty} \bm{P}(A_k) \le \bm{P}(\limsup_{k \rightarrow \infty} A_k)$$
+
+
+<h1 class="section-title">ボレル-カンテリの定理</h1>
+
+<p class="content-paragraph">まずはその定理の主張を見たい。</p>
+<div class="content-def"><p><span class="content-def-name">ボレル-カンテリの定理</span></p><p class="content-paragraph">任意の可測集合族$\{A_k\}_{k=1}^{\infty}$に対して</p>
+$$\sum_{k=1}^{\infty} \bm{P}(A_k) < \infty \Rightarrow \bm{P}(\limsup_{k \rightarrow \infty} A_k) = 0$$</div>
+<p class="content-paragraph">ここまで準備してきてあれば、比較的証明は簡単にできる。</p>
+$$\bm{P}(\limsup_{k \rightarrow \infty} A_k) = \lim_{n \rightarrow \infty} \sum_{k=n}^{\infty} \bm{P}(A_k) = \sum_{k=1}^{\infty} \bm{P}(A_k) - \lim_{n \rightarrow \infty} \sum_{k=1}^n \bm{P}(A_k) = 0$$
+<p class="content-paragraph">今回は$\sum_{k=1}^{\infty} \bm{P}(A_k)$が収束しているから二つ目の式変形ができて引き算の形になったが、もし発散していたらそこの変形ができないので$0$にはならない。</p>
+
+<p class="content-paragraph">ざっと定理を読んだだけだど演習問題のようで、特に名前がつくようなものに見えなかったので、一つ具体例を調べてみる。</p>
+<div class="content-def"><p><span class="content-def-name">無限回のコイントス</span></p><p class="content-paragraph">半分の確率で表と裏が出るコインを投げ続けるとする。投げ始めて$k$回連続で表が出るという事象を$A_k$と表せば、$\bm{P}(A_k) = 1/2^k$となる。明らかに</p>
+$$\sum_{k=1}^{\infty} \bm{P}(A_k) < \infty$$
+<p class="content-paragraph">なので、</p>
+$$\bm{P}(\limsup_{k \rightarrow \infty} A_k) = 0$$</div>
+<p class="content-paragraph">この例における$\limsup_{k \rightarrow \infty} A_k$とは何かというと、その集合に含まれる標本$\omega$がどのような条件を満たしているかというと</p>
+$$\omega \in \limsup_{k \rightarrow \infty} A_k \iff \forall n \in \mathbb{N}, \exists k \ge n, \omega \in A_k$$
+<p class="content-paragraph">となるが、これは要するに無限回連続で表が出続けるような事象ということになる。この例においてボレル-カンテリの定理は、無限回連続で表が出る確率は$0$であるということを示しているということになる。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2020 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
