@@ -1,0 +1,195 @@
+可測関数の定義とその性質
+2020-05-03
+
+@p{「測度から確率へ」の第4章を読んでいる。内容としては大きく次の二つに分かれている。}
+@ol
+  {可測関数の定義とその性質の紹介}
+  {確率変数の定義とその性質の紹介}
+@p{今回はその前半、可測関数の定義とその性質について、をまとめていこうと思う。}
+
+
+@section{可測関数の定義と性質}
+
+@def{可測関数}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}上の実数または@inmath{+\infty,-\infty}の値をとる関数@inmath{X}が、任意の実数@inmath{\alpha}に対して}
+@blmath{ \{\omega \in \Omega : X(\omega) > \alpha\} }
+@p{を満たすとき、関数@inmath{X}を可測関数と呼ぶ。}
+}
+@p{可測関数は値域に@inmath{+\infty,-\infty}を含んでいることに注意する。}
+
+@p{この先、この可測関数に対する積分を定めたいのだが、基本的に積分はリーマン積分の時と同じく何かしらその関数に近い、積分の値っぽいものが定め易そうな関数を持ってきて、それを徐々に本当の関数に近づけていくという方法をとる。この時必要になるのが、まず定義関数というもの。}
+@def{定義関数}{
+@p{集合@inmath{\Omega}のある部分集合@inmath{A}に紐づく関数}
+@blmath{
+I_A(\omega) = \begin{cases}
+  1 & \omega \in \Omega  \\
+  0 & \omega \not \in \Omega
+\end{cases}
+}
+@p{を定義関数と呼ぶ。}
+}
+@p{そして、その定義関数を有限個組み合わせて作る単関数というものである。}
+@def{単関数}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}上の実数値関数@inmath{X}に対して、互いに共通部分を持たない可測集合族}
+@blmath{ A_1, A_2, \cdots, A_n \in \mathcal{B} }
+@p{と、実数@inmath{a_1, a_2, \cdots, a_n \in \mathbb{R}}が存在して}
+@blmath{ X(\omega) = \sum_{k=1}^n a_k I_{A_k}(\omega) }
+@p{となるならば、@inmath{X}は単関数であるという。}
+}
+@p{定義からしてカクカクしていて積分の値っぽいものが定め易そうであることがわかると思う。}
+
+@p{この本ではここから一気に積分の定義にいくわけではなく、その一歩前の段階として可測関数の積分をしたいと思った時に、それに徐々に近くような単関数を作れるのかどうかという点を考えていくことにしている様子。}
+@def{可測関数列の性質}{
+@p{可測関数列@inmath{\{X_n\}_{n=1}^{\infty}}が与えられたとき、}
+@blmath{\sup_n X_n, \inf_n X_n, \limsup_n X_n, \liminf_n X_n}
+@p{はどれも可測関数である。}
+}
+@p{まず@inmath{\sup}に対しての証明を行う。任意の実数@inmath{\alpha}に対して}
+@blmath{
+\sup_n X_n(w) > \alpha \iff \exists n, X_n(w) > \alpha
+}
+@p{であるから、}
+@blmath{
+\{\omega \in \Omega : \sup_n X_n(w) > \alpha\} = \bigcup_n \{\omega \in \Omega : X_n(w) > \alpha\} \in \mathcal{B}
+}
+@p{よって、@inmath{\sup_n X_n}は可測関数である。}
+
+@p{つぎに@inmath{\inf}については、単に同じ議論をしてしまうと}
+@blmath{
+\inf_n X_n(\omega) \ge \alpha \iff \forall n, X_n(\omega) > \alpha
+}
+@p{となってしまうので、少し工夫して}
+@blmath{
+\exists m, \inf_n X_n(\omega) > \alpha + \frac{1}{m} \iff \exists m, \forall n, X_n(\omega) > \alpha + \frac{1}{m}
+}
+@p{を証明することにする。必要性は明らかで、十分性は@inmath{m}を適切に取った後に}
+@blmath{
+\forall n, X_n(\omega) > \alpha + \frac{1}{m} \Rightarrow \inf_n X_n(\omega) \ge \alpha + \frac{1}{m} > \alpha + \frac{1}{m+1}
+}
+@p{として示せる。この結果を使えば}
+@blmath{\begin{aligned}
+\{\omega \in \Omega : \inf_n X_n(w) > \alpha \} &= \bigcup_m \{\omega \in \Omega : \inf_n X_n(w) > \alpha + \frac{1}{m} \} \\
+&= \bigcup_m \bigcap_n \{\omega \in \Omega : X_n(w) > \alpha + \frac{1}{m} \} \in \mathcal{B}
+\end{aligned}}
+@p{となり、@inmath{\inf_n X_n}も可測関数であることがわかる。}
+
+@p{@inmath{\limsup}と@inmath{\liminf}は、}
+@blmath{
+\limsup_n X_n = \inf_n \sup_{k \ge n} X_k, \liminf_n X_n = \sup_n \inf_{k \ge n} X_k,
+}
+@p{であり、@inmath{\sup}と@inmath{\inf}の組み合わせなので、可測関数である。}
+
+@def{可測関数列の極限}{
+@p{可測関数列@inmath{\{X_n\}_{n=1}^{\infty}}が与えられたときに}
+@blmath{ \limsup_n X_n = \liminf_n X_n }
+@p{となれば、その値を}
+@blmath{ \lim_n X_n }
+@p{と表すこととする。}
+}
+
+@p{ここまで準備すれば、可測関数に徐々に近づくような単関数を作れるかという点についてある程度の回答を得ることができる。}
+@def{非負可測関数と単関数の関係}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}上の非負関数@inmath{X}が可測となる必要十分条件は、ある非負単関数列@inmath{\{X_n\}}で}
+@blmath{ 0 \le X_1 \le X_2 \le \cdots \le X}
+@p{を満たし、かつ}
+@blmath{\lim_n X_n = X}
+@p{となるようなものが存在することである。}
+}
+@p{十分性は、単関数が可測であり、可測関数の極限も可測になることから明らかである。必要性は、任意の非負可測関数@inmath{X}に対して}
+@blmath{\begin{aligned}
+A_0^n &= \{\omega : X(\omega) > n\} \in \mathcal{B} \\
+A_k^n &= \{\omega : \frac{k-1}{2^n} \le X(\omega) < \frac{k}{2^n} \} \in \mathcal{B} \\
+X_n(\omega) &= \sum_{k=1}^{n2^n} \frac{k-1}{2^n} I_{A_k^n}(\omega) + I_{A_0^n}(\omega)
+\end{aligned}}
+@p{とすれば、@inmath{\{X_n\}}が上記の条件を満たすことがわかる。}
+
+@p{最後に一工夫すると、どんな可測関数に対してもそれに近づいていくような単関数列を作ることができることがわかる。}
+@def{可測関数と単関数の関係}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}上の関数@inmath{X}が可測となる必要十分条件は、ある単関数列@inmath{\{X_n\}}で}
+@blmath{ 0 \le X_1 \le X_2 \le \cdots \le X}
+@p{を満たし、かつ}
+@blmath{\lim_n X_n = X}
+@p{となるようなものが存在することである。}
+}
+@p{十分性は先ほどと同じく明らか。必要性は、}
+@blmath{
+X^+(\omega) = \max(X(\omega), 0) \\
+X^-(\omega) = - \min(X(\omega), 0)
+}
+@p{とすれば、それらに対して近似単関数列@inmath{X^+_n, X^-_n}が取れるが、}
+@blmath{ X_n = X^+_n - X^-_n }
+@p{とすれば目的の単関数列が得られる。}
+
+
+@section{可測関数と可測写像}
+
+@p{可測関数は値域が実数と@inmath{+\infty,-\infty}の場合についての話だったが、可測関数とは別に可測写像と呼ばれる、値域が一般の可測空間の場合の話をすることもできる。}
+@def{可測写像}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}から@inmath{(\Omega', \mathcal{B}')}への写像@inmath{T}が、任意の@inmath{\mathcal{B}'}-可測集合@inmath{A}に対して}
+@blmath{T^{-1}(A) \in \mathcal{B}}
+@p{となる時、写像@inmath{T}は可測写像であるという。}
+}
+@p{ここで注意するべきは、一般に可測関数は可測写像ではないということである。一番それっぽいのは実数と1次元ボレル集合体で作られる可測空間への関数}
+@blmath{ T: (\Omega, \mathcal{B}) \rightarrow (\mathbb{R}, \bm{B}_1) }
+@p{だが、残念ながらこの関数の値域に@inmath{+\infty,-\infty}が含まれない。}
+
+@p{ただし、可測関数は可測写像っぽい性質を満たしてはいる。}
+@def{可測関数の逆像に関する性質}{
+@p{可測関数@inmath{X}について次が成り立つ。}
+@ol
+  {@inmath{X^{-1}(+\infty) \in \mathcal{B}}}
+  {@inmath{X^{-1}(-\infty) \in \mathcal{B}}}
+  {任意の1次元ボレル集合@inmath{B \in \bm{B}_1}に対して、@inmath{X^{-1}(B) \in \mathcal{B}}}
+}
+@p{一つ目は}
+@blmath{ \{\omega \subset \Omega : X(\omega) = \infty\} = \bigcap_n \{\omega \subset \Omega : X(\omega) > n \} \in \mathcal{B} }
+@p{より明らか。二つ目も同様に}
+@blmath{ \{\omega \subset \Omega : X(\omega) = - \infty\} = \bigcap_n \{\omega \subset \Omega : X(\omega) \le -n \} \in \mathcal{B} }
+@p{より明らか。三つ目は}
+@blmath{ \mathcal{B}_0 \equiv \{B \subset \mathbb{R} : X^{-1}(B) \in \mathcal{B}\} }
+@p{とすると、任意の@inmath{-\infty < a \le b \le \infty}に対して}
+@blmath{ X^{-1}((a, b]) = X^{-1}((a, \infty] - (b, \infty]) = X^{-1}((a, \infty]) - X^{-1}((b, \infty]) \in \mathcal{B} }
+@p{となるので、}
+@blmath{ \bm{J}_1 \subset \mathcal{B}_0 \Rightarrow \bm{B}_1 \subset \mathcal{B}_0 }
+@p{よって任意の@inmath{B \in \bm{B}_1}に対して@inmath{X^{-1}(B) \in \mathcal{B}_0}となる。}
+
+@p{そして実関数に限ればそれらは同じ意味。}
+@def{実関数における可測関数と可測写像}{
+@p{実関数に限れば、それが可測関数であることの必要十分条件は可測写像であることである。そしてそのような関数のことを実可測関数と呼ぶ。}
+}
+
+
+@section{実可測関数の性質}
+
+@p{実可測関数は足し算したり掛け算したりしても相変わらず実可測関数である。そのことを示すためにまず次を示す。}
+@def{可測空間から@inmath{d}次元ユークリッド空間への写像}{
+@p{可測空間@inmath{(\Omega, \mathcal{B})}から@inmath{(\mathbb{R}, \bm{B}_1)}への可測写像@inmath{X_1, X_2, \cdots, X_d}を組み合わせた写像}
+@blmath{ \bm{X}: \omega \in \Omega \rightarrow (X_1(\omega), X_2(\omega), \cdots, X_d(\omega)) }
+@p{は、@inmath{(\Omega, \mathcal{B})}から@inmath{(\mathbb{R}^d, \bm{B}_d)}への可測写像である。}
+}
+@p{次のような集合族を考える。}
+@blmath{ \mathcal{B}_0 \equiv \{B \subset \mathbb{R}^d : \bm{X}^{-1}(B) \in \mathcal{B}\} }
+@p{任意の@inmath{\bm{J}_d}の元}
+@blmath{ J = \prod_{j=1}^d (a_j, b_j], a_j, b_j \in \mathbb{R} }
+@p{に対して、その@inmath{\bm{X}}による逆像は}
+@blmath{ \bigcap_{j=1}^d X^{-1}_j((a_j, b_j]) \in \mathcal{B} }
+@p{となるため、}
+@blmath{\bm{J}_d \subset \mathcal{B}_0 \Rightarrow \bm{B}_d \subset \mathcal{B}_0}
+@p{よって、任意の@inmath{B \in \bm{B}_d}に対して、@inmath{\bm{X}^{-1}(B) \in \mathcal{B}}。要するに@inmath{\bm{X}}は可測写像。}
+
+@p{さらにこちらも示す。}
+@def{@inmath{\mathbb{R}^d}から@inmath{\mathbb{R}}への連続写像}{
+@p{任意の@inmath{\mathbb{R}^d}から@inmath{\mathbb{R}}への連続写像@inmath{X}は可測写像である。}
+}
+@p{次のような集合族を考える。}
+@blmath{ \mathcal{B}_0 \equiv \{ B \subset \mathbb{R} : X^{-1}(B) \in \bm{B}_d \} }
+@p{この時、@inmath{X}は連続であるから、任意の@inmath{\mathbb{R}}の開集合@inmath{O}の逆像も開集合なので}
+@blmath{ \mathcal{O} \subset \mathcal{B}_0 \Rightarrow \bm{B}_1 \subset \mathcal{B}_0}
+@p{ここで、@inmath{\mathcal{O}}は@inmath{\mathbb{R}}の開集合族。よって、任意の1次元ボレル集合@inmath{B}に対して、その逆像は@inmath{d}次元ボレル集合。要するに@inmath{X}は可測写像。}
+
+@p{これらを組み合わせれば、例えば以下などがわかる。}
+@def{実可測関数の足し算掛け算}{
+@p{実可測関数@inmath{X,Y}に対して}
+@blmath{X+Y, XY}
+@p{なども実可測関数である。}
+}
