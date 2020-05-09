@@ -17,11 +17,10 @@
 
 
 @ul
-{@a{Reddit}{https://www.reddit.com/}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
-{@a{Twitter}{https://twitter.com/}}
-{@a{TweetDeck}{https://tweetdeck.twitter.com/}}
+{@a{Reddit}{https://www.reddit.com/}}
 {@a{微博}{https://www.weibo.com}}
+{@a{LeetCode}{https://leetcode.com/}}
 
 
 @section{よく使うツール}
