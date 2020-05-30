@@ -50,6 +50,7 @@ $ python main.py
 | `@quote` | `@quote{これは引用です}` | 引用 |
 | `@incode` | `@incode{#include <iostream>}` | inlineコード |
 | `@blcode` | `@blcode{int a = 1}` | blockコード |
+| `@pre` | `@pre{これはそのまま出力されます}` | そのまま出力 |
 | `@inmath` | `@inmath{a^t_k}` | inline-math |
 | `@blmath` | `@blmath{\sum_{n=1}^10 = 55}` | block-math |<br />
 

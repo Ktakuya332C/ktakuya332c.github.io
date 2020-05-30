@@ -78,6 +78,11 @@ def blcode_func(args: List[str]) -> str:
     return '<div class="code-container"><pre><code>' + code + '</code></pre></div>'
 
 
+def pre_func(args: List[str]) -> str:
+    _assert_n_args('pre', args, 1)
+    return '<div class="pre-container"><pre>' + args[0] + '</pre></div>'
+
+
 def ul_func(args: List[str]) -> str:
     html: str = '<ul class="content-ul">'
     for arg in args:
@@ -168,6 +173,7 @@ default_func_map: FuncMapType = {
     'p': (p_func, True),
     'incode': (incode_func, False),
     'blcode': (blcode_func, False),
+    'pre': (pre_func, False),
     'ul': (ul_func, True),
     'ol': (ol_func, True),
     'def': (def_func, True),
