@@ -3,15 +3,6 @@
 
 @p{よくみるブログをとりあえず適当にリストしてみる。}
 
-@section{データサイエンス系}
-@ul
-  {@a{大トロ}{https://blog.otoro.net/}}
-  {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
-  {@a{読書日記}{https://elsur.jpn.org/diary/}}
-  {@a{StatModeling Memorandum}{http://statmodeling.hatenablog.com/}}
-  {@a{free range statistics}{http://freerangestats.info/}}
-  {@a{Goolge AI Blog}{https://ai.googleblog.com/}}
-
 @section{エンジニアリング一般}
 @ul
   {@a{Dropbox Tech Blog}{https://dropbox.tech/}}
@@ -25,3 +16,14 @@
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
   {@a{The Cloudflare Blog}{https://blog.cloudflare.com/}}
+
+@section{データサイエンス系}
+@ul
+  {@a{Goolge AI Blog}{https://ai.googleblog.com/}}
+  {@a{Facebook AI Blog}{https://ai.facebook.com/blog/}}
+  {@a{free range statistics}{http://freerangestats.info/}}
+  {@a{StatModeling Memorandum}{http://statmodeling.hatenablog.com/}}
+  {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
+  {@a{読書日記}{https://elsur.jpn.org/diary/}}
+  {@a{大トロ}{https://blog.otoro.net/}}
+  
