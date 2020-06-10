@@ -17,7 +17,7 @@
 
 
 @ul
-{@a{My Twitter List}{https://twitter.com/i/lists/1269778480905908224}}
+{@a{よくみるブログ}{@rel{/build/interesting-blogs.html}}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
 {@a{Reddit}{https://www.reddit.com/}}
 {@a{微博}{https://www.weibo.com}}
