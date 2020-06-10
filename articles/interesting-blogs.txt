@@ -11,11 +11,11 @@
   {@a{Google Open Source Blog}{https://opensource.googleblog.com/}}
   {@a{Netflix Tech Blog}{https://netflixtechblog.com/}}
   {@a{Microsoft Research Blog}{https://www.microsoft.com/en-us/research/blog/}}
+  {@a{The Cloudflare Blog}{https://blog.cloudflare.com/}}
   {@a{The morning paper}{https://blog.acolyer.org/}}
   {@a{Highly Available, Seldom Consistent}{http://www.bailis.org/blog/}}
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
-  {@a{The Cloudflare Blog}{https://blog.cloudflare.com/}}
 
 @section{データサイエンス系}
 @ul
