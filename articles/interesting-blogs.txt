@@ -24,3 +24,4 @@
   {@a{Highly Available, Seldom Consistent}{http://www.bailis.org/blog/}}
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
+  {@a{The Cloudflare Blog}{https://blog.cloudflare.com/}}
