@@ -16,6 +16,7 @@
   {@a{Highly Available, Seldom Consistent}{http://www.bailis.org/blog/}}
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
+  {@a{LWN.net}{https://lwn.net/}}
 
 @section{データサイエンス系}
 @ul
