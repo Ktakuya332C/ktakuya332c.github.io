@@ -18,7 +18,6 @@
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
   {@a{SOTA}{https://deeeet.com/}}
-  {@a{LWN.net}{https://lwn.net/}}
 
 @section{データサイエンス系}
 @ul
@@ -29,4 +28,8 @@
   {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
   {@a{読書日記}{https://elsur.jpn.org/diary/}}
   {@a{大トロ}{https://blog.otoro.net/}}
-  
+
+@section{その他}
+@ul
+  {@a{LWN.net}{https://lwn.net/}}
+  {@a{Linux Documentation}{https://www.spinics.net/lists/linux-doc}}
