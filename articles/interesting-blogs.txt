@@ -14,7 +14,7 @@
   {@a{The Cloudflare Blog}{https://blog.cloudflare.com/}}
   {@a{DeNA Engineering Blog}{https://engineer.dena.com/}}
   {@a{The morning paper}{https://blog.acolyer.org/}}
-  {@a{Highly Available, Seldom Consistent}{http://www.bailis.org/blog/}}
+  {@a{Ctrl blog}{https://www.ctrl.blog/}}
   {@a{Perspectives}{https://perspectives.mvdirona.com/}}
   {@a{Danluu}{https://danluu.com/}}
   {@a{SOTA}{https://deeeet.com/}}
