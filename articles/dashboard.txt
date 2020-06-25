@@ -8,9 +8,7 @@
 {@a{StackOverflow}{https://stackoverflow.com/}}
 {@a{ServerFault}{https://serverfault.com/}}
 {@a{Cross Validated}{https://stats.stackexchange.com/}}
-{@a{Slack: Tokyo.R}{https://r-wakalang.slack.com}}
-{@a{Slack: kagger-ja}{https://kaggler-ja.slack.com}}
-{@a{connpass}{https://connpass.com/}}
+{@a{Apache Arrow Mailing List}{https://lists.apache.org/list.html?arrow.apache.org}}
 
 
 @section{暇になった時に回るページ}

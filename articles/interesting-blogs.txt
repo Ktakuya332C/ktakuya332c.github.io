@@ -37,4 +37,3 @@
 @ul
   {@a{The morning paper}{https://blog.acolyer.org/}}
   {@a{LWN.net}{https://lwn.net/}}
-  {@a{Linux Documentation}{https://www.spinics.net/lists/linux-doc}}
