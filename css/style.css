@@ -224,6 +224,10 @@ p {
   border-left: 2px solid rgba(149, 168, 224, .5);
 }
 
+.article-wrapper .content .mermaid-wrapper {
+  overflow-x: scroll;
+}
+
 /**** フッターに関わるスタイル ****/
 .footer {
   width: 100%;

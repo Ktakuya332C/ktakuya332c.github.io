@@ -167,7 +167,10 @@ def quote_func(args: List[str]) -> str:
 
 def mermaid_func(args: List[str]) -> str:
     _assert_n_args('mermaid', args, 1)
-    return '<div class="mermaid">' + args[0] + '</div>'
+    html: str = '<div class="mermaid-wrapper">'
+    html += '<div class="mermaid">' + args[0] + '</div>'
+    html += '</div>'
+    return html
 
 
 # ----
