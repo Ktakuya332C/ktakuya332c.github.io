@@ -1,5 +1,5 @@
 mermaidを入れてみた
-2020-07-27
+2020-06-27
 
 @p{いろいろな図を書くことのできるライブラリmermaidを導入してみた}
 @ul{@a{mermaid}{http://mermaid-js.github.io/mermaid}}
