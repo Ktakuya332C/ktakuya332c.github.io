@@ -165,6 +165,11 @@ def quote_func(args: List[str]) -> str:
     return '<p class="content-quote">' + args[0] + '</p>'
 
 
+def mermaid_func(args: List[str]) -> str:
+    _assert_n_args('mermaid', args, 1)
+    return '<div class="mermaid">' + args[0] + '</div>'
+
+
 # ----
 # それぞれの関数名について、その実際の関数とその関数が引数を解釈するかどうかを表す真偽値を対応させる辞書
 # ----
@@ -185,4 +190,5 @@ default_func_map: FuncMapType = {
     'inmath': (inmath_func, False),
     'blmath': (blmath_func, False),
     'quote': (quote_func, True),
+    'mermaid': (mermaid_func, False),
 }

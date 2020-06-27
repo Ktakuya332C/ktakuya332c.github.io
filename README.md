@@ -52,7 +52,8 @@ $ python main.py
 | `@blcode` | `@blcode{int a = 1}` | blockコード |
 | `@pre` | `@pre{これはそのまま出力されます}` | そのまま出力 |
 | `@inmath` | `@inmath{a^t_k}` | inline-math |
-| `@blmath` | `@blmath{\sum_{n=1}^10 = 55}` | block-math |<br />
+| `@blmath` | `@blmath{\sum_{n=1}^10 = 55}` | block-math |
+| `@mermaid` | `@mermaid{graph TD; A-->B;}` | [mermaid](http://mermaid-js.github.io/mermaid/)の出力 |
 
 
 ## 開発

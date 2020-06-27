@@ -33,6 +33,12 @@ def _gen_google_analytics() -> str:
     return html
 
 
+def _gen_mermaid() -> str:
+    html: str = '<script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script>'
+    html += '<script>mermaid.initialize({startOnLoad:true});</script>'
+    return html
+
+
 def gen(root: str, title_str: str) -> str:
     html: str = '<head>'
     html += '<meta charset="UTF-8">'
@@ -41,5 +47,6 @@ def gen(root: str, title_str: str) -> str:
     html += _gen_styles(root)
     html += _gen_highlight(root)
     html += _gen_katex()
+    html += _gen_mermaid()
     html += '</head>'
     return html

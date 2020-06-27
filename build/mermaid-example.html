@@ -14,22 +14,46 @@
                     <main class="main">
                         <div class="article-wrapper">
                             <div class="header">
-                                <h2 class="title">Rのパッケージimagerを入れる</h2>
-                                <p class="date">2018-12-10</h2>
+                                <h2 class="title">mermaidを入れてみた</h2>
+                                <p class="date">2020-07-27</h2>
                             </div>
                             <div class="content">
-                                <p class="content-paragraph">適当にRのパッケージである<a href="https://cran.r-project.org/web/packages/imager/index.html">imager</a>をインストールしようと思ったらできなかったのでメモ。</p>
+                                <p class="content-paragraph">いろいろな図を書くことのできるライブラリmermaidを導入してみた</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="http://mermaid-js.github.io/mermaid">mermaid</a></li></ul>
 
-<p class="content-paragraph">とりあえずGoogleで検索するとちょうど同じ問題に突き当たっていた人がStackoverflowで<a href="https://stackoverflow.com/questions/23642353/error-message-installing-cairo-package-in-r">質問</a>をしていた。解答によればCairoパッケージを入れればいいらしい。とりあえずbrewで入れてみる</p>
+<p class="content-paragraph">とりあえずサンプルを色々と試してみた。どれもきれいな図がレンダリングされるのでとても良い。</p>
 
-<div class="code-container"><pre><code>$ brew install cairo</code></pre></div>
+<h1 class="section-title">Flowchart</h1>
+<div class="mermaid">graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;</div>
 
-<p class="content-paragraph">と何の問題もなく入ったので、とりあえず再度インストール</p>
+<h1 class="section-title">SequenceDiagram</h1>
+<div class="mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!</div>
 
-<div class="code-container"><pre><code>$ r
-&gt; install.packages(&quot;imager&quot;)</code></pre></div>
+<h1 class="section-title">Gantt Chart</h1>
+<div class="mermaid">gantt
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
 
-<p class="content-paragraph">今度はちゃんと入ってくれた。</p>
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2              :         des4, after des3, 5d</div>
                             </div>
                         </div>
                     </main>
