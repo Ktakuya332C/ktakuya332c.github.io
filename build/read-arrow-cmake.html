@@ -1,6 +1,6 @@
         <!doctype html>
             <html lang="ja">
-            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true});</script></head>
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
             <body>
                 <div class="container">
                     <header class="header">
@@ -15,191 +15,172 @@
                         <div class="article-wrapper">
                             <div class="header">
                                 <h2 class="title">arrowのcmakeファイルを読む</h2>
-                                <p class="date">2020-06-27</h2>
+                                <p class="date">2020-06-28</h2>
                             </div>
                             <div class="content">
                                 <p class="content-paragraph">arrowのcmakeファイルを読んで変数の依存関係をまとめてみる。</p>
 <p class="content-paragraph">読む対象は今リリースされている中で一番最新のブランチ</p>
-<ul class="content-ul"><li class="content-ul-item"><a href="https://github.com/apache/arrow/tree/Maint-0.17.x">Maint-0.17.x</a></li></ul>
-<p class="content-paragraph">で、とりあえず<span class="inline-code">cpp/CMakeLists.txt</span>だけ読み進めることができれば十分。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://github.com/apache/arrow/tree/maint-0.17.x">maint-0.17.x</a></li></ul>
+<p class="content-paragraph">として、<span class="inline-code">cpp/CMakeLists.txt</span>をまとめてみる。</p>
 
+<h1 class="section-title">概観</h1>
+<p class="content-paragraph">このファイルは一つの長いcmakeファイルになっているが、実際にはいくつかのパートに分かれている。</p>
+<table class="content-table"><tr class="content-tr"><th class="content-th">対象の行</th><th class="content-th">内容</th><th class="content-th">ラベル</th></tr><tr class="content-tr"><td class="content-td">L21-L57</td><td class="content-td">バージョン関連設定</td><td class="content-td">Version</td></tr><tr class="content-tr"><td class="content-td">L59-L141</td><td class="content-td">グローバルな変数の設定</td><td class="content-td">BuildGlobal</td></tr><tr class="content-tr"><td class="content-td">L145-L184</td><td class="content-td">ビルドオプションの設定</td><td class="content-td">BuildOptions</td></tr><tr class="content-tr"><td class="content-td">L186-L290</td><td class="content-td">開発用のターゲット設定</td><td class="content-td">DevelopTargets</td></tr><tr class="content-tr"><td class="content-td">L292-L377</td><td class="content-td">オプション間の依存関係設定</td><td class="content-td">OptionDependencies</td></tr><tr class="content-tr"><td class="content-td">L379-L399とL455-L494</td><td class="content-td">コンパイラフラグの設定</td><td class="content-td">CompilerFlags</td></tr><tr class="content-tr"><td class="content-td">L401-L-449</td><td class="content-td">ビルド成果物のディレクトリ設定</td><td class="content-td">BuildDirectory</td></tr><tr class="content-tr"><td class="content-td">L628-L811</td><td class="content-td">リンカフラグの設定</td><td class="content-td">LinkerFlags</td></tr></table>
+<p class="content-paragraph">以降はそれぞれのパート毎に変数の依存関係を図にしていく。</p>
+
+<p class="content-paragraph">依存関係の表し方としては</p>
 <div class="mermaid-wrapper"><div class="mermaid">graph LR
+  target([target]) --> variable --> subroutine[[subroutine]] & subpart{{subpart}}</div></div>
+<p class="content-paragraph">という形で、ノードの形状でそれぞれの役割を分類することにしている。</p>
 
-  %% どう入れるか
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L357
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L367
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L379-L397
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L490-L494
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L689
-  %% https://github.com/apache/arrow/blob/maint-0.17.x/cpp/CMakeLists.txt#L739-L743
+<h1 class="section-title">バージョン関連設定(Version)</h1>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  project[[project]] --> ARROW_BASE_VERSION
+  arrow_VERSION_MAJOR --> project[[project]]
+  arrow_VERSION_MINOR --> project[[project]]
+  arrow_VERSION_PATCH --> project[[project]]
+  ARROW_VERSION_MAJOR --> arrow_VERSION_MAJOR
+  ARROW_VERSION_MINOR --> arrow_VERSION_MINOR
+  ARROW_VERSION_PATCH --> arrow_VERSION_PATCH
+  ARROW_SO_VERSION --> ARROW_VERSION_MAJOR & ARROW_VERSION_MINOR
+  ARROW_FULL_SO_VERSION --> ARROW_SO_VERSION & ARROW_VERSION_PATCH
+  ARROW_BASE_VERSION --> ARROW_VERSION</div></div>
 
-  subgraph バージョン関連設定
-    project[[project]] --> ARROW_BASE_VERSION
-    arrow_VERSION_MAJOR --> project[[project]]
-    arrow_VERSION_MINOR --> project[[project]]
-    arrow_VERSION_PATCH --> project[[project]]
-    ARROW_VERSION_MAJOR --> arrow_VERSION_MAJOR
-    ARROW_VERSION_MINOR --> arrow_VERSION_MINOR
-    ARROW_VERSION_PATCH --> arrow_VERSION_PATCH
-    ARROW_SO_VERSION --> ARROW_VERSION_MAJOR & ARROW_VERSION_MINOR
-    ARROW_FULL_SO_VERSION --> ARROW_SO_VERSION & ARROW_VERSION_PATCH
-    ARROW_BASE_VERSION --> ARROW_VERSION
-  end
+<h1 class="section-title">グローバルな変数の設定(BuildGlobal)</h1>
+<p class="content-paragraph">ここでstartはcmakeがデフォルトで生成する変数を生成するプロセス。</p>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  CMAKE_BUILD_TYPE --> start[[start]]
+  LOWERCASE_BUILD_TYPE --> CMAKE_BUILD_TYPE
+  UPPERCASE_BUILD_TYPE --> CMAKE_BUILD_TYPE
+  ARROW_SOURCE_DIR --> PROJECT_SOURCE_DIR --> start[[start]]
+  ARROW_SOURCE_DIR --> PROJECT_BINARY_DIR --> start[[start]]
+  BUILD_SUPPORT_DIR --> CMAKE_SOURCE_DIR --> start[[start]]
+  CMAKE_INSTALL_LIBDIR --> GNUInstallDirs[[GNUInstallDirs]]
+  PROJECT_NAME --> project[[project]]
+  ARROW_CMAKE_INSTALL_DIR --> CMAKE_INSTALL_LIBDIR & PROJECT_NAME
+  ARROW_DOC_DIR --> PROJECT_NAME</div></div>
+<h1 class="section-title">ビルドオプションの設定(BuildOptions)</h1>
+<p class="content-paragraph">ここでanyが依存している変数は任意のターゲットが依存している変数であることを示す。</p>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  PYTHON_EXECUTABLE --> CMAKE_VERSION --> start[[start]]
+  ARROW_USE_CCACHE --> DefineOptions[[DefineOptions]]
+  CCACHE_FOUND --> ARROW_USE_CCACHE
+  RULE_LAUNCH_COMPILE --> CCACHE_FOUND
+  RULE_LAUNCH_LINK --> CCACHE_FOUND
+  any([any]) --> RULE_LAUNCH_COMPILE & RULE_LAUNCH_LINK
+  ARROW_OPTION_INSTALL --> DefineOptions[[DefineOptions]]
+  CMAKE_SKIP_INSTALL_ALL_DEPENDENCY --> ARROW_OPTION_INSTALL
+  INSTALL_IS_OPTIONAL --> ARROW_OPTION_INSTALL
+  any([any]) --> CMAKE_SKIP_INSTALL_ALL_DEPENDENCY</div></div>
 
-  subgraph ビルド関連設定
-    LOWERCASE_BUILD_TYPE --> CMAKE_BUILD_TYPE
-    UPPERCASE_BUILD_TYPE --> CMAKE_BUILD_TYPE
-    ARROW_SOURCE_DIR --> PROJECT_SOURCE_DIR
-    ARROW_SOURCE_DIR --> PROJECT_BINARY_DIR
-    BUILD_SUPPORT_DIR --> CMAKE_SOURCE_DIR
-    CMAKE_INSTALL_LIBDIR --> GNUInstallDirs[[GNUInstallDirs]]
-    PROJECT_NAME --> project[[project]]
-    ARROW_CMAKE_INSTALL_DIR --> CMAKE_INSTALL_LIBDIR & PROJECT_NAME
-    ARROW_DOC_DIR --> PROJECT_NAME
-    CLANG_FORMAT_FOUND --> ClangTools[[ClangTools]]
-    CLANG_FORMAT_BIN --> ClangTools[[ClangTools]]
-  end
-
-  subgraph オプション関連
-    ARROW_USE_CCACHE --> DefineOptions[[DefineOptions]]
-    CCACHE_FOUND --> ARROW_USE_CCACHE
-    RULE_LAUNCH_COMPILE --> CCACHE_FOUND
-    RULE_LAUNCH_LINK --> CCACHE_FOUND
-    ARROW_OPTION_INSTALL --> DefineOptions[[DefineOptions]]
-    CMAKE_SKIP_INSTALL_ALL_DEPENDENCY --> ARROW_OPTION_INSTALL
-    INSTALL_IS_OPTIONAL --> ARROW_OPTION_INSTALL
-    ARROW_BUILD_BENCHMARKS --> DefineOptions[[DefineOptions]]
-    ARROW_BUILD_TESTS --> DefineOptions[[DefineOptions]]
-    ARROW_BUILD_INTEGRATION --> DefineOptions[[DefineOptions]]
-    ARROW_FUZZING --> DefineOptions[[DefineOptions]]
-    ARROW_JSON --> ARROW_BUILD_BENCHMARKS & ARROW_BUILD_TESTS & ARROW_BUILD_INTEGRATION &  ARROW_FUZZING & ARROW_PYTHON
-    ARROW_CUDA --> DefineOptions[[DefineOptions]]
-    ARROW_FLIGHT --> DefineOptions[[DefineOptions]]
-    ARROW_PARQUET --> DefineOptions[[DefineOptions]]
-    ARROW_IPC --> ARROW_CUDA & ARROW_FLIGHT & ARROW_PARQUET & ARROW_BUILD_TESTS
-    ARROW_DATASET --> DefineOptions[[DefineOptions]] & ARROW_PYTHON
-    ARROW_PYTHON --> DefineOptions[[DefineOptions]]
-    ARROW_COMPUTE --> ARROW_DATASET & ARROW_PARQUET & ARROW_PYTHON
-    ARROW_FILESYSTEM --> ARROW_DATASET & ARROW_PYTHON
-    ARROW_CSV --> ARROW_PYTHON
-    ARROW_HDFS --> ARROW_PYTHON
-    ARROW_ORC --> MSVC
-    ARROW_USE_GLOG --> MSVC
-    ARROW_JNI --> DefineOptions[[DefineOptions]]
-    ARROW_BUILD_STATIC --> ARROW_JNI
-    ARROW_WITH_LZ4 --> ARROW_ORC
-    ARROW_WITH_SNAPPY --> ARROW_ORC
-    ARROW_WITH_ZLIB --> ARROW_ORC
-    ARROW_WITH_ZSTD --> ARROW_ORC
-    NO_TEST --> ARROW_BUILD_TESTS
-    unittest([unittest]) --> all-tests([all-tests])
-    ARROW_BUILD_BENCHMARKS --> DefineOptions[[DefineOptions]]
-    NO_BENCHMARKS --> ARROW_BUILD_BENCHMARKS
-    benchmark([benchmark]) --> all-benchmark([all-benchmark])
-    ARROW_BUILD_EXAMPLES --> DefineOptions[[DefineOptions]]
-    NO_EXAMPLES --> ARROW_BUILD_EXAMPLES
-    NO_FUZZING --> ARROW_FUZZING
-    PYTHON_EXECUTABLE --> CMAKE_VERSION
-  end
-
-  subgraph 開発コマンド関連
-    ARROW_VERBOSE_LINT --> DefineOptions[[DefineOptions]]
-    ARROW_LINT_QUIET --> ARROW_VERBOSE_LINT
-    LINT_EXCLUSIONS_FILE --> BUILD_SUPPORT_DIR
-    CPPLINT_BIN --> BUILD_SUPPORT_DIR
-    lint([lint]) --> PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CPPLINT_BIN & LINT_EXCLUSIONS_FILE & CMAKE_CURRENT_SOURCE_DIR & ARROW_LINT_QUIET
-    format([format]) --> CLANG_FORMAT_FOUND & PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CLANG_FORMAT_BIN & LINT_EXCLUSIONS_FILE & CMAKE_CURRENT_SOURCE_DIR & ARROW_LINT_QUIET
-    check-format([check-format]) --> CLANG_FORMAT_FOUND & PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CLANG_FORMAT_BIN & LINT_EXCLUSIONS_FILE & CMAKE_CURRENT_SOURCE_DIR & ARROW_LINT_QUIET
-    lint_cpp_cli([lint_cpp_cli]) --> PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CMAKE_CURRENT_SOURCE_DIR
-    clang-tidy([clang-tidy]) --> CLANG_FORMAT_FOUND & PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CLANG_TIDY_BIN & LINT_EXCLUSIONS_FILE & CMAKE_BINARY_DIR & CMAKE_CURRENT_SOURCE_DIR & ARROW_LINT_QUIET
-    check-clang-tidy([check-clang-tidy]) --> CLANG_FORMAT_FOUND & PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR & CLANG_TIDY_BIN & LINT_EXCLUSIONS_FILE & CMAKE_BINARY_DIR & CMAKE_CURRENT_SOURCE_DIR & ARROW_LINT_QUIET
-    iwyu([iwyu]) --> UNIX & BUILD_SUPPORT_DIR
-    iwyu-all([iwyu-all]) --> UNIX & BUILD_SUPPORT_DIR
-    INFER_BIN --> InferTools[[InferTools]]
-    INFER_FOUND --> InferTools[[InferTools]]
-    infer([infer]) --> INFER_FOUND & BUILD_SUPPORT_DIR & INFER_BIN & CMAKE_BINARY_DIR
-    infer-analyze([infer-analyze]) --> INFER_FOUND & BUILD_SUPPORT_DIR & INFER_BIN & CMAKE_BINARY_DIR
-    infer-report([infer-report]) --> INFER_FOUND & BUILD_SUPPORT_DIR & INFER_BIN & CMAKE_BINARY_DIR
-  end
-
-  subgraph ビルド先のディレクトリ確保
-    BUILD_SUBDIR_NAME --> CMAKE_BUILD_TYPE
-    BUILD_OUTPUT_ROOT_DIRECTORY --> CMAKE_CURRENT_BINARY_DIR & BUILD_SUBDIR_NAME
-    CMAKE_ARCHIVE_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
-    ARCHIVE_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
-    CMAKE_LIBRARY_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
-    LIBRARY_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
-    EXECUTABLE_OUTPUT_PATH --> BUILD_OUTPUT_ROOT_DIRECTORY
-  end
-
-  subgraph コンパイル時の設定
-    CXX_COMMON_FLAGS --> SetupCxxFlags[[SetupCxxFlags]]
-    ARROW_CXXFLAGS --> DefineOptions[[DefineOptions]]
-    CMAKE_CXX_FLAGS --> CXX_COMMON_FLAGS & ARROW_CXXFLAGS & CXX_ONLY_FLAGS & ARROW_GENERATE_COVERAGE
-    CMAKE_C_FLAGS --> CXX_COMMON_FLAGS & ARROW_GENERATE_COVERAGE
-    CXX_ONLY_FLAGS --> SetupCxxFlags[[SetupCxxFlags]]
-    ARROW_GENERATE_COVERAGE --> DefineOptions[[DefineOptions]]
-  end
-
-  subgraph 依存ライブラリの設定
-    ARROW_USE_OPENSSL --> DefineOptions[[DefineOptions]]
-    ARROW_OPENSSL_LIBS --> ARROW_USE_OPENSSL
-    ARROW_LINK_LIBS --> ARROW_OPENSSL_LIBS
-    ARROW_STATIC_LINK_LIBS --> ARROW_OPENSSL_LIBS
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_OPENSSL_LIBS
-    ARROW_WITH_BROTLI --> DefineOptions[[DefineOptions]]
-    ARROW_BROTLI_LIBS --> ARROW_USE_BROTLI
-    ARROW_LINK_LIBS --> ARROW_BROTLI_LIBS
-    ARROW_STATIC_LINK_LIBS --> ARROW_BROTLI_LIBS
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_BROTLI_LIBS
-    ARROW_WITH_BZ2--> DefineOptions[[DefineOptions]]
-    ARROW_STATIC_LINK_LIBS --> ARROW_WITH_BZ2
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_WITH_BZ2
-    ARROW_WITH_LZ4--> DefineOptions[[DefineOptions]]
-    ARROW_STATIC_LINK_LIBS --> ARROW_WITH_LZ4
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_WITH_LZ4
-    ARROW_WITH_SNAPPY--> DefineOptions[[DefineOptions]]
-    ARROW_STATIC_LINK_LIBS --> ARROW_WITH_SNAPPY
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_WITH_SNAPPY
-    ARROW_WITH_ZLIB--> DefineOptions[[DefineOptions]]
-    ARROW_STATIC_LINK_LIBS --> ARROW_WITH_ZLIB
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_WITH_ZLIB
-    ARROW_WITH_ZSTD--> DefineOptions[[DefineOptions]]
-    ARROW_STATIC_LINK_LIBS --> ARROW_WITH_ZSTD
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_WITH_ZSTD
-    ARROW_PROTOBUF_LIBPROTOBUF --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    ARROW_LINK_LIBS --> ARROW_ORC & ARROW_PROTOBUF_LIBPROTOBUF
-    ARROW_STATIC_LINK_LIBS --> ARROW_ORC & ARROW_PROTOBUF_LIBPROTOBUF & ARROW_SYSTEM_LINK_LIBS
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_ORC & ARROW_PROTOBUF_LIBPROTOBUF
-    ARROW_USE_GLOG --> DefineOptions[[DefineOptions]]
-    ARROW_LINK_LIBS --> ARROW_USE_GLOG
-    ARROW_STATIC_LINK_LIBS --> ARROW_USE_GLOG
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_USE_GLOG
-    ARROW_S3 --> DefineOptions[[DefineOptions]]
-    AWSSDK_LINK_LIBRARIES --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    ARROW_LINK_LIBS --> ARROW_S3 & AWSSDK_LINK_LIBRARIES
-    toolchain --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    arrow_dependencies([arrow_dependencies]) --> toolchain
-    toolchain-tests --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    arrow_dependencies([arrow_test_dependencies]) --> toolchain-tests
-    arrow_dependencies([arrow_dependencies]) --> ARROW_STATIC_LINK_LIBS
-    ARROW_SHARED_PRIVATE_LINK_LIBS --> ARROW_STATIC_LINK_LIBS
-    BOOST_FILESYSTEM_LIBRARY --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    BOOST_SYSTEM_LIBRARY --> ThirdpartyToolchain[[ThirdpartyToolchain]]
-    ARROW_TEST_LINK_LIBS --> ARROW_FLIGHT & ARROW_S3 & &ARROW_BUILD_TESTS & ARROW_BUILD_INTEGRATION & BOOST_FILESYSTEM_LIBRARY & BOOST_SYSTEM_LIBRARY
-    ARROW_LINKS_LIBS --> MSVC & CMAKE_DL_LIBS & ARROW_SYSTEM_LINK_LIBS
-    ARROW_SHARED_INSTALL_INTERFACE_LIBS --> MSVC & CMAKE_DL_LIBS
-    ARROW_TEST_LINK_TOOLCHAIN --> BOOST_FILESYSTEM_LIBRARY & BOOST_SYSTEM_LIBRARY
-    arrow_test_dependencies([arrow_test_dependencies]) --> ARROW_BUILD_TESTS & ARROW_TEST_LINK_TOOLCHAIN
-    arrow_benchmark_dependencies([arrow_benchmark_dependencies]) --> ARROW_BUILD_BENCHMARKS & arrow_test_dependencies & toolchain-benchmarks
-    ARROW_TEST_STATIC_LINK_LIBS --> ARROW_LINK_LIBS & ARROW_TEST_LINK_TOOLCHAIN
-    ARROW_TEST_SHARED_LINK_LIBS --> ARROW_LINK_LIBS & ARROW_TEST_LINK_TOOLCHAIN & CMAKE_DL_LIBS
-    ARROW_JEMALLOC --> DefineOptions[[DefineOptions]]
-    ARROW_SYSTEM_LINK_LIBS --> ARROW_JEMALLOC & ARROW_MIMALLOC
-    ARROW_STATIC_INSTALL_INTERFACE_LIBS --> ARROW_SYSTEM_LINK_LIBS
-  end</div></div>
-
-<p class="content-paragraph">比較的長大なグラフになった上に項目数が多すぎてよくわからない。生成するなら自動生成を目指すべきかもしれないし、理解するためなら別の方法を探った方がいいかもしれない。</p>
+<h1 class="section-title">開発用のターゲット設定(DevelopTargets)</h1>
+<p class="content-paragraph">DUMMYから始まるノードはいくつかの変数をまとめるために導入したダミー変数。</p>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  LINT_EXCLUSIONS_FILE --> BUILD_SUPPORT_DIR --> BuildGlobal{{BuildGlobal}}
+  CPPLINT_BIN --> BUILD_SUPPORT_DIR
+  PYTHON_EXECUTABLE --> BuildOptions{{BuildOptions}}
+  CMAKE_CURRENT_SOURCE_DIR --> start[[start]]
+  CLANG_FORMAT_FOUND --> ClangTools[[ClangTools]]
+  CLANG_FORMAT_BIN --> ClangTools[[ClangTools]]
+  CLANG_TIDY_FOUND --> ClangTools[[ClangTools]]
+  CLANG_TIDY_BIN --> ClangTools[[ClangTools]]
+  DUMMY1 --> CMAKE_CURRENT_SOURCE_DIR & PYTHON_EXECUTABLE & BUILD_SUPPORT_DIR
+  DUMMY2 --> ARROW_LINT_QUIET & LINT_EXCLUSIONS_FILE & DUMMY1
+  ARROW_LINT_QUIET --> ARROW_VERBOSE_LINT --> DefineOptions[[DefineOptions]]
+  formats([format]) --> CLANG_FORMAT_FOUND & CLANG_FORMAT_BIN & DUMMY2
+  check-formats([check-format]) --> CLANG_FORMAT_FOUND & CLANG_FORMAT_BIN & DUMMY2
+  clang-tidy([clang-tidy]) --> DUMMY2 & CLANG_TIDY_FOUND & CLANG_TIDY_BIN
+  check-clang-tidy([check-clang-tidy]) --> DUMMY2 & CLANG_TIDY_FOUND & CLANG_TIDY_BIN
+  lint_cpp_cli([lint_cpp_cli]) --> DUMMY1
+  lint([lint]) --> DUMMY2 & CPPLINT_BIN
+  UNIX --> start[[start]]
+  iwyu([iwyu]) --> BUILD_SUPPORT_DIR & UNIX
+  iwyu-all([iwyu-all]) --> BUILD_SUPPORT_DIR & UNIX</div></div>
+<h1 class="section-title">オプション間の依存関係設定(OptionDependencies)</h1>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  ARROW_BUILD_BENCHMARKS --> DefineOptions[[DefineOptions]]
+  ARROW_BUILD_INTEGRATION --> DefineOptions[[DefineOptions]]
+  ARROW_FUZZING --> DefineOptions[[DefineOptions]]
+  ARROW_BUILD_TESTS --> DefineOptions[[DefineOptions]]
+  ARROW_JSON --> ARROW_BUILD_BENCHMARKS & ARROW_BUILD_INTEGRATION & ARROW_FUZZING & ARROW_BUILD_TESTS & DefineOptions[[DefineOptions]]
+  ARROW_CUDA --> DefineOptions[[DefineOptions]]
+  ARROW_FLIGHT --> DefineOptions[[DefineOptions]]
+  ARROW_PARQUET --> DefineOptions[[DefineOptions]]
+  ARROW_IPC --> ARROW_CUDA & ARROW_FLIGHT & ARROW_PARQUET & ARROW_BUILD_TESTS & DefineOptions[[DefineOptions]]
+  ARROW_DATASET --> DefineOptions[[DefineOptions]]
+  ARROW_COMPUTE --> ARROW_DATASET & DefineOptions[[DefineOptions]]
+  ARROW_FILESYSTEM --> ARROW_DATASET & DefineOptions[[DefineOptions]]
+  ARROW_COMPUTE --> ARROW_PQRQUET
+  ARROW_PYTHON --> DefineOptions[[DefineOptions]]
+  ARROW_COMPUTE --> ARROW_PYTHON
+  ARROW_CSV --> ARROW_PYTHON & DefineOptions[[DefineOptions]]
+  ARROW_DATASET --> ARROW_PYTHON
+  ARROW_FILESYSTEM --> ARROW_PYTHON
+  ARROW_HDFS --> ARROW_PYTHON & DefineOptions[[DefineOptions]]
+  ARROW_JSOSN --> ARROW_PYTHON
+  MSVC --> start[[start]]
+  ARROW_ORC --> MSVC & DefineOptions[[DefineOptions]]
+  ARROW_USE_GLOG --> MSVC & DefineOptions[[DefineOptions]]
+  ARROW_JNI --> DefineOptions[[DefineOptions]]
+  ARROW_BUILD_STATIC --> ARROW_JNI & DefineOptions[[DefineOptions]]
+  ARROW_WITH_LZ4 --> ARROW_ORC & DefineOptions[[DefineOptions]]
+  ARROW_WITH_SNAPPY --> ARROW_ORC & DefineOptions[[DefineOptions]]
+  ARROW_WITH_ZLIB --> ARROW_ORC & DefineOptions[[DefineOptions]]
+  ARROW_WITH_ZSTD --> ARROW_ORC & DefineOptions[[DefineOptions]]
+  NO_TESTS --> ARROW_BUILD_TESTS
+  all-tests([all-tests]) --> ARROW_BUILD_TESTS
+  unittest([unittest]) --> ARROW_BUILD_TESTS & all-tests([all-tests])
+  ARROW_BUILD_EXAMPLES --> DefineOptions[[DefineOptions]]
+  NO_EXAMPLES --> ARROW_BUILD_EXAMPLES
+  NO_FUZZING --> ARROW_FUZZING</div></div>
+<h1 class="section-title">コンパイラフラグの設定(CompilerFlags)</h1>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  CXX_COMMON_FLAGS --> SetupCxxFlags[[SetupCxxFlags]]
+  CMAKE_C_FLAGS --> CXX_COMMON_FLAGS
+  CMAKE_CXX_FLAGS --> CXX_COMMON_FLAGS
+  ARROW_CXXFLAGS --> DefineOptions[[DefineOptions]]
+  CMAKE_CXX_FLAGS --> ARROW_CXXFLAGS
+  CXX_ONLY_FLAGS --> SetupCxxFlags[[SetupCxxFlags]]
+  CMAKE_CXX_FLAGS --> CXX_ONLY_FLAGS
+  ARROW_GENERATE_COVERAGE --> DefineOptions[[DefineOptions]]
+  CMAKE_C_FLAGS --> ARROW_GENERATE_COVERAGE
+  CMAKE_CXX_FLAGS --> ARROW_GENERATE_COVERAGE
+  any([any]) --> CMAKE_C_FLAGS & CMAKE_CXX_FLAGS</div></div>
+<h1 class="section-title">ビルド成果物のディレクトリ設定(BuildDirectory)</h1>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  BUILD_SUBDIR_NAME --> CMAKE_BUILD_TYPE --> start[[start]]
+  CMAKE_CURRENT_BINARY_DIR --> start[[start]]
+  BUILD_OUTPUT_ROOT_DIRECTORY --> CMAKE_CURRENT_BINARY_DIR & BUILD_SUBDIR_NAME
+  CMAKE_ARCHIVE_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
+  ARCHIVE_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
+  CMAKE_LIBRARY_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
+  LIBRARY_OUTPUT_DIRECTORY --> BUILD_OUTPUT_ROOT_DIRECTORY
+  EXECUTABLE_OUTPUT_PATH --> BUILD_OUTPUT_ROOT_DIRECTORY</div></div>
+<h1 class="section-title">リンカフラグの設定(LinkerFlags)</h1>
+<div class="mermaid-wrapper"><div class="mermaid">graph LR
+  ARROW_USE_OPENSSL --> DefineOptions[[DefineOptions]]
+  ARROW_WITH_BROTLI --> DefineOptions[[DefineOptions]]
+  ARROW_WITH_BZ2 --> DefineOptions[[DefineOptions]]
+  ARROW_S3 --> DefineOptions[[DefineOptions]]
+  ARROW_WITH_LZ4 --> OptionDependencies{{OptionDependencies}}
+  ARROW_WITH_SNAPPY --> OptionDependencies{{OptionDependencies}}
+  ARROW_WITH_ZLIB --> OptionDependencies{{OptionDependencies}}
+  ARROW_WITH_ZSTD --> OptionDependencies{{OptionDependencies}}
+  ARROW_ORC --> OptionDependencies{{OptionDependencies}}
+  ARROW_USE_GLOG --> OptionDependencies{{OptionDependencies}}
+  CMAKE_DL_LIBS --> start[[start]]
+  DUMMY1 --> ARROW_USE_OPENSSL & ARROW_WITH_BROTLI & ARROW_ORC & ARROW_USE_GLOG
+  DUMMY2 --> DUMMY1 & ARROW_WITH_BROTLI & ARROW_WITH_BZ2 & ARROW_WITH_LZ4 & ARROW_WITH_SNAPPY & ARROW_WITH_ZLIB & ARROW_WITH_ZSTD
+  ARROW_LINK_LIBS --> DUMMY1 & ARROW_S3 & CMAKE_DL_LIBS
+  ARROW_STATIC_LINK_LIBS --> DUMMY2
+  ARROW_STATIC_INSTALL_INTERFACE_LIBS --> DUMMY2 & CMAKE_DL_LIBS
+  toolchain([toolchain]) --> ThirdpartyToolchain{{ThirdpartyToolchain}}
+  arrow_dependencies([arrow_dependencies]) --> toolchain([toolchain])
+  toolchain-tests([toolchain-tests]) --> ThirdpartyToolchain{{ThirdpartyToolchain}}
+  arrow_test_dependencie([arrow_test_dependencie]) --> toolchain-tests([toolchain-tests])
+  arrow_dependencies([arrow_dependencies]) --> ARROW_STATIC_LINK_LIBS
+  ARROW_SHARED_PRIVATE_LINK_LIBS --> ARROW_STATIC_LINK_LIBS</div></div>
+<p class="content-paragraph">途中で複雑すぎて挫折。やはり何かしら別の方法で持って理解するのが良さげ。</p>
                             </div>
                         </div>
                     </main>

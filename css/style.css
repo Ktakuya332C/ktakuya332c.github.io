@@ -226,6 +226,7 @@ p {
 
 .article-wrapper .content .mermaid-wrapper {
   overflow-x: scroll;
+  font-size: 10px;
 }
 
 /**** フッターに関わるスタイル ****/

@@ -35,7 +35,7 @@ def _gen_google_analytics() -> str:
 
 def _gen_mermaid() -> str:
     html: str = '<script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script>'
-    html += '<script>mermaid.initialize({startOnLoad:true});</script>'
+    html += '<script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script>'
     return html
 
 
