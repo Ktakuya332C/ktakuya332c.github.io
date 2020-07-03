@@ -83,3 +83,9 @@ patch: **** malformed patch at line 12:
 $ echo $?
 2
 }
+
+@section{参考}
+@ul
+  {@a{Linuxエンジニアらしいパッチのつくりかた}{https://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c}}
+  {@a{diffによるunified形式の意味について}{https://den8.hatenadiary.org/entry/20100622/1277226958}}
+  {@a{diff & patch コマンドでのパッチを適用する方法}{http://mrgoofy.hatenablog.com/entry/20101019/1287500809}}
