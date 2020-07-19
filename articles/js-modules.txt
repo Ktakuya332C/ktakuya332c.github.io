@@ -1,0 +1,129 @@
+javascriptのモジュール機構
+2020-07-19
+
+@p{javascriptのモジュールの機構として@incode{require}だと@incode{exports}だの同じようで少しづつ違いそうなコードをよくみるので、ここらでまとめてみる。}
+
+@section{commonJSとECMAScript}
+
+@p{まずは最初のバージョンのJavascriptにはモジュールやそれに類する機能は存在しなかったという点を認識しておく必要がありそう。基本的にはHTMLの上でいくつかのjsファイルをscriptタグでロードしていく方法}
+@blcode{
+<script src="lib1.js"></script>
+<script src="lib2.js"></script>
+}
+@p{でしか他のファイルに存在するjsのコードを参照する方法はなかったらしい[2]}
+
+@p{ただしJavascriptは基本的にはブラウザー上で実行される言語だったので、普通のプログラミング言語のようにその開発者が一人でモジュールの作成方法を決めることができない。そこでいろいろな人がそこら中でJavascriptのモジュールはこのようにすると良いのではないかと考えて色々な仕様を策定し始めた結果、今でもそれなりに有名になっているのが次の二つの仕様ということらしい}
+@ul
+  {@a{commonJS}{https://en.wikipedia.org/wiki/CommonJS}}
+  {@a{ECMAScript}{https://ja.wikipedia.org/wiki/ECMAScript}}
+
+@p{commonJSはnodejsに基本的なモジュールの仕様として採用されたので、基本的にはサーバーサイドの開発で使われることになるモジュールの仕様となっているようす。ただし各種ブラウザーに採用されることがなかったので主にはサーバーサイドの開発用のモジュール構成となっている}
+
+@p{ECMAScriptはブラウザにおけるJavascriptのモジュール仕様として採用されたようで、基本的には各種ブラウザーで使うことができる。ただし毎年新しいバージョンの仕様が発表されるので、その最新バージョンの仕様にどのブラウザーが追いついているかは逐一確認する必要がある。}
+
+@p{ただしいずれにしろバージョンによってサポート状況が違ったりするので、結局は@a{Babel}{https://babeljs.io/}や@a{Browsify}{http://browserify.org/}などでtranspileして使うことが多く、そうなると結局どちらのモジュール仕様を使っても問題なくなり、結果的に色々なモジュールの使い方がmixされているコードを見ることがよくある。}
+
+@section{commonJSのモジュールの使い方}
+
+@p{名前付きexportの場合は}
+@blcode{
+$ vim module.js
+$ cat module.js
+const PI = 3.14;
+exports.area = (r) => PI * r ** 2;
+exports.circumference = (r) => 2 * PI * r;
+$ vim index.js
+$ cat index.js
+const { area } = require('./module.js');
+console.log(area(5));
+$ node index.js
+78.5
+}
+@p{として使うことができる。}
+@p{デフォルトexportの場合は}
+@blcode{
+$ vim module.js
+$ cat module.js
+module.exports = class Square {
+  constructor(width) {
+    this.width = wdith;
+  }
+  area() {
+    return this.width ** 2;
+  }
+}
+$ vim index.js
+$ cat index.js
+const Square = require('./module.js');
+const mySquare = new Square(2);
+console.log(mySquare.area());
+$ node index.js
+4
+}
+@p{となる。}
+
+@section{ECMAScriptのモジュールの使い方}
+
+@p{nodejsでのサポートは十分ではないこともあるのでブラウザで試す。}
+@p{名前付きexportの場合は}
+@blcode{
+$ vim module.js
+$ cat module.js
+export function cube(x) {
+  return x * x * x;
+}
+export function square(x) {
+  return x * x;
+}
+$ vim index.html
+$ cat index.html
+<html>
+  <head>
+    <title>Example</title>
+    <script type="module">
+      import { square } from './module.js';
+      const elem = document.getElementById('main');
+      const valueSquare = square(2);
+      const squareNode = document.createTextNode(`${valueSquare}`);
+      elem.appendChild(squareNode);
+    </script>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+</html>
+$ python -m http.server
+}
+@p{としてそのページにアクセスすると左上に@incode{4}と出てくる。}
+@p{同じものをデフォルトexportで書き下すと}
+@blcode{
+$ vim module.js
+$ cat module.js
+export default function square(x) {
+  return x * x;
+}
+$ vim index.html
+$ cat index.html
+<html>
+  <head>
+    <title>Example</title>
+    <script type="module">
+      import square from './module.js';
+      const elem = document.getElementById('main');
+      const valueSquare = square(2);
+      const squareNode = document.createTextNode(`${valueSquare}`);
+      elem.appendChild(squareNode);
+    </script>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+</html>
+$ python -m http.server
+}
+@p{として同じ結果が得られる。}
+
+@section{参考}
+@ol
+  {@a{CommonJS と ES6の import/export で迷うなら}{https://qiita.com/rooooomania/items/4c999d93ae745e9d8657}}
+  {@a{Understanding ES6 Modules}{https://www.sitepoint.com/understanding-es6-modules/}}
