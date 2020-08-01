@@ -115,7 +115,7 @@ int main() {
   float percentile = 0.99;
   int ind = calc_percentile_index(hist, percentile);
   int value = calc_value(ind, n, base);
-  std::cout << percentile << "p: " << value << std::endl;
+  std::cout << percentile << "p: " << value << std::endl; // 0.99p: 9900
 }
 }
 
