@@ -27,6 +27,7 @@
 @ul
   {@a{Goolge AI Blog}{https://ai.googleblog.com/}}
   {@a{Facebook AI Blog}{https://ai.facebook.com/blog/}}
+  {@a{NYT Open}{https://open.nytimes.com/}}
   {@a{free range statistics}{http://freerangestats.info/}}
   {@a{StatModeling Memorandum}{http://statmodeling.hatenablog.com/}}
   {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
