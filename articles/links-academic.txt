@@ -66,7 +66,7 @@
 
 @p{研究一般に関連するリンクは以下}
 @ul
-{@a{アホでも数学者になれる方法}{http://coexistence.world.coocan.jp/note10.html}}
+{@a{アホでも数学者になれる方法 from web.archive}{http://web.archive.org/web/20191130075912/http://coexistence.world.coocan.jp:80/note10.html}}
 {@a{卒業論文、修士論文関連のエントリー}{http://next49.hatenadiary.jp/entry/20080105/p3}}
 {@a{圧倒的に生産性の高い人の研究スタイル}{http://d.hatena.ne.jp/kaz_ataka/20081018/1224287687}}
 {@a{書きなぐれ、その後レヴィ=ストロースのように推敲しよう}{https://readingmonkey.blog.fc2.com/blog-entry-461.html}}
