@@ -2,26 +2,20 @@
 2018-11-24
 
 @section{よくチェックしているページ}
+s
 
-
-@ul
-{@a{StackOverflow}{https://stackoverflow.com/}}
-{@a{Cross Validated}{https://stats.stackexchange.com/}}
-{@a{ServerFault}{https://serverfault.com/}}
-{@a{Unix and Linux}{https://unix.stackexchange.com/}}
-{@a{Apache Arrow Mailing List}{https://lists.apache.org/list.html?arrow.apache.org}}
-
-
-@section{暇になった時に回るページ}
+@section{よく回るページ}
 
 
 @ul
 {@a{よくみるブログ}{@rel{/build/interesting-blogs.html}}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
 {@a{Reddit}{https://www.reddit.com/}}
-{@a{微博}{https://www.weibo.com}}
+{@a{Duolingo}{https://www.duolingo.com/}}
+{@a{Twitter}{https://twitter.com/}}
+{@a{Bilibili}{https://www.bilibili.com/}}
 {@a{LeetCode}{https://leetcode.com/}}
-{@a{AOJ}{http://judge.u-aizu.ac.jp/}}
+{@a{微博}{https://www.weibo.com}}
 
 
 @section{よく使うツール}
