@@ -38,3 +38,5 @@
 @ul
   {@a{The morning paper}{https://blog.acolyer.org/}}
   {@a{LWN.net}{https://lwn.net/}}
+  {@a{34歳からの数学博士}{https://blog.taketo1024.jp/}}
+  {@a{tsujimotterのノートブック}{https://tsujimotter.hatenablog.com/}}
