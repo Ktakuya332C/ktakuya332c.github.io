@@ -1,0 +1,127 @@
+NFXPアルゴリズムの簡単な応用例
+2020-11-22
+
+@p{次の本をtwitterで見かけた。}
+@ul{@a{経済分析のための構造推定アルゴリズム、楠田康之}{https://www.amazon.co.jp/dp/4866931418}}
+@p{以前から構造推定アルゴリズムには興味があったので買ってみたところ、最初に紹介されていたのが以前もブログで紹介したことがあるこの論文だった。}
+@ul{J. Rust (1987), Optimal Replacement of GMC Bus Engines, Econometrica}
+@p{Nested Fixed Point Algorithm (NFXP)を理解する際にこの論文は外せないようなので、再度読んでまとめてみる。}
+@p{先の本ではこの論文について説明した後に、擬似データを生成してそのデータに対してNFXPアルゴリズムを適用してみて挙動を確かめてみていたので、この後自分もその再現などを行えると良いなと思っている。}
+
+
+@section{概要}
+
+@p{あるバス会社に務める整備士がどのようにしてバスのメンテナンスに関する意思決定を行なっているかを構造推定アルゴリズムを使って理解してみるという内容の論文。特にバスのエンジン交換の意思決定をどのように行なっているかという点に着目し、構造モデリングを行い、その推定を行なっている。}
+
+@p{内容としては大きく次の章に分かれており、なぜわざわざNFXPアルゴリズムのようなある程度複雑なアルゴリズムを導入して解析しないといけないかというモチベーションの部分までしっかり説明している。}
+@ol
+  {イントロダクション}
+  {バス会社の整備士からもらうことのできたデータの紹介}
+  {解析的な式で整備士の意思決定が表現できるようなモデルの紹介}
+  {NFXPアルゴリズムのある程度一般的な導入}
+  {モデルの一般化とNFXPアルゴリズムの適用}
+  {モデルから示唆される事柄の紹介}
+
+@p{今回の目的はNFXPアルゴリズムを理解して可能なら実装までやってみることなので、NFXPアルゴリズムなどを導入するモチベーションなどの説明は省き、いきなりモデルの説明とそれに対するNFXPアルゴリズムの適用方法の説明を行なっていくことにする。結果的には主に上の4章周辺を中心に説明をすることになると思う。}
+
+
+@section{モデル}
+
+@p{この論文で取り上げられている整備士は同時にいくつかのバスのメンテナンスをおこなっていたが、それぞれのバスのメンテナンスに関する意思決定は独立に行われたと仮定している。}
+
+@p{各時刻@inmath{t \in \mathbb{N}}において整備士がエンジンを交換したかどうかを@inmath{i_t \in \{0, 1\}}で表現し、各時刻でのバスの状態を@inmath{s_t}で表現する。このバスの状態@inmath{s_t}の具体的な内容はいくつも考えることができるが、この論文では、エンジンを交換してからの総走行距離@inmath{x_t \in \mathbb{R}_{\ge 0}}のみがデータとして入手できた情報のようで、バスの状態はこれと入手できなかった各時刻での他のバスの状態@inmath{\xi_t}と組み合わせて@inmath{s_t = (x_t, \xi_t)}と表現している。}
+
+@p{整備士によるメンテナンスコストは、エンジンを交換しない場合とした場合で大きく異なると仮定されている。エンジン交換をしない場合には、総走行距離@inmath{x_t}に応じた定常的メンテナンスのコスト@inmath{c(x_t)}がかかると同時に、データとして入手できなかったバスの状態に依存して何らかのメンテナンスコスト@inmath{\epsilon_0(\xi_t)}がかかっていると仮定されている。エンジン交換をする場合には、エンジン交換自体のコスト@inmath{RC}に加えて、総走行距離@inmath{0}のメンテナンスコスト@inmath{c(0)}がかかり、さらにこちらも同様にデータとして入手できなかった状態によるコスト@inmath{\epsilon_1(\xi_t)}がかかっていると仮定されている。コストより効用とした方が他の定式化に馴染みやすいので、効用として定式化するとつぎのようになる。}
+@blmath{
+u(s_t, i_t) = u(x_t, \xi_t, i_t) = \begin{cases}
+  - RC - c(0) + \epsilon_1(\xi_t) & i_t = 1 \\
+  - c(x_t) + \epsilon_0(\xi_t) & i_t = 0
+\end{cases}
+}
+
+@p{バスの状態の遷移については最も一般的に書けば}
+@blmath{ p(s_{t+1} | s_t, i_t) = p(x_{t+1}, \xi_{t+1} | x_t, \xi_t, i_t) }
+@p{という形になるが、今後の解析を簡単にするために、次のような形に制限されると仮定されている。}
+@blmath{ p(x_{t+1} | x_t, i_t) q(\xi_{t+1} | x_{t+1}) }
+@p{今回データとして入手できなかったバスの状態@inmath{\xi_{t+1}}が、同じ時刻の今回入手できたデータ@inmath{x_{t+1}}にのみ依存しているという仮定となっており、ある程度強い仮定だがこの仮定がないとこの後の議論がうまく進まない。同様に今後の解析を簡単にするために、@inmath{q}の元で@inmath{\epsilon_0, \epsilon_1}はそれぞれ独立な確率変数となり、それらの確立密度はどちらも平均@inmath{0}のガンベル分布}
+@blmath{ f(\epsilon_i) = \exp(-\exp(-\epsilon_i + \gamma))}
+@p{に従うと仮定されている。ただしここで@inmath{\gamma}はオイラーの定数である。}
+
+@p{整備士の役割は、メンテナンスを行っている期間の効用を最大化することであり、言い換えればある割引率@inmath{\beta \in [0, 1)}を用いて}
+@blmath{ J = \textbf{E}[\sum_{t=1}^{\infty} \beta^t u(s_t, i_t)] }
+@p{と表される期待効用を最大化させることである。}
+
+
+@section{整備士の最適戦略}
+
+@p{整備士が取れる方策をマルコフ的な形@inmath{P(i | s)}に制限した時、その最適な方策はつぎのようにして得られることが知られている[1]。}
+@blmath{
+P(i | s) = \begin{cases}
+1 & i_t = \argmax_{i = 0, 1} [u(s, i) + \beta \int ds' p(s' | s, i) V(s')] \\
+0 & \textrm{otherwise}
+\end{cases}
+}
+@p{ただしここで、@inmath{V(s)}は最適価値関数と呼ばれ、つぎの再帰的な式の安定的な不動点である。}
+@blmath{
+V(s) = \max_{i = 0, 1} [u(s, i) + \beta \int ds' p(s' | s, i) V(s')]
+}
+
+@p{バスの状態@inmath{s}に含まれる観測できなかった要素@inmath{\xi}は解析をする上で厄介なので、可能な限り取り払っておく。まず、ガンベル分布は次の二つの性質を持つ。}
+@def{ガンベル分布の性質}{
+@p{@inmath{N}個の定数@inmath{v_i \in \mathbb{R}}と@inmath{N}個の独立な平均@inmath{0}のガンベル分布@inmath{\epsilon_i}に対して}
+@blmath{ P(i = \argmax_j \{v_j + \epsilon_j\}) = \frac{\exp(v_i)}{\sum_{i=1}^N \exp(v_i)} }
+@p{が成り立つ。また、}
+@blmath{ \int \prod_{i=1}^N d\epsilon_i \max_{i=1,\cdots,N} \{v_i + \epsilon_i \} = \ln[ \sum_{i=1}^N \exp(v_i)] }
+@p{も成立する。}
+}
+
+@p{これをつかえば、まず最適価値関数@inmath{V(s) = V(x,\xi)}を@inmath{\xi}についてのみ積分した値である期待価値関数@inmath{EV}は次のような再帰的な式を満たすことがわかる。}
+@blmath{\begin{aligned}
+EV(x) &= \int_{-\infty}^{\infty} d\xi q(\xi | x) V(x, \xi) \\
+&= \int_{-\infty}^{\infty} d\xi q(\xi | x) \max_{i = 0, 1} [u(x, \xi, i) + \beta \int ds' p(x', \xi' | x, \xi, i) V(x', \xi')] \\
+&= \int_{-\infty}^{\infty} d\xi q(\xi | x) \max_{i = 0, 1} [u(x, i) + \epsilon_i(\xi) + \beta \int ds' p(x', \xi' | x, \xi, i) V(x', \xi')] \\
+&= \ln [\sum_{i=0,1} \exp ( u(x, i) + \beta \int ds' p(x', \xi' | x, \xi, i) V(x', \xi') )] \\
+&= \ln [\sum_{i=0,1} \exp ( u(x, i) + \beta \int^{\infty}_{0} dx' \int d\xi q(\xi' | x') p(x' | x, i) V(x', \xi') )] \\
+&= \ln [\sum_{i=0,1} \exp ( u(x, i) + \beta \int^{\infty}_{0} dx' p(x' | x, i) EV(x') )]
+\end{aligned}}
+
+@p{また、方策@inmath{P}については}
+@blmath{\begin{aligned}
+&\quad u(s, i) + \beta \int ds' p(s' | s, i) V(s') \\
+&= u(x, i) + \epsilon_i(\xi) + \beta \int_{-\infty}^{\infty} dx' \int d\xi' p(x', \xi' | x, \xi, i) V(x', \xi') \\
+&= u(x, i) + \epsilon_i(\xi) + \beta \int_{-\infty}^{\infty} dx' p(x' | x, i) EV(x')
+\end{aligned}}
+@p{となるので、}
+@blmath{ P(i | s) = P(i | x) = \frac{\exp(u(x, i) + \beta \int_{-\infty}^{\infty} dx' p(x' | x, i) EV(x'))}{\sum_{i=0,1} \exp(u(x, i) + \beta \int_{-\infty}^{\infty} dx' p(x' | x, i) EV(x'))} }
+@p{と書くことができる。}
+
+@p{整備士は効用@inmath{u}と割引率@inmath{\beta}についての情報を持っており、遷移確率@inmath{p}についての情報もある程度持っているはずである。よって、整備士は期待価値関数@inmath{EV}に対する再起的な式の安定的な不動点をもとめたあと、その値を使って方策@inmath{P}を計算すれば最適な行動ができることがわかる。}
+
+
+@section{構造パラメータの推定}
+
+@p{整備士が上記のような考えのもとに最適な行動を行い、@inmath{\{x_t, i_t\}_{t=1}^{\infty}}という履歴を残したとする。今回の目的はこの行動を理解することであり、そのためにはこの履歴から、整備士の考える効用@inmath{u}、割引率@inmath{\beta}、遷移確率@inmath{p}の推定を行い、その値を知ることでどのようなコスト感の下で日々のメンテナンス業務を行なっているかを理解することができる。}
+
+@p{整備士が@inmath{\{x_t, i_t\}_{t=1}^{\infty}}という履歴を残す確率は}
+@blmath{\begin{aligned}
+p(\{x_t, i_t\}_{t=1}^{\infty}) &= \int \prod_{t=1}^{\infty} d\xi_t p(s_0) \prod_{t=1}^{\infty} P(i_t | s_t) p(s_{t+1} | s_t, i_t) \\
+&= \int \prod_{t=1}^{\infty} d\xi_t p(x_0, \xi_0) \prod_{t=1}^{\infty} P(i_t | x_t) p(x_{t+1}, \xi_{t+1} | x_t, \xi_t, i_t) \\
+&= \int \prod_{t=1}^{\infty} d\xi_t p(x_0, \xi_0) \prod_{t=1}^{\infty} P(i_t | x_t) p(x_{t+1} | x_t, i_t) q(\xi_{t+1} | x_{t+1}) \\
+&= p(x_0) \prod_{t=1}^{\infty} P(i_t | x_t) p(x_{t+1} | x_t, i_t)
+\end{aligned}}
+@p{となるため、これを特定の効用と割引率と遷移確率のもとでのlikelihoodだと考えれば、最尤推定をおこなうことができる。}
+
+@p{最尤推定を行う方法はいくつかあるが、NFXPアルゴリズムではニュートン法を使って最大化する。最小化する目的関数としてnegative-log-likehoodをとり}
+@blmath{ -\ln p(\{x_t, i_t\}_{t=1}^{\infty}) = - \ln p(x_0) - \sum_{t=1}^{\infty} \ln P(i_t | x_t) - \sum_{t=1}^{\infty} \ln p(x_{t+1} | x_t, i_t) }
+@p{まずはそれぞれのパラメータについて微分をすることになる。この時、@inmath{\ln P(i_t | x_t)}に対する微分は@inmath{EV}の微分に依存することになるが、@inmath{EV}についての再帰式の両辺を微分して、@inmath{EV}の微分に関する再帰式を得てその不動点を求めることで微分の値を得ることができる。ヘッシアンについても同様に計算すること自体は可能である。}
+
+@section{参考文献}
+@ol
+  {Richard S. Sutton (2018), @a{Reinforcement Learning: An Introduction}{http://incompleteideas.net/book/the-book.html}}
+
+
+@section{備考}
+@ol
+  {観察されていないバスの状態@inmath{\xi}がどのような集合に属する値なのかは曖昧なまま書き進めてある。きちんと議論を行うのならばそれを明示するために確率空間を定義し、他の部分も測度論的に議論しないといけないのだが、今回はそこまでやらなくてもそれほど面倒なことにはならなさそうだったので曖昧に書いた。}
+  {今回は明示的に戦略としてマルコフ戦略しか考えないという過程をおいたが、一般的な場合でもマルコフ戦略が最適になるのだろうか?}
+  {NFXPアルゴリズムのヘッシアンを計算するところなどは手計算でやっているのだろうか? 式が複雑でやるきがおきないとおもうのだが。経済分析のための構造推定アルゴリズムのMatlabのサンプルコードにはそもそもヘッシアンを計算するコードの箇所が掲載されていなかった様子。}
