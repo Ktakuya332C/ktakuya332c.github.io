@@ -1,0 +1,116 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Preloading</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">Rust(1987)のデータを再現する</h2>
+                                <p class="date">2020-11-23</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">動的離散選択モデルの構造推定を扱った次の論文</p>
+<ul class="content-ul"><li class="content-ul-item">J. Rust (1987), Optimal Replacement of GMC Bus Engines, Econometrica</li></ul>
+<p class="content-paragraph">の再現を行いたいが、データが手に入らないので、まずはそのデータをシミュレーションで再現してみる。この論文の概要とそこで紹介されているNFXPアルゴリズムについては次の記事を参考にしてほしい。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="../build/a-simple-application-of-nfxp-algorithm.html">NFXPアルゴリズムの簡単な応用例</a></li></ul>
+
+<h1 class="section-title">論文で使われているデータの詳細</h1>
+
+<p class="content-paragraph">対象のバス会社からは色々とメンテナンスに関するデータをもらったようだが、論文から読み取れる限りでは、主に次の形式のデータを使用していたのだろうと推測できる。</p>
+<table class="content-table"><tr class="content-tr"><th class="content-th">列名</th><th class="content-th">説明</th><th class="content-th">備考</th></tr><tr class="content-tr"><td class="content-td">年月</td><td class="content-td">そのデータを取得した年月</td><td class="content-td">10年分のデータ(120点)を入手した様子</td></tr><tr class="content-tr"><td class="content-td">バス種別</td><td class="content-td">バスの型や製造メーカーなどの情報</td><td class="content-td">種別の詳細情報は特に使われない</td></tr><tr class="content-tr"><td class="content-td">バスID</td><td class="content-td">バスそれぞれの固有ID</td><td class="content-td">明示はされていないが通常はあるはず</td></tr><tr class="content-tr"><td class="content-td">走行距離</td><td class="content-td">最後にエンジンを変えてからの累積走行距離</td><td class="content-td">単位はマイル</td></tr><tr class="content-tr"><td class="content-td">エンジン交換</td><td class="content-td">エンジン交換をしたら1でしなかったら0</td><td class="content-td">一月に2回以上交換する事はないと仮定</td></tr></table>
+<p class="content-paragraph">このようなデータの記述統計を計算しているのが論文の2章である。そこでは図や表ごとに次のような集計がなされている。</p>
+<table class="content-table"><tr class="content-tr"><th class="content-th">図表</th><th class="content-th">説明</th></tr><tr class="content-tr"><td class="content-td">Table1</td><td class="content-td">バス種別ごとのバスの台数</td></tr><tr class="content-tr"><td class="content-td">Table2a</td><td class="content-td">一度でもエンジン交換を行ったバスのバス種別ごとのエンジン交換間隔とその間の走行距離の平均</td></tr><tr class="content-tr"><td class="content-td">Table2b</td><td class="content-td">一度もエンジン交換を行なっていないバスの乗車時間と走行距離の平均</td></tr><tr class="content-tr"><td class="content-td">Figure1</td><td class="content-td">Table2aと2bのデータのプロット</td></tr></table>
+<p class="content-paragraph">大体の数値の感覚としては</p>
+<table class="content-table"><tr class="content-tr"><th class="content-th">内容</th><th class="content-th">スケール</th></tr><tr class="content-tr"><td class="content-td">年月</td><td class="content-td">10年分12ヶ月より120点</td></tr><tr class="content-tr"><td class="content-td">対象の全バスの台数</td><td class="content-td">162台(Table1より)</td></tr><tr class="content-tr"><td class="content-td">全データ点</td><td class="content-td">$120 \times 162 = 19440$点程度</td></tr><tr class="content-tr"><td class="content-td">エンジン交換間隔</td><td class="content-td">5年程度(Table2aより)</td></tr><tr class="content-tr"><td class="content-td">エンジン交換までの走行距離</td><td class="content-td">20万マイル程度(Table2aより)</td></tr></table>
+<p class="content-paragraph">となっている。普通の車は<a href="https://www.webcartop.jp/2016/10/51860/">30万km程度まで走れる</a>らしいので、大体スケールとしては今の普通の車の感覚と一致するようだ。全データ点は$19440$とかなり多いが、この後の分析では大抵一部のバスの種類のみを対象にして分析を行っているので、そこまでのデータ点は使用していない。</p>
+
+
+<h1 class="section-title">データの生成方法</h1>
+
+<p class="content-paragraph">この論文では推定結果の妥当性を確保するために、様々な条件のもとでNFXPアルゴリズムを適用してパラメータの推定を行なっている。主に変更しているのは以下の3つの点である。</p>
+<ul class="content-ul"><li class="content-ul-item">どのバスの種別を対象とするか</li><li class="content-ul-item">割引率$\beta$の値</li><li class="content-ul-item">通常メンテナンスのコスト関数$c$の形</li><li class="content-ul-item">エンジンを変えた後の総走行距離$x$の離散化粒度</li><li class="content-ul-item">遷移確率$p$の離散化粒度</li></ul>
+<p class="content-paragraph">今回は次の文献</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://www.amazon.co.jp/dp/4866931418">経済分析のための構造推定アルゴリズム</a>、楠田康之</li></ul>
+<p class="content-paragraph">での再現と同じく、論文のTable10で紹介されている次の内容の推定結果を使ってデータを再現することにする。</p>
+<ul class="content-ul"><li class="content-ul-item">対象のバス種別は種別1,2,3</li><li class="content-ul-item">割引率$\beta$の値は$0.9999$を想定</li><li class="content-ul-item">通常メンテナンスのコスト関数は線形($c(x)=0.001\theta_{11}x$)を仮定</li><li class="content-ul-item">総走行距離はデータで観察された最大値よりも少し大きい45万マイルを175等分する</li><li class="content-ul-item">遷移確率は上の離散化された距離で$0,1,2,3$個分だけ走行する可能性があると仮定</li></ul>
+
+<p class="content-paragraph">これらの仮定とTable10の値をあわせれば、効用は次のような式となり</p>
+$$u(x, i) = \begin{cases}
+  - 11.7257 & i = 1 \\
+  - 0.0024569x & i = 0
+\end{cases}$$
+<p class="content-paragraph">遷移確率はまず区間$x_k$を</p>
+$$\begin{cases}
+x_k = [ \frac{450000}{175} k, \frac{450000}{175} (k+1)) & k = 0,1,\cdots,174 \\
+x_k = [450000, \infty) & k = 175
+\end{cases}$$
+<p class="content-paragraph">と分割すれば、次のような式で表されることがわかる。</p>
+$$p(x_k | x_l, i) = \begin{cases}
+  g(k - 0) & i = 1 \\
+  g(k - l) & i = 0
+\end{cases}$$
+<p class="content-paragraph">ただだしここで確率分布$g$は</p>
+$$g(n) = \begin{cases}
+  0.0937 & n = 0 \\
+  0.4475 & n = 1 \\
+  0.4459 & n = 2 \\
+  0.0127 & n = 3 \\
+  0.0000 & \textrm{otherwise}
+\end{cases}$$
+<p class="content-paragraph">となる。ただしここで$l=175$の場合などそれ以上値が大きくならない場合には、$x_{175}$を吸収状態とするような遷移確率によしなに変更しておく。</p>
+
+<p class="content-paragraph">効用関数と遷移確率が定まれば整備工の最適方策を次のように計算することができる。まずは期待価値関数をつぎの再帰的な式の不動点を求めることで得ることができる。</p>
+$$EV(x_k) = \ln \left[ \sum_{i=0,1} \exp(u(x_k,i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)) \right]$$
+<p class="content-paragraph">ただしここで効用$u(x_k,i)$の計算は、区間$x_k$の最小値$450000/175k$で代替して計算することにする。そこで得られた期待方策を用いて方策を</p>
+$$P(i|x_k) = \frac{\exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}{\sum_{i=0,1} \exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}$$
+<p class="content-paragraph">と計算できる。これと遷移確率を用いて次の確率分布に従ってデータ$\{x_t, i_t\}_{t=1}^{120}$を生成することができる。</p>
+$$p(\{x_t, i_t\}_{t=1}^{120}) = \prod_{t=1}^{120} P(i_t | x_t) p(x_{t+1} | x_t, i_t)$$
+
+
+<h1 class="section-title">データの生成</h1>
+
+<p class="content-paragraph">実際にこの方法によってデータを生成するコードをpythonで実装した</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://gist.github.com/Ktakuya332C/18af4faafd1e0946c1230b6d90cf40bf">Rust1987の再現データの生成</a></li></ul>
+
+<p class="content-paragraph">いくつかの視点から生成したデータを眺めてみる。まずは記述統計をひと取り計算する。</p>
+<div class="code-container"><pre><code>&gt; library(tidyverse)
+&gt; data &lt;- read_csv(&apos;data.csv&apos;)
+&gt; summary(data)
+     ep_id          t                x               i
+ Min.   : 0   Min.   :  0.00   Min.   : 0.00   Min.   :0.00000
+ 1st Qu.:16   1st Qu.: 29.75   1st Qu.: 8.00   1st Qu.:0.00000
+ Median :32   Median : 59.50   Median :16.00   Median :0.00000
+ Mean   :32   Mean   : 59.50   Mean   :15.97   Mean   :0.03974
+ 3rd Qu.:48   3rd Qu.: 89.25   3rd Qu.:24.00   3rd Qu.:0.00000
+ Max.   :64   Max.   :119.00   Max.   :34.00   Max.   :1.00000</code></pre></div>
+<p class="content-paragraph">エンジンを変えた後の走行距離の最大値が$34$となっているので、その分布を計算してみる。</p>
+<div class="code-container"><pre><code>&gt; library(tidyverse)
+&gt; data &lt;- read_csv(&apos;data.csv&apos;)
+&gt; data %&gt;% filter(i==1) %&gt;% group_by(x) %&gt;% summarise(n=n())
+      x     n
+  &lt;dbl&gt; &lt;int&gt;
+1    31    61
+2    32   175
+3    33    71
+4    34     3</code></pre></div>
+<p class="content-paragraph">ある程度小さい範囲の値に固まっているようなので、整備工の方策がある程度走行したらエンジンを替えるという比較的単純な方策になっている可能性が高い。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2020 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
