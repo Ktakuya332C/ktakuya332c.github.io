@@ -79,6 +79,7 @@ g(n) = \begin{cases}
   0.4475 & n = 1 \\
   0.4459 & n = 2 \\
   0.0127 & n = 3 \\
+  0.0002 & n = 4 \\
   0.0000 & \textrm{otherwise}
 \end{cases}
 }
