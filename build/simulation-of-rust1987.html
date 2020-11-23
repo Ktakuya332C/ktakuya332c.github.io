@@ -72,7 +72,7 @@ $$g(n) = \begin{cases}
 <p class="content-paragraph">効用関数と遷移確率が定まれば整備工の最適方策を次のように計算することができる。まずは期待価値関数をつぎの再帰的な式の不動点を求めることで得ることができる。</p>
 $$EV(x_k) = \ln \left[ \sum_{i=0,1} \exp(u(x_k,i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)) \right]$$
 <p class="content-paragraph">ただしここで効用$u(x_k,i)$の計算は、区間$x_k$の最小値$450000/175k$で代替して計算することにする。そこで得られた期待方策を用いて方策を</p>
-$$P(i|x_k) = \frac{\exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}{\sum_{i=0,1} \exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}$$
+$$P(i|x_k) = \frac{\exp(u(x_k, i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l))}{\sum_{i=0,1} \exp(u(x_k, i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l))}$$
 <p class="content-paragraph">と計算できる。これと遷移確率を用いて次の確率分布に従ってデータ$\{x_t, i_t\}_{t=1}^{120}$を生成することができる。</p>
 $$p(\{x_t, i_t\}_{t=1}^{120}) = \prod_{t=1}^{120} P(i_t | x_t) p(x_{t+1} | x_t, i_t)$$
 

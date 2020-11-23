@@ -91,7 +91,7 @@ EV(x_k) = \ln \left[ \sum_{i=0,1} \exp(u(x_k,i) + \beta \sum_{l=0}^{175} p(x_l |
 }
 @p{ただしここで効用@inmath{u(x_k,i)}の計算は、区間@inmath{x_k}の最小値@inmath{450000/175k}で代替して計算することにする。そこで得られた期待方策を用いて方策を}
 @blmath{
-P(i|x_k) = \frac{\exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}{\sum_{i=0,1} \exp(u(x_k, i)) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l)}
+P(i|x_k) = \frac{\exp(u(x_k, i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l))}{\sum_{i=0,1} \exp(u(x_k, i) + \beta \sum_{l=0}^{175} p(x_l | x_k, i) EV(x_l))}
 }
 @p{と計算できる。これと遷移確率を用いて次の確率分布に従ってデータ@inmath{\{x_t, i_t\}_{t=1}^{120}}を生成することができる。}
 @blmath{
