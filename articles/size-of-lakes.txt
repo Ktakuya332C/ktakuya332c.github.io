@@ -1,0 +1,29 @@
+湖の大きさ
+2020-11-28
+
+@p{カスピ海は海という名前がついているけど地理的には湖なのを最近知った。地図をよく見れば当たり前ではあるのが、どうもカスピ海という名前から海だと思っていた。他にも色々大きい湖があるようなので、どれくらい大きいのかみてみた。}
+
+@p{とりあえずwikipediaからデータをスクレイピングしてくる。pandasで適当に取ってきてみる。}
+@blcode{
+import pandas as pd
+from urllib.parse import quote
+from matplotlib import pyplot as plt
+
+page = quote(u'湖沼の一覧_(面積順)')
+data = pd.read_html(f'https://ja.wikipedia.org/wiki/{page}')
+world_lakes = data[2]
+size_strs = world_lakes['面積'].values.flatten()
+int_strs = filter(lambda x: x.isdigit(), size_strs)
+sizes = list(map(lambda x: int(x), size_strs))
+
+plt.plot(sizes)
+plt.xlabel('Rank of the lake')
+plt.ylabel('Size of the lake')
+plt.yscale('log')
+plt.savefig('size-of-lakes.png')
+plt.close()
+}
+@p{結果的に得られたグラフが次のようなグラフになった。}
+@fig{70}{@rel{/static/size-of-lakes/size-of-lakes.png}}
+
+@p{よくみるpower-law的な法則が見えてくるなという感想。}
