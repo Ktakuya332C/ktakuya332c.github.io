@@ -6,6 +6,7 @@
 
 @ul
 {@a{よくみるブログ}{@rel{/build/interesting-blogs.html}}}
+{@a{The Economist}{https://www.economist.com/}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
 {@a{Reddit}{https://www.reddit.com/}}
 {@a{Twitter}{https://twitter.com/}}
