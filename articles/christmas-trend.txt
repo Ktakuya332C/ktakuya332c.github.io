@@ -1,0 +1,48 @@
+クリスマス関連のGoogleトレンド
+2020-11-30
+
+@p{Covid19の影響によってやることがなくなった人たちが早めのクリスマスを楽しみ始めているという記事を見た。}
+@ul{@a{Why office morale will be hard to maintain this year}{https://www.economist.com/business/2020/11/28/why-office-morale-will-be-hard-to-maintain-this-year}}
+@p{本当にそうなのかを調べるって手っ取り早い方法としてGoogleトレンドを使ってクリスマス関連の検索件数の推移が去年と異なるかどうかを調べてみた。}
+
+@section{クリスマス}
+
+@p{Googleトレンドで次の条件で検索をした。}
+@table
+  {項目,内容}
+  {検索ワード,クリスマス}
+  {地域,日本}
+  {期間,2018年11月30日から2020年11月30日まで}
+@p{この結果が去年と比べてどの程度かをみてみる。}
+@blcode{
+library(tidyverse)
+library(lubridate)
+
+timeseries <- read_csv('christmas.csv')
+plot <- timeseries %>%
+  filter(Week >= '2019-01-01') %>%
+  filter(month(Week) %in% c(8,9,10,11,12)) %>%
+  mutate(MonthDate=`year<-`(Week, 2020)) %>%
+  mutate(Year=strftime(Week, format='%y')) %>%
+  ggplot(aes(MonthDate, RelativeNumberOfSearches, color=Year)) +
+    geom_point() +
+    geom_line(alpha=0.5)
+ggsave('christmas.png', plot)
+}
+@p{実際大して変わっていなさそうではある。}
+@fig{50}{@rel{/static/christmas-trend/christmas.png}}
+
+@section{クリスマスセール}
+
+@p{同じような検索ワードとしてクリスマスセールも見てみた。}
+@table
+  {項目,内容}
+  {検索ワード,クリスマスセール}
+  {地域,日本}
+  {期間,2018年11月30日から2020年11月30日まで}
+@p{こちらもあまり変わりなさそう。}
+@fig{50}{@rel{/static/christmas-trend/christmas-sales.png}}
+
+@section{その他}
+
+@p{GoogleトレンドのAPIがどこかで公開されていると思ったが公式のドキュメントが見つからなかった。@a{pytrends}{https://github.com/GeneralMills/pytrends}の様なライブラリはcsvをダウンロードする際に行われているリクエスト内容を真似て使っている様子。色々な場所でみるので公式のAPIドキュメントが見つからないのは意外だった。}
