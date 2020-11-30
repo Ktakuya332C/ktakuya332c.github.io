@@ -3,7 +3,7 @@
 
 @p{Covid19の影響によってやることがなくなった人たちが早めのクリスマスを楽しみ始めているという記事を見た。}
 @ul{@a{Why office morale will be hard to maintain this year}{https://www.economist.com/business/2020/11/28/why-office-morale-will-be-hard-to-maintain-this-year}}
-@p{本当にそうなのかを調べるって手っ取り早い方法としてGoogleトレンドを使ってクリスマス関連の検索件数の推移が去年と異なるかどうかを調べてみた。}
+@p{本当にそうなのかを頑張って調べるのは手間なので、とりあえず手近なところでGoogleトレンドを使ってクリスマス関連の検索件数の推移が去年と異なるかどうかを調べてみた。}
 
 @section{クリスマス}
 
