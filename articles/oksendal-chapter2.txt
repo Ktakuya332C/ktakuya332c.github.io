@@ -9,15 +9,15 @@
 
 @p{この本で紹介されているブラウン運動の定義を簡潔にまとめると以下の様になる。}
 @def{ブラウン運動}{
-@p{ある確率空間@inmath{(\Omega, \mathcal{F}, \textbf{P})}とその上の連続な@inmath{\mathbb{R}^n}-値確率過程@inmath{\{B_t\}_{t\ge0}}で次の条件を満たすものが取れる。すなわち、任意の@inmath{k \in \mathbb{N}}と@inmath{0=t_0 \le t_1 \le,\cdots \le t_k}、@inmath{F_1,F_2,\cdots,F_k \in \mathcal{B}(\mathbb{R}^n)}に対して}
+@p{任意の@inmath{x \in \mathbb{R}^n}に対して、ある確率空間@inmath{(\Omega, \mathcal{F}, \textbf{P}^x)}とその上の連続な@inmath{\mathbb{R}^n}-値確率過程@inmath{\{B_t\}_{t\ge0}}で次の条件を満たすものが取れる。すなわち、任意の@inmath{k \in \mathbb{N}}と@inmath{0=t_0 \le t_1 \le,\cdots \le t_k}、@inmath{F_1,F_2,\cdots,F_k \in \mathcal{B}(\mathbb{R}^n)}に対して}
 @blmath{
-\textbf{P}(B_{t_1} \in F_1, \cdots, B_{t_k} \in F_k) = \int_{F_1 \times \cdots \times F_k} \prod_{i=1}^k p(t_k - t_{k-1}, x_{k-1}, x_k) dx_1 \cdots dx_k
+\textbf{P}^x(B_{t_1} \in F_1, \cdots, B_{t_k} \in F_k) = \int_{F_1 \times \cdots \times F_k} \prod_{i=1}^k p(t_k - t_{k-1}, x_{k-1}, x_k) dx_1 \cdots dx_k
 }
-@p{ただしここで、@inmath{x_0 \in \mathbb{R}^n}であり、@inmath{p}はガウス分布}
+@p{ただしここで、@inmath{x=sx_0 \in \mathbb{R}^n}であり、@inmath{p}はガウス分布}
 @blmath{
 p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})
 }
-@p{である。この時、確率過程@inmath{\{B_t\}_{t \ge 0}}をブラウン運動と呼ぶ。}
+@p{である。この時、確率過程@inmath{\{B_t\}_{t \ge 0}}を@inmath{x}を出発するブラウン運動と呼ぶ。}
 }
 @p{重要なのはブラウン運動が連続であることと、上記の@inmath{P}に関する式、有限次元分布に関する式、を満たすことの二つである。}
 @p{また、少なくともこの本で紹介されている限りでは、標本空間@inmath{\Omega}やそれに付随する完全加法族@inmath{\mathcal{F}}が具体的にどの様なものであるかは示されず、単に上記の様な条件を満たす確率空間を取ることができる、ということのみがわかっている。}
@@ -30,12 +30,12 @@ p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})
 @def{モーメント母関数に関する性質}{
 @p{任意の@inmath{0 \le t_1 \le \cdots \le t_k}に対応する確率変数@inmath{(B_{t_1}, \cdots, B_{t_k})}は次の関係を満たす。}
 @blmath{
-\textbf{E}[\exp(i \sum_{j=1}^{nk} u_j B_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)
+\textbf{E}^x[\exp(i \sum_{j=1}^{nk} u_j B_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)
 }
 @p{ただしここで、}
 @blmath{\begin{aligned}
-M_j &= \textbf{E}[B_{t_j}] \\
-C_{ij} &= \textbf{E}[(B_{t_i} - M_i)(B_{t_j} - M_j)]
+M_j &= \textbf{E}^x[B_{t_j}] \\
+C_{ij} &= \textbf{E}^x[(B_{t_i} - M_i)(B_{t_j} - M_j)]
 \end{aligned}}
 @p{である。}
 }
@@ -43,12 +43,12 @@ C_{ij} &= \textbf{E}[(B_{t_i} - M_i)(B_{t_j} - M_j)]
 @def{ブラウン運動の平均や共分散}{
 @p{次が成り立つ。}
 @blmath{\begin{aligned}
-\textbf{E}[B_t] &= x_0 \\
-\textbf{E}[(B_t - \textbf{E}[B_t])^2] &= nt \\
-\textbf{E}[(B_t - \textbf{E}[B_t])(B_s - \textbf{E}[B_s])] &= n \min(s, t)
+\textbf{E}^x[B_t] &= x \\
+\textbf{E}^x[(B_t - \textbf{E}[B_t])^2] &= nt \\
+\textbf{E}^x[(B_t - \textbf{E}[B_t])(B_s - \textbf{E}[B_s])] &= n \min(s, t)
 \end{aligned}}
 @p{さらに、@inmath{t \ge s}の時以下が成り立つ。}
-@blmath{ \textbf{E}[(B_t - B_s)^2] = n(t-s) }
+@blmath{ \textbf{E}^x[(B_t - B_s)^2] = n(t-s) }
 }
 
 @p{また、ブラウン運動@inmath{\{B_t\}_{t \ge 0}}は独立な増分を持つ。}

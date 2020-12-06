@@ -25,11 +25,11 @@
 <h1 class="section-title">ブラウン運動の定義</h1>
 
 <p class="content-paragraph">この本で紹介されているブラウン運動の定義を簡潔にまとめると以下の様になる。</p>
-<div class="content-def"><p><span class="content-def-name">ブラウン運動</span></p><p class="content-paragraph">ある確率空間$(\Omega, \mathcal{F}, \textbf{P})$とその上の連続な$\mathbb{R}^n$-値確率過程$\{B_t\}_{t\ge0}$で次の条件を満たすものが取れる。すなわち、任意の$k \in \mathbb{N}$と$0=t_0 \le t_1 \le,\cdots \le t_k$、$F_1,F_2,\cdots,F_k \in \mathcal{B}(\mathbb{R}^n)$に対して</p>
-$$\textbf{P}(B_{t_1} \in F_1, \cdots, B_{t_k} \in F_k) = \int_{F_1 \times \cdots \times F_k} \prod_{i=1}^k p(t_k - t_{k-1}, x_{k-1}, x_k) dx_1 \cdots dx_k$$
-<p class="content-paragraph">ただしここで、$x_0 \in \mathbb{R}^n$であり、$p$はガウス分布</p>
+<div class="content-def"><p><span class="content-def-name">ブラウン運動</span></p><p class="content-paragraph">任意の$x \in \mathbb{R}^n$に対して、ある確率空間$(\Omega, \mathcal{F}, \textbf{P}^x)$とその上の連続な$\mathbb{R}^n$-値確率過程$\{B_t\}_{t\ge0}$で次の条件を満たすものが取れる。すなわち、任意の$k \in \mathbb{N}$と$0=t_0 \le t_1 \le,\cdots \le t_k$、$F_1,F_2,\cdots,F_k \in \mathcal{B}(\mathbb{R}^n)$に対して</p>
+$$\textbf{P}^x(B_{t_1} \in F_1, \cdots, B_{t_k} \in F_k) = \int_{F_1 \times \cdots \times F_k} \prod_{i=1}^k p(t_k - t_{k-1}, x_{k-1}, x_k) dx_1 \cdots dx_k$$
+<p class="content-paragraph">ただしここで、$x=sx_0 \in \mathbb{R}^n$であり、$p$はガウス分布</p>
 $$p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})$$
-<p class="content-paragraph">である。この時、確率過程$\{B_t\}_{t \ge 0}$をブラウン運動と呼ぶ。</p></div>
+<p class="content-paragraph">である。この時、確率過程$\{B_t\}_{t \ge 0}$を$x$を出発するブラウン運動と呼ぶ。</p></div>
 <p class="content-paragraph">重要なのはブラウン運動が連続であることと、上記の$P$に関する式、有限次元分布に関する式、を満たすことの二つである。</p>
 <p class="content-paragraph">また、少なくともこの本で紹介されている限りでは、標本空間$\Omega$やそれに付随する完全加法族$\mathcal{F}$が具体的にどの様なものであるかは示されず、単に上記の様な条件を満たす確率空間を取ることができる、ということのみがわかっている。</p>
 
@@ -39,22 +39,22 @@ $$p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})$$
 
 <p class="content-paragraph">$\{B_t\}_{t \ge 0}$はガウス過程である。よってそのモーメント母関数に関して次が成り立つ。</p>
 <div class="content-def"><p><span class="content-def-name">モーメント母関数に関する性質</span></p><p class="content-paragraph">任意の$0 \le t_1 \le \cdots \le t_k$に対応する確率変数$(B_{t_1}, \cdots, B_{t_k})$は次の関係を満たす。</p>
-$$\textbf{E}[\exp(i \sum_{j=1}^{nk} u_j B_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)$$
+$$\textbf{E}^x[\exp(i \sum_{j=1}^{nk} u_j B_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)$$
 <p class="content-paragraph">ただしここで、</p>
 $$\begin{aligned}
-M_j &= \textbf{E}[B_{t_j}] \\
-C_{ij} &= \textbf{E}[(B_{t_i} - M_i)(B_{t_j} - M_j)]
+M_j &= \textbf{E}^x[B_{t_j}] \\
+C_{ij} &= \textbf{E}^x[(B_{t_i} - M_i)(B_{t_j} - M_j)]
 \end{aligned}$$
 <p class="content-paragraph">である。</p></div>
 <p class="content-paragraph">ここから平均や共分散について次の性質が成り立つことがわかる。</p>
 <div class="content-def"><p><span class="content-def-name">ブラウン運動の平均や共分散</span></p><p class="content-paragraph">次が成り立つ。</p>
 $$\begin{aligned}
-\textbf{E}[B_t] &= x_0 \\
-\textbf{E}[(B_t - \textbf{E}[B_t])^2] &= nt \\
-\textbf{E}[(B_t - \textbf{E}[B_t])(B_s - \textbf{E}[B_s])] &= n \min(s, t)
+\textbf{E}^x[B_t] &= x \\
+\textbf{E}^x[(B_t - \textbf{E}[B_t])^2] &= nt \\
+\textbf{E}^x[(B_t - \textbf{E}[B_t])(B_s - \textbf{E}[B_s])] &= n \min(s, t)
 \end{aligned}$$
 <p class="content-paragraph">さらに、$t \ge s$の時以下が成り立つ。</p>
-$$\textbf{E}[(B_t - B_s)^2] = n(t-s)$$</div>
+$$\textbf{E}^x[(B_t - B_s)^2] = n(t-s)$$</div>
 
 <p class="content-paragraph">また、ブラウン運動$\{B_t\}_{t \ge 0}$は独立な増分を持つ。</p>
 <div class="content-def"><p><span class="content-def-name">ブラウン運動の増分の独立性</span></p><p class="content-paragraph">任意の$0 \le t_1 \le \cdots \le t_k$に対して</p>
