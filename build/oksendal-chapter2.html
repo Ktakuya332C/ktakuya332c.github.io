@@ -38,12 +38,12 @@ $$p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})$$
 <p class="content-paragraph">ブラウン運動に関してのいくつかの性質を可能な限り簡潔に紹介していく。</p>
 
 <p class="content-paragraph">$\{B_t\}_{t \ge 0}$はガウス過程である。よってそのモーメント母関数に関して次が成り立つ。</p>
-<div class="content-def"><p><span class="content-def-name">モーメント母関数に関する性質</span></p><p class="content-paragraph">任意の$0 \le t_1 \le \cdots \le t_k$に対応する確率変数$(B_{t_1}, \cdots, B_{t_k})$は次の関係を満たす。</p>
-$$\textbf{E}^x[\exp(i \sum_{j=1}^{nk} u_j B_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)$$
+<div class="content-def"><p><span class="content-def-name">モーメント母関数に関する性質</span></p><p class="content-paragraph">任意の$0 \le t_1 \le \cdots \le t_k$に対応する確率変数$Z=(B_{t_1}, \cdots, B_{t_k}) \in \mathbb{R}^{nk}$は次の関係を満たす。</p>
+$$\textbf{E}^x[\exp(i \sum_{j=1}^{nk} u_j Z_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)$$
 <p class="content-paragraph">ただしここで、</p>
 $$\begin{aligned}
-M_j &= \textbf{E}^x[B_{t_j}] \\
-C_{ij} &= \textbf{E}^x[(B_{t_i} - M_i)(B_{t_j} - M_j)]
+M_j &= \textbf{E}^x[Z_j] \\
+C_{ij} &= \textbf{E}^x[(Z_i - M_i)(Z_j - M_j)]
 \end{aligned}$$
 <p class="content-paragraph">である。</p></div>
 <p class="content-paragraph">ここから平均や共分散について次の性質が成り立つことがわかる。</p>
