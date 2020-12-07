@@ -28,11 +28,11 @@ p(t, x, y) = (2 \pi t)^{-n/2} \exp(-\frac{|x-y|^2}{2t})
 
 @p{@inmath{\{B_t\}_{t \ge 0}}はガウス過程である。よってそのモーメント母関数に関して次が成り立つ。}
 @def{モーメント母関数に関する性質}{
-@p{任意の@inmath{0 \le t_1 \le \cdots \le t_k}に対応する確率変数@inmath{Z=(B_{t_1}, \cdots, B_{t_k}) \in \mathbb{R}^{nk}}は次の関係を満たす。}
+@p{任意の@inmath{0 \le t_1 \le \cdots \le t_k}に対応する確率変数@inmath{Z=(B_{t_1}, \cdots, B_{t_k}) \in \mathbb{R}^{nk}}に対して、次の関係を満たすような@inmath{C_{ij}}と@inmath{M_j}が存在する。}
 @blmath{
 \textbf{E}^x[\exp(i \sum_{j=1}^{nk} u_j Z_{t_j})] = \exp(-\frac{1}{2} \sum_{i,j} u_i C_{ij} u_j + i \sum_{j} u_j M_j)
 }
-@p{ただしここで、}
+@p{この時、@inmath{M_i}と@inmath{C_{ij}}は以下の関係を満たすことが確認できる。}
 @blmath{\begin{aligned}
 M_j &= \textbf{E}^x[Z_j] \\
 C_{ij} &= \textbf{E}^x[(Z_i - M_i)(Z_j - M_j)]
