@@ -1,0 +1,90 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Preloading</title><link rel="stylesheet" href="../css/reset.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/vs.css"><script src="../js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/">Preloading</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">エクセンダールの第三章のまとめ</h2>
+                                <p class="date">2020-11-12</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">次の本を読み進めている。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://www.amazon.co.jp/dp/4621061763">確率微分方程式</a></li></ul>
+<p class="content-paragraph">今回は第三章についてまとめていく。少し確率過程一般の前提知識を紹介した後に、伊藤積分の定義とその性質を紹介していく章である。</p>
+
+<h1 class="section-title">確率過程に関する前提知識</h1>
+<p class="content-paragraph">伊藤積分の紹介に入る前に、いくつか確率過程を語る上で欠かせない概念の紹介をする。</p>
+<div class="content-def"><p><span class="content-def-name">フィルトレーション</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{F})$上のフィルトレーションとは$\mathcal{F}$の部分完全加法族の増大列のことである。すなわち、$\mathcal{M}_t \subset \mathcal{F}$であって、</p>
+$$0 \le s \le t \Rightarrow \mathcal{M}_s \subset \mathcal{M}_t$$
+<p class="content-paragraph">を満たす列$\{\mathcal{M}_t\}_{t \ge 0}$のことを指す。</p></div>
+<p class="content-paragraph">フィルトレーションと確率過程の関係については次の定義を紹介する必要がある。</p>
+<div class="content-def"><p><span class="content-def-name">適合</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\}_{t \ge 0}$とフィルトレーション$\{\mathcal{M}_t\}_{t \ge 0}$を考える。各$t \ge 0$において、写像</p>
+$$\omega \rightarrow X_t(\omega)$$
+<p class="content-paragraph">が$\mathcal{M}_t$-可測となる時、確率過程$\{X_t\}$は$\{\mathcal{M}_t\}$-適合であるという。</p></div>
+<p class="content-paragraph">さらに強く確立過程とフィルトレーションの関係を見ることができるのはマルチンゲールの定義においてである。</p>
+<div class="content-def"><p><span class="content-def-name">マルチンゲール</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\}_{t \ge 0}$がフィルトレーション$\{\mathcal{M}_t\}_{t \ge 0}$に対して次の3条件を満たす時マルチンゲールであるという。</p>
+<ol class="content-ol"><li class="content-ol-item">$\{X_t\}$は$\{\mathcal{M}_t\}$-適合である</li><li class="content-ol-item">全ての$t \ge 0$について$\{X_t\}$は可積分</li><li class="content-ol-item">$0 \le s \le t$ならば$\textbf{E}[X_t | \mathcal{M_s}] = X_s$</li></ol></div>
+<p class="content-paragraph">マルチンゲール性の重要性はまずブラウン運動に見て取れる</p>
+<div class="content-def"><p><span class="content-def-name">ブラウン運動はマルチンゲール</span></p><p class="content-paragraph">ブラウン運動$\{B_t\}_{t \ge 0}$は、$\{B_s | s \le t\}$から生成されるフィルトレーション$\{\mathcal{M_t}\}_{t \ge 0}$に対してマルチンゲールである。</p></div>
+<p class="content-paragraph">また、マルチンゲールであれば次のような不等式も成立する</p>
+<div class="content-def"><p><span class="content-def-name">マルチンゲール不等式</span></p><p class="content-paragraph">確率過程$\{X_t\}_{t \ge 0}$がほとんど確実に連続かつマルチンゲールであれば、全ての$p \ge 1$と$T \ge 0$、$\lambda > 0$に対して以下が成立する</p>
+$$\textbf{P}[\sup_{0 \le t \le T} |M_t| \ge \lambda] \le \frac{1}{\lambda^p} \textbf{E}[|M_T|^p]$$</div>
+
+<h1 class="section-title">伊藤積分の定義</h1>
+<p class="content-paragraph">結論から言えば、伊藤積分は次の様な確率過程に対してのみ定義される。</p>
+<div class="content-def"><p><span class="content-def-name">伊藤積分可能性</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\}$で、次の三つの条件を満たすものの集合を$\mathcal{V}(S, T)$と表す。</p>
+<ol class="content-ol"><li class="content-ol-item">$(t, \omega) \rightarrow X_t(\omega)$は$\mathcal{B} \times \mathcal{F}$-可測</li><li class="content-ol-item">あるフィルトレーション$\{\mathcal{H}_t\}$が存在し、ブラウン運動$\{B_t\}$が$\{\mathcal{H}_t\}$-マルチンゲールであり、かつ$\{X_t\}$が$\{\mathcal{H}_t\}$-適合</li><li class="content-ol-item">$\textbf{E}[\int_S^T X_t^2 dt] < \infty$</li></ol></div>
+<p class="content-paragraph">まずは簡単な確率過程に対して伊藤積分を定義する。</p>
+<div class="content-def"><p><span class="content-def-name">初等的な確率過程</span></p><p class="content-paragraph">確率過程$\{X_t\} \in \mathcal{V}(S, T)$で、次の形に表現できるものは初等的であるという。</p>
+$$X_t(\omega) = \sum_{j} e_j(\omega) \chi_{[t_j, t_{j+1})}(t)$$
+<p class="content-paragraph">ただしここで$e_j$は確率変数であり、$\chi$は定義関数。</p></div>
+<div class="content-def"><p><span class="content-def-name">初等的な確率過程に対する伊藤積分</span></p><p class="content-paragraph">初等的な確率過程</p>
+$$X_t(\omega) = \sum_{j} e_j(\omega) \chi_{[t_j, t_{j+1})}(t)$$
+<p class="content-paragraph">に対して伊藤積分を以下の確率変数</p>
+$$\int_S^T X_t dB_t(\omega) = \sum_{j} e_j(\omega) [B_{t_{j+1}} - B_{t_j}](\omega)$$
+<p class="content-paragraph">として定義する。</p></div>
+<p class="content-paragraph">一般の確率過程$\{X_t\} \in \mathcal{V}$に対する伊藤積分はそれらの極限によって定義される。</p>
+<div class="content-def"><p><span class="content-def-name">伊藤積分</span></p><p class="content-paragraph">任意の確率過程$\{X_t\} \in \mathcal{V}$に対して、ある初等的な確率過程の列$\{\{Y_t^n\}\}$が存在し、</p>
+$$\lim_{n \rightarrow \infty} \textbf{E}[\int_S^T |X_t - Y_t|^2 dt] = 0$$
+<p class="content-paragraph">を満たす。$\{X_t\}$に対する伊藤積分を</p>
+$$\int_S^T X_t dB_t = \lim_{n \rightarrow \infty} \int_S^T Y^n_t dB_t$$
+<p class="content-paragraph">として定義する。ただし極限は$L^2(\textbf{P})$の意味でとる。</p></div>
+
+<h1 class="section-title">伊藤積分の性質</h1>
+<p class="content-paragraph">いくつかの基本的な性質を列挙する。</p>
+<div class="content-def"><p><span class="content-def-name">基本的な性質</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\},\{Y_t\} \in \mathcal{V}(0, T)$とした時、$0 \le S \le T$として</p>
+<ul class="content-ul"><li class="content-ul-item">ほとんど確実に$\int_S^T X_t dB_t = \int_S^U X_t dB_t + \int_U^T X_t dB_t$</li><li class="content-ul-item">ほとんど確実に$\int_S^T (cX_t + Y_t) dB_t = c \int_S^T X_t dB_t + \int_S^T Y_t dB_t$</li><li class="content-ul-item">$\textbf{E}[\int_S^T X_t dB_t] = 0$</li><li class="content-ul-item">$\int_S^T X_t dB_t$は$\mathcal{F}_T$-可測</li></ul></div>
+<p class="content-paragraph">また、次の様な特徴もある。</p>
+<div class="content-def"><p><span class="content-def-name">伊藤積分の等長性</span></p><p class="content-paragraph">全ての$\{X_t\} \in \mathcal{V}(S, T)$に対して以下が成り立つ。</p>
+$$\textbf{E}[(\int_S^T X_t dB_t)^2] = \textbf{E}[\int_S^T X_t^2 dt]$$</div>
+<p class="content-paragraph">そして、伊藤積分は積分領域に関して連続となるものが取れる。</p>
+<div class="content-def"><p><span class="content-def-name">伊藤積分の積分領域に関する性質</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\} \in \mathcal{V}(0, T)$に対する伊藤積分</p>
+$$\int_0^t X_s dB_s$$
+<p class="content-paragraph">のt-連続修正が必ず存在する。すなわち、t-連続な確率過程$\{J_t\}$で、</p>
+$$\textbf{P}[J_t = \int_0^t X_t dB_t] = 1$$
+<p class="content-paragraph">となるものが存在する。</p></div>
+<p class="content-paragraph">そして、マルチンゲールとなる。</p>
+<div class="content-def"><p><span class="content-def-name">伊藤積分のマルチンゲール性</span></p><p class="content-paragraph">確率過程$\{X_t\} \in \mathcal{V}(0, T)$に対する伊藤積分</p>
+$$Y_t = \int_0^t X_s dB_ss$$
+<p class="content-paragraph">はマルチンゲールである。</p></div>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2020 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
