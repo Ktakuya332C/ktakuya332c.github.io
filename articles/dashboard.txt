@@ -8,8 +8,9 @@
 {@a{よくみるブログ}{@rel{/build/interesting-blogs.html}}}
 {@a{The Economist}{https://www.economist.com/}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
+{@a{Datatau}{https://datatau.net/}}
+{@a{TweetDeck}{https://tweetdeck.twitter.com/}}
 {@a{Reddit}{https://www.reddit.com/}}
-{@a{Twitter}{https://twitter.com/}}
 {@a{Bilibili}{https://www.bilibili.com/}}
 {@a{LeetCode}{https://leetcode.com/}}
 {@a{微博}{https://www.weibo.com}}
