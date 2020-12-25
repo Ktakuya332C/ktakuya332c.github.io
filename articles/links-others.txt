@@ -40,3 +40,4 @@
 {@a{ctftime}{https://ctftime.org/}}
 {@a{ctf field guide}{https://trailofbits.github.io/ctf/index.html}}
 {@a{トップレベルのコンピュータエンジニアなら普段からチェックして当然の技術系メディアN選}{https://kuenishi.hatenadiary.jp/entry/2018/04/13/022908}}
+{@a{ふだん目を通している英語雑誌}{http://ryotamugiyama.com/2017/08/23/journals1708/}}
