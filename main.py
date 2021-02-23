@@ -11,7 +11,7 @@ index_path = 'index.html'
 root_from_index = './'
 title_str = 'Preloading'
 desc_str = 'Ktakuyaのブログ'
-footer_str = 'Copyright@2020 Ktakuya. All rights reserved.'
+footer_str = 'Copyright@2021 Ktakuya. All rights reserved.'
 trace_on = False
 try:
     if os.path.exists(build_dir):
