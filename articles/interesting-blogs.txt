@@ -33,6 +33,7 @@
   {@a{統計コンサルの議事メモ}{http://ushi-goroshi.hatenablog.com/}}
   {@a{読書日記}{https://elsur.jpn.org/diary/}}
   {@a{大トロ}{https://blog.otoro.net/}}
+  {@a{rushter/data-science-blogs}{https://github.com/rushter/data-science-blogs}}
 
 @section{その他}
 @ul
