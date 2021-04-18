@@ -162,13 +162,11 @@ u_i(\alpha^*_i(x_i), \bm{\alpha}^*_{-i}(\bm{x}_{-i}), \bm{x}) \ge u_i(a_i, \bm{\
 @blcode{
 FOR それぞれのプレイヤーiに対して次を行う
   FOR プレイヤーi以外の他のプレイヤーが取りうる戦略の組alpha_minus_iそれぞれに対して次を行う
-    FOR それぞれのシグナルの組x_minus_iに対して次を行う
-      FOR それぞれのシグナルx_iに対して次を行う
-        プレイヤーiによるシグナルの組(x_i, x_minus_i)と戦略alpha_minus_iに対する最適反応行動a_iを計算
-      ENDFOR
-      最適反応戦略alpha_iとして上で計算したx_iとa_iの組を保存
+    FOR それぞれのシグナルxに対して次を行う
+      プレイヤーiによるシグナルの組xと戦略alpha_minus_iに対する最適反応行動a_iを計算
     ENDFOR
-    IF 最適反応戦略alpha_iがシグナルの組x_minus_iに依存しない
+    IF 最適反応a_iがプレイヤーiが知らないシグナルの組x_minus_iに依存しない
+      x_iとa_iの組をプレイヤーiの最適反応alpha_iとして保存する
       計算した戦略の組(alpha_i, alpha_minus_i)を保存しておく
     ELSE
       事後均衡は存在しない
