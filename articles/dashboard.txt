@@ -25,5 +25,4 @@
 {@a{Google Analytics}{https://analytics.google.com}}
 {@a{Trello}{https://trello.com/}}
 {@a{Google Translate}{https://translate.google.com/}}
-{@a{Inoreader}{https://www.inoreader.com/}}
-{@a{Google Alerts}{https://www.google.com/alerts}}
+{@a{Watchlist}{https://app.distill.io/}}
