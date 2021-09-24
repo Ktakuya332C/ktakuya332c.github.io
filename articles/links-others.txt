@@ -23,6 +23,7 @@
 {@a{ruby on rails tutorial}{https://www.railstutorial.org/}}
 {@a{devpost}{https://devpost.com/}}
 {@a{build-your-own-x}{https://github.com/danistefanovic/build-your-own-x}}
+{@a{Project Based Learning}{https://github.com/practical-tutorials/project-based-learning}}
 {@a{the beginners guide to iptables}{https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/}}
 {@a{Ethereum Research}{https://ethresear.ch/}}
 {@a{Peter Turchin}{http://peterturchin.com/}}
