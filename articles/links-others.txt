@@ -43,3 +43,5 @@
 {@a{トップレベルのコンピュータエンジニアなら普段からチェックして当然の技術系メディアN選}{https://kuenishi.hatenadiary.jp/entry/2018/04/13/022908}}
 {@a{ふだん目を通している英語雑誌}{http://ryotamugiyama.com/2017/08/23/journals1708/}}
 {@a{Top 100 Economics Blogs of 2020}{https://www.intelligenteconomist.com/economics-blogs/}}
+{@a{小平邦彦の数学書の読み方}{http://drei-punkte.cocolog-nifty.com/blog/2019/01/post-4b14.html}}
+{@a{凡人が数学を語学として学ぶ具体的な手続きを説明する}{https://readingmonkey.blog.fc2.com/blog-entry-589.html}}
