@@ -1,0 +1,42 @@
+様々な可換環の具体例
+2021-10-28
+
+@p{今読み進めているガロア理論の教科書}
+@ul{@a{今度こそわかるガロア理論}{https://www.kspub.co.jp/book/detail/1566026.html}}
+@p{の3章で紹介されている可換環の性質についてまとめる。}
+
+@section{可換環の分類}
+@p{可換環はそれらが持つ代表的な性質で下図のように分類できる(@a{ref}{https://en.wikipedia.org/wiki/Integral_domain})}
+@fig{60}{@rel{/static/characteristics-of-various-rings/various-rings.png}}
+@p{以下ではそれらの具体例を列挙していく。}
+
+@subsection{可換環}
+@p{@inmath{\mathbb{Z}_6}は可換環だが整域ではない。例えば@inmath{2}と@inmath{3}は零元ではないが、その積は@inmath{0}になる。}
+
+@subsection{整域}
+@p{次の環@inmath{A}は整域ではあるが素元分解整域ではない}
+@blmath{ A = \{f(x) \in \mathbb{Q}[x] | f(0) \in \mathbb{Z}\} }
+@p{整域であることは、@inmath{\mathbb{Q}}が整域であることから導かれる(@a{ref}{https://math.stackexchange.com/questions/2187381/prove-that-if-a-commutative-ring-r-is-integral-domain-then-the-polynomial-rin})。}
+@p{素元分解整域でないことは、素元@inmath{x}が次の@inmath{f(x)}と@inmath{g(x)}の積@inmath{f(x)g(x)}を割り切るが}
+@blmath{ f(x) = \frac{1}{2}x, \quad g(x) = 2 }
+@p{そのどちらも割り切れないことからわかる(@a{ref}{https://math.stackexchange.com/questions/3999158/is-there-an-integral-domain-containing-an-element-having-no-factorization-into-i})。ここで@inmath{1/2 \not \in A}に注意する。}
+
+@subsection{素元分解整域}
+@p{@inmath{\mathbb{Z}[x]}は素元分解整域だが単項イデアル整域ではない。}
+@p{素元分解整域であることはガウスの補題を使うと証明できるが(@a{ref}{https://math.stackexchange.com/questions/2884646/gauss-lemma-prove-mathbbzx-ufd})、長いので記載しない。}
+@p{単項イデアル整域でないことは、次のイデアルが単項イデアルでないことからわかる(@a{ref}{https://math.stackexchange.com/questions/500254/is-mathbbzx-a-principal-ideal-domain})}
+@blmath{ \{f(x)x + 2g(x) | f, g \in \mathbb{Z}[x]\} }
+
+@subsection{単項イデアル整域}
+@p{@inmath{\mathbb{Z}}上では任意のイデアルが単項イデアルである。}
+
+@section{素元と既約元について}
+@p{素元と既約元は次のような定義域を持ち、共に定義される場合それらは一致する。}
+@fig{60}{@rel{/static/characteristics-of-various-rings/various-elements.png}}
+
+@section{素イデアルと極大イデアルについて}
+@p{任意の極大イデアルは素イデアルだが、特に単項イデアル整域においてそれらは一致する。}
+@fig{60}{@rel{/static/characteristics-of-various-rings/various-ideals.png}}
+@p{ここで@inmath{\mathbb{Z}[x]}には素イデアルだが極大イデアルではないようなイデアルが存在するはずだが、確かに次の素イデアルが極大イデアルではない(@a{ref}{https://yutsumura.com/examples-of-prime-ideals-in-commutative-rings-that-are-not-maximal-ideals/})}
+@blmath{ \{xf(x) | f \in \mathbb{Z}[x]\} \subset \{2f(x) | f \in \mathbb{Z}[x]\} }
+
