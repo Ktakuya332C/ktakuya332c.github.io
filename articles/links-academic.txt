@@ -74,3 +74,4 @@
 {@a{松尾ぐみの論文の書き方:英語論文}{http://ymatsuo.com/japanese/ronbun_eng.html}}
 {@a{村上春樹はどのように読みやすい文章を書くのか？}{http://www.tjsg-kokoro.com/2014/05/13/murakamiharuki/}}
 {@a{指南役さんの文章推敲論}{https://togetter.com/li/75337}}
+{@a{先生の「まずは論文の骨子を箇条書きで書いてみて」に対応する: 論文執筆の第一歩}{https://shunk031.hatenablog.com/entry/lets-write-outline}}
