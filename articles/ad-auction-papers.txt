@@ -131,7 +131,7 @@
   {[2011] @a{A Structural Model of Sponsored Search Advertising Auctions}{http://economics.mit.edu/files/6975}}
   {[2011] @a{Stochastic Variability in Sponsored Search Auctions: Observations and Models}{https://www.microsoft.com/en-us/research/publication/stochastic-variability-in-sponsored-search-auctions-observations-and-models/}}
   {[2013] @a{Counterfactual Reasoning and Learning Systems: The Example of Computational Advertising}{https://www.microsoft.com/en-us/research/publication/counterfactual-reasoning-and-learning-systems-the-example-of-computational-advertising/}}
-  {[2017] @a{AQuantal RegretMethod for Structural Econometrics in Repeated Games{}{https://www.microsoft.com/en-us/research/publication/quantal-regret-method-structural-econometrics-repeated-games/}}
+  {[2017] @a{A Quantal Regret Method for Structural Econometrics in Repeated Games}{https://www.microsoft.com/en-us/research/publication/quantal-regret-method-structural-econometrics-repeated-games/}}
   {[2017] @a{Inference on Auctions with Weak Assumptions on Information}{https://arxiv.org/abs/1710.03830}}
 @p{間接的に社会厚生等を推定する}
 @ul
