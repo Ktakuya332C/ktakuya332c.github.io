@@ -151,7 +151,9 @@
   {[2014] @a{Optimising Trade-offs Among Stakeholders in Ad Auctions}{https://www.microsoft.com/en-us/research/publication/optimising-trade-offs-among-stakeholders-in-ad-auctions/}}
   {[2014] @a{The Economic and Cognitive Costs of Annoying Display Advertisements}{https://www.microsoft.com/en-us/research/publication/the-economic-and-cognitive-costs-of-annoying-display-advertisements/}}
   {[2015] @a{Focus on the Long-Term: It's better for Users and Business}{https://research.google/pubs/pub43887/}}
-
+@p{オークションのA/Bテストの際のKPI}
+@ul
+  {[2016] @a{A/B Testing of Auctions}{https://arxiv.org/abs/1606.00908}}
 
 @section{他の参考文献}
 @ul
