@@ -37,8 +37,8 @@
   {[2014] @a{Biobjective Online Bipartite Matching}{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.718.3997&rep=rep1&type=pdf}}
 @p{Adwords-problemに対してさらに広告主のインセンティブを考慮した論文}
 @ul
-  {[2012] @a{Clinching Auctions with Online Supply}{https://arxiv.org/pdf/1210.1456.pdf}}
   {[2012] @a{Polyhedral Clinching Auctions and the Adwords Polytope}{https://arxiv.org/pdf/1201.0404.pdf}}
+  {[2012] @a{Clinching Auctions with Online Supply}{https://arxiv.org/pdf/1210.1456.pdf}}
   {[2012] @a{Prior-free Auctions for Budgeted Agents}{https://www.nikhildevanur.com/pubs/ec14-devanur.pdf}}
   {[2014] @a{Clinching auctions beyond hard budget constraints}{https://arxiv.org/pdf/1404.5000.pdf}}
 @p{予算消化ペースの調整方法についての論文}
