@@ -39,12 +39,11 @@
 @ul
   {[2012] @a{Polyhedral Clinching Auctions and the Adwords Polytope}{https://arxiv.org/pdf/1201.0404.pdf}}
   {[2012] @a{Clinching Auctions with Online Supply}{https://arxiv.org/pdf/1210.1456.pdf}}
-  {[2012] @a{Prior-free Auctions for Budgeted Agents}{https://www.nikhildevanur.com/pubs/ec14-devanur.pdf}}
-  {[2014] @a{Clinching auctions beyond hard budget constraints}{https://arxiv.org/pdf/1404.5000.pdf}}
 @p{予算消化ペースの調整方法についての論文}
 @ul
   {[2008] @a{Budget Constrained Bidding in Keyword Auctions and Online Knapsack Problems}{ https://www.microsoft.com/en-us/research/publication/budget-constrained-bidding-keyword-auctions-online-knapsack-problems/}}
   {[2012] @a{Sequential Auctions of Identical Items with Budget-Constrained Bidders}{https://www.microsoft.com/en-us/research/publication/sequential-auctions-identical-items-budget-constrained-bidders/}}
+  {[2012] @a{Prior-free Auctions for Budgeted Agents}{https://www.nikhildevanur.com/pubs/ec14-devanur.pdf}}
   {[2012] @a{Budget Smoothing for Internet Ad Auctions: A Game Theoretic Approach}{https://www.microsoft.com/en-us/research/publication/budget-smoothing-internet-ad-auctions-game-theoretic-approach/}}
   {[2012] @a{Budget Optimization for Sponsored Search: Censored Learning in MDPs}{https://www.microsoft.com/en-us/research/publication/budget-optimization-for-sponsored-searchcensored-learning-in-mdps/}}
   {[2014] @a{Efficient Regret Bounds for Online Bid Optimisation in Budget-Limited Sponsored Search Auctions}{https://www.microsoft.com/en-us/research/publication/efficient-regret-bounds-for-online-bid-optimisation-in-budget-limited-sponsored-search-auctions/}}
@@ -84,6 +83,7 @@
 @subsection{利得関数が異なる広告主}
 @p{tCPA制約やtROAS制約を持つ広告主のモデル}
 @ul
+  {[2014] @a{Clinching auctions beyond hard budget constraints}{https://arxiv.org/pdf/1404.5000.pdf}}
   {[2019] @a{Autobidding with Constraints}{https://research.google/pubs/pub48721/}}
   {[2021] @a{The Landscape of Autobidding Auctions: Value versus Utility Maximization}{https://research.google/pubs/pub50579/}}
   {[2021] @a{Robust Auction Design in the Auto-bidding World}{https://openreview.net/pdf?id=01884FCwbNf}}
