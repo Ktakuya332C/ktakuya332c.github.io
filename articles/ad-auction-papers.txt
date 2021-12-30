@@ -39,9 +39,9 @@
 @ul
   {[2012] @a{Polyhedral Clinching Auctions and the Adwords Polytope}{https://arxiv.org/pdf/1201.0404.pdf}}
   {[2012] @a{Clinching Auctions with Online Supply}{https://arxiv.org/pdf/1210.1456.pdf}}
+  {[2008] @a{Budget Constrained Bidding in Keyword Auctions and Online Knapsack Problems}{ https://www.microsoft.com/en-us/research/publication/budget-constrained-bidding-keyword-auctions-online-knapsack-problems/}}
 @p{予算消化ペースの調整方法についての論文}
 @ul
-  {[2008] @a{Budget Constrained Bidding in Keyword Auctions and Online Knapsack Problems}{ https://www.microsoft.com/en-us/research/publication/budget-constrained-bidding-keyword-auctions-online-knapsack-problems/}}
   {[2012] @a{Sequential Auctions of Identical Items with Budget-Constrained Bidders}{https://www.microsoft.com/en-us/research/publication/sequential-auctions-identical-items-budget-constrained-bidders/}}
   {[2012] @a{Prior-free Auctions for Budgeted Agents}{https://www.nikhildevanur.com/pubs/ec14-devanur.pdf}}
   {[2012] @a{Budget Smoothing for Internet Ad Auctions: A Game Theoretic Approach}{https://www.microsoft.com/en-us/research/publication/budget-smoothing-internet-ad-auctions-game-theoretic-approach/}}
