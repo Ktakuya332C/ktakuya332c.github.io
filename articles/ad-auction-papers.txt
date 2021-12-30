@@ -31,6 +31,7 @@
 @ul
   {[2007] @a{AdWords and Generalized On-line Matching}{https://web.stanford.edu/~saberi/adwords.pdf}}
   {[2007] @a{Online Primal-Dual Algorithms for MaximizingAd-Auctions Revenue}{http://www.columbia.edu/~cs2035/courses/ieor8100.F18/buchbinder.pdf}}
+  {[2011] @a{Near Optimal Online Algorithms and Fast Approximation Algorithms for Resource Allocation Problems}{https://www.cs.cmu.edu/~sandholm/cs15-892F15/near%20optimal%20online%20algs%20for%20resource%20allocation.ec11.pdf}}
   {[2012] @a{Asymptotically Optimal Algorithm for Stochastic Adwords}{http://pages.cs.wisc.edu/~balu2901/papers/2012/adwords_optimal.pdf}}
   {[2012] @a{Online Matching and Ad Allocation}{https://storage.googleapis.com/pub-tools-public-publication-data/pdf/9b9bacbb54799b5b7b38fb53aa81ccc3b55604db.pdf}}
   {[2014] @a{Biobjective Online Bipartite Matching}{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.718.3997&rep=rep1&type=pdf}}
