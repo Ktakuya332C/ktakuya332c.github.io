@@ -144,6 +144,7 @@
   {[2019] @a{Online Learning for Measuring Incentive Compatibility in Ad Auctions}{https://arxiv.org/abs/1901.06808}}
   {[2019] @a{Testing Dynamic Incentive Compatibility in Display Ad Auctions}{https://research.google/pubs/pub49340/}}
   {[2019] @a{Envy, Regret, and Social Welfare Loss}{https://arxiv.org/abs/1907.07721}}
+  {[2019] @a{Estimating Approximate Incentive Compatibility}{https://par.nsf.gov/servlets/purl/10119656}}
   {[2020] @a{A Data-Driven Metric of Incentive Compatibility}{https://research.google/pubs/pub49036/}}
 
 @subsection{オークションのKPI}
@@ -156,6 +157,8 @@
 @p{オークションのA/Bテストの際のKPI}
 @ul
   {[2016] @a{A/B Testing of Auctions}{https://arxiv.org/abs/1606.00908}}
+  {[2017] @a{Mechanism Redesign}{https://arxiv.org/abs/1708.04699}}
+  {[2019] @a{Variance Reduction in Bipartite Experiments through Correlation Clustering}{https://proceedings.neurips.cc/paper/2019/file/bc047286b224b7bfa73d4cb02de1238d-Paper.pdf}}
 
 @section{他の参考文献}
 @ul
