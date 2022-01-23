@@ -19,6 +19,5 @@
 {@a{Gmail}{http://gmail.com}}
 {@a{Google Calender}{https://calendar.google.com}}
 {@a{Google Analytics}{https://analytics.google.com}}
-{@a{Trello}{https://trello.com/}}
 {@a{Google Translate}{https://translate.google.com/}}
 {@a{Watchlist}{https://app.distill.io/}}
