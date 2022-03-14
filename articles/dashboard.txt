@@ -5,12 +5,10 @@
 
 
 @ul
-{@a{よくみるブログ}{@rel{/build/interesting-blogs.html}}}
 {@a{Hacker News}{https://news.ycombinator.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
-{@a{Lobsters}{https://lobste.rs/}}
-{@a{Good Judgment Open}{https://www.gjopen.com/}}
 {@a{Metaculus}{https://www.metaculus.com/}}
+{@a{Github Project}{https://github.com/Ktakuya332C/tweets/projects/1}}
 
 
 @section{よく使うツール}
