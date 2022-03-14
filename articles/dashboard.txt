@@ -5,10 +5,10 @@
 
 
 @ul
-{@a{Hacker News}{https://news.ycombinator.com/}}
+{@a{HackerNews}{https://news.ycombinator.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
 {@a{Metaculus}{https://www.metaculus.com/}}
-{@a{Github Project}{https://github.com/Ktakuya332C/tweets/projects/1}}
+{@a{MyProject}{https://github.com/Ktakuya332C/tweets/projects/1}}
 
 
 @section{よく使うツール}
