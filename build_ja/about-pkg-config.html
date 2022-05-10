@@ -1,0 +1,130 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">pkg-configについてまとめる</h2>
+                                <p class="date">2020-06-22</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">pkg-configを使う用事ができたので学んでみる。一通りmanページに書かれていることを試せばそれなりに理解できるはず[1]。</p>
+
+<h1 class="section-title">オプションを片っ端から試す</h1>
+
+<p class="content-paragraph">pkg-configがpcファイルを探す先はデフォルトで</p>
+<ul class="content-ul"><li class="content-ul-item"><span class="inline-code">/usr/lib/pkgconfig</span></li><li class="content-ul-item"><span class="inline-code">/usr/local/lib/pkgconfig</span></li></ul>
+<p class="content-paragraph">などがあるようす[2]。とりあえず中身を覗いてみると、gio-2.0のpcファイルが色々と書かれていて練習に良さそうだったので、このライブラリで試してみる。</p>
+
+<p class="content-paragraph">そのライブラリのpcファイルの中身は以下</p>
+<div class="code-container"><pre><code>$ tail -n 8 /usr/local/lib/pkgconfig/gio-2.0.pc
+Name: GIO
+Description: glib I/O library
+Version: 2.64.3
+Requires: glib-2.0, gobject-2.0
+Requires.private: gmodule-no-export-2.0, zlib
+Libs: -L${libdir} -lgio-2.0
+Libs.private: -Wl,-framework,CoreFoundation -Wl,-framework,Carbon -Wl,-framework,Foundation -Wl,-framework,AppKit -lintl -lresolv
+Cflags:-I${includedir}</code></pre></div>
+
+<h1 class="subsection-title">modversion</h1>
+<div class="code-container"><pre><code>$ pkg-config --modversion gio-2.0
+2.64.3</code></pre></div>
+
+<h1 class="subsection-title">cflags</h1>
+<div class="code-container"><pre><code>$ pkg-config --cflags gio-2.0
+-I/usr/local/Cellar/libffi/3.3/include -I/usr/local/Cellar/glib/2.64.3/include -I/usr/local/Cellar/glib/2.64.3/include/glib-2.0 -I/usr/local/Cellar/glib/2.64.3/lib/glib-2.0/include -I/usr/local/opt/gettext/include -I/usr/local/Cellar/pcre/8.44/include</code></pre></div>
+<p class="content-paragraph">gio自体が要求しているcflagsは存在せず、依存パッケージglibとgobjectによるものが引き継がれているようす</p>
+<div class="code-container"><pre><code>$ pkg-config --cflags glib-2.0
+-I/usr/local/Cellar/glib/2.64.3/include/glib-2.0 -I/usr/local/Cellar/glib/2.64.3/lib/glib-2.0/include -I/usr/local/opt/gettext/include -I/usr/local/Cellar/pcre/8.44/include
+$ pkg-config --cflags gobject-2.0
+-I/usr/local/Cellar/libffi/3.3/include -I/usr/local/Cellar/glib/2.64.3/include -I/usr/local/Cellar/glib/2.64.3/include/glib-2.0 -I/usr/local/Cellar/glib/2.64.3/lib/glib-2.0/include -I/usr/local/opt/gettext/include -I/usr/local/Cellar/pcre/8.44/include</code></pre></div>
+
+<h1 class="subsection-title">libs</h1>
+<div class="code-container"><pre><code>$ pkg-config --libs gio-2.0
+-L/usr/local/Cellar/glib/2.64.3/lib -L/usr/local/opt/gettext/lib -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl</code></pre></div>
+<p class="content-paragraph">この中で、次の二つはgioのpcファイルによるもの</p>
+<ul class="content-ul"><li class="content-ul-item"><span class="inline-code">-L/usr/local/Cellar/glib/2.64.3/lib</span></li><li class="content-ul-item"><span class="inline-code">-lgio-2.0</span></li></ul>
+<p class="content-paragraph">この二つは依存のglibによって追加されたもの</p>
+<ul class="content-ul"><li class="content-ul-item"><span class="inline-code">-L/usr/local/opt/gettext/lib</span></li><li class="content-ul-item"><span class="inline-code">-lglib-2.0</span></li><li class="content-ul-item"><span class="inline-code">-lintl</span></li></ul>
+<p class="content-paragraph">さらにgobjectによって次が追加されている</p>
+<ul class="content-ul"><li class="content-ul-item"><span class="inline-code">-lgobject-2.0</span></li></ul>
+<p class="content-paragraph">もちろん<span class="inline-code">Requires.private</span>になっているzlibなどによるフラグは入っていない</p>
+<div class="code-container"><pre><code>$ pkg-config --libs gmodule-no-export-2.0
+-L/usr/local/Cellar/glib/2.64.3/lib -L/usr/local/opt/gettext/lib -lgmodule-2.0 -lglib-2.0 -lintl
+$ pkg-config --libs  zlib
+-lz</code></pre></div>
+
+<h1 class="subsection-title">libs-only-L, libs-only-l</h1>
+<p class="content-paragraph">確かに<span class="inline-code">-L</span>や<span class="inline-code">-l</span>だけ抜き出されている</p>
+<div class="code-container"><pre><code>$ pkg-config --libs-only-L gio-2.0
+-L/usr/local/Cellar/glib/2.64.3/lib -L/usr/local/opt/gettext/lib
+$ pkg-config --libs-only-l gio-2.0
+-lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl</code></pre></div>
+
+<h1 class="subsection-title">static</h1>
+<p class="content-paragraph">staticをつけるとprivateになっていたリンクオプションが全てくっつく</p>
+<div class="code-container"><pre><code>$ pkg-config --libs --static gio-2.0
+-L/usr/local/Cellar/libffi/3.3/lib -L/usr/local/Cellar/glib/2.64.3/lib -L/usr/local/opt/gettext/lib -L/usr/local/Cellar/pcre/8.44/lib -lgio-2.0 -Wl,-framework,CoreFoundation -Wl,-framework,Carbon -Wl,-framework,Foundation -Wl,-framework,AppKit -lintl -lresolv -lgmodule-2.0 -lintl -lz -lgobject-2.0 -lintl -lffi -lglib-2.0 -lintl -Wl,-framework,CoreFoundation -Wl,-framework,Carbon -Wl,-framework,Foundation -Wl,-framework,AppKit -liconv -lpcre -D_THREAD_SAFE -pthread</code></pre></div>
+
+<h1 class="section-title">pcファイルを作る</h1>
+
+<p class="content-paragraph">[3]に従って作ってみる。</p>
+<div class="code-container"><pre><code>$ vim foo.pc
+$ cat foo.pc
+prefix=/usr/local
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+Name: foo
+Description: The foo library
+Version: 1.0.0
+Cflags: -I${includedir}/foo
+Libs: -L${libdir} -lfoo
+$ vim bar.pc
+$ cat bar.pc
+prefix=/usr/local
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+Name: bar
+Description: The bar library
+Version: 1.0.0
+Requires.private: foo
+Cflags: -I${includedir}/bar
+Libs: -L${libdir} -lbar</code></pre></div>
+<p class="content-paragraph">そして実際に使ってみる。</p>
+<div class="code-container"><pre><code>$ export PKG_CONFIG_PATH=$(pwd)
+$ pkg-config --modversion bar
+1.0.0
+$ pkg-config --cflags bar
+-I/usr/local/include/bar -I/usr/local/include/foo
+$ pkg-config --libs bar
+-L/usr/local/lib -lbar
+$ pkg-config --libs --static bar
+-L/usr/local/lib -lbar -lfoo</code></pre></div>
+
+
+<h1 class="section-title">参考</h1>
+<ol class="content-ol"><li class="content-ol-item"><a href="https://linux.die.net/man/1/pkg-config">pkg-config(1) - Linux man page</a></li><li class="content-ol-item"><a href="https://askubuntu.com/questions/210210/pkg-config-path-environment-variable">PKG_CONFIG_PATH environment variable</a></li><li class="content-ol-item"><a href="https://people.freedesktop.org/~dbn/pkg-config-guide.html">Guide to pkg-config</a></li></ol>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

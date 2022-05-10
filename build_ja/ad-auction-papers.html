@@ -1,0 +1,104 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">広告オークション関連の論文まとめ</h2>
+                                <p class="date">2021-12-26</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">広告オークション関連の論文をつぎのソースから集めてきたのでまとめておく</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://timroughgarden.org/f07/f07.html">Foundations of Sponsored Search</a></li><li class="content-ul-item"><a href="https://research.google/pubs/?area=economics-and-electronic-commerce">Google Research: Economics and Electronic Commerce</a></li><li class="content-ul-item"><a href="https://research.facebook.com/publications/">Meta Research: Economics and Computation</a></li><li class="content-ul-item"><a href="https://www.microsoft.com/en-us/research/publications/">Microsoft Research: Economics</a></li><li class="content-ul-item"><a href="https://ec21.sigecom.org/program/accepted-papers/">ACM Conference on Economics and Computation</a></li><li class="content-ul-item"><a href="https://hpi.de/wine2021/accepted-papers/">The Conference on Web and Internet Economics</a></li></ul>
+
+<h1 class="section-title">規範的な分析</h1>
+<p class="content-paragraph">広告オークションの最適な仕組みの理論的な研究</p>
+
+<h1 class="subsection-title">GSPの分析</h1>
+<p class="content-paragraph">GSPの静的な均衡に関する論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2006] <a href="https://web.stanford.edu/~ashishg/papers/laddered_auction_extended.pdf">Truthful Auctions for Pricing Search Keywords</a></li><li class="content-ul-item">[2006] <a href="https://people.ischool.berkeley.edu/~hal/Papers/2006/position.pdf">Position auctions</a></li><li class="content-ul-item">[2006] <a href="https://courses.cs.duke.edu/spring07/cps296.3/fp185-lahaie.pdf">An Analysis of Alternative Slot Auction Designs for Sponsored Search</a></li><li class="content-ul-item">[2007] <a href="https://www.benedelman.org/publications/gsp-060801.pdf">Internet Advertising and the Generalized Second-Price Auction</a></li></ul>
+<p class="content-paragraph">GSPの動的な均衡に関する分析</p>
+<ul class="content-ul"><li class="content-ul-item">[2006] <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.98.1213&rep=rep1&type=pdf">Vindictive Bidding in Keyword Auctions</a></li><li class="content-ul-item">[2007] <a href="https://homes.cs.washington.edu/~karlin/papers/ecc.pdf">Greedy Bidding Strategies for Keyword Auctions</a></li><li class="content-ul-item">[2007] <a href="http://www2007.thewebconf.org/papers/paper089.pdf">Dynamics of Bid Optimization in Online Advertisement Auctions</a></li></ul>
+
+<h1 class="subsection-title">予算制約問題</h1>
+<p class="content-paragraph">広告掲載枠を広告主に割り当てるonlineアルゴリズムを求める問題(Adwords-problem)に関する論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2007] <a href="https://web.stanford.edu/~saberi/adwords.pdf">AdWords and Generalized On-line Matching</a></li><li class="content-ul-item">[2007] <a href="http://www.columbia.edu/~cs2035/courses/ieor8100.F18/buchbinder.pdf">Online Primal-Dual Algorithms for MaximizingAd-Auctions Revenue</a></li><li class="content-ul-item">[2009] <a href="https://arxiv.org/abs/0905.4100">Online Stochastic Matching: Beating 1-1/e</a></li><li class="content-ul-item">[2011] <a href="https://www.cs.cmu.edu/~sandholm/cs15-892F15/near%20optimal%20online%20algs%20for%20resource%20allocation.ec11.pdf">Near Optimal Online Algorithms and Fast Approximation Algorithms for Resource Allocation Problems</a></li><li class="content-ul-item">[2012] <a href="http://pages.cs.wisc.edu/~balu2901/papers/2012/adwords_optimal.pdf">Asymptotically Optimal Algorithm for Stochastic Adwords</a></li><li class="content-ul-item">[2012] <a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/9b9bacbb54799b5b7b38fb53aa81ccc3b55604db.pdf">Online Matching and Ad Allocation</a></li><li class="content-ul-item">[2014] <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.718.3997&rep=rep1&type=pdf">Biobjective Online Bipartite Matching</a></li></ul>
+<p class="content-paragraph">Adwords-problemに対してさらに広告主のインセンティブを考慮した論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2012] <a href="https://arxiv.org/pdf/1201.0404.pdf">Polyhedral Clinching Auctions and the Adwords Polytope</a></li><li class="content-ul-item">[2012] <a href="https://arxiv.org/pdf/1210.1456.pdf">Clinching Auctions with Online Supply</a></li><li class="content-ul-item">[2008] <a href="https://www.microsoft.com/en-us/research/publication/budget-constrained-bidding-keyword-auctions-online-knapsack-problems/">Budget Constrained Bidding in Keyword Auctions and Online Knapsack Problems</a></li></ul>
+<p class="content-paragraph">予算消化ペースの調整方法についての論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2012] <a href="https://www.microsoft.com/en-us/research/publication/sequential-auctions-identical-items-budget-constrained-bidders/">Sequential Auctions of Identical Items with Budget-Constrained Bidders</a></li><li class="content-ul-item">[2012] <a href="https://www.nikhildevanur.com/pubs/ec14-devanur.pdf">Prior-free Auctions for Budgeted Agents</a></li><li class="content-ul-item">[2012] <a href="https://www.microsoft.com/en-us/research/publication/budget-smoothing-internet-ad-auctions-game-theoretic-approach/">Budget Smoothing for Internet Ad Auctions: A Game Theoretic Approach</a></li><li class="content-ul-item">[2012] <a href="https://www.microsoft.com/en-us/research/publication/budget-optimization-for-sponsored-searchcensored-learning-in-mdps/">Budget Optimization for Sponsored Search: Censored Learning in MDPs</a></li><li class="content-ul-item">[2014] <a href="https://www.microsoft.com/en-us/research/publication/efficient-regret-bounds-for-online-bid-optimisation-in-budget-limited-sponsored-search-auctions/">Efficient Regret Bounds for Online Bid Optimisation in Budget-Limited Sponsored Search Auctions</a></li><li class="content-ul-item">[2017] <a href="https://arxiv.org/abs/1706.07151">Multiplicative Pacing Equilibria in Auction Markets</a></li><li class="content-ul-item">[2018] <a href="https://arxiv.org/abs/1811.07166">Pacing Equilibrium in First-Price Auction Markets</a></li><li class="content-ul-item">[2021] <a href="https://arxiv.org/abs/2103.13969">The Complexity of Pacing for Second-Price Auctions</a></li><li class="content-ul-item">[2021] <a href="https://arxiv.org/abs/2107.10923">Throttling Equilibria in Auction Markets</a></li></ul>
+
+<h1 class="subsection-title">リッチ広告関連の論文</h1>
+<p class="content-paragraph">リッチ広告に対するオークション設計</p>
+<ul class="content-ul"><li class="content-ul-item">[2014] <a href="https://research.google/pubs/pub43282/">Randomized Revenue Monotone Mechanisms for Online Advertising</a></li><li class="content-ul-item">[2018] <a href="https://www.microsoft.com/en-us/research/publication/fast-core-pricing-for-rich-advertising-auctions/">Fast Core Pricing for Rich Advertising Auctions</a></li><li class="content-ul-item">[2019] <a href="https://arxiv.org/abs/1907.04400">The Ad Types Problem</a></li><li class="content-ul-item">[2021] <a href="https://hpi.de/wine2021/accepted-posters/">Simple Mechanisms for Welfare Maximization in Rich Advertising Auctions</a></li></ul>
+<p class="content-paragraph">動画広告のオークション設計</p>
+<ul class="content-ul"><li class="content-ul-item">[2018] <a href="https://research.google/pubs/pub46847/">Optimizing Ad Refresh In Mobile App Advertising</a></li></ul>
+
+<h1 class="subsection-title">繰り返しオークションの分析</h1>
+<p class="content-paragraph">繰り返しオークションにおける均衡分析</p>
+<ul class="content-ul"><li class="content-ul-item">[2009] <a href="https://arxiv.org/abs/2009.06136">Convergence Analysis of No-Regret Bidding Algorithms in Repeated Auctions</a></li><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub50822/">Learning to Bid in Contextual First Price Auctions</a></li></ul>
+<p class="content-paragraph">繰り返しオークションのデザイン</p>
+<ul class="content-ul"><li class="content-ul-item">[2016] <a href="https://research.google/pubs/pub45750/">Dynamic Auctions with Bank Accounts</a></li><li class="content-ul-item">[2018] <a href="https://research.google/pubs/pub47745/">Dynamic Mechanism Design in the Field</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub49331/">Prior-Free Dynamic Auctions with Low Regret Buyers</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub47737/">Optimal Dynamic Auctions are Virtual Welfare Maximizers</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub49424/">A Robust Non-Clairvoyant Dynamic Mechanism for Contextual Auctions</a></li><li class="content-ul-item">[2020] <a href="https://research.google/pubs/pub49903/">Robust Pricing in Dynamic Mechanism Design</a></li><li class="content-ul-item">[2020] <a href="https://research.google/pubs/pub47744/">Non-Clairvoyant Dynamic Mechanism Design</a></li><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub49576/">Non-Excludable Dynamic Mechanism Design</a></li><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub50657/">Revenue-Incentive Tradeoffs in Dynamic Reserve Pricing</a></li></ul>
+
+<h1 class="subsection-title">利得関数が異なる広告主</h1>
+<p class="content-paragraph">tCPA制約やtROAS制約を持つ広告主のモデル</p>
+<ul class="content-ul"><li class="content-ul-item">[2014] <a href="https://arxiv.org/pdf/1404.5000.pdf">Clinching auctions beyond hard budget constraints</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub48721/">Autobidding with Constraints</a></li><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub50579/">The Landscape of Autobidding Auctions: Value versus Utility Maximization</a></li><li class="content-ul-item">[2021] <a href="https://openreview.net/pdf?id=01884FCwbNf">Robust Auction Design in the Auto-bidding World</a></li><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub50310/">Towards Efficient Auctions in an Auto-bidding World</a></li><li class="content-ul-item">[2021] <a href="https://openreview.net/pdf/be174d96434d7a3bad61654285fe0babf20aa194.pdf">Prior-independent Dynamic Auctions for a Value-maximizing Buyer</a></li></ul>
+
+<h1 class="subsection-title">オークションにおける機械学習</h1>
+<p class="content-paragraph">機械学習を用いてオークションの設計を行う</p>
+<ul class="content-ul"><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub48310/">Automated mechanism design via neural networks</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub48185/">Optimal Auctions through Deep Learning</a></li><li class="content-ul-item">[2020] <a href="https://arxiv.org/abs/2012.02930">Optimizing Multiple Performance Metrics with Deep GSP Auctions for E-commerce Advertising</a></li><li class="content-ul-item">[2021] <a href="https://dl.acm.org/doi/10.1145/3447548.3467103">Neural Auction: End-to-End Learning of Auction Mechanisms for E-Commerce Advertising</a></li></ul>
+<p class="content-paragraph">オークション構造を考慮したCTR予測等の学習方法</p>
+<ul class="content-ul"><li class="content-ul-item">[2017] <a href="https://research.google/pubs/pub46552/">Loss Functions for Predicted Click-Through Rates in Auctions for Online Advertising</a></li><li class="content-ul-item">[2018] <a href="https://research.google/pubs/pub46913/">Incentive-Aware Learning for Large Markets</a></li></ul>
+<p class="content-paragraph">機械学習の学習を行うための探索と活用のトレードオフ</p>
+<ul class="content-ul"><li class="content-ul-item">[2007] <a href="http://www.cs.cmu.edu/~spandey/publications/ctrEstimation.pdf">Handling Advertisements of Unknown Quality in Search Advertising</a></li><li class="content-ul-item">[2010] <a href="http://www.vorobeychik.com/2010/ssaexplore.pdf">Maintaining Equilibria During Exploration in Sponsored Search Auctions</a></li></ul>
+
+<h1 class="subsection-title">他の広告市場との比較</h1>
+<p class="content-paragraph">一位価格オークションへの移行に対する考察</p>
+<ul class="content-ul"><li class="content-ul-item">[2020] <a href="https://research.google/pubs/pub49912/">Why Competitive Markets Converge to First Price Auctions</a></li></ul>
+<p class="content-paragraph">広告主がCV情報やユーザー情報をどのような場合に開示するかに関する考察</p>
+<ul class="content-ul"><li class="content-ul-item">[2021] <a href="https://research.google/pubs/pub50821/">Auctioning with Strategically Reticent Bidders</a></li></ul>
+<p class="content-paragraph">Ad-Exchange関連の論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2016] <a href="https://research.google/pubs/pub45455/">Where to sell: Simulating auctions from learning algorithms</a></li><li class="content-ul-item">[2016] <a href="https://research.google/pubs/pub45454/">Pricing a low-regret seller</a></li><li class="content-ul-item">[2016] <a href="https://research.google/pubs/pub45875/">Reservation Exchange Markets for Internet Advertising</a></li><li class="content-ul-item">[2017] <a href="https://research.google/pubs/pub47736/">Dynamic Revenue Sharing</a></li></ul>
+<p class="content-paragraph">広告主に提示する予測メトリクスの調整方法について</p>
+<ul class="content-ul"><li class="content-ul-item">[2021] <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3858104">Welfare-maximizing Guaranteed Dashboard Mechanisms</a></li></ul>
+
+<h1 class="section-title">実証的な分析</h1>
+<p class="content-paragraph">すでに動いている広告オークションの実証的な研究</p>
+
+<h1 class="subsection-title">オークションの隠れパラメータの推定</h1>
+<p class="content-paragraph">直接広告主価値を推定する</p>
+<ul class="content-ul"><li class="content-ul-item">[2011] <a href="http://economics.mit.edu/files/6975">A Structural Model of Sponsored Search Advertising Auctions</a></li><li class="content-ul-item">[2011] <a href="https://www.microsoft.com/en-us/research/publication/stochastic-variability-in-sponsored-search-auctions-observations-and-models/">Stochastic Variability in Sponsored Search Auctions: Observations and Models</a></li><li class="content-ul-item">[2013] <a href="https://www.microsoft.com/en-us/research/publication/counterfactual-reasoning-and-learning-systems-the-example-of-computational-advertising/">Counterfactual Reasoning and Learning Systems: The Example of Computational Advertising</a></li><li class="content-ul-item">[2017] <a href="https://www.microsoft.com/en-us/research/publication/quantal-regret-method-structural-econometrics-repeated-games/">A Quantal Regret Method for Structural Econometrics in Repeated Games</a></li><li class="content-ul-item">[2017] <a href="https://arxiv.org/abs/1710.03830">Inference on Auctions with Weak Assumptions on Information</a></li></ul>
+<p class="content-paragraph">インセンティブ両立性を推定する</p>
+<ul class="content-ul"><li class="content-ul-item">[2019] <a href="https://arxiv.org/abs/1901.06808">Online Learning for Measuring Incentive Compatibility in Ad Auctions</a></li><li class="content-ul-item">[2019] <a href="https://research.google/pubs/pub49340/">Testing Dynamic Incentive Compatibility in Display Ad Auctions</a></li><li class="content-ul-item">[2019] <a href="https://arxiv.org/abs/1907.07721">Envy, Regret, and Social Welfare Loss</a></li><li class="content-ul-item">[2019] <a href="https://par.nsf.gov/servlets/purl/10119656">Estimating Approximate Incentive Compatibility</a></li><li class="content-ul-item">[2020] <a href="https://research.google/pubs/pub49036/">A Data-Driven Metric of Incentive Compatibility</a></li></ul>
+<p class="content-paragraph">間接的に社会厚生等を推定する</p>
+<ul class="content-ul"><li class="content-ul-item">[2015] <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2601928">Robust Data-Driven Guarantees in Auctions</a></li><li class="content-ul-item">[2017] <a href="https://www.microsoft.com/en-us/research/publication/efficiency-guarantees-data/">Efficiency Guarantees from Data</a></li><li class="content-ul-item">[2020] <a href="https://arxiv.org/abs/2007.01722">Learning Utilities and Equilibria in Non-Truthful Auctions</a></li></ul>
+
+<h1 class="subsection-title">オークションのA/Bテスト関連</h1>
+<p class="content-paragraph">オークションのKPIに関する論文</p>
+<ul class="content-ul"><li class="content-ul-item">[2013] <a href="https://arxiv.org/abs/1304.7642">Ranking and Tradeoffs in Sponsored Search Auctions</a></li><li class="content-ul-item">[2014] <a href="https://www.microsoft.com/en-us/research/publication/optimising-trade-offs-among-stakeholders-in-ad-auctions/">Optimising Trade-offs Among Stakeholders in Ad Auctions</a></li><li class="content-ul-item">[2014] <a href="https://www.microsoft.com/en-us/research/publication/the-economic-and-cognitive-costs-of-annoying-display-advertisements/">The Economic and Cognitive Costs of Annoying Display Advertisements</a></li><li class="content-ul-item">[2015] <a href="https://research.google/pubs/pub43887/">Focus on the Long-Term: It's better for Users and Business</a></li></ul>
+<p class="content-paragraph">オークションの変更の影響の推定</p>
+<ul class="content-ul"><li class="content-ul-item">[2016] <a href="https://arxiv.org/abs/1606.00908">A/B Testing of Auctions</a></li><li class="content-ul-item">[2017] <a href="https://arxiv.org/abs/1708.04699">Mechanism Redesign</a></li><li class="content-ul-item">[2019] <a href="https://proceedings.neurips.cc/paper/2019/file/bc047286b224b7bfa73d4cb02de1238d-Paper.pdf">Variance Reduction in Bipartite Experiments through Correlation Clustering</a></li><li class="content-ul-item">[2019] <a href="https://arxiv.org/abs/1901.06230">Computing large market equilibria using abstractions</a></li><li class="content-ul-item">[2019] <a href="https://arxiv.org/abs/1904.02235">Robust Multi-agent Counterfactual Prediction</a></li><li class="content-ul-item">[2019] <a href="https://dl.acm.org/doi/pdf/10.1145/3328526.3329632">Sample Complexity for Non-Truthful Mechanisms</a></li></ul>
+
+<h1 class="section-title">他の参考文献</h1>
+<ul class="content-ul"><li class="content-ul-item"><a href="http://timroughgarden.org/videos.html">Tim Roughgarden's Online Courses</a></li><li class="content-ul-item"><a href="https://github.com/wnzhang/rtb-papers">Paper Collection of Real-Time Bidding</a></li><li class="content-ul-item"><a href="https://github.com/wzhe06/Ad-papers">计算广告论文、学习资料、业界分享</a></li></ul>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
