@@ -1,0 +1,113 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">なぜブログを書くか、どのように書くか</h2>
+                                <p class="date">2021-02-23</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">以前から継続的にブログを続けている人たちを見てすごいなと思っていた。例えばほとんど毎日 Computer Science (CS)系の論文を紹介してくれていた <a href="https://blog.acolyer.org/">the morning paper</a>。とにかくCS系のいろいろな分野の論文をその概要に絞って紹介してくれるのでとてもありがたく、自分はメーリングリストに登録していて新しい記事が出てきたらすぐに読んでいた。残念ながら最近連載を終了してしまったようだが、もし復活することがあればまた読み始めるだろう。スタートアップ支援の団体であるYCombinatorの Paul Graham さんの<a href="http://www.paulgraham.com/articles.html">ブログ記事</a>も比較的読む記事だ。<a href="http://www.paulgraham.com/start.html">How to start a startup</a> などはスタートアップを作る予定がなくとも何かしら新しいものを作ろうとする際には参考になる記事だ。また最近で言えば<a href="https://www.intelligenteconomist.com/economics-blogs/">Top 100 Economics Blogs of 2020</a> を見つけた。経済学の情報をいろいろな人がほとんど毎日更新してくれている。</p>
+
+<p class="content-paragraph">このように継続的にブログを描き続けている人たちのモチベーションが長い間謎だったのだが、昨日頭があんまり働かなかなかったのでダラダラしていた時にいろいろな人のブログをぼんやり眺めていたところ何となく気づいたことがあったので一度まとめてみたい。</p>
+
+<h1 class="section-title">ブログを書く目的</h1>
+
+<p class="content-paragraph">基本的にはTwitterと同じではないかなという結論に至った。自分はブログはあんまり継続的に続けているとは言えないかもしれないが、Twitter歴はそろそろ8年を超え9年目に差し掛かろうかという長さで、十分に継続的に続けていると言って良いだろう。どういう時にTwitterで呟くかなと考えるとやっぱり良い情報を見つけたからシェアしたいというのが一番だろうと思った。要するに何かしらの記事を読んで面白いと思ったから他の人も面白いと思うのではないか、この論文なんかに使えそうだから他の人も使えると思うんじゃないかという感覚でシェアをしている。その媒体がTwitterではなくてブログであるというだけなんだろうという気がしている。</p>
+
+<p class="content-paragraph">比較的よく読むようになってsubscription登録もしている経済学の研究紹介ブログ<a href="https://conversableeconomist.blogspot.com/p/faqs.html">ConversableEconomist</a>の人は多分同じ発想でこのような書き方をしている。</p>
+<p class="content-quote">I will attempt to serve as an ambassador from my world of economics, and help in "finding topics of conversation fit for the entertainment of rational creatures."</p>
+<p class="content-paragraph">要するに面白げな研究をみんなのお茶の間の話題のために提供する、みたいなところだろうか。やはり何かしら面白いものを見つけたからそれをシェアしたいみたいなのが基本的なモチベーションだと思って良さげだ。</p>
+
+<h1 class="section-title">ブログを書く方法</h1>
+
+<p class="content-paragraph">面白げなものを見つけたというだけで文章は書けないし、小学校とかの読書感想文の影響で原稿用紙が埋まらなかったらどうしようみたいな点に意識が向いてしまう自分としては書く気も起こらない(残念ながらその意識はそろそろ20年くらいぬけていないことになる)。そういう人がどのようにしたら文章を書くことができるようになれるかという観点で調べると小学生の頃読んだことがあったような本が見つかった。ここからは基本的にはこの本の方法でブログ記事を書く方法をまとめていきたい。</p>
+<ul class="content-ul"><li class="content-ul-item">斎藤孝、<a href="https://www.amazon.co.jp/dp/4041003245">誰でもかける最高の読書感想文</a></li></ul>
+
+<h1 class="subsection-title">データを集める</h1>
+<p class="content-paragraph">ブログでも読書感想文でも論文でも、自分は常に文章量が足りなかったらどうしようという不安が常にある。それを解消するためにまずは内容自体を全て集めてしまうのが有効な様子。斎藤さんの本ではまず参考となる文献に三色ボールペンでもって面白いと思ったところにメモをつけていけと書いてある。</p>
+<p class="content-quote">本との出会いの瞬間、自分の心の中にひらめいたものを、うまくつかまえて言葉にするためには、その感覚が消えてしまわないうちにその場でさっとつかまえておく。三色ボールペンは、僕の採集アミです。</p>
+<p class="content-paragraph">そうすることでとりあえず書くための基礎データが溜まる。そしてその後さらにそこから色々と関連することも書き出していく。</p>
+<p class="content-quote">本を読み終わったら、箇条書きのメモをつくります。「グッときたところ」をはじめとして、読んでいるときに自分のアンテナにひっかかって、線を引いたり印をつけたりしたところがあるよね。それを書き出す。それから、読み終えて自分の中に起きた変化、読後の印象などもある。書きたいと思うことを、箇条書きでどんどんあげていきます。</p>
+<p class="content-paragraph">こういう手順を経てとりあえず書く内容さえ固まってしまえば、それより文章量が少なくなるという危険はない。この段階で文章量が足りなかったらどうしようなどの不安を消すことができる。</p>
+
+<h1 class="subsection-title">整理して書く</h1>
+<p class="content-paragraph">その次にそのデータを編纂する。適当に出したデータをきれいにまとめていくという作業をして、書き出したことがどのようにまとめられるかを分析していく。そしてそれをもとに実際に書く。ブログでどこまでこだわるかは微妙なところだが、論文などだとここに膨大な時間をかけることにはなると思っている。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://readingmonkey.blog.fc2.com/blog-entry-461.html">書きなぐれ、そのあとレヴィ＝ストロースのように推敲しよう</a></li><li class="content-ul-item"><a href="https://ktakuya332c.github.io/build/links-academic.html">松尾ぐみの論文の書き方:英語論文</a></li></ul>
+
+<h1 class="subsection-title">テストする</h1>
+<p class="content-paragraph">少し特殊だが自分は最後にテストするというのを入れたい。ソフトウェアを書くときも、最後に書いたコードが動いているかどうかを確認するのは自然なことで、文章を書くときもそうではないのかという発想からだ。具体的にはその文章が最初に意図した機能を実際に持っているかどうかを読み直して確認することだ。ブログを書く目的が面白いと思った内容を共有することだったのならば、その機能をきちんとその文章が果たせるかどうかをもう一度読み直して確認することが必要だし、もし何かしらが有用だと思って書いた記事ならば相手にも有用だと思ってもらえるようになっているかどうかをテストしないといけない。</p>
+
+<p class="content-paragraph">ここで参考になるのが多分有名な <a href="https://youtu.be/WP-FkUaOcOM?t=204">How to write research paper</a> という公演の一節だ。</p>
+<p class="content-quote">What's the purpose of your paper? ... The real reason you write a paper is to act like a virus ... If I write a paper, the part of my goal is to get an idea out of my head and make it infect (his) brain ...</p>
+<p class="content-paragraph">自分の頭の中で起こったアイディアを他人にも同じように発生させることが重要と言っている。ブログの場合も同じだろう。自分の中で起こった「この論文面白いな」みたいな現象を、自分の記事を読んだ人の頭の中でも起こすことができるか。自分の中で起こった「この論文なんか使えそうという着想」を同様に自分の記事を読んだ人の頭の中でおこすことができるか。そういう観点でテストする必要があるのだろう。</p>
+
+<h1 class="section-title">最後に</h1>
+<p class="content-paragraph">忘れると悲しいのでこの記事を書くときに使った内容書き出しメモをまず貼っておく。とりあえず構成は何も考えずに適当にCotEditorに書き出していった結果だ。</p>
+<div class="code-container"><pre><code>内容書き出し
+- how to write a great reasearch paper (https://youtu.be/WP-FkUaOcOM?t=204)
+  What&apos;s the purpose of your paper? ... The real reason you write a paper is to act like a virus ... If I write a paper, the part of my goal is to get an idea out of my head and make it infect (his) brain ...
+- The conversable economist
+  I will attempt to serve as an ambassador from my world of economics, and help in &quot;finding topics of conversation fit for the entertainment of rational creatures.&quot;
+- 単純に面白いのを見つけたから紹介したいという感覚でブログを書いている感じ
+- morning paper ( https://blog.acolyer.org/2015/03/30/end-of-term-and-how-i-read-a-paper/ )
+- 文章を書いた時の「テスト」はどういうものなのだろうか。メソッドとかならそれを再現できるかどうか
+- 頭に起こった反応をそのまま相手の頭でも起こすこと
+- Vox explainer
+  - Tips for Video Journalists: Johnny Harris Explains It All, https://www.youtube.com/watch?v=M78sDuehUnk
+- 書きなぐれ、そのあとレヴィ＝ストロースのように推敲しよう／書き物をしていて煮詰まっている人へ, https://readingmonkey.blog.fc2.com/blog-entry-461.html
+- 誰でもかける最高の読書感想文
+  - 三色ボールペン
+  - 書きたいことメモをつくる
+- アウトプットする力、知の回転力を意識する、コンビニ
+- 100 economist blog、https://www.intelligenteconomist.com/economics-blogs/
+- paulgrahamブログ</code></pre></div>
+<p class="content-paragraph">これをもとに記事の構成を次のように考えた。上に貼ったデータをとりあえずカテゴリごとにまとめた結果だ。</p>
+<div class="code-container"><pre><code>構成
+- イントロ
+  - 以前から継続的にブログを書いている人がすごいなと思っていた
+    - ref paulgraham.com
+    - ref the morning paper
+    - ref https://www.intelligenteconomist.com/economics-blogs/
+- ブログを書く目的
+  - 自分の頭で起こった事象を他の人の頭にも起こす
+    - 面白いと思った、だからそれと同じ現象を他の人の頭にも起こそう
+    - 何かを疑問に思った、だから同じように疑問に思ってもらおう
+    - 基本的にはTwitterとおなじ。面白いねと言い合いたいだけ。
+    - ref The conversable economist
+- ブログを書く方法
+  - データを集める
+    - 三色ボールペン(斎藤さんの本)
+    - とりあえず内容を書き出す(斎藤さんの本)
+  - 整理する
+    - 書きたいことメモをつくる
+    - 書きなぐれ、そのあとレヴィ＝ストロースのように推敲しよう
+  - テストする
+    - 論文ならそれをもって同じものを再現できるかどうか
+    - ブログの場合は自分の頭で起こった現象を相手の頭でも起こすことができるかどうか
+    - ref how to write research paper
+  - この記事の例
+    - このメモ自体を説明する</code></pre></div>
+<p class="content-paragraph">今回の記事は比較的他の記事と比べて文字数が多いと思うが、こういうメモと構成案を考えたらこれくらいはさっと書けるということを知れる良い経験になったと思う。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

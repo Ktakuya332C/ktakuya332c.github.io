@@ -1,0 +1,154 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">確率微分方程式(1)</h2>
+                                <p class="date">2020-11-15</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">次の本を読み始めた。</p>
+<ul class="content-ul"><li class="content-ul-item">谷口説男著、<a href="https://www.kyoritsu-pub.co.jp/bookdetail/9784320112018">確率微分方程式</a></li></ul>
+<p class="content-paragraph">今回はこの本の第一章をまとめていく。</p>
+<p class="content-paragraph">第一章は確率論の基礎の復習を行う章になっている。この章で紹介されている内容については他の本などですでに学習済みであることが想定されているため、細かい定義の説明や定理の証明などは掲載されていない。この記事ではそれら紹介されている定義と定理を可能な限り簡潔にまとめていく。</p>
+
+<h1 class="section-title">基礎的な定義</h1>
+<p class="content-paragraph">確率論を構成するにあたって最低限必要な定義を列挙してく。</p>
+
+<div class="content-def"><p><span class="content-def-name">完全加法族</span></p><p class="content-paragraph">集合$\Omega$の部分集合族$\mathcal{F}$が完全加法族であるとは、次の3つの条件を満たすことを言う。</p>
+<ol class="content-ol"><li class="content-ol-item">$\phi, \Omega \in \mathcal{F}$</li><li class="content-ol-item">$A \in \mathcal{F}$ならば$A^C \in \mathcal{F}$</li><li class="content-ol-item">任意の$i \in \mathbb{N}$に対して$A_i \in \mathcal{F}$ならば$\bigcup_{i=1}^{\infty} A_i \in \mathcal{F}$</li></ol>
+<p class="content-paragraph">ただしここで$A^C$は$A$の補集合を表す。完全加法族の要素$A \in \mathcal{F}$を可測集合と呼び、組$(\Omega, \mathcal{F})$を可測空間と呼ぶ。</p></div>
+
+<div class="content-def"><p><span class="content-def-name">確率測度</span></p><p class="content-paragraph">$(\Omega, \mathcal{F})$を可測空間とする。関数$\textbf{P}: \mathcal{F} \rightarrow [0, 1]$が次の2条件を満たすとき、$\textbf{P}$を確率測度と呼ぶ。</p>
+<ol class="content-ol"><li class="content-ol-item">$\textbf{P}(\Omega) = 1$</li><li class="content-ol-item">$A_i \in \mathcal{F}$が互いに交わらない場合に、$\textbf{P}(\bigcup_{i=1}^{\infty}A_i) = \sum_{i=1}^{\infty} \textbf{P}(A_i)$が成り立つ</li></ol>
+<p class="content-paragraph">さらに、三つ組$(\Omega, \mathcal{F}, \textbf{P})$を確率空間と呼ぶ。</p></div>
+
+<div class="content-def"><p><span class="content-def-name">$E$-値確率変数</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{F}, \textbf{P})$から可測空間$(E, \mathcal{E})$への関数$X: \Omega \rightarrow E$が$E$-値確率変数であるとは以下を満たすことを指す</p>
+$$\forall A \in \mathcal{E} \quad X^{-1}(A) \in \mathcal{F}$$</div>
+
+<p class="content-paragraph">特に確率変数の値域が実数である場合に興味がある。</p>
+
+<div class="content-def"><p><span class="content-def-name">完全加法族の生成</span></p><p class="content-paragraph">ある集合$\Omega$の部分集合族$\mathcal{A}$に対して、それを含む完全加法族の全体を$\Lambda(\mathcal{A})$と書く。このときこの中の最小の要素</p>
+$$\sigma(\mathcal{A}) = \bigcap_{\mathcal{G} \in \Lambda(\mathcal{A})} \mathcal{G}$$
+<p class="content-paragraph">を$\mathcal{A}$が生成する完全加法族と呼ぶ。</p></div>
+
+<div class="content-def"><p><span class="content-def-name">ボレル完全加法族</span></p><p class="content-paragraph">位相空間$\Omega$に対して、その開集合族$\mathcal{O}$が生成する完全加法族を$\mathcal{B}(\Omega)$と書き、ボレル完全加法族と呼ぶ。</p></div>
+
+<div class="content-def"><p><span class="content-def-name">確率変数</span></p><p class="content-paragraph">値域として可測空間$(\mathbb{R}, \mathcal{B}(\mathbb{R}))$をとる$\mathbb{R}$-値確率変数を、単に確率変数と呼ぶ。</p></div>
+
+<p class="content-paragraph">確率変数に対しては期待値と呼ばれる実数を定義できる。</p>
+
+<div class="content-def"><p><span class="content-def-name">期待値</span></p><p class="content-paragraph">確率変数$X$の期待値$\textbf{E}[X]$を次の手順で定義する。</p>
+<p class="content-paragraph">まず$a_i \in \mathbb{R}$と$A_i \in \mathcal{F}$によって定義される確率変数</p>
+$$X = \sum_{i=1}^{n} a_i \textbf{1}_{A_i}$$
+<p class="content-paragraph">の全体を$\mathcal{SF}$と定義し、各要素$X$に対してその期待値を以下のように定める。</p>
+$$\textbf{E}[X] = \sum_{i=1}^{n} a_i \textbf{P}(A_i)$$
+<p class="content-paragraph">次に、任意の非負確率変数$X$に対してその期待値を次のように定める</p>
+$$\textbf{E}[X] = \sup \{\textbf{E}[Y] | Y \in \mathcal{SF}, 0 \le Y \le X\}$$
+<p class="content-paragraph">最後に、任意の確率変数$X$に対して</p>
+$$\begin{aligned}
+X^{+}(\omega) &= \max \{X(\omega), 0 \} \\
+X^{-}(\omega) &= \max \{X(-\omega), 0 \}
+\end{aligned}$$
+<p class="content-paragraph">という定義を使って、その期待値を次のように定める</p>
+$$\textbf{E}[X] = \textbf{E}[X^{+}] - \textbf{E}[X^{-}]$$</div>
+
+<p class="content-paragraph">以上が確率論における基本的な概念であり、これらを組み合わせて様々な議論をしていくことになる。</p>
+
+
+<h1 class="section-title">基礎的な性質</h1>
+<p class="content-paragraph">ここまでで定義していた概念の性質を列挙していく。</p>
+
+<h1 class="subsection-title">確率測度の性質</h1>
+
+<div class="content-def"><p><span class="content-def-name">単調性</span></p><p class="content-paragraph">$A,B \in \mathcal{F}$に対して以下が成り立つ。</p>
+$$A \subset B \Rightarrow \textbf{P}(A) \le \textbf{P}(B)$$
+<p class="content-paragraph">さらに、可測集合列$A_i \in \mathcal{F}$に対して</p>
+$$\begin{aligned}
+A_i \subset A_{i+1} &\Rightarrow \textbf{P}(\bigcup_{i=1}^{\infty} A_i) = \lim_{i \rightarrow \infty} \textbf{P}(A_i)\\
+A_i \supset A_{i+1} &\Rightarrow \textbf{P}(\bigcap_{i=1}^{\infty} A_i) = \lim_{i \rightarrow \infty} \textbf{P}(A_i)
+\end{aligned}$$</div>
+
+<div class="content-def"><p><span class="content-def-name">独立性</span></p><p class="content-paragraph">$A_1,A_2,\cdots,A_n \in \mathcal{F}$が独立であるとは、任意の$m \le n$と$1 \le i_1 < \cdots < i_m \le n$に対して次が成り立つことを指す。</p>
+$$\textbf{P}(\bigcap_{j=1}^{m} A_{i_j}) = \prod_{j=1}^{m} \textbf{P}(A_{i_j})$$
+<p class="content-paragraph">さらに、完全加法族$\mathcal{G}_1, \cdots, \mathcal{G}_n \subset \mathcal{F}$が独立であるとは、任意の$A_1 \in \mathcal{F}_1, \cdots, A_n \in \mathcal{F_n}$が独立であることを指す。</p></div>
+
+<div class="content-def"><p><span class="content-def-name">ボレルカンテリの補題</span></p><p class="content-paragraph">$A_i \in \mathcal{F}$に対して、</p>
+$$\sum_{i=1}^{\infty} \textbf{P}(A_i) < \infty \Rightarrow \textbf{P}(A) = 0$$
+<p class="content-paragraph">さらに、もし$A_1, \cdots, A_n$が独立ならば</p>
+$$\sum_{i=1}^{\infty} \textbf{P}(A_i) = \infty \Rightarrow \textbf{P}(A) = 1$$</div>
+
+<h1 class="subsection-title">$E$-値確率変数の性質</h1>
+<p class="content-paragraph">$E$-値確率変数の議論には確率分布を使用した方がわかりやすいことが多い。</p>
+<div class="content-def"><p><span class="content-def-name">確率分布</span></p><p class="content-paragraph">$E$-値確率変数に対して、$\textbf{Q}: \mathcal{E} \rightarrow [0,1]$を</p>
+$$\textbf{Q}(A) = \textbf{P}(X^{-1}(A))$$
+<p class="content-paragraph">と定義すると、$\textbf{Q}$は$(E,\mathcal{E})$上の確率測度であり、これを$X$の確率分布と呼ぶ。</p></div>
+
+<p class="content-paragraph">また、$E$-値確率変数についても独立性の議論をすることができる。</p>
+<div class="content-def"><p><span class="content-def-name">独立性</span></p><p class="content-paragraph">$E$-値確率変数$X$に対して、$X$の生成する完全加法族として</p>
+$$\mathcal{F}^X = \{X^{-1}(A) | A \in \mathcal{E}\}$$
+<p class="content-paragraph">と定義する。確率変数$X_1,\cdots,X_n$が独立であるとは、対応する完全加法族$\mathcal{F}^{X_1},\cdots,\mathcal{F}^{X_n}$が独立であることを指す。</p></div>
+
+<p class="content-paragraph">さらに、値域に距離$d$を入れた場合、$E$-値確率変数列の収束の議論をすることができる。</p>
+<div class="content-def"><p><span class="content-def-name">$E$-値確率変数列の収束性</span></p><p class="content-paragraph">可測空間$(E,\mathcal{E})$に対して距離$d$が定義されているとする。$E$-値確率変数変数列$X_n$について考える。</p>
+<p class="content-paragraph">$X_n$が$X$に概収束するとは次を満たすことを指す。</p>
+$$\textbf{P}(\lim_{n \rightarrow \infty} d(X_n, X) = 0) = 1$$
+<p class="content-paragraph">$X_n$が$X$に確率収束するとは、任意の$\epsilon > 0$に対して次を満たすことを言う。</p>
+$$\lim_{n \rightarrow \infty} \textbf{P}(d(X_n, X) > \epsilon) = 0$$</div>
+
+<p class="content-paragraph">ここで概収束の方が強い概念である。</p>
+<div class="content-def"><p><span class="content-def-name">概収束と確率収束</span></p><p class="content-paragraph">次の二つが成り立つ。</p>
+<ol class="content-ol"><li class="content-ol-item">$X_n$が$X$に概収束すれば、確率収束する。</li><li class="content-ol-item">$X_n$が$X$に確率収束すれば、概収束する部分列$\{X_{n_k}\}_{k=1}^{\infty}$が存在する。</li></ol></div>
+
+<h1 class="subsection-title">期待値の性質</h1>
+<p class="content-paragraph">全ての確率変数に対して期待値が定義できるわけではない。</p>
+<div class="content-def"><p><span class="content-def-name">可積分</span></p><p class="content-paragraph">確率変数$X$に対して$\textbf{E}[X] < \infty$となるとき、$X$は可積分であるという。</p>
+<p class="content-paragraph">さらに、$p > 0$に対して$|X|^p$が可積分であるとき、$X$は$p$-乗可積分であるといい、これらの全体を$L^p(\textbf{P})$と表す。$X \in L^p(\textbf{P})$に対して</p>
+$$\|X\|_p = (\textbf{E}[|X|^p])^{1/p}$$
+<p class="content-paragraph">とおく。</p></div>
+
+<p class="content-paragraph">期待値についても収束の議論をすることができる。</p>
+<div class="content-def"><p><span class="content-def-name">収束定理</span></p><p class="content-paragraph">(単調収束定理) $X_n \le X_{n+1}, \textbf{P}-a.s.$ならば次が成り立つ。</p>
+$$\lim_{n \rightarrow \infty} \textbf{E}[X_n] = \textbf{E}[\lim_{n \rightarrow \infty} X_n]$$
+<p class="content-paragraph">(Fatouの補題) $X_n \ge 0, \textbf{P}-a.s.$ならば次が成り立つ。</p>
+$$\textbf{E}[\liminf_{n \rightarrow \infty} X_n] \le \liminf_{n \rightarrow \infty} \textbf{E}[X_n]$$
+<p class="content-paragraph">(優収束定理) $|X_n| \le Y, \textbf{P}-a.s.$となる確率変数$Y \in L^p(\textbf{P})$が存在し、$\lim_{n \rightarrow \infty} X_n$が至る所存在する場合以下が成り立つ。</p>
+$$\lim_{n \rightarrow \infty} \textbf{E}[X_n] = \textbf{E}[\lim_{n \rightarrow \infty} X_n]$$</div>
+
+<p class="content-paragraph">可積分の概念を確率変数列に拡大することもできる。</p>
+<div class="content-def"><p><span class="content-def-name">一様可積分</span></p><p class="content-paragraph">確率変数列$X_n$が以下を満たすとき、一様可積分であるという。</p>
+$$\lim_{\lambda \rightarrow \infty} \sup_{n \in \mathbb{N}} \textbf{E}[|X_n| ; |X_n| \ge \lambda] = 0$$
+<p class="content-paragraph">ただしここで$\textbf{E}[X ; A] = \textbf{E}[X\textbf{1}_A]$という記法を使っている。</p></div>
+<p class="content-paragraph">この場合はより強い収束定理が成り立つ。</p>
+<div class="content-def"><p><span class="content-def-name">収束定理</span></p><p class="content-paragraph">確率変数列$X_n$が一様可積分であり</p>
+$$\lim_{n \rightarrow \infty} X_n = X, \textbf{P}-a.s.$$
+<p class="content-paragraph">である場合、$X \in L^p(\textbf{P})$であり、任意の$A \in \mathcal{F}$に対して以下が成り立つ。</p>
+$$\lim_{n \rightarrow \infty} \textbf{E}[X_n ; A] = \textbf{E}[X; A]$$</div>
+
+<p class="content-paragraph">ついで、独立性についてもよく知られた次の性質が成り立つ。</p>
+<div class="content-def"><p><span class="content-def-name">独立性</span></p><p class="content-paragraph">確率変数$X,Y$が独立でともに可積分ならば、$XY$も可積分で、$\textbf{E}[XY] = \textbf{E}[X] \textbf{E}[Y]$</p></div>
+
+<h1 class="section-title">備考</h1>
+<ul class="content-ul"><li class="content-ul-item">条件付き期待値をまとめる前に力尽きました。</li><li class="content-ul-item">フビニの定理とトネリの定理を別でまとめたい。</li><li class="content-ul-item">この本では拡張実数を確率変数の値域に入れていないようだが、それによる問題は何か出てくるかどうか。</li></ul>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

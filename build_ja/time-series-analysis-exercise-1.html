@@ -1,0 +1,100 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">計量時系列分析の1章の数値計算</h2>
+                                <p class="date">2020-12-22</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">次の本を読んでいる。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://www.amazon.co.jp/dp/4254127928">経済・ファイナンスデータの計量時系列分析</a>、	沖本竜義著</li></ul>
+<p class="content-paragraph">今回は1章の演習問題のうち、数値計算部分を次の記事を参考にしながら解いてみる。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://qiita.com/mckeeeen/items/666e14c94e1548130646">【第1章】pythonで「経済・ファイナンスデータの計量時系列分析」の章末問題を解く</a></li></ul>
+
+<h1 class="section-title">問題1.5</h1>
+<p class="content-paragraph">まずはデータをダウンロードしてくる。書かれているリンクからはデータが取得できないので、次のページからダウンロードする。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="http://www.asakura.co.jp/books/isbn/978-4-254-12792-8/">朝倉書店｜経済・ファイナンスデータの 計量時系列分析</a></li></ul>
+
+<h1 class="subsection-title">問題(1)</h1>
+<p class="content-paragraph">まずはそれぞれのデータを単純にプロットしていく。</p>
+<div class="code-container"><pre><code>import pandas as pd
+from matplotlib import pyplot as plt
+
+data = pd.read_excel(&apos;economicdata.xls&apos;)
+data.rename(columns={&apos;Unnamed: 0&apos;: &apos;date&apos;}, inplace=True)
+
+_, ax = plt.subplots(nrows=3, ncols=2)
+for i in range(3):
+  for j in range(2):
+    idx = 2*(i+1) + j
+    ax[i, j].plot(data.iloc[:,idx])
+    ax[i, j].set_title(data.columns[idx])
+plt.subplots_adjust(wspace=0.2, hspace=0.6)
+plt.savefig(&apos;figure-1-5-1.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:70%"><img class="content-img" src="../static/time-series-analysis-exercise-1/figure-1-5-1.png"></figure>
+
+<h1 class="subsection-title">問題(2)と(3)</h1>
+<p class="content-paragraph">topix、exrate、indprodの対数差分系列を計算する。</p>
+<div class="code-container"><pre><code>import numpy as np
+
+date = data.date.values[1:]
+topix_cr = np.diff(np.log(data.topix.values))
+exrate_cr = np.diff(np.log(data.exrate.values))
+indprod_cr = np.diff(np.log(data.indprod.values))
+
+_, ax = plt.subplots(nrows=3, ncols=1)
+ax[0].plot(date, topix_cr)
+ax[0].set_title(&apos;topix&apos;)
+ax[1].plot(date, exrate_cr)
+ax[1].set_title(&apos;exrate&apos;)
+ax[2].plot(date, indprod_cr)
+ax[2].set_title(&apos;indprod&apos;)
+plt.subplots_adjust(hspace=0.6)
+plt.savefig(&apos;figure-1-5-2.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:70%"><img class="content-img" src="../static/time-series-analysis-exercise-1/figure-1-5-2.png"></figure>
+
+<h1 class="subsection-title">問題(4)</h1>
+<p class="content-paragraph">まずは標本自己相関をプロットする</p>
+<div class="code-container"><pre><code>from statsmodels.tsa.stattools import acf
+autocorr, confint, qstat, pvalues = acf(indprod_cr, nlags=20, qstat=True, alpha=0.95)
+plt.bar(np.arange(20), autocorr[1:])
+plt.savefig(&apos;figure-1-5-4-1.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/time-series-analysis-exercise-1/figure-1-5-4-1.png"></figure>
+
+<p class="content-paragraph">次にLjung-BoxのQ統計量とそのp値をプロットする。</p>
+<div class="code-container"><pre><code>_, ax = plt.subplots(nrows=2, ncols=1)
+ax[0].plot(qstat)
+ax[0].set_title(&apos;Q-value&apos;)
+ax[1].plot(pvalues)
+ax[1].set_title(&apos;p-value&apos;)
+plt.subplots_adjust(hspace=0.3)
+plt.savefig(&apos;figure-1-5-4-2.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/time-series-analysis-exercise-1/figure-1-5-4-2.png"></figure>
+<p class="content-paragraph">常にp値は$10^{-8}$程度であり自己相関がないという帰無仮説は棄却できる。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

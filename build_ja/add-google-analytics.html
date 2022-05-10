@@ -1,0 +1,58 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">Google Analytics を追加してみた</h2>
+                                <p class="date">2020-04-26</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">このブログは個人的な練習場なので一般公開している意味は特にないが、それでも自分以外の誰かがここに書かれている記事を見て、何かしらの意味で役に立つようなことがあればありがたいとは思う。その意味で、少しこのブログは誰かが見ているのかなというのを知りたくなったので、Google Analytics を導入してみた。</p>
+
+<h1 class="section-title">事前学習</h1>
+
+<p class="content-paragraph">とりあえずサイトへの流入量くらいがわかればそれ以上はあまり期待していなかったのだが、色々とよく見ていくと Google Analytics は本格的に企業のためのサイトを運用するような人たちのために作られているツールのようので、それ以上のことが色々とできる。もっとシンプルなサービスを見つけられればそちらでもよかったのだが、とりあえずよく聞くので Google Analytics でやることにした。</p>
+
+<p class="content-paragraph">ある程度複雑そうなのでとりあえずざっと全体像を掴むために1時間ほど次のコースを見た。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://analytics.google.com/analytics/academy/course/6">Google Analytics for Beginners</a></li></ul>
+<p class="content-paragraph">ユーザーがサイトのどこを訪れているかとか、どういうユーザーが訪れているかとか、そういう情報まで取ることができるらしい。それらが全て無料なのは流石にすごいことだなと思ったがどうやって収益につなげているんだろうか。広告オプションがいっぱいあるからそれかなと思いつつ、発展的な内容に触れることは多分ないのでそちらには手を触れずにおいた。</p>
+
+<p class="content-paragraph">そのコースで唯一わからなかったのがアカウントの構造、特にPropertyとViewの違いについてだったので、このページ</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://ferret-plus.com/curriculums/10019">Googleアナリティクスのアカウント構造を理解しよう</a></li></ul>
+<p class="content-paragraph">を読んでとりあえずざっくりとは理解した。Propertyが大体一つのサイトにあたって、そのデータをGoogleがどこかにためてくれるから、そのデータのViewを作っていくみたいな形だと理解すれば良さそう。今回は複雑なデータをとるわけではないので、Propertyはこのブログを指定して、Viewは一つとりあえず全てのデータが見れるものを用意しておけば問題なさそうだ。</p>
+
+<h1 class="section-title">Global Site Tag の設置</h1>
+
+<p class="content-paragraph">このブログは独自の静的サイト生成スクリプトで生成されているので、データを貯めるためのjsタグも手で埋め込むことにした。単純に<span class="inline-code">&lt;head&gt;&lt;/head&gt;</span>の間に指定されたタグを埋め込んでおくだけで良さそうなので、特に何の問題も起こらずに終わった。</p>
+
+<p class="content-paragraph">少し気になっていたのは Github Pages がjsを発火してくれるかどうかだったが、よく考えればすでにいくつか数式系を使うためにjsを発火させていたので問題はなさそう。他の人も同じように単純に貼り付けるだけでうまくいっているようだし、多分問題はないはず。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://qiita.com/weekendhikach/items/c46039fb50759b6b5c3e">GitHubPagesにGoogle Analyticsを設定</a></li></ul>
+
+<p class="content-paragraph">テストtrafficを流してみると、きちんと使っているユーザーが増えたので多分設置はできたはず。</p>
+<figure class="content-figure" style="width:40%"><img class="content-img" src="../static/add-google-analytics/test_traffic.png"></figure>
+
+<h1 class="section-title">設置後の集計反映</h1>
+
+<p class="content-paragraph">この記事を書いている途中に、テストのためだったり色々他の作業のために自分のブログに幾度もアクセスしているが、Hourlyで見てもアクセス数が増えていないので、多分ログの集計は一日ごとだったりするのではなかろうか。気長に、もし誰かが見てくれていたらありがたいなくらいの感じで、見続けて行こうかなと思う。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

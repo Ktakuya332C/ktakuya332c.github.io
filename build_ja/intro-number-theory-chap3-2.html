@@ -1,0 +1,65 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">数論入門第3章2節のまとめ</h2>
+                                <p class="date">2021-05-08</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">次の本を読んでいる</p>
+<ul class="content-ul"><li class="content-ul-item">山本芳彦著、<a href="https://www.iwanami.co.jp/book/b259041.html">数論入門</a>、岩波書店</li></ul>
+<p class="content-paragraph">入門者向けの本なので、数論の本筋以外の話を紹介するにあたって学部で習うような代数学の基礎的な事項も並べて紹介されている。学習する分には忘れている内容などの復習にもなるのでとても良いのだが、後から内容を思い出そうとすると復習の部分の内容とあわさって本筋がどのような内容だったかが思い出しにくい。ここではその本筋の内容だけを取り出してまとめていくことにする。</p>
+
+<h1 class="section-title">合同類</h1>
+<p class="content-paragraph">3章1節では合同類$\mathbb{Z}/m\mathbb{Z}$の性質の紹介がなされている。ほとんどが代数学の復習なので、実質本筋としては紹介されている内容は次の3つに絞られるように見える。</p>
+<ol class="content-ol"><li class="content-ol-item">$\mathbb{Z}/m\mathbb{Z}$が整域であることと、$m$が素数であることは同値</li><li class="content-ol-item">$m$が素数の時、$\mathbb{Z}/m\mathbb{Z}$は体</li><li class="content-ol-item">$(m,n)=1$の時、$\mathbb{Z}/mn\mathbb{Z} \cong \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$</li></ol>
+<p class="content-paragraph">最後の内容については次のような環準同型写像$f$を考えて</p>
+$$f: a \in \mathbb{Z} \rightarrow (a + n\mathbb{Z}, a + m\mathbb{Z})$$
+<p class="content-paragraph">環準同型定理より証明できる。</p>
+
+<h1 class="section-title">既約剰余類</h1>
+<p class="content-paragraph">3章2節では合同類$\mathbb{Z}/m\mathbb{Z}$から得られる既約剰余類の性質とオイラー関数とのつながりが紹介されている。</p>
+<div class="content-def"><p><span class="content-def-name">既約剰余類</span></p><p class="content-paragraph">法$m$に関する既約剰余類とは次の集合のことを指す</p>
+$$(\mathbb{Z}/m\mathbb{Z})^{\times} = \{\bar{a} \in \mathbb{Z}/m\mathbb{Z} | (a, m) = 1\}$$</div>
+<p class="content-paragraph">既約剰余類はアーベル群である。実際、$(1,m) = 1$であるから</p>
+$$\bar{1} \in (\mathbb{Z}/m\mathbb{Z})^{\times}$$
+<p class="content-paragraph">となり単位元が確保できる。逆元の存在は任意の$\bar{a} \in \mathbb{Z}/m\mathbb{Z}$に対して</p>
+$$ax + bm = 1$$
+<p class="content-paragraph">となるような$x, b \in \mathbb{Z}$が存在することから</p>
+$$\bar{a} \bar{x} = \bar{1}$$
+<p class="content-paragraph">となり、$\bar{x}$が逆元である。群であることを意識して以降は既約剰余類群と呼ぶ。</p>
+
+<p class="content-paragraph">既約剰余類群の要素数はオイラー関数と呼ばれる。</p>
+<div class="content-def"><p><span class="content-def-name">オイラー関数</span></p><p class="content-paragraph">法$m$に関する既約剰余類群の要素数は$m$に関するオイラー関数と呼ばれる</p>
+$$\phi(m) = \# (\mathbb{Z}/m\mathbb{Z})^{\times} = \{a = 1,2,\cdots, m-1 | (a, m) = 1\}$$</div>
+<p class="content-paragraph">オイラー関数については次の定理と合わせれば</p>
+<div class="content-def"><p><span class="content-def-name">ラグランジュの定理</span></p><p class="content-paragraph">位数$g$の有限群$G$において</p>
+<ul class="content-ul"><li class="content-ul-item">部分群$H$の位数$h$は$g$の約数</li><li class="content-ul-item">$G$の各元$a$の位数は$g$の約数</li></ul>
+<p class="content-paragraph">2つ目の提言は特に次の内容も意味する</p>
+$$a^g = 1$$</div>
+<p class="content-paragraph">$(a,m)=1$となるような$a$に対して</p>
+$$a^{\phi(m)} = 1 \quad (\textrm{mod} \ m)$$
+<p class="content-paragraph">が成り立つことも意味する。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

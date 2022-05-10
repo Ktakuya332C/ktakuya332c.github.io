@@ -1,0 +1,83 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">bootloaderからcのkernel関数を呼び出す</h2>
+                                <p class="date">2019-03-10</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph"><a href="https://github.com/cfenollosa/os-tutorial">os-tutorial</a>を元にbootloaderを作って見ている。この記事では以下の処理を行うことのできる簡単なbootloaderを紹介する。</p>
+
+<ol class="content-ol"><li class="content-ol-item">diskからkernelをメモリーにロードして、</li><li class="content-ol-item">16bit real mode から 32bit protected mode にスイッチ</li><li class="content-ol-item">C言語で書かれたカーネルに書かれた処理を実行する</li></ol>
+
+<p class="content-paragraph">これはos-tutorialにおける13-kernel-barebonesまでと同じ機能を持っていることになる。</p>
+
+<h1 class="section-title">実装本体</h1>
+
+<p class="content-paragraph">実装は<a href="https://gist.github.com/Ktakuya332C/413a3b877b86fd1d39010738f6d06f6f">このGist</a>に記録してある。</p>
+
+<h1 class="section-title">実行方法</h1>
+
+<p class="content-paragraph">開発環境は<a href="../build/debug-bootloader-on-mac.html">この記事</a>にしたがって整備しておく。</p>
+
+<p class="content-paragraph">次に上記の実装をコピペしてVagrantによる仮想環境上に置いておく。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:~$ ls
+boot.asm  entry.asm  kernel.c  Makefile</code></pre></div>
+
+<p class="content-paragraph">開発環境が全て整っていれば次のコマンドで実行イメージ(image.bin)を作成できるはずである。</p>
+
+<div class="code-container"><pre><code>$ make
+nasm -f bin -o boot.bin boot.asm
+nasm -f elf -o entry.o entry.asm
+gcc -ffreestanding -o kernel.o -c kernel.c
+ld -o kernel.bin -Ttext 0x1000 entry.o kernel.o --oformat binary
+ld: warning: cannot find entry symbol _start; defaulting to 0000000000001000
+cat boot.bin kernel.bin &gt; image.bin</code></pre></div>
+
+<p class="content-paragraph">リンカーの警告が一つ出ているがこれは今の所無視して良い。</p>
+
+<p class="content-paragraph">実行は次のようにqemuを使って実行する</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:~$ qemu-system-i386 -nographic -curses image.bin</code></pre></div>
+
+<p class="content-paragraph">実行すれば画面がTUIに切り替わり、次のような文字列が出力されるはずである。</p>
+
+<div class="code-container"><pre><code>Aanded in 32-bit Protected Mode_223240-lgw01-56)
+iPXE (http://ipxe.org) 00:03.0 C900 PCI2.10 PnP PMM+07FC10F0+07F210F0 C900
+Booting from Hard Disk...
+Started in 16-bit Real Mode
+Loading kernel into memory</code></pre></div>
+
+<p class="content-paragraph">この画面は今回実行したbootloaderがいくつかの出力を画面に行なった結果である。</p>
+
+<ol class="content-ol"><li class="content-ol-item">bootloaderが処理を始めたときに BIOS interrupt call を使って'Started in 16-bit Real Mode'と出力する</li><li class="content-ol-item">bootloadreがkernelをdiskからロードし始めたときに BIOS interrupt call を使って'Loading kernel into memory'と出力する</li><li class="content-ol-item">bootloadeが 16bit real mode での動作から　32bit protected mode への動作に移った際に、VGAメモリに直接書き込むことで'Landed in 32-bit Protected Mode'と出力する。Offsetを計算する処理を入れていないため、TUIの一番上に出力されてしまう。</li><li class="content-ol-item">bootloaderがC言語で書かれたkernelを呼び出した際に、VGAメモリに直接'A'と書き込むことで左上の文字がAに書き換わる。</li></ol>
+
+<h1 class="section-title">コメント</h1>
+
+<p class="content-paragraph">基本的には<a href="https://github.com/cfenollosa/os-tutorial">os-tutorial</a>の13-kernel-barebonesまでを読めば理解できるはずだが、比較的複雑なところだけコメントしておく。</p>
+
+<ul class="content-ul"><li class="content-ul-item"><span class="inline-code">load_disk</span>関数で使用されている BIOS interrupt call 0x13 はdisk処理を行うinterruptで、その使用方法は例えば<a href="http://stanislavs.org/helppc/int_13-2.html">この資料</a>などに記載されている。</li><li class="content-ul-item"><span class="inline-code">kernel.c</span>の<span class="inline-code">func_dummy</span>関数は、<span class="inline-code">entry.asm</span>の役割を際立たせるために置いてある関数である。もしmain関数が必ずファイルの一番上に書かれていることが約束されるのならば<span class="inline-code">boot.asm</span> に書かれた処理が終わった後に直接<span class="inline-code">kernel.c</span>の一番最初のアドレスに飛んでしまっても問題はない。しかしそれでは<span class="inline-code">kernel.c</span>内部での関数の順番が重要になってきてしまうために<span class="inline-code">entry.asm</span>という単純にmain関数を呼ぶためだけのものを作成している。</li><li class="content-ul-item">linkerは引数にとるオブジェクトファイルの順番を保つため、ldコマンドに渡すオブジェクトファイルの順番は今回の通りにしなければならない。</li><li class="content-ul-item">当然だがimage.binを作成するときにcatをするときも最初の512bytesにbootloaderのコードが入るように順番に気をつけなければならない。</li></ul>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

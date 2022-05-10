@@ -6,12 +6,12 @@ from lib.entity.article import Article
 from lib.component import head, header, footer
 
 
-def _gen_content(article: Article, build_dir: str, insert_year: bool = False):
+def _gen_content(article: Article, build_path: str, insert_year: bool = False):
     year: str = article.date.strftime('%Y')
     year_or_empty: str = year if insert_year else ''
     month_day: str = article.date.strftime('%m-%d')
     file_name: str = article.file_name()
-    path: str = os.path.join(build_dir, f'{file_name}.html')
+    path: str = os.path.join(build_path, f'{file_name}.html')
     return textwrap.dedent(f"""\
         <li class="article-item">
             <a href="{path}">
@@ -35,16 +35,17 @@ def _gen_contents(articles: List[Article], build_dir: str):
     return html
 
 
-def gen(root: str,
-        build_dir: str,
+def gen(build_dir: str,
+        root_path: str,
         title_str: str,
         desc_str: str,
         footer_str: str,
         articles: List[Article]):
-    head_block = head.gen(root, title_str)
-    header_block = header.gen(title_str, desc_str)
+    build_path = os.path.join("/", build_dir)
+    head_block = head.gen(root_path, title_str)
+    header_block = header.gen(build_path, title_str, desc_str)
     footer_block = footer.gen(footer_str)
-    contents = _gen_contents(articles, build_dir)
+    contents = _gen_contents(articles, build_path)
     return textwrap.dedent(f"""\
         <!doctype html>
         <html lang="ja">

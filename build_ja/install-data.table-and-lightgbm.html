@@ -1,0 +1,111 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build_ja">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">data.tableとxgboostをMacに入れる際の問題</h2>
+                                <p class="date">2018-12-15</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph"><a href="https://github.com/Rdatatable/data.table">data.table</a>パッケージを<a href="https://github.com/Rdatatable/data.table/wiki/Installation">この指示</a>に従ってllvmを使ってインストールした。</p>
+
+<div class="code-container"><pre><code>$ xcode-select --install
+$ brew install llvm
+$ mkdir ~/.R
+$ vim ~/.R/Makevars
+$ cat ~/.R/Makevars
+LLVM_LOC = /usr/local/opt/llvm
+CC=$(LLVM_LOC)/bin/clang -fopenmp
+CXX=$(LLVM_LOC)/bin/clang++ -fopenmp
+CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe
+CXXFLAGS=-g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe
+LDFLAGS=-L/usr/local/opt/gettext/lib -L$(LLVM_LOC)/lib -Wl,-rpath,$(LLVM_LOC)/lib
+CPPFLAGS=-I/usr/local/opt/gettext/include -I$(LLVM_LOC)/include</code></pre></div>
+
+<p class="content-paragraph">その後色々なライブラリを入れて使っていたが、その時は何も問題が起きなかった。</p>
+
+<p class="content-paragraph">問題が起きたのは、LightGBMを使いたくなったので、<a href="https://github.com/Microsoft/LightGBM/tree/master/R-package">この指示</a>に従ってインストールしてみた時だ。</p>
+
+<div class="code-container"><pre><code>$ brew install libomp
+$ git clone --recursive https://github.com/Microsoft/LightGBM
+$ cd LightGBM
+$ Rscript build_r.R</code></pre></div>
+
+<p class="content-paragraph">こうやってインストールしたLightGBMをdata.tableを入れた後にインストールしたライブラリとともに使用したらエラーが出た。</p>
+
+<div class="code-container"><pre><code>OMP: Error #15: Initializing libomp.dylib, but found libomp.dylib already initialized.
+OMP: Hint This means that multiple copies of the OpenMP runtime have been linked into the program. That is dangerous, since it can degrade performance or cause incorrect results. The best thing to do is to ensure that only a single OpenMP runtime is linked into the process, e.g. by avoiding static linking of the OpenMP runtime in any library. As an unsafe, unsupported, undocumented workaround you can set the environment variable KMP_DUPLICATE_LIB_OK=TRUE to allow the program to continue to execute, but that may cause crashes or silently produce incorrect results. For more information, please see http://openmp.llvm.org/
+Abort trap: 6</code></pre></div>
+
+<p class="content-paragraph">どうもlibomp.dylibが二つ以上リンクされているということらしい。</p>
+
+<p class="content-paragraph">このエラーの原因は多分libompとllvmの二つのライブラリでインストールされたlibomp.dylibがどちらもリンクされてしまっていることが問題だろう。確かにlibompでインストールされたもの</p>
+
+<div class="code-container"><pre><code>$ ls /usr/local/lib | grep libomp.dylib
+libomp.dylib</code></pre></div>
+
+<p class="content-paragraph">と、llvmでインストールされたもの</p>
+
+<div class="code-container"><pre><code>$ ls /usr/local/opt/llvm/lib | grep libomp
+libomp.dylib</code></pre></div>
+
+<p class="content-paragraph">の二つが存在している。さらに、data.tableをインストールする時に<span class="inline-code">-Wl,-rpath,$(LLVM_LOC)/lib</span>としてlllvm側の<span class="inline-code">libomp.dylib</span>にリンクしていることがわかるし、多分<span class="inline-code">build_r.R</span>も内部でlibomp側の<span class="inline-code">libomp.dylib</span>にリンクしているのだろう。</p>
+
+<p class="content-paragraph">lightGBMをllvmの持っているopemMPIとともにインストールする方法が乗っていなかったうえに、Makefileをいじらないといけなさそうだったのでそこは回避して、llvmを使わない方向に決めた。とりあえずdata.tableからllvmの依存を抜いてみた</p>
+
+<div class="code-container"><pre><code>$ r
+&gt; remove.packages(&quot;data.table&quot;)
+$ rm -rf ~/.R
+$ r
+&gt; install.packages(&quot;data.table&quot;)</code></pre></div>
+
+<p class="content-paragraph">が、まだ先ほどと同じエラーが出る。</p>
+
+<p class="content-paragraph">data.tableを入れた後に入れたいくつかのライブラリが原因であると思われるので、とりあえずllvmのopemMPIにリンクしているライブラリを全て再インストールすることで解決を図った。とりあえずライブラリがインストールされているパスは</p>
+
+<div class="code-container"><pre><code>&gt; .libPaths()
+[1] &quot;/usr/local/lib/R/3.5/site-library&quot;
+[2] &quot;/usr/local/Cellar/r/3.5.1/lib/R/library&quot;</code></pre></div>
+
+<p class="content-paragraph">の二つのようなので、それぞれのディレクトリで全てのライブラリに対してotoolで依存している dynamic library をみていけばllvmにリンクされてしまっているものがわかる。</p>
+
+<div class="code-container"><pre><code>$ cd /usr/local/lib/R/3.5/site-library
+$ for d in */; do
+  cd $d
+  if [[ -d libs ]]; then
+    cd libs
+    otool -L *.so | grep libomp &gt; /dev/null
+    if [[ $? == 0 ]]; then
+      pwd
+      otool -L *.so
+    fi
+    cd ..
+  fi
+  cd ..
+done</code></pre></div>
+
+<p class="content-paragraph">とりあえず適当にスクリプトを走らせてみると、いくつか該当するライブラリが見つかった。依存性で入ってきているものが多いので、あまり記憶にないものが多いが、記憶にあるものは最近入れたものなので妥当だろう。それらの該当するライブラリを再度インストールしてみることで、llvmに依存するライブラリはなくなるはずだ。</p>
+
+<p class="content-paragraph">以上でllvmへの依存を全て抜いたはずなので、これでlightGBMとそのほかのライブラリを併用しても問題がなくなった。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

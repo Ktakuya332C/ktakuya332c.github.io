@@ -1,15 +1,18 @@
+import os
 import textwrap
 from lib.entity.article import Article
 from lib.component import head, header, footer
 
 
-def gen(root: str,
+def gen(build_dir: str,
+        root_path: str,
         title_str: str,
         desc_str: str,
         footer_str: str,
         article: Article) -> str:
-    head_block = head.gen(root, title_str)
-    header_block = header.gen(title_str, desc_str)
+    build_path = os.path.join("/", build_dir)
+    head_block = head.gen(root_path, title_str)
+    header_block = header.gen(build_path, title_str, desc_str)
     footer_block = footer.gen(footer_str)
     return textwrap.dedent(f"""\
         <!doctype html>

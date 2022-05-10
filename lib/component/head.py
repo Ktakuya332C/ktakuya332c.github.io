@@ -2,15 +2,15 @@ def _gen_title(title_str: str) -> str:
     return '<title>' + title_str + '</title>'
 
 
-def _gen_styles(root: str) -> str:
-    html: str = '<link rel="stylesheet" href="' + root + 'css/reset.css">'
-    html += '<link rel="stylesheet" href="' + root + 'css/style.css">'
+def _gen_styles(root_path: str) -> str:
+    html: str = '<link rel="stylesheet" href="' + root_path + 'css/reset.css">'
+    html += '<link rel="stylesheet" href="' + root_path + 'css/style.css">'
     return html
 
 
-def _gen_highlight(root: str) -> str:
-    html: str = '<link rel="stylesheet" href="' + root + 'css/vs.css">'
-    html += '<script src="' + root + 'js/highlight.pack.js"></script>'
+def _gen_highlight(root_path: str) -> str:
+    html: str = '<link rel="stylesheet" href="' + root_path + 'css/vs.css">'
+    html += '<script src="' + root_path + 'js/highlight.pack.js"></script>'
     html += '<script>hljs.initHighlightingOnLoad();</script>'
     return html
 
@@ -39,13 +39,13 @@ def _gen_mermaid() -> str:
     return html
 
 
-def gen(root: str, title_str: str) -> str:
+def gen(root_path: str, title_str: str) -> str:
     html: str = '<head>'
     html += '<meta charset="UTF-8">'
     html += _gen_google_analytics()
     html += _gen_title(title_str)
-    html += _gen_styles(root)
-    html += _gen_highlight(root)
+    html += _gen_styles(root_path)
+    html += _gen_highlight(root_path)
     html += _gen_katex()
     html += _gen_mermaid()
     html += '</head>'
