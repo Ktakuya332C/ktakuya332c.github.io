@@ -1,4 +1,0 @@
-My First Blog Post
-2022-05-10
-
-@p{This is my first blog post. Other posts will come soon, maybe. }
