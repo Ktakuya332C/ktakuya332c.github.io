@@ -7,6 +7,7 @@
 @ul
 {@a{HackerNews}{https://news.ycombinator.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
+{@a{Twitter}{https://twitter.com/}}
 {@a{Metaculus}{https://www.metaculus.com/}}
 
 
@@ -15,6 +16,7 @@
 
 @ul
 {@a{Gmail}{http://gmail.com}}
+{@a{Zaim}{https://zaim.net/}}
 {@a{Google Keep}{https://keep.google.com/}}
 {@a{Google Calender}{https://calendar.google.com}}
 {@a{Google Analytics}{https://analytics.google.com}}
