@@ -47,6 +47,7 @@
 @ul
 {@a{kaggle}{https://www.kaggle.com/}}
 {@a{signate}{https://signate.jp/}}
+{@a{AIcrowd}{https://www.aicrowd.com/}}
 {@a{dream challenge}{http://dreamchallenges.org/}}
 {@a{probspace}{https://comp.probspace.com/}}
 
