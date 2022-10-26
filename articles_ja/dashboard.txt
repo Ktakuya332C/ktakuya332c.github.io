@@ -8,6 +8,7 @@
 {@a{HackerNews}{https://news.ycombinator.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
 {@a{Metaculus}{https://www.metaculus.com/}}
+{@a{Reddit}{https://www.reddit.com/}}
 
 
 @section{よく使うツール}
