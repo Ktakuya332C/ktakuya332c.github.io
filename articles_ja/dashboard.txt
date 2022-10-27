@@ -5,10 +5,11 @@
 
 
 @ul
-{@a{HackerNews}{https://news.ycombinator.com/}}
+{@a{Reddit}{https://www.reddit.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
 {@a{Metaculus}{https://www.metaculus.com/}}
-{@a{Reddit}{https://www.reddit.com/}}
+{@a{HackerNews}{https://news.ycombinator.com/}}
+{@a{StackOverflow}{https://stackoverflow.com/}}
 
 
 @section{よく使うツール}
@@ -16,9 +17,9 @@
 
 @ul
 {@a{Zaim}{https://zaim.net/}}
+{@a{Gmail}{http://gmail.com}}
+{@a{Github}{https://github.com/}}
 {@a{Watchlist}{https://app.distill.io/}}
 {@a{Google Keep}{https://keep.google.com/}}
 {@a{Google Calender}{https://calendar.google.com}}
 {@a{Google Analytics}{https://analytics.google.com}}
-{@a{Gmail}{http://gmail.com}}
-{@a{Github Project}{https://github.com/users/Ktakuya332C/projects/2/views/1}}
