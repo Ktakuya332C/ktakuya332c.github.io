@@ -1,0 +1,111 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">計量時系列分析の4章の数値計算</h2>
+                                <p class="date">2020-12-25</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">引き続き次の本を読んでいる。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://www.amazon.co.jp/dp/4254127928">経済・ファイナンスデータの計量時系列分析</a>、	沖本竜義著</li></ul>
+<p class="content-paragraph">今回は4章の演習問題のうち、数値計算部分を次の記事を参考にしながら解いてみる。</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://qiita.com/mckeeeen/items/4afa1167008c1f315d0b">【第4章】pythonで「経済・ファイナンスデータの計量時系列分析」の章末問題を解く</a></li></ul>
+
+<h1 class="section-title">問題4.5</h1>
+
+<h1 class="subsection-title">データの取得</h1>
+<p class="content-paragraph">データは以前と同じく</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="http://www.asakura.co.jp/books/isbn/978-4-254-12792-8/">朝倉書店｜経済・ファイナンスデータの 計量時系列分析</a></li></ul>
+<p class="content-paragraph">からダウンロードしてきて使用する。</p>
+<div class="code-container"><pre><code>import pandas as pd
+data = pd.read_excel(&apos;msci_day.xls&apos;)
+data = data[[&apos;Date&apos;, &apos;jp&apos;, &apos;uk&apos;, &apos;us&apos;]]</code></pre></div>
+<p class="content-paragraph">まずは変化率の列を作成する。</p>
+<div class="code-container"><pre><code>import numpy as np
+from matplotlib import pyplot as plt
+
+data[&apos;jp_cr&apos;] = np.log(data[&apos;jp&apos;]).diff()
+data[&apos;uk_cr&apos;] = np.log(data[&apos;uk&apos;]).diff()
+data[&apos;us_cr&apos;] = np.log(data[&apos;us&apos;]).diff()
+data.dropna(inplace=True)
+
+_, ax = plt.subplots(nrows=3, ncols=1)
+ax[0].plot(data.Date, data.jp_cr)
+ax[0].set_title(&apos;jp_cr&apos;)
+ax[1].plot(data.Date, data.uk_cr)
+ax[1].set_title(&apos;uk_cr&apos;)
+ax[2].plot(data.Date, data.us_cr)
+ax[2].set_title(&apos;us_cr&apos;)
+plt.tight_layout()
+plt.savefig(&apos;figure-4-5-1.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/time-series-analysis-exercise-4/figure-4-5-1.png"></figure>
+<p class="content-paragraph">定常的に見えるのでVAR関連の分析を行うことができそう。</p>
+
+<p class="content-paragraph">これ以降VARモデルの当てはめをする際にはdataframeのindexをtimeseriesに変換しておく必要がある。</p>
+<div class="code-container"><pre><code>data.index = pd.DatetimeIndex(data.Date)
+data.drop(columns=&apos;Date&apos;, inplace=True)</code></pre></div>
+
+<h1 class="subsection-title">VARモデルの推定</h1>
+<p class="content-paragraph">変化率のデータを使ってVARモデルの推定を行う。</p>
+<div class="code-container"><pre><code>from statsmodels.tsa.vector_ar.var_model import VAR
+
+aics = list()
+for p in range(1, 11):
+  model = VAR(data[[&apos;jp_cr&apos;, &apos;uk_cr&apos;, &apos;us_cr&apos;]], dates=data[&apos;Date&apos;], freq=&apos;B&apos;).fit(maxlags=p)
+  aics.append(model.aic)
+
+plt.plot(np.arange(1, 11), aics)
+plt.savefig(&apos;figure-4-5-2.png&apos;)
+plt.title(&apos;AIC&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:40%"><img class="content-img" src="../static/time-series-analysis-exercise-4/figure-4-5-2.png"></figure>
+<p class="content-paragraph">AICが一番低いのはVAR(4)かVAR(6)あたりという感じになりそう。</p>
+
+<h1 class="subsection-title">グレンジャー因果の検定</h1>
+<p class="content-paragraph">教科書と同じVAR(3)モデルを今一度推定する。</p>
+<div class="code-container"><pre><code>model = VAR(data[[&apos;jp_cr&apos;, &apos;uk_cr&apos;, &apos;us_cr&apos;]], dates=data[&apos;Date&apos;], freq=&apos;B&apos;).fit(maxlags=3)</code></pre></div>
+<p class="content-paragraph">この結果を使ってグレンジャー因果を検定してみる。</p>
+<div class="code-container"><pre><code>uk2jp = model.test_causality(&apos;jp_cr&apos;, &apos;uk_cr&apos;, kind=&apos;f&apos;, signif=0.05)
+uk2jp.test_statistic // 12.012495863151996
+uk2jp.pvalue // 7.917449229649696e-08</code></pre></div>
+<p class="content-paragraph">再現できていそう。</p>
+
+<h1 class="subsection-title">インパルス応答関数</h1>
+<div class="code-container"><pre><code>model.irf(periods=10).plot()
+plt.savefig(&apos;figure-4-5-3.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/time-series-analysis-exercise-4/figure-4-5-3.png"></figure>
+<p class="content-paragraph">全体的な傾向は教科書とかは変わらなさそうだが、細かい計算結果はだいぶ異なる様に見える。</p>
+
+<h1 class="subsection-title">相対的分散寄与率</h1>
+<div class="code-container"><pre><code>model.fevd(periods=10).plot()
+plt.savefig(&apos;figure-4-5-4.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/time-series-analysis-exercise-4/figure-4-5-4.png"></figure>
+
+<h1 class="section-title">問題4.6</h1>
+<p class="content-paragraph">問題4.6でやることは問題4.5でやることとほぼ同じなので、わざわざ繰り返すことはしない。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

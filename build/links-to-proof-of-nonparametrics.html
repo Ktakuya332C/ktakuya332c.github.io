@@ -1,0 +1,42 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">nonparametric統計検定手法の導出へのリンク</h2>
+                                <p class="date">2019-01-14</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">統計的な検定手法についての本は大抵次のどちらかに別れる。</p>
+
+<ol class="content-ol"><li class="content-ol-item">統計的な検定を使用する人用の本で、どのような場合にどの手法を使えば良いかが書かれているが、どのようにそれらの検定手法が導出されたかが書かれていない。たとえば<a href="http://www.biostathandbook.com/">Handbook of Biological Statistics</a>などがその系統。</li><li class="content-ol-item">統計学を学ぶ人用の本で、一般的な統計学の定理などの導出などはきちんと書かれているが、統計的な検定手法について上記の本で紹介されているくらい深く掘り下げてはいない。例えば Elementary statistics (by Paul G. Hoel) などがある。</li></ol>
+
+<p class="content-paragraph">最近nonparametric統計の手法を使って検定を行わないといけない事案に幾度か遭遇して、その度に上で言うところの1の系統の本にあたってどの検定手法が最も適しているかを探っていたのだが、どれもやはり導出が書いていないのでどのような過程を置いているかがわかりずらく、この検定手法があってるかなと思ってとりあえずGoogle検索すると違う手法の方が良いと言われることが多かった。かといって2の系統の本には大抵カイ二乗検定くらいの導出で本が終わっており、nonparametrics系の検定手法について書かれていることは少なかった。</p>
+
+<p class="content-paragraph">nonparametrics系まで導出まで書いてくれている本はないかと探したがなかったので、取り合えず最近出会ったnonparametrics系の導出の参考になりそうなリンクを貼っておく。導出を忘れてどれがいいか迷った時はまたここに戻ってくる予定。</p>
+
+<ul class="content-ul"><li class="content-ul-item">Chi squared: <a href="http://personal.psu.edu/drh20/asymp/fall2006/lectures/ANGELchpt07.pdf">Penn State University の授業資料かも</a></li><li class="content-ul-item">Mann Whitney: <a href="https://math.mit.edu/~rmd/650/nonpartests.pdf">MITの数学科の授業資料かも</a></li><li class="content-ul-item">Kruskal Wallis: W.H.Kruskal and W.A.Wallis (1952), <a href="https://people.ucalgary.ca/~jefox/Kruskal%20and%20Wallis%201952.pdf">Use of ranks in one-criterion variance analysis</a></li><li class="content-ul-item">Kendall's tau: M.G.Kendall (1938), <a href="https://www.jstor.org/stable/pdf/2332226.pdf?seq=1#page_scan_tab_contents">A new measure of rank correlation</a>, JSTORなので一月に読める回数制限あり。</li></ul>
+
+<p class="content-paragraph">ざっと見た感じ、どのnonparametricsの導出も大学受験の感じな確率論を使って対象の統計量の平均値と分散値を導出したのちに、中心極限定理を使ってその平均と分散を持つ正規分布に近づくという近似を使っているように見えた。それほど複雑な導出ではないように見えるので、使う前には一度思い出してみるのも良いかもしれない。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

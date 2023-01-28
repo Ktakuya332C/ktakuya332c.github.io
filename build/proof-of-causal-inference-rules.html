@@ -1,0 +1,466 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">宮川本の推論ルールの証明</h2>
+                                <p class="date">2020-02-28</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">宮川雅巳さんの書いた<a href="http://www.asakura.co.jp/books/isbn/978-4-254-12781-2/">統計因果推論</a>という本の5章で紹介されている、因果効果の推論ルールの証明が載っていなかったのでここで証明していく。この記事を書きながら証明した定理なども多いので比較的煩雑になっているものも多いので、いつか綺麗に清書して書き直す必要があるかもしれない。</p>
+
+<h1 class="section-title">非巡回的有向独立グラフ</h1>
+
+<p class="content-paragraph">5章で紹介される、因果効果の推論ルールを証明するにあたって、宮川本で採用されいている記法は個人的にはあまり使い勝手が良くない。以下では宮川本で採用されている記法とは異なる記法で、4章で紹介されている種々の内容をおさらいしていく。</p>
+
+<h1 class="subsection-title">定義と表記法</h1>
+
+<p class="content-paragraph">確率変数を英子文字$x, y, z$などで表し、それらの同時確率分布を$f(x, y, z)$と表す。この確率分布からいくつかの確率変数を周辺化した分布を、例えば、$f(x)$や$f(x, y)$と表現する。また、この確率分布から導かれる条件付き分布を$f(x | y)$や$f(x, y | z)$などと表現する。確率変数の集合は英大文字$X, Y, Z$などで表現され、それらの同時確率は確率変数の場合と同じように$f(X, Y, Z)$と表現する。周辺化確率や条件確率も同様の表記を行う。</p>
+
+<p class="content-paragraph">確率変数の集合$X, Y, Z$の同時確率$f$について</p>
+$$f(X, Y | Z) = f(X | Z)f(Y | Z)$$
+<p class="content-paragraph">が成立する時、確率変数の集合$X$と$Y$は$Z$を与えた時に条件付き独立であるといい、この関係を</p>
+$$X \perp\!\!\!\perp Y | Z$$
+<p class="content-paragraph">と記載する。特に$Z$が空集合であるとき、$X$と$Y$は独立であるといい、この関係を</p>
+$$X \perp\!\!\!\perp Y$$
+<p class="content-paragraph">と表現する。</p>
+
+<h1 class="subsection-title">基本定理</h1>
+
+<p class="content-paragraph">確率変数の独立性を示す際に、使用する頻度の高い次の定理を証明しておく。</p>
+
+<div class="content-def"><p><span class="content-def-name">因数分解基準</span></p><p class="content-paragraph">確率分布$f$に従う互いに排反な3つの確率変数の集合$X, Y, Z$について、$X \perp\!\!\!\perp Y | Z$となるための必要十分条件は</p>
+$$f(X, Y, Z) = g(X, Z)h(Y, Z)$$
+<p class="content-paragraph">を満たす関数$g, h$が存在することである。</p></div>
+<p class="content-paragraph">まずは十分性から証明する。定義から$X \perp\!\!\!\perp Y | Z$であれば確率分布$f$は</p>
+$$f(X, Y, Z) = f(X | Z)f(Y | Z)f(Z)$$
+<p class="content-paragraph">と分解できる。$g(X, Z) = f(X | Z)$、$h(Y, Z) = f(Y | Z)f(Z)$とすれば題意を満たす。</p>
+<p class="content-paragraph">次に必要性を証明する。確率分布$f$を$X$と$Y$のどちらについても周辺化すれば</p>
+$$f(Z) = \sum_X g(X, Z) \sum_Y h(Y, Z)$$
+<p class="content-paragraph">という式が得られる。同時確率$f(X, Y, Z)$を上式で割って</p>
+$$f(X, Y | Z) = \frac{g(X, Z)}{\sum_X g(X, Z)} \frac{h(Y, Z)}{\sum_Y h(Y, Z)}$$
+<p class="content-paragraph">という式が得られる。上式から$X$を周辺化すると</p>
+$$f(Y | Z) = \frac{h(Y, Z)}{\sum_Y h(Y, Z)}$$
+<p class="content-paragraph">となる。同様に$Y$を周辺化すると</p>
+$$f(X | Z) = \frac{g(X, Z)}{\sum_X g(X, Z)}$$
+<p class="content-paragraph">という式が得られる。合わせれば</p>
+$$f(X, Y | Z) = f(X | Z) f(Y | Z)$$
+<p class="content-paragraph">となり、これはとりも直さず$X \perp\!\!\!\perp Y | Z$を表す。</p>
+
+<h1 class="subsection-title">グラフ用語</h1>
+
+<p class="content-paragraph">基本はグラフ関連の用語に関しては宮川本で定義されいている用語をそのまま使用するが、いくつかの定義を明確にしておきたいので復習しておく。</p>
+
+<div class="content-def"><p><span class="content-def-name">グラフ全体の性質に関する定義</span></p><ul class="content-ul"><li class="content-ul-item">グラフ$(V, E)$とは、頂点の集合$V$と、その直積$V \times V$の部分集合である矢線の集合$E$の組を指す。</li><li class="content-ul-item">グラフの頂点の数$|V|$が有限であるようなグラフを有限グラフと呼ぶ。</li><li class="content-ul-item">任意の二つの頂点$v_1, v_2$に対して$(v_1, v_2) \in E => (v_2, v_1) \not \in E$が成り立つようなグラフを有向グラフと呼ぶ。</li><li class="content-ul-item">任意の二つの頂点$v_1, v_2$に対して$(v_1, v_2) \in E => (v_2, v_1) \in E$が成り立つようなグラフを無向グラフと呼ぶ。</li></ul></div>
+<p class="content-paragraph">以下では有限グラフしか考えないため、普通にグラフと言った場合には有限グラフのことを指すこととする。</p>
+
+<p class="content-paragraph">グラフの一部に注目することもあるため、そのための用語を定義しておく。</p>
+<div class="content-def"><p><span class="content-def-name">部分グラフ</span></p><p class="content-paragraph">グラフ$G=(V, E)$に対して、その頂点集合の部分集合$X$と、矢線の両端がどちらも$X$に含まれるような矢線の集合</p>
+$$E_X = \{(v_1, v_2) \in E | v_1 \in X \land v_2 \in X\}$$
+<p class="content-paragraph">の組$(X, E_X)$を部分グラフと言い$G(X)$と表す。</p></div>
+
+<p class="content-paragraph">次にグラフの頂点間の局所的な関係についての定義をおさらいする。</p>
+
+<div class="content-def"><p><span class="content-def-name">グラフの頂点間の局所的な関係の定義</span></p><ul class="content-ul"><li class="content-ul-item">二つの頂点$v_1, v_2$について、$(v_1, v_2) \in E$ならば、$v_1$を$v_2$の親といい、$v_2$を$v_1$の子という。</li><li class="content-ul-item">グラフ$G$において、ある頂点$v$の親の集合を$pa(v : G)$と表し、子の集合を$ch(v : G)$と表す。グラフ$G$が文脈から自明である場合にはそれぞれ$pa(v), ch(v)$と書くこともある。</li><li class="content-ul-item">グラフ$G$において、ある頂点集合$X$に含まれる任意の頂点の親の合併を$pa(X : G)$と表し頂点集合$X$の親の集合と呼ぶ。同様に子の合併を$ch(X : G)$と表し子の集合と呼ぶ。グラフ$G$が文脈から自明である場合にはそれぞれ$pa(v), ch(v)$と書くこともある。</li></ul></div>
+
+<p class="content-paragraph">次にグラフの頂点集合の性質についての定義をおさらいする。</p>
+
+<div class="content-def"><p><span class="content-def-name">グラフの頂点系列の性質についての定義</span></p><ul class="content-ul"><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親か子である場合、$T$を長さ$K$の道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の道と呼ぶ。</li><li class="content-ul-item">2つ以上の頂点の系列$T=(t_1, t_2, \cdots, t_{K+1})$において、全ての$i=1,2, \cdots, K$に対して$t_i$が$t_{i+1}$の親である場合、$T$を長さ$K$の有向道という。また、その系列が一つの頂点しか含まない場合$T = \{ t_1 \}$も同様に長さ$0$の有向道と呼ぶ。</li><li class="content-ul-item">長さ1以上の有向道$T=(t_1, t_2, \cdots, t_{K+1})$において、$t_1$を始点、$t_{K+1}$を終点と呼ぶ。長さ$0$の有向道$T=(t_1)$については始点も終点も$t_1$であるとする。</li><li class="content-ul-item">グラフ$G$における、二つの頂点$v_1, v_2$の間に存在する全ての道の集合を$path(v_1, v_2 : G)$と表す。また、二つの頂点$v_1, v_2$の間に存在する長さが$1$以上の道全ての集合を$tpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$path(v_1, v_2), tpath(v_1, v_2)$とも書く。</li><li class="content-ul-item">グラフ$G$における、始点と終点をそれぞれ$v_1, v_2$とする全ての有向道の集合を$dpath(v_1, v_2 : G)$と表す。また、始点と終点をそれぞれ$v_1, v_2$とする長さが$1$以上の有向道全ての集合を$tdpath(v_1, v_2 : G)$と表す。グラフ$G$が自明である場合にはそれぞれ$dpath(v_1, v_2), tdpath(v_1, v_2)$とも書く。</li></ul></div>
+
+<p class="content-paragraph">道上の頂点は合流点と非合流点に分類できる。</p>
+<div class="content-def"><p><span class="content-def-name">合流点</span></p><p class="content-paragraph">長さ$2$以上の道$T = (t_1, t_2, \cdots, t_K, t_{K+1})$上の$i=2,3,\cdots, K$番目の頂点$t_i$について</p>
+$$(t_{i-1}, t_i) \in E \land (t_{i+1}, t_i) \in E$$
+<p class="content-paragraph">が成り立つ場合、その頂点を道$T$の合流点であるという。また、道$T$上の合流点以外の頂点を非合流点と呼ぶ。</p></div>
+
+<p class="content-paragraph">また、有向道の定義を使って親や子の定義を拡張した、先祖や子孫という概念を定義できる。</p>
+<div class="content-def"><p><span class="content-def-name">先祖と子孫</span></p><ul class="content-ul"><li class="content-ul-item">2つの頂点$x, y$の間に有向道$T \in dpath(x, y)$が存在する時、$x$は$y$の先祖であるといい、逆に$y$は$x$の子孫であるという。ある頂点$x$の先祖の集合を$an(x : G)$と書き、子孫の集合を$de(x : G)$とかく。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(x)$や$de(x)$とかく。</li><li class="content-ul-item">頂点集合$X$に含まれる要素の先祖の集合の合併を$an(X : G)$と書き、子孫の集合の合併を$de(X : G)$と書く。ここで対象となるグラフ$G$が自明である場合にはそれぞれ$an(X)$や$de(X)$とかく。</li><li class="content-ul-item">ある頂点集合$A$がそれ自身の先祖の集合と一致する場合$A = an(A)$、その頂点集合は先祖的であるという。</li><li class="content-ul-item">ある頂点集合$X$を含む最小の先祖的な集合$A$を、$X$に対する最小先祖集合と呼ぶ。</li></ul></div>
+<p class="content-paragraph">ここで、長さ$0$の有向道$(x) \in dpath(x, x)$が存在することから、ある頂点$x$の子孫や先祖には自分自身も含まれる</p>$$x \in de(x), x \in an(x)$$
+<p class="content-paragraph">ことに注意する。</p>
+
+<p class="content-paragraph">また、最小先祖集合については次のような特徴的な定理を証明することができる。</p>
+<div class="content-def"><p><span class="content-def-name">最小先祖集合と子孫の関係</span></p><p class="content-paragraph">あるグラフ$G=(V, E)$における頂点集合$X$の最小祖先集合を$A$とする。この最小祖先集合に含まれる任意の要素$a \in A$はその子孫に必ず$X$の要素を含む</p>
+$$\forall a \in A \quad de(a : G(A)) \cap X \neq \phi$$</div>
+<p class="content-paragraph">もし子孫に$X$の要素が一つもない頂点が存在すると仮定すると</p>
+$$\exists a \in A \quad de(a : G(A)) \cap X = \phi$$
+<p class="content-paragraph">その子孫の集合全体を$A$から抜いた集合</p>
+$$B = A - de(a : G(A))$$
+<p class="content-paragraph">は$X$を含み、先祖的である。よって$A$よりも小さい最小先祖集合が存在することとなり矛盾する。</p>
+
+<p class="content-paragraph">道や有向道の定義を使うと頂点間の大域的な関係が定義できる。</p>
+
+<div class="content-def"><p><span class="content-def-name">グラフの頂点間の大域的な関係の定義</span></p><ul class="content-ul"><li class="content-ul-item">二つの異なる頂点$x, y$をつなぐ任意の道$T \in path(x, y)$が、ある頂点集合$Z$の頂点を必ず含むとき、頂点集合$Z$は頂点$x, y$を分離するという。</li><li class="content-ul-item">三つの排反な頂点集合$X, Y, Z$について、任意の頂点$x \in X$と$y \in X$を$Z$が分離するとき、頂点集合$X$と$Y$は$Z$によって分離されるという。</li></ul></div>
+
+<p class="content-paragraph">次に巡回性に関連する定義をおさらいする。</p>
+
+<div class="content-def"><p><span class="content-def-name">グラフの巡回性に関する定義</span></p><ul class="content-ul"><li class="content-ul-item">始点$v_1$と終点$v_2$が同じ頂点$v_1 = v_2$であるような、長さが$1$以上の有向道$T \in tdpath(v_1, v_1)$を巡回閉路と呼ぶ。</li><li class="content-ul-item">巡回閉路の存在しない有向グラフを非巡回的有向グラフと呼ぶ。</li></ul></div>
+<p class="content-paragraph">非巡回的有向グラフ$G$の定義は以下のように読み替えることも可能である。</p>
+$$\forall v \in V \quad tdpath(v, v) = \phi$$
+
+
+<h1 class="subsection-title">非巡回的有向独立グラフ</h1>
+
+<p class="content-paragraph">以上で定義したグラフ用語を使って以下の定義を行う。</p>
+
+<div class="content-def"><p><span class="content-def-name">非巡回的有向独立グラフ</span></p><p class="content-paragraph">$N$個の確率変数$V = \{v_1, v_2, \cdots, v_N\}$を頂点とする非巡回的有向グラフ$G = (V, E)$を考える。これら確率変数の同時確率$f$がグラフに従う逐次因数分解の形、すなわち</p>
+$$f(V) = \prod_{i=1}^N f(v_i | pa(v_i))$$
+<p class="content-paragraph">の形に規定されるとき、そのグラフを確率分布$f$の非巡回的有向独立グラフという。ただしここで$pa(v_i)$は頂点$v_i$の親の集合を指す。</p></div>
+
+<h1 class="subsection-title">大域的マルコフ性</h1>
+
+<p class="content-paragraph">宮川本では非巡回的有向独立グラフでの大域的マルコフ性として二つの表現方法を紹介している。どちらにおいても宮川本では証明がされていない箇所があるので、二つともここでおさらいすると同時に欠けている証明も補っていく。</p>
+
+<div class="content-def"><p><span class="content-def-name">モラルグラフ</span></p><p class="content-paragraph">非巡回的有向グラフ$G = (V, E)$に対して、以下の三つの条件を満たす最小の矢線の集合$E'$を考える。</p>
+<ol class="content-ol"><li class="content-ol-item">$e \in E \Rightarrow e \in E'$</li><li class="content-ol-item">$(v_1, v_2) \in E' \Rightarrow (v_2, v_1) \in E'$</li><li class="content-ol-item">任意の三つの頂点$v_1,v_2,v_3$に対して、$(v_1, v_3) \in E$かつ$(v_2, v_3) \in E$ならば$(v_1, v_2) \in E'$</li></ol>
+<p class="content-paragraph">この矢線の集合$E'$により構成されるグラフ$G' = (V, E')$を$G$のモラルグラフと呼ぶ。</p></div>
+
+<p class="content-paragraph">モラルグラフの定義をすることで次の定理を示すことができる。</p>
+
+<div class="content-def"><p><span class="content-def-name">モラルグラフによる確率変数集合の分類</span></p><p class="content-paragraph">確率変数の集合$V$の確率分布$f$に対する非巡回的有向独立グラフ$G=(V, E)$を考える。$V$の三つの排反な部分集合$X, Y, Z$について、$Z$が$X$と$Y$を$G$のモラルグラフ$G'$上で分離すると仮定する。</p>
+<p class="content-paragraph">このとき、残りの確率変数の集合$W = V - X - Y - Z$は三つの排反な部分集合に分類され</p>
+$$W = W_X \cup W_Y \cup W_Z$$
+<p class="content-paragraph">確率分布$f$は適当な関数$g_X, g_Y, g_Z$を使って次のように分解できる。</p>
+$$f(X, Y, Z, W) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z)$$</div>
+<p class="content-paragraph">モラルグラフ$G'$上で、$X$から$Z$によって分離されていない頂点の集合を$A$とする。</p>
+$$A = \{a \in V | \exists x \in X \ \exists T \in path(x, a : G') \quad T \cap Z = \phi\}$$
+<p class="content-paragraph">同様にして$Y$から$Z$によって分離されていない頂点の集合を$B$とする。</p>
+$$B = \{b \in V | \exists y \in Y \ \exists T \in path(y, b : G') \quad T \cap Z = \phi\}$$
+<p class="content-paragraph">これらの集合は$Z$とは排反である。なぜなら、もし共通の頂点$s$が存在すれば</p>
+$$s \in Z \cap A$$
+<p class="content-paragraph">ある頂点$x \in X$と道$T \in path(x, s : G')$が存在し、</p>
+$$T \cap Z = \phi$$
+<p class="content-paragraph">となるはずだが、$s \in Z$かつ$s \in T$であるから</p>
+$$T \cap Z \neq \phi$$
+<p class="content-paragraph">となり矛盾するためである。</p>
+<p class="content-paragraph">また、$A$と$B$も排反である。もし、共通の頂点$s$が存在すれば</p>
+$$s \in A \cap B$$
+<p class="content-paragraph">ある頂点$x \in X, y \in Y$と道$T_x \in path(x, s : G'), T_y \in path(y, s : G')$が存在し</p>
+$$T_x \cap Z = \phi \land T_y \cap Z = \phi$$
+<p class="content-paragraph">を満たさなければならない。よって、道$T_x$と$T_y$を頂点$s$で繋いだ道$T_{xy} \in path(x, y)$を考えると、この道は$Z$との共有点を持たない。</p>
+$$T_{xy} \cap Z = \phi$$
+<p class="content-paragraph">一方で、$X$と$Y$は$Z$によって分離されているため、$x$と$y$も$Z$によって分離されている。</p>
+$$\forall T \in path(x, y : G') \quad T \cap Z \neq \phi$$
+<p class="content-paragraph">具体的に$T_{xy}$を代入してみれば</p>
+$$T_{xy} \cap Z \neq \phi$$
+<p class="content-paragraph">となるが、これは明らかに矛盾している。</p>
+<p class="content-paragraph">以上より、$A, B, Z$は互いに排反な集合であることがわかった。ここで$C = V - A - B - Z$と定義すると、確率分布はそれに付随する非巡回的有向独立グラフによる制限により</p>
+$$f(A, B, C, Z) = \prod_{a \in A} f(a | pa(a)) \prod_{b \in B} f(b | pa(b)) \prod_{c \in C} f(c | pa(c)) \prod_{z \in Z} f(z | pa(z))$$
+<p class="content-paragraph">と書くことができる。ここでもし、次の6つの性質が成り立ったうえに</p>
+<ul class="content-ul"><li class="content-ul-item">$pa(A) \cap B = \phi$</li><li class="content-ul-item">$pa(A) \cap C = \phi$</li><li class="content-ul-item">$pa(B) \cap A = \phi$</li><li class="content-ul-item">$pa(B) \cap C = \phi$</li><li class="content-ul-item">$pa(C) \cap A = \phi$</li><li class="content-ul-item">$pa(C) \cap B = \phi$</li></ul>
+<p class="content-paragraph">$Z$の要素を、親が$Z$か$A$の頂点しか含まない$Z_A$と、親が$Z$か$B$の頂点しか含まない$Z_B$、親が$Z$か$C$の頂点しか含まない$Z_C$に分けられた場合、分布$f$は次の三つに分解できることになる。</p>
+<ol class="content-ol"><li class="content-ol-item">$A$と$Z$のみに依存する項: $\prod_{a \in A} f(a | pa(a)) \prod_{z \in Z_A} f(z | pa(z))$</li><li class="content-ol-item">$B$と$Z$のみに依存する項: $\prod_{b \in B} f(b | pa(b)) \prod_{z \in Z_B} f(z | pa(z))$</li><li class="content-ol-item">$C$と$Z$のみに依存する項: $\prod_{c \in C} f(c | pa(c)) \prod_{z \in Z_C} f(z | pa(z))$</li></ol>
+<p class="content-paragraph">それぞれの項を$g_X, g_Y, g_Z$と名付ければ</p>
+$$f(A, B, C, Z) = g_X(A, Z) g_Y(B, Z) g_Z(C, Z)$$
+<p class="content-paragraph">と書くことができる。さらに$W_X = A - X, W_Y = B - Y, W_Z = C$書き直せば題意の式が得られる。</p>
+$$f(X, Y, Z, W) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z)$$
+<p class="content-paragraph">では、そのような議論を進めるための前提条件を一つ一つ証明していく。まず$pa(A) \cap B = \phi$だが、もし</p>
+$$s \in pa(A) \cap B$$
+<p class="content-paragraph">となるような頂点が存在した場合、ある$a \in A$が存在して$s$と$a$の間に矢線が存在する。また、$a \in A$と$s \in B$より、次のような条件を満たす頂点$x, y$と道$T_x, T_y$が存在する。</p>
+$$\begin{aligned}
+x &\in X \\
+y &\in Y \\
+T_x &\in path(x, a : G') \\
+T_y &\in path(y, s : G') \\
+\phi &= T_x \cap Z \\
+\phi &= T_y \cap Z
+\end{aligned}$$
+<p class="content-paragraph">道$T_x$と$T_y$と$s$と$a$の間の矢線を繋げれば、$X$の要素$x$と$Y$の要素$y$の間に道が出来上がるが</p>
+$$\begin{aligned}
+\phi &= T_x \cap Z \\
+\phi &= T_y \cap Z
+\end{aligned}$$
+<p class="content-paragraph">より、この道の要素に$Z$は含まれない。これは$X$と$Y$が$Z$で分離されていることと矛盾する。似たような議論を使ってあとの5つの性質も証明できる。</p>
+<p class="content-paragraph">次に$Z$が、その親が$Z$か$A$の頂点しか含まない$Z_A$と、親が$Z$か$B$の頂点しか含まない$Z_B$、親が$Z$か$C$の頂点しか含まない$Z_C$に分けられることを示す。もしある$z \in Z$についてその親が$A$と$B$の要素のどちらをも含む場合</p>
+$$pa(z) \cap A \neq \phi \land pa(z) \cap B \neq \phi$$
+<p class="content-paragraph">ある$a \in A$と$b \in B$が存在して</p>
+$$(a, z) \in E \land (b, z) \in E$$
+<p class="content-paragraph">となる。このとき、モラルグラフ$G'$の性質から</p>
+$$(a, b) \in E'$$
+<p class="content-paragraph">となるが、$A$と$B$の性質によりある$x \in X, y \in Y$と道$T_x \in path(x, a : G'), T_y \in path(y, b : G')$が存在し</p>
+$$\begin{aligned}
+T_x \cap Z &= \phi \\
+T_y \cap Z &= \phi
+\end{aligned}$$
+<p class="content-paragraph">となる性質を持つ。$T_x$と$T_y$、それに矢線$(a, b)$を合わせた経路$T$は$x$と$y$を繋ぎ、これらの性質から$T \cap Z = \phi$となるが、このような経路の存在は$A$と$B$が$Z$によって分離されていることに矛盾する。似たような議論を使って任意の$z \in Z$は$A, B, C$のうち二つ以上の要素を同時に含むことはないことが証明できる。これはとりも直さず、$Z$が三つの集合$Z_A, Z_B, Z_C$に分類できることを示している。</p>
+
+<p class="content-paragraph">以上の定理から次の定理を導くことができる。</p>
+<div class="content-def"><p><span class="content-def-name">モラルグラフでの大域的マルコフ性</span></p><p class="content-paragraph">確率変数の集合$V$の確率分布$f$に対する非巡回的有向独立グラフ$G=(V, E)$を考える。その非巡回的有向独立グラフのモラルグラフ$G'$上で、確率変数の集合$X, Y$が別の確率変数の集合$Z$によって分離されるのならば</p>
+$$X \perp\!\!\!\perp Y | Z$$
+<p class="content-paragraph">が成立する。ただしここで$X, Y, Z$は互いに排反である。</p></div>
+<p class="content-paragraph">先の定理より</p>
+$$f(X, Y, Z, W) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z)$$
+<p class="content-paragraph">と分類できる。$W$について周辺化すれば</p>
+$$f(X, Y, Z) = (\sum_{W_X} g_X(X, W_X, Z)) (\sum_{W_Y} g_Y(Y, W_Y, Z) \sum_{W_Z} g_Z(W_Z, Z))$$
+<p class="content-paragraph">と書くことができるが、一つ目の項は$X, Z$にしか依存せず、二つ目の項は$Y, Z$にしか依存しないため、因数分解基準により</p>
+$$X \perp\!\!\!\perp Y | Z$$
+<p class="content-paragraph">と結論できる。</p>
+
+<p class="content-paragraph">モラルグラフ上の議論だけで確率変数の間の独立性を全て語れれば簡単なのだが、もう少し考慮しないといけないことがある。</p>
+<div class="content-def"><p><span class="content-def-name">先祖集合での構造保存性</span></p><p class="content-paragraph">確率変数の集合$V$の確率分布$f$に対する非巡回的有向独立グラフ$G$を考える。$V$のある部分集合$A$が先祖的であれば、$A$に含まれている確率変数の周辺確率分布は、部分グラフ$G(A)$に従う逐次因数分解ができる。要するに</p>
+$$f(A) = \prod_{a \in A} f(a | pa(a : G(A)))$$
+<p class="content-paragraph">と表現できる。</p></div>
+<p class="content-paragraph">まず、$B = V - A$とした時、$B$の要素の子は必ず$B$に含まれる。</p>
+$$\forall b \in B \quad ch(b : G) \subset B$$
+<p class="content-paragraph">なぜなら、もし$b \in B$の子が$A$に含まれていれば、$A$が先祖的であるので$b \in A$も成立するが、これは$b \in A \cap B$を意味し、$B = V - A$という定義に矛盾するからである。</p>
+<p class="content-paragraph">この事実を使うと、必ず$B$の要素で子を持たないものが存在することがわかる。</p>
+$$\exists b \in B \quad ch(b : G) = \phi$$
+<p class="content-paragraph">もしすべての$b \in B$が子を持つとすると、適当な要素を一つ取ってその子を選択するという操作を続けることが永遠にできることになるが、今考えている確率変数の集合は有限であるためどこかで以前選択した要素を再度選択していることになる。よってこのグラフには巡回閉路が存在することになり、$G$が非巡回的有向グラフであることと矛盾する。</p>
+<p class="content-paragraph">以上より、$V=(A,B)$の確率分布</p>
+$$f(A, B) = \prod_{a \in A} f(a | pa(a : G)) \prod_{b \in B} f(b | pa(b : G))$$
+<p class="content-paragraph">に対して、$B$の要素の中で子のいない頂点をひとつひとつ周辺化していくことができることがわかる。今考えている確率変数の集合は有限であるため、有限の回数で$B$の要素をすべて周辺化することができる。</p>
+$$f(A) = \prod_{a \in A} f(a | pa(a : G))$$
+<p class="content-paragraph">ここで、$A$は先祖的であるから、任意の要素の親もその集合に含まれる。</p>
+$$\forall a \in A \quad \forall v \in V \quad a \in A \land (v, a) \in E \Rightarrow v \in A$$
+<p class="content-paragraph">ことを使えば、任意の$a \in A$に対して</p>
+$$\begin{aligned}
+pa(a : G) &= \{v \in V | (v, a) \in E\} \\
+&= \{v \in V | (v, a) \in E \land v \in A\} \\
+&= pa(a : G(A))
+\end{aligned}$$
+<p class="content-paragraph">が成立する。よって$A$の確率分布は</p>
+$$f(A) = \prod_{a \in A} f(a | pa(a : G(A)))$$
+<p class="content-paragraph">と表現できる。</p>
+
+<p class="content-paragraph">この先祖集合の性質を利用して、モラルグラフによる確率変数集合の分類を拡張することができる。</p>
+<div class="content-def"><p><span class="content-def-name">非巡回的有向独立グラフでの確率変数集合の分類</span></p><p class="content-paragraph">確率変数の集合$V$の確率分布$f$に対する非巡回的有向独立グラフ$G$を考える。$V$のある3つの排反した部分集合$X, Y, Z$について、それらが導く最小祖先集合$A$による部分グラフ$G(A)$のモラルグラフ$G(A)'$上で$X$と$Y$を$Z$が分離していると仮定する。この時$W = A - X - Y - Z$を分割する排反な部分集合$W_X, W_Y, W_Z$と適当な関数$g_X, g_Y, g_Z$があって</p>
+$$\begin{aligned}
+f(V) &= f(X, Y, Z, W_X, W_Y, W_Z, B) \\
+&= g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z) f(B | X, W_X, Y, W_Y, Z, W_Z)
+\end{aligned}$$
+<p class="content-paragraph">と分解できる。ただしここで$B = V - A$である。</p></div>
+<p class="content-paragraph">この定理において$f$は確率分布を示すが、$g$は単なる関数を示し、多くの場合に確率分布としての意味を持たないことに注意する必要がある。例えば、7つの確率変数</p>
+$$x, y, z, w_x, w_y, w_z, b$$
+<p class="content-paragraph">の確率分布が次のように与えられる時</p>
+$$\begin{aligned}
+f(x, y, z, w_x, w_y, w_z, b) &= f(w_z)f(z | w_z)f(w_x | z)f(x | w_x)f(w_y | z) f(y | w_y)f(b | w_z)
+\end{aligned}$$
+<p class="content-paragraph">$X = \{x\}, Y = \{ y\}, \cdots$などと定義すれば、</p>
+$$\begin{aligned}
+g_X(X, W_X, Z) &= f(w_x | z)f(x | w_x) \\
+g_Y(Y, W_Y, Z) &= f(w_y | z) f(y | w_y) \\
+g_Z(W_Z, Z) &= f(w_z)f(z | w_z) \\
+f(B | X, W_X, Y, W_Y, Z, W_Z) &= f(b | w_z)
+\end{aligned}$$
+<p class="content-paragraph">と対応することになる。</p>
+<p class="content-paragraph">証明としては先祖集合での構造保存性から</p>
+$$f(V) = f(B | A) f(A) = f(B | A) \prod_{a \in A} f(a | pa(a : G(A)))$$
+<p class="content-paragraph">となるが、この二項目に対してモラルグラフによる確率変数集合の分類がそのまま適用できるため題意の式を得ることができる。</p>
+
+<p class="content-paragraph">この定理からモラルグラフでの大域的マルコフ性を拡張することができる。</p>
+<div class="content-def"><p><span class="content-def-name">非巡回的有向独立グラフでの大域的マルコフ性(1)</span></p><p class="content-paragraph">確率変数の集合$V$の確率分布$f$に対する非巡回的有向独立グラフ$G$を考える。$V$のある3つの排反した部分集合$X, Y, Z$について、それらが導く最小祖先集合$A$のモラルグラフ$A'$上で$X$と$Y$を$Z$が分離していると仮定する。この時</p>
+$$X \perp\!\!\!\perp Y | Z$$
+<p class="content-paragraph">が成立する。</p></div>
+<p class="content-paragraph">同条件下で確率分布$f$は次のように分解される。</p>
+$$f(V) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z) f(B | X, W_X, Y, W_Y, Z, W_Z)$$
+<p class="content-paragraph">$X, Y, Z$以外の変数を全て周辺化すれば、因数分解基準より題意を得る。</p>
+
+<p class="content-paragraph">以上がモラルグラフを使った大域的マルコフ性の表現だが、そのほかに有向分離という概念を使った表現の方法も宮川本で紹介されている。</p>
+<div class="content-def"><p><span class="content-def-name">有向分離</span></p><p class="content-paragraph">非巡回的有向グラフ$G$上で、2つの異なる頂点$x, y$とそれらと排反な頂点集合$Z$を考える。$x$と$y$を繋ぐ道$T \in tpath(x, y)$のいずれかの頂点$t \in T$に対して次のいずれか条件が成り立つ時、$Z$は道$T$を有向分離するという。</p>
+<ul class="content-ul"><li class="content-ul-item">$t$が$T$の合流点であり、$de(t) \cap Z = \phi$</li><li class="content-ul-item">$t$が$T$の合流点でなく、$t \in Z$</li></ul>
+<p class="content-paragraph">以上では道に対する有向分離を定義したが、2つの頂点$x$と$y$に対しても$x$と$y$を繋ぐ任意の道$T \in tpath(x, y)$が有向分離されている時、$x$と$y$は$Z$によって有向分離されているという。</p>
+<p class="content-paragraph">さらに、三つの排反な頂点集合$X, Y, Z$があった時、任意の$x \in X, y \in Y$が$Z$によって有向分離されている時、$X$と$Y$は$Z$によって有向分離されているという。</p></div>
+
+<p class="content-paragraph">有向分離とモラルグラフの関係を語るにあたって次の定理を証明しておくと議論を進めやすい。</p>
+<div class="content-def"><p><span class="content-def-name">モラルグラフと元のグラフの関係</span></p><p class="content-paragraph">ある非巡回的有向グラフ$G=(V,E)$とそのモラルグラフ$G'=(V,E')$を考える。モラルグラフ上でしか繋がっていない二つの頂点$v_1, v_2$</p>
+$$(v_1, v_2) \in E' - E \land (v_2, v_1) \in E' - E$$
+<p class="content-paragraph">に対してある頂点$v_3 \in V$が存在して</p>
+$$(v_1, v_3) \in E \land (v_2, v_3) \in E$$
+<p class="content-paragraph">を満たすものが存在する。</p></div>
+<p class="content-paragraph">背理法で証明する。モラルグラフ上でしか繋がっていないある二つの頂点$v_1, v_2$</p>
+$$(v_1, v_2) \in E' - E \land (v_2, v_1) \in E' - E$$
+<p class="content-paragraph">に対して、任意の頂点$v_3 \in V$が次の条件を満たすと仮定する。</p>
+$$(v_1, v_3) \not \in E \lor (v_2, v_3) \not \in E$$
+<p class="content-paragraph">二つの矢線$(v_1, v_2), (v_2, v_1)$を$E'$から除いた矢線の集合を以降$E''$と呼ぶこととする。この矢線の集合$E''$と頂点集合$V$からなるグラフ$G''$も$G$のモラルグラフであることが示せるが、明らかに$G''$の方が$G'$よりも小さいため、$G'$はモラルグラフの最小性に矛盾する。</p>
+
+<p class="content-paragraph">以上の定理を使って次のような有向分離とモラルグラフの関係を示すことができる。</p>
+<div class="content-def"><p><span class="content-def-name">有向分離とモラルグラフの関係</span></p><p class="content-paragraph">ある非巡回的有向グラフ$G=(V, E)$上の3つの排反な頂点集合$X, Y, Z$を考える。もし、$X$と$Y$が$Z$によって有向分離されているならば、$X, Y, Z$が導く最小先祖集合$A$による部分グラフ$G(A)=(A, E(A))$のモラルグラフ$G(A)'=(A, E(A)')$上で$Z$は$X$と$Y$を分離している。</p></div>
+<p class="content-paragraph">まずは$G$上で$Z$によって有向分離されていた$X$と$Y$が$G(A)$上でも同様に有向分離されていることを見る。任意の$x \in X, y \in Y$に対して、それらを繋ぐ$G(A)$上での道は明らかに元のグラフ$G$上の道でもある</p>
+$$T \in path(x, y : G(A)) \Rightarrow T \in path(x, y : G)$$
+<p class="content-paragraph">よって、$G$上で$X$と$Y$が$Z$によって有向分離されていることから、任意の道$T \in path(x, y: G(A))$に対して、いずれかの頂点$t \in T$に対して下記のいずれかの条件が成り立っている。</p>
+<ol class="content-ol"><li class="content-ol-item">$t$が$T$の合流点であり、$de(t : G) \cap Z = \phi$</li><li class="content-ol-item">$t$が$T$の合流点でなく、$t \in Z$</li></ol>
+<p class="content-paragraph">ひとつ目の条件が成立している場合、$G(A)$は$G$の部分グラフであることから</p>
+$$de(t: G(A)) \subset de(t : G)$$
+<p class="content-paragraph">となるため、</p>
+$$de(t : G(A)) \cap Z = \phi$$
+<p class="content-paragraph">と導かれる。これは道$T$が$Z$によって有向分離されていることに他ならない。もし二つ目の条件が成立していた場合にも同様に$T$が$Z$によって有向分離される。</p>
+<p class="content-paragraph">つぎに、任意の$x \in X, y \in Y$と、$G(A)'$上でそれらを繋ぐ任意の道$T' \in path(x, y : G(A)')$を$Z$が分離していること</p>
+$$T' \cap Z \neq \phi$$
+<p class="content-paragraph">を示す。$T'$に対して$x$と$y$を繋ぐ$G(A)$上の道$T$を次のように構成する。$T'$に含まれる任意の矢線$(v_1, v_2)$に対して</p>
+<ol class="content-ol"><li class="content-ol-item">もし$(v_1, v_2) \in E(A)$であれば$(v_1, v_2) \in T$とする。</li><li class="content-ol-item">もし$(v_1, v_2) \not \in E(A)$だが、$(v_2, v_1) \in E(A)$であれば、$(v_2, v_1) \in T$とする。</li><li class="content-ol-item">もし$(v_1, v_2) \not \in E(A)$かつ$(v_2, v_1) \not \in E(A)$であれば、先の定理により$v_3 \in A$が存在して$(v_1, v_3) \in E(A)$かつ$(v_2, v_3) \in E(A)$となる。これらの矢線を$T$に含める。ちなみに、新たに追加された頂点$v_3$は道$T$における合流点となる。</li></ol>
+<p class="content-paragraph">$T'$にない$T$の頂点は全て3つ目の条件で追加された合流点であるため、もし$T$の合流点以外の場所に必ず$Z$の要素が存在することを示すことができれば、$T'$上には必ず$Z$の要素が存在することになり</p>
+$$T' \cap Z \neq \phi$$
+<p class="content-paragraph">を示すことができる。</p>
+<p class="content-paragraph">$T$上の合流点以外の場所に必ず$Z$の要素が存在することを示す。背理法で示すために、一旦$T$上の合流点以外の場所には$Z$の要素が存在しないと仮定する。$T$は$Z$によって有向分離されているため、いずれかの頂点$t \in T$が以下のいずれかの条件を満たしている。</p>
+<ol class="content-ol"><li class="content-ol-item">$t$が$T$の合流点であり、$de(t : G(A)) \cap Z = \phi$</li><li class="content-ol-item">$t$が$T$の合流点でなく、$t \in Z$</li></ol>
+<p class="content-paragraph">$T$上の合流点以外の場所に$Z$の要素が存在しないという仮定に反するため、二つ目の条件を満たす頂点は$T$上に存在しない。よって$T$上の合流点のどれか$t \in T$が1つ目の条件を満たすことになる。ここで$A$が$X \cup Y \cup Z$の最小先祖集合であることを考慮すれば、最小先祖集合と子孫の関係より</p>
+$$a \in de(t : G(A)) \cap (X \cup Y \cup Z)$$
+<p class="content-paragraph">となるような$a \in A$が存在する。条件の一つ目より</p>
+$$de(t : G(A)) \cap Z = \phi$$
+<p class="content-paragraph">であるから、条件を強くすることができて</p>
+$$a \in de(t : G(A)) \cap (X \cup Y)$$
+<p class="content-paragraph">である。要するに$t$から$X$か$Y$の要素への$Z$の要素を含まない有向道を形成することができる。一般性を落とさずに$a \in X$と仮定することができるが、この時$t$から$a$への有向道を$S_X$、$T$の$t$から$y$までの経路を$S_y$として、それらを$t$で繋いだ経路$S$を考えると、その経路も$X$と$Y$を繋いでいるため、有向分離されなければならない。以降同じような議論を続けていくと$T$の長さの有限性より必ず$T$上の合流点以外の場所に$Z$の要素が存在しなければならないことが示せる。</p>
+
+<h1 class="section-title">介入効果とその識別可能条件</h1>
+
+<p class="content-paragraph">因果効果の定義などを宮川本で採用されている記法とは異なる方法で記載し、推論ルールの証明を行なっていく。</p>
+
+<h1 class="subsection-title">構造方程式による因果ダイアグラムの定義</h1>
+
+<p class="content-paragraph">宮川本では因果ダイアグラムを決定論的な式に対してノイズを入れる形で定義していた。ここでは代わりに確率分布を前面に出して定義を行う。</p>
+<div class="content-def"><p><span class="content-def-name">因果モデル</span></p><p class="content-paragraph">因果モデル$(V, G, F)$とは、確率変数$V$、それらを頂点とした非巡回的有向グラフ$G$、確率変数$v$それぞれに対する条件付確率分布$f_v$の集合$F$の組を指す。この因果モデルにおいて$X$の確率分布は</p>
+$$f(V) = \prod_{v \in V} f_v (v | pa(v))$$
+<p class="content-paragraph">と与えられ、グラフ$G$を因果ダイアグラムと呼ぶ。</p></div>
+<p class="content-paragraph">ここで非巡回的有向独立グラフは、あくまで考えている確率変数$X$の確率分布$f$の取れる形を制限するためのものであるのに対して、因果ダイアグラムは構造方程式モデルとともに確率変数$X$の依存関係を与えることに注意する。例えば三つの確率変数$V=\{v_1, v_2, v_3\}$の確率分布$f$に対して</p>
+$$(v_1, v_2) \in E \land (v_2, v_3) \in E$$
+<p class="content-paragraph">となり、それ以外に矢線を持たない非巡回的有効独立グラフ$G=(V,E)$を与えた時、それら確率変数の確率分布は</p>
+$$f(v_1, v_2, v_3) = f(v_1) f(v_2 | v_1) f(v_3 | v_2)$$
+<p class="content-paragraph">と分解できるものに制限できるが、非巡回的有効独立グラフ$G'=(V,E')$として</p>
+$$(v_3, v_2) \in E' \land (v_2, v_1) \in E'$$
+<p class="content-paragraph">となり、それ以外に矢線を持たないものを取ったとしても</p>
+$$\begin{aligned}
+f(v_1, v_2, v_3) &= f(v_3) f(v_2 | v_3) f(v_1 | v_2) \\
+&= f(v_2, v_3) \frac{f(v_1 , v_2)}{f(v_2)} \\
+&= f(v_3 | v_2) f(v_2 | v_1) f(v_1)
+\end{aligned}$$
+<p class="content-paragraph">となり、確率分布$f$に与える制約は同じである。しかし$G$と$G'$を因果ダイアグラムとしてみた時、それぞれに付随して定義される条件付確率の集合$F$が、$G$の場合には</p>
+$$f_1(v_1), f_2(v_2 | v_1), f_3(v_3 | v_2)$$
+<p class="content-paragraph">であるのに対して、$G'$の場合には</p>
+$$f_1(v_1 | v_2), f_2(v_2 | v_3), f_3(v_3)$$
+<p class="content-paragraph">であり全く異なる。</p>
+
+<p class="content-paragraph">この因果モデルに対して何かしら外部から操作を行うことを介入と呼ぶ。</p>
+<div class="content-def"><p><span class="content-def-name">介入</span></p><p class="content-paragraph">ある因果モデル$(V,G,F)$に対して介入を行うとは、いくつかの確率変数$X \subset V$に対する条件付確率分布$f_v$を別の条件付き分布に変更すること$f'_v$である。この時、$V$の確率分布は</p>
+$$\prod_{v \in X} f'_v(v | v'_1, v'_2, \cdots) \prod_{v \in V - X} f_v(v | pa(v))$$
+<p class="content-paragraph">と変化するが、この確率分布を</p>
+$$f(V : \{v \sim f'_v(v | v'_1, v'_2, \cdots)\}_{v \in X})$$
+<p class="content-paragraph">と書く。ここで$f'_v$が依存する頂点$v'_1, v'_2, \cdots$は介入する前の頂点$pa(v)$と一致しても良いししなくても良い。</p>
+<p class="content-paragraph">特に一つの変数$x \in V$に対してのみ介入を行った場合の確率分布を</p>
+$$f(V : x \sim f'_x(x | x'_1, x'_2, \cdots))$$
+<p class="content-paragraph">などと書く。</p></div>
+<p class="content-paragraph">この定義に付随して、介入を行った後の分布における条件付き分布を適当な確率変数集合$X, Y$について</p>
+$$f(Y | X : x \sim f'_x(x | x'_1, x'_2, \cdots)) = \frac{f(Y, X : x \sim f'_x(x | x'_1, x'_2, \cdots))}{f(X : x \sim f'_x(x | x'_1, x'_2, \cdots))}$$
+<p class="content-paragraph">などと書くこととする。</p>
+<p class="content-paragraph">ちなみに、宮川本で紹介されている同時介入効果はこの記法を使った場合以下のように記載できる。因果モデル$(V,G,F)$と、排反な二つの頂点集合$(X, Y)$を考える。$X$の要素それぞれに対して、他の要素の影響を受け付けなくなるような介入</p>
+$$f'_x(x)$$
+<p class="content-paragraph">を行い得られた分布</p>
+$$f(V : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f'_x(x) \prod_{v \in V - X} f_v(v | pa(v))$$
+<p class="content-paragraph">における条件付き分布</p>
+$$f(Y | X : \{x \sim f'_x(x)\}_{x \in X})$$
+<p class="content-paragraph">を宮川本では$X$に介入したときの$Y$への同時介入効果と呼んでいる。ちなみにこの式は</p>
+$$f(X : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f'_x(x)$$
+<p class="content-paragraph">より、</p>
+$$f(Y | X : \{x \sim f'_x(x)\}_{x \in X}) = \sum_{v \in V - X - Y}\prod_{v \in V - X} f_v(v | pa(v))$$
+<p class="content-paragraph">とも表現できる。</p>
+
+<h1 class="subsection-title">推論ルール</h1>
+
+<p class="content-paragraph">ここまでの準備をもって、3つある因果効果の推論ルールをひとつひとつ示していく。</p>
+
+<div class="content-def"><p><span class="content-def-name">推論ルールその1</span></p><p class="content-paragraph">因果モデル$(V, G, F)$と、その頂点集合$V$の排反な三つの部分集合$(X, Y, Z)$を考える。因果ダイアグラム$G$において、$X$の要素へ向いている矢線を全て除いたグラフにおいて、$X$が$Y$と$Z$を有向分離するならば以下が成り立つ。</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = f(Y | X : \{x \sim f'_x(x)\}_{x \in X})$$</div>
+<p class="content-paragraph">$G$から、$X$の要素へ向いている矢線全て除くという介入を行ったときの確率分布は</p>
+$$f(V : \{x \sim f'_x(x)\}_{x \in X})$$
+<p class="content-paragraph">と表せる。この分布上で$X$が$Y$と$Z$を有向分離するということは、この介入を行った後の分布について</p>
+$$Y \perp\!\!\!\perp Z | X$$
+<p class="content-paragraph">が成り立つことを意味するため、題意は明らかに成り立つ。</p>
+
+<div class="content-def"><p><span class="content-def-name">推論ルールその2</span></p><p class="content-paragraph">因果モデル$(V,G,F)$と、その頂点集合$V$の排反な三つの部分集合$(X, Y, Z)$を考える。因果ダイアグラム$G$から、$X$から出る矢線を全て除いたグラフにおいて、$Z$が$X$と$Y$を有向分離するならば以下が成り立つ。</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = f(Y | X, Z)$$</div>
+<p class="content-paragraph">全ての確率変数の同時分布は以下のように表現できる。</p>
+$$f(V) = \prod_{x \in X} f(x | pa(x)) \prod_{y \in Y} f(y | pa(y)) \prod_{z \in Z} f(z | pa(z)) \prod_{w \in W} f(w | pa(w))$$
+<p class="content-paragraph">ただしここで$W = V - X - Y - Z$としている。因果ダイアグラム$G$において$X$から出る矢線を全て除いたグラフの確率分布は、$Y, Z, W$をそれぞれ$G$上で親に$X$の要素を持つ要素$Y', Z', W'$とそれ以外$Y'', Z'', W''$に分割して</p>
+$$\begin{aligned}
+f(V : \{v \sim f'_v(v | pa(v) - X)\}_{v \in ch(X)}) &= \prod_{x \in X} f(x | pa(x)) \\
+&\quad \prod_{y \in Y'} f'(y | pa(y) - X) \prod_{y \in Y''} f(y | pa(y)) \\
+&\quad \prod_{z \in Z'} f'(z | pa(z) - X) \prod_{z \in Z''} f(z | pa(z)) \\
+&\quad \prod_{w \in W'} f'(w | pa(w) - X) \prod_{w \in W''} f(w | pa(w))
+\end{aligned}$$
+<p class="content-paragraph">と表せる。ここで$f'$は$X$から出る矢線を全て除くという介入をする際に導入される確率分布である。一方でこの分布において$Z$が$X$と$Y$を有向分離することから、$W$を4つの集合$W_X,W_Y,W_Z,W_B$に分割して</p>
+$$f(V : \{v \sim f'_v(v | pa(v) - X)\}_{v \in ch(X)}) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z) f(W_B | X, W_X, Y, W_Y, Z, W_Z)$$
+<p class="content-paragraph">と表現することも可能である。この二つの式を見比べることで次の事実を発見することができる。</p>
+<ul class="content-ul"><li class="content-ul-item">$\forall x \in X \quad pa(x) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall y \in Y' \quad pa(y) \subset X \cup Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall y \in Y'' \quad pa(y) \subset Y \cup W_Y \cup Z$</li></ul>
+<p class="content-paragraph">さらに、$Z',Z''$はそれぞれ三つの排反な集合に分割することができて</p>
+$$\begin{aligned}
+Z' &= Z'_X \cup Z'_Y \cup Z'_Z \\
+Z'' &= Z''_X \cup Z''_Y \cup Z''_Z
+\end{aligned}$$
+<p class="content-paragraph">次の事実が成り立つ。</p>
+<ul class="content-ul"><li class="content-ul-item">$\forall z \in Z'_X \quad pa(z) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall z \in Z''_X \quad pa(z) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall z \in Z'_Y \quad pa(z) \subset Y \cup W_Y \cup Z \cup X$</li><li class="content-ul-item">$\forall z \in Z''_Y \quad pa(z) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall z \in Z'_Z \quad pa(z) \subset W_Z \cup Z \cup X$</li><li class="content-ul-item">$\forall z \in Z''_Y \quad pa(z) \subset W_Z \cup Z$</li></ul>
+<p class="content-paragraph">同様に$W',W''$もそれぞれ4つの排反な集合に分割することができて</p>
+$$\begin{aligned}
+W' &= W'_X \cup W'_Y \cup W'_Z \cup W_B' \\
+W'' &= W''_X \cup W''_Y \cup W''_Z \cup W_B''
+\end{aligned}$$
+<p class="content-paragraph">それぞれ$W'_X = W' \cap W_X$などの意味を持つとする。このとき、次の事実が成り立つ。</p>
+<ul class="content-ul"><li class="content-ul-item">$\forall w \in W'_X \quad pa(w) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall w \in W''_X \quad pa(w) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall w \in W'_Y \quad pa(w) \subset Y \cup W_Y \cup Z \cup X$</li><li class="content-ul-item">$\forall w \in W''_Y \quad pa(w) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall w \in W'_Z \quad pa(w) \subset W_Z \cup Z \cup X$</li><li class="content-ul-item">$\forall w \in W''_Z \quad pa(w) \subset W_Z \cup Z$</li></ul>
+<p class="content-paragraph">これらの集合を次の3種類に分類する。</p>
+<ul class="content-ul"><li class="content-ul-item">$A = X \cup Z'_X \cup Z''_X \cup W'_X \cup W''_X$</li><li class="content-ul-item">$B = Y' \cup Y'' \cup Z'_Y \cup Z''_Y \cup W'_Y \cup W''_Y$</li><li class="content-ul-item">$C = Z'_Z \cup Z''_Z \cup W'_Z \cup W''_Z$</li></ul>
+<p class="content-paragraph">このときそれぞれの集合について</p>
+<ul class="content-ul"><li class="content-ul-item">$pa(A) \subset X \cup Z \cup W_X$</li><li class="content-ul-item">$pa(B) \subset X \cup Z \cup W_Y \cup Y$</li><li class="content-ul-item">$pa(C) \subset X \cup Z \cup W_Z$</li></ul>
+<p class="content-paragraph">が成り立つ。よって介入前の同時分布$f$は</p>
+$$f(V) = \prod_{a \in A} f(a | pa(a)) \prod_{b \in B} f(b | pa(b)) \prod_{c \in C} f(c : pa(c)) f(W_B | A, B, C)$$
+<p class="content-paragraph">と書けるが、$A, B, C$の性質より</p>
+$$f(X, Y, Z) = \sum_{W_X} \prod_{a \in A}f(a | pa(a)) \sum_{W_Y} \prod_{b \in B} f(b | pa(b)) \prod_{c \in C} f(c | pa(c))$$
+<p class="content-paragraph">となる。$Y$を周辺化する際には$B$しか$Y$には依存しないため</p>
+$$f(X, Z) = \sum_{W_X} \prod_{a \in A}f(a | pa(a)) \sum_{W_Y, Y} \prod_{b \in B} f(b | pa(b)) \prod_{c \in C} f(c | pa(c))$$
+<p class="content-paragraph">となり、条件付き分布</p>
+$$f(Y | X, Z) = \frac{\sum_{W_Y} \prod_{b \in B} f(b | pa(b))}{\sum_{W_Y, Y} \prod_{b \in B} f(b | pa(b))}$$
+<p class="content-paragraph">と表せる。一方で介入後の同時分布は</p>
+$$f(V : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f(x | pa(x))\prod_{a \in A-X} f(a | pa(a)) \prod_{b \in B} f(b | pa(b)) \prod_{c \in C} f(c : pa(c)) f(W_B | A, B, C)$$
+<p class="content-paragraph">と表せるが、条件付き分布は同様に</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = \frac{\sum_{W_Y} \prod_{b \in B} f(b | pa(b))}{\sum_{W_Y, Y} \prod_{b \in B} f(b | pa(b))}$$
+<p class="content-paragraph">と表せる。これは$f(Y | X, Z)$と全く同じ式であるから</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = f(Y | X, Z)$$
+
+<div class="content-def"><p><span class="content-def-name">推論ルールその3</span></p><p class="content-paragraph">因果モデル$(V,G,F)$と、その頂点集合$V$の排反な三つの部分集合$(X, Y, Z)$を考える。因果ダイアグラム$G$から、$X$に向かう矢線を全て除いたグラフにおいて$Z$が$X$と$Y$を有向分離するならば、以下が成り立つ。</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = f(Y | Z)$$</div>
+<p class="content-paragraph">因果ダイアグラム$G$から、$X$に向かう矢線を全て除くという介入を行った後の分布は、適当な確率分布$f'_x$を使って</p>
+$$f(X, Y, Z, W : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f'_x(x) \prod_{y \in Y} f(y | pa(y)) \prod_{z \in Z} f(z | pa(z)) \prod_{w \in W} f(w | pa(w))$$
+<p class="content-paragraph">と書くことができる。ただしここで$W = V - X - Y - Z$である。ここで$Z$が$X$と$Y$を有向分離するため、ある$W$の分割</p>
+$$W = W_X \cup W_Y \cup W_Z \cup W_B$$
+<p class="content-paragraph">と関数$g_X,g_Y,g_Z$があって</p>
+$$f(X, Y, Z, W : \{x \sim f'_x(x)\}_{x \in X}) = g_X(X, W_X, Z) g_Y(Y, W_Y, Z) g_Z(W_Z, Z) f(W_B | X, W_X, Y, W_Y, Z_, W_Z)$$
+<p class="content-paragraph">と表現することができる。これを元の式と見比べれば</p>
+<ul class="content-ul"><li class="content-ul-item">$\forall y \in Y \quad pa(y) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall w \in W_X \quad pa(w) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall w \in W_Y \quad pa(w) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall w \in W_Z \quad pa(w) \subset Z \cup W_Z$</li></ul>
+<p class="content-paragraph">となり、$Z$は三つの集合$Z_X,Z_Y,Z_Z$に分割することができて</p>
+<ul class="content-ul"><li class="content-ul-item">$\forall z \in Z_X \quad pa(z) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$\forall z \in Z_Y \quad pa(z) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$\forall z \in Z_Z \quad pa(z) \subset Z \cup W_Z$</li></ul>
+<p class="content-paragraph">を満たすことがわかる。変数の集合を次のようにまとめれば</p>
+<ul class="content-ul"><li class="content-ul-item">$A = Y \cup W_Y \cup Z_Y$</li><li class="content-ul-item">$B = W_X \cup Z_X$</li><li class="content-ul-item">$C = W_Z \cup Z_Z$</li></ul>
+<p class="content-paragraph">それぞれの親の集合は次の条件を満たす。</p>
+<ul class="content-ul"><li class="content-ul-item">$pa(A) \subset Y \cup W_Y \cup Z$</li><li class="content-ul-item">$pa(B) \subset X \cup W_X \cup Z$</li><li class="content-ul-item">$pa(C) \subset Z \cup W_Z$</li></ul>
+<p class="content-paragraph">介入後の$X,Y,Z$の確率分布は</p>
+$$f(X, Y, Z : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f'_x(x) \sum_{W_Y} \prod_{a \in A} f(a : pa(a)) \sum_{W_X} \prod_{b \in B} f(b : pa(b)) \sum_{W_Z}\prod_{c \in C} f(c : pa(c))$$
+<p class="content-paragraph">となり、$Y$について周辺化すると</p>
+$$f(X, Y, Z : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f'_x(x) \sum_{W_Y, Y} \prod_{a \in A} f(a : pa(a)) \sum_{W_X} \prod_{b \in B} f(b : pa(b)) \sum_{W_Z}\prod_{c \in C} f(c : pa(c))$$
+<p class="content-paragraph">よって介入後の条件付確率は</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = \frac{\sum_{W_Y} \prod_{a \in A} f(a : pa(a))}{ \sum_{W_Y, Y} \prod_{a \in A} f(a : pa(a))}$$
+<p class="content-paragraph">介入前の$X, Y, Z$の確率分布は</p>
+$$f(X, Y, Z : \{x \sim f'_x(x)\}_{x \in X}) = \prod_{x \in X} f(x : pa(x)) \sum_{W_Y} \prod_{a \in A} f(a : pa(a)) \sum_{W_X} \prod_{b \in B} f(b : pa(b)) \sum_{W_Z}\prod_{c \in C} f(c : pa(c))$$
+<p class="content-paragraph">であり、全く同じ議論から</p>
+$$f(Y | X, Z) = \frac{\sum_{W_Y} \prod_{a \in A} f(a : pa(a))}{ \sum_{W_Y, Y} \prod_{a \in A} f(a : pa(a))}$$
+<p class="content-paragraph">と結論できる。さらに右辺に$X$への依存性がないため、</p>
+$$f(Y | X, Z) = f(Y | Z)$$
+<p class="content-paragraph">と書ける。これらから</p>
+$$f(Y | X, Z : \{x \sim f'_x(x)\}_{x \in X}) = f(Y | Z)$$
+<p class="content-paragraph">を結論できる。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

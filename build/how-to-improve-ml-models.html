@@ -1,0 +1,42 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">どのようにして機械学習モデルの精度を上げていけば良いか</h2>
+                                <p class="date">2019-01-26</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">とりあえずkaggleなどのコンペに参加して、Kernelを漁ってある程度良いベンチマークを得るところまでは多分参加者全員が行うことで、そこまでできてやっとコンペがスタートする感じがある。問題はそこまで言った後に何をするかで、そこらへんがあまり明確に書かれている記事が少な気がするのでとりあえず今回考えたことを書き残してみる。</p>
+
+<p class="content-paragraph">まずKernel漁りが終わった人が次にやることとしてほとんど何も考えなくてもできることが、いろいろな文献を集めてきて片っ端から適用してみることだ。とりあえずその問題に適用できそうな手法をいろいろな文献から取ってきて実装して当てはめてみてダメだったらさっさと次に行くということを繰り返して行く方法。多分普通に機械学習を使って何かしらのアプリケーションをつくるとかだったらこれくらいでよくて、とりあえず5個くらいその分野で有名なアルゴリズムを試してみてうまく言ったらそれを採用してみればいいと思う。</p>
+
+<p class="content-paragraph">ただしこの方法ではKaggleみたいな時間がほとんど無制限に近くて精度のみを競うコンペでは十分に高い精度は出ない。大抵教科書とか有名な論文に乗っているようなモデルはKernelかDiscussionで公開されるので、それらを適当に適用してみただけではあまりコンペで上位に行くことはできない。もちろんその分野が初めてで、業務に使うために色々と知りたいという要求の元コンペに参加しているのならばそれをやってみるのは非常によく勉強できるとは思うが、それだけではコンペで勝てるほど精度が良くなることはあまりない気がする。</p>
+
+<p class="content-paragraph">ではどうすれば良いかというと、やはり改善のループを回すしかないのだろうなというのが今の所の感想というか考え。基本的にはこの記事(<a href="https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-c8d82ce642b0">How to deliver on Machine Learning projects</a>)でも言及されている通り、とりあえず作ってみてその評価をして、最後になぜその評価になったかどうして全ての対象に対して正しい予測ができないかを分析してその経験をもとに新しいモデルを作るみたいなことをやらないといけないはずだ。となるとやはり適当に既存のライブラリからとってきたよくわからんモデルを適当に適用してみただけだとそれはできないので、自分で書いてみるとかしないといけないのかなとは思う。</p>
+
+<p class="content-paragraph">機械学習は機械に何かしらのタスクを教えることになるが、人間に何かしらを教えるときも多分そうするのが良いのだろうなとは思っていて、その類推は何かしら機械学習の精度上げの際の指針になるかもしれない。人間に教えるときはとりあえず教えてみて、テストしてどうして間違ったかを考えて、そこを直すような教え方をもう一度やってみるということを繰り返すと思う。機械学習もそれと同じだろうなと思う。機械に一度教えてみて、テストしてみて、なぜ間違ったかを考えてそれを直してみるというループを繰り返すはずだ。問題は教える側もよくわかっていないタスクというのが機械学習にはよくあるという点だが、そういう場合でもやることは同じだろうと思う。少し難易度は上がるが、どうして誤判断をするようになるのかをきちんと解析できさえすれば、改善のループは回せるはずだ。</p>
+
+<p class="content-paragraph">こういう改善のループは、一人で作業をしていると明確になりにくいが、チームで共同したりしていると明確になりやすいのかなとは思う。例えばこの<a href="https://www.reddit.com/r/MachineLearning/comments/4uncbo/running_an_ml_product_team/">Reddit Thread</a>では、そういう機械学習のモデルを作るチームが普通の Agile Development の方式に従って開発している様子が回答されている。一回何かしらの方法で改善をしたら、それを評価して、なぜ間違ったかを解析するタスクが入って、それを活用して次の改善へみたいなことをやるのだろう。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

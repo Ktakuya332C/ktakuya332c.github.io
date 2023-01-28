@@ -1,0 +1,153 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">bootloaderからC言語のコードを呼ぶ</h2>
+                                <p class="date">2019-03-16</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">bootloader内でassemblyからC言語のコードを呼ぶことができたのでメモする。</p>
+
+<h1 class="section-title">調査用コード</h1>
+
+<p class="content-paragraph">調査用コードは<a href="https://gist.github.com/Ktakuya332C/881eb08b8adcdbef299afc6bf18fa0be">Gist</a>にアップロードしておいた。</p>
+
+<p class="content-paragraph">それぞれのファイルの役割は</p>
+
+<ul class="content-ul"><li class="content-ul-item">boot.S: BIOSから最初に呼び出されるスクリプト。16-bit real mode から 32-bit protected mode に動作方法を変換し、main.cのbootmain関数を呼び出す</li><li class="content-ul-item">main.c: 無限ループをする関数bootmainを定義しているスクリプト。</li><li class="content-ul-item">sign.pl: 任意のバイナリファイルを読み取り、510バイト以下なら510バイトになるように0を付け足した上で最後にbootloaderであることを示すマジックナンバーであるAA55を付け足すスクリプト。</li></ul>
+
+<h1 class="section-title">調査準備</h1>
+
+<p class="content-paragraph">まず、<a href="../build/debug-bootloader-on-mac.html">Macでbootloader周辺をデバッグする方法</a>の通りに環境構築を行う。</p>
+
+<p class="content-paragraph">次に、今回調査を行うためのスクリプトをコンパイルする。まずはassemblyのスクリプトであるboot.Sをコンパイルする。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o</code></pre></div>
+
+<p class="content-paragraph">次に、C言語のスクリプトであるmain.cをコンパイルする。この時<span class="inline-code">-ffreestanding</span>フラグをつけることで標準ライブラリなどが入り込まないようにし、コンパイルしている環境に依存しないようにする。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ gcc -ffreestanding -c main.c -o main.o</code></pre></div>
+
+<p class="content-paragraph">そしてそれら二つのオブジェクトファイル(boot.oとmain.o)をリンクする。bootloaderは必ず0x7c00番地からロードされるので引数には<span class="inline-code">-Ttext 0x7c00</span>を渡している。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 0x7c00 --oformat=binary --entry start boot.o main.o -o boot.bin</code></pre></div>
+
+<p class="content-paragraph">以上の操作でbootloaderの処理が書かれたバイナリファイル<span class="inline-code">boot.bin</span>ができたわけだが、bootloaderとして認識されるためには510と511番地にマジックナンバーを書かなければならない。これを書くために<span class="inline-code">sign.pl</span>が存在する。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ perl sign.pl boot.bin
+boot block is 136 bytes (max 510)
+vagrant@vagrant-ubuntu-trusty-32:/vagrant$ hexdump boot.bin
+0000000 fcfa 010f 2e16 0f7c c020 8366 01c8 220f
+0000010 eac0 7c34 0008 0000 0000 0000 0000 ffff
+0000020 0000 9a00 00cf ffff 0000 9200 00cf 0017
+0000030 7c16 0000 b866 0010 d88e c08e e08e e88e
+0000040 d08e 00bc 007c e800 0002 0000 feeb 8955
+0000050 ebe5 00fe 0014 0000 0000 0000 7a01 0052
+0000060 7c01 0108 0c1b 0404 0188 0000 0018 0000
+0000070 001c 0000 ffda ffff 0005 0000 4100 080e
+0000080 0285 0d42 0005 0000 0000 0000 0000 0000
+0000090 0000 0000 0000 0000 0000 0000 0000 0000
+*
+00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
+0000200</code></pre></div>
+
+<p class="content-paragraph">最後にaa55の文字が見えるので、きちんと書き込まれたことがわかる。</p>
+
+<h1 class="section-title">調査内容</h1>
+
+<p class="content-paragraph">作成したbootloaderをqemuで実行し、gdbを使ってその動作を見ていく。</p>
+
+<div class="code-container"><pre><code>vagrant@vagrant-ubuntu-trusty-32:/vagrant$ qemu-system-i386 boot.bin -nographic -s -S
+vagrant@vagrant-ubuntu-trusty-32:~$ gdb
+(gdb) target remote :1234
+(gdb) set architecture i8086</code></pre></div>
+
+<p class="content-paragraph">とりあえずbootloaderの処理が始まる0x7c00まで処理を進める。</p>
+
+<div class="code-container"><pre><code>(gdb) b *0x7c00
+Breakpoint 1 at 0x7c00
+(gdb) c
+Continuing.
+Breakpoint 1, 0x00007c00 in ?? ()</code></pre></div>
+
+<p class="content-paragraph">次に 16-bit real mode から 32-bit protected mode に切り替わるところまで処理を進める。</p>
+
+<div class="code-container"><pre><code>(gdb) disassemble 0x7c00,+0x12
+Dump of assembler code from 0x7c00 to 0x7c12:
+=&gt; 0x00007c00:	cli
+   0x00007c01:	cld
+   0x00007c02:	lgdtw  0x7c2e
+   0x00007c07:	mov    %cr0,%eax
+   0x00007c0a:	or     $0x1,%eax
+   0x00007c0e:	mov    %eax,%cr0
+   0x00007c11:	ljmp   $0x8,$0x7c34
+End of assembler dump.
+(gdb) b *0x7c11
+Breakpoint 2 at 0x7c11
+(gdb) c
+Continuing.
+Breakpoint 2, 0x00007c11 in ?? ()
+(gdb) si</code></pre></div>
+
+<p class="content-paragraph">切り替わったら次はbootmainを呼び出す前まで処理を進める。</p>
+
+<div class="code-container"><pre><code>(gdb) set architecture i386
+(gdb) info reg eip
+eip            0x7c34	0x7c34
+(gdb) disassemble 0x7c34,+0x14
+Dump of assembler code from 0x7c34 to 0x7c48:
+=&gt; 0x00007c34:	mov    $0x10,%ax
+   0x00007c38:	mov    %eax,%ds
+   0x00007c3a:	mov    %eax,%es
+   0x00007c3c:	mov    %eax,%fs
+   0x00007c3e:	mov    %eax,%gs
+   0x00007c40:	mov    %eax,%ss
+   0x00007c42:	mov    $0x7c00,%esp
+   0x00007c47:	call   0x7c4e
+End of assembler dump.</code></pre></div>
+
+<p class="content-paragraph">この0x7c47番地のcall処理が<span class="inline-code">call bootmain</span>に当たることになる。実際にcall処理を呼び出すところまで進めて見る。</p>
+
+<div class="code-container"><pre><code>(gdb) b *0x7c47
+Breakpoint 3 at 0x7c47
+(gdb) c
+Continuing.
+Breakpoint 3, 0x00007c47 in ?? ()
+(gdb) si
+0x00007c4e in ?? ()
+(gdb) info reg eip
+eip            0x7c4e	0x7c4e</code></pre></div>
+
+<p class="content-paragraph">ここからの処理がどのようになっているのかを見て見る。</p>
+
+<div class="code-container"><pre><code>(gdb) disassemble 0x7c4e,+0x4
+Dump of assembler code from 0x7c4e to 0x7c52:
+=&gt; 0x00007c4e:	push   %ebp
+   0x00007c4f:	mov    %esp,%ebp
+   0x00007c51:	jmp    0x7c51
+End of assembler dump.</code></pre></div>
+
+<p class="content-paragraph">ここからの処理は、C言語の関数の通常処理と無限ループになっていることがわかる。確かにbootmainを呼ぶことができているようだ。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
