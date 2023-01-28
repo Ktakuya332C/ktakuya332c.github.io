@@ -1,0 +1,128 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">確率変数の平均値</h2>
+                                <p class="date">2020-05-04</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">「測度から確率へ」の第5章を読み進めている。5章の内容は</p>
+<ul class="content-ul"><li class="content-ul-item">確率変数に対する平均値の定義とその性質</li><li class="content-ul-item">平均値と極限操作の関係</li><li class="content-ul-item">平均値に関する幾つかの不等式</li><li class="content-ul-item">$L^p$-収束</li></ul>
+<p class="content-paragraph">となっている。ここでは、確率変数に対する平均値の定義とその性質についてまとめていこうと思う。</p>
+
+
+<h1 class="section-title">非負単関数に対する定義</h1>
+
+<p class="content-paragraph">まずは一番簡単なものに対してから定義を始めていく。</p>
+<div class="content-def"><p><span class="content-def-name">定義1</span></p><p class="content-paragraph">確率空間$(\Omega, \mathcal{B}, \bm{P})$上の確率変数$X$が、$\Omega$を分割する互いに交わらない可測集合族$\{A_k\}_{k=1}^n$をもとにした非負単関数</p>
+$$X(\omega) = \sum_{k=1}^n a_k I_{A_k}(\omega), a_k \ge 0$$
+<p class="content-paragraph">として表せる時、その平均値を</p>
+$$\bm{E}[X] = \sum_{k=1}^n a_k \bm{P}(A_k)$$
+<p class="content-paragraph">として定義する。</p></div>
+<p class="content-paragraph">単関数の表現は一意的ではないため、どのような表現をとっても値が同じになることを示す。</p>
+<div class="content-def"><p><span class="content-def-name">命題1</span></p><p class="content-paragraph">非負単関数$X$の平均値は、その単関数の表現にかかわらず同じ値をとる。</p></div>
+<p class="content-paragraph">もし二つの表現があったとする。</p>
+$$X = \sum_{k=1}^n a_k I_{A_k} = \sum_{l=1}^m b_l I_{B_l}$$
+<p class="content-paragraph">この時、$C_{kl} = A_k \cap B_l$として</p>
+$$c_{kl} = \begin{cases}
+  a_k (= b_l) & C_{kl} \neq \phi \\
+  0 & C_{kl} = \phi
+\end{cases}$$
+<p class="content-paragraph">とすると、</p>
+$$\begin{aligned}
+\bm{E}[X] &= \sum_{k=1}^n a_k \bm{P}(A_k) \\
+&= \sum_{k=1}^n a_k \sum_{l=1}^m \bm{P}(C_{kl}) \\
+&= \sum_{k=1}^n \sum_{l=1}^m c_{kl} \bm{P}(C_{kl})
+\end{aligned}$$
+<p class="content-paragraph">となるが、これは$\{B_l\}$を使った場合の展開も同じことである。よって表現にはよらないことが確認できた。</p>
+
+<p class="content-paragraph">その他にいくつか簡単な性質を並べておく。証明は先ほどと同じく$\{C_{kl}\}$を出してくればできるので、ここでは明示的に書くことはやめる。</p>
+<div class="content-def"><p><span class="content-def-name">命題2</span></p><p class="content-paragraph">非負単関数$X,Y$に対して</p>
+<ol class="content-ol"><li class="content-ol-item">$X \le Y$の時、$\bm{E}[X] \le \bm{E}[Y]$</li><li class="content-ol-item">$\bm{E}[X + Y] = \bm{E}[X] + \bm{E}[Y]$</li></ol></div>
+
+
+<h1 class="section-title">非負確率変数に対する定義</h1>
+
+<p class="content-paragraph">一段難しくなって単関数以外に対する定義をする。ただしまだ非負性は残している。</p>
+<div class="content-def"><p><span class="content-def-name">定義2</span></p><p class="content-paragraph">非負確率変数$X$は非負可測関数でもあるので、それに近づく近似単関数列$\{X_n\}$を取ることができる。この近似単関数列の平均値の極限を$X$の平均値と定義する。</p>
+$$\bm{E}[X] \equiv \lim_{n \rightarrow \infty} \bm{E}[X_n]$$</div>
+<p class="content-paragraph">やはりこの場合でも先ほどと同様一意性が気になるので示しておく。</p>
+<div class="content-def"><p><span class="content-def-name">命題3</span></p><p class="content-paragraph">非負確率変数の平均値は、それを定義する際に使用する近似単関数列によらず一意に定まる。</p></div>
+<p class="content-paragraph">非負確率変数$X$の近似単関数列として$\{X_n\}$と$\{Y_n\}$が取れたとする。これらから</p>
+$$Z_n(\omega) = \max(X_n(\omega), Y_n(\omega)), \omega \in \Omega$$
+<p class="content-paragraph">とすると、先ほどの非負単関数の平均値の性質より</p>
+$$\bm{E}[X_n] \le \bm{E}[Z_n] \Rightarrow \lim_{n \rightarrow \infty} \bm{E}[X_n] \le \lim_{n \rightarrow \infty} \bm{E}[Z_n]$$
+<p class="content-paragraph">また、適当に$m \in \mathbb{N}$と$\epsilon > 0$を決めて</p>
+$$\Gamma_n \equiv \{\omega \in \Omega : X_n(\omega) > Z_m(\omega) - \epsilon\}$$
+<p class="content-paragraph">とすると、この集合は単調増加して最終的には$\Omega$にたどり着く</p>
+$$\Gamma_1 \subset \Gamma_2 \subset \cdots, \bigcup_{n=1}^{\infty} \Gamma_k = \Omega$$
+<p class="content-paragraph">この集合の上では</p>
+$$\bm{E}[Z_m I_{\Gamma_n}] < \bm{E}[X_n] + \epsilon$$
+<p class="content-paragraph">となるが、両辺で$n$を無限に飛ばせば</p>
+$$\bm{E}[Z_m] < \lim_{n \rightarrow \infty} \bm{E}[X_n] + \epsilon$$
+<p class="content-paragraph">任意の$\epsilon > 0$と任意の$m \in \mathbb{N}$に対して成り立っているので、</p>
+$$\lim_{m \rightarrow \infty} \bm{E}[Z_m] \le \lim_{n \rightarrow \infty} \bm{E}[X_n]$$
+<p class="content-paragraph">と言える。よって、</p>
+$$\lim_{n \rightarrow \infty} \bm{E}[X_n] = \lim_{n \rightarrow \infty} \bm{E}[Z_n]$$
+<p class="content-paragraph">だが、$\{Y_n\}$に関しても同様のことが言えるはずなので、題意は得られる。</p>
+
+<p class="content-paragraph">非負単関数に対して調べた性質をこちらでも示しておく。</p>
+<div class="content-def"><p><span class="content-def-name">命題4</span></p><p class="content-paragraph">非負確率変数$X,Y$に対して</p>
+<ol class="content-ol"><li class="content-ol-item">$X \le Y$の時、$\bm{E}[X] \le \bm{E}[Y]$</li><li class="content-ol-item">$\bm{E}[X + Y] = \bm{E}[X] + \bm{E}[Y]$</li></ol></div>
+<p class="content-paragraph">一つ目は先ほどと同じく</p>
+$$Z_n(\omega) = \max(X_n(\omega), Y_n(\omega)), \omega \in \Omega$$
+<p class="content-paragraph">とすると、明らかに</p>
+$$\bm{E}[X_n] \le \bm{E}[Z_n]$$
+<p class="content-paragraph">極限を取れば</p>
+$$\bm{E}[X] = \lim_{n \rightarrow \infty} \bm{E}[X_n] \le \lim_{n \rightarrow \infty} \bm{E}[Z_n] = \bm{E}[Y]$$
+<p class="content-paragraph">もう一つの方は単純に非負単関数の時の結果を援用すれば示せる。</p>
+$$\bm{E}[X + Y] = \lim_{n \rightarrow \infty} \bm{E}[X_n + Y_n] = \lim_{n \rightarrow \infty} (\bm{E}[X_n] + \bm{E}[Y_n]) = \bm{E}[X] + \bm{E}[Y]$$
+
+
+<h1 class="section-title">一般の確率変数に対しての定義</h1>
+
+<p class="content-paragraph">やっと一般の確率変数を取り扱うことができる。</p>
+<div class="content-def"><p><span class="content-def-name">定義3</span></p><p class="content-paragraph">確率変数$X$をその正の部分と負の部分に切り分けた時に</p>
+$$\begin{aligned}
+X^+(\omega) &= \max(X(\omega), 0) \\
+X^-(\omega) &= -\min(X(\omega, 0))
+\end{aligned}$$
+<p class="content-paragraph">それぞれの平均値が発散しない</p>
+$$\bm{E}[X^+] < \infty, \bm{E}[X^-] < \infty$$
+<p class="content-paragraph">とき、確率変数$X$は平均可能であるといい、その平均値を</p>
+$$\bm{E}[X] = \bm{E}[X^+] - \bm{E}[X^-]$$
+<p class="content-paragraph">とする。</p></div>
+<p class="content-paragraph">平均可能性を正の部分と負の部分に分けて考えるのは面倒なので、次の性質が使える。</p>
+<div class="content-def"><p><span class="content-def-name">命題5</span></p><p class="content-paragraph">確率変数$X$が平均可能であることと</p>
+$$\bm{E}[|X|] < \infty$$
+<p class="content-paragraph">は同値。</p></div>
+$$\bm{E}[|X|] = \bm{E}[X^+] + \bm{E}[X^-]$$
+<p class="content-paragraph">なので、明らか。</p>
+
+
+<h1 class="section-title">その他</h1>
+
+<p class="content-paragraph">今までは定義や補題などに、この本に書いていない場合には、適当な名前をつけてきたが、それもそろそろめんどくさくなってきたので、今回から定義には「定義」、補題や定理などには「性質」とつけることにした。補題と定理のさがいまいちわかっておらず、区別するのもめんどくさいので、とりあえず「補題」という言葉に統一することにした。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

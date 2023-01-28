@@ -1,0 +1,176 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">可測関数の定義とその性質</h2>
+                                <p class="date">2020-05-03</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">「測度から確率へ」の第4章を読んでいる。内容としては大きく次の二つに分かれている。</p>
+<ol class="content-ol"><li class="content-ol-item">可測関数の定義とその性質の紹介</li><li class="content-ol-item">確率変数の定義とその性質の紹介</li></ol>
+<p class="content-paragraph">今回はその前半、可測関数の定義とその性質について、をまとめていこうと思う。</p>
+
+
+<h1 class="section-title">可測関数の定義と性質</h1>
+
+<div class="content-def"><p><span class="content-def-name">可測関数</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$上の実数または$+\infty,-\infty$の値をとる関数$X$が、任意の実数$\alpha$に対して</p>
+$$\{\omega \in \Omega : X(\omega) > \alpha\}$$
+<p class="content-paragraph">を満たすとき、関数$X$を可測関数と呼ぶ。</p></div>
+<p class="content-paragraph">可測関数は値域に$+\infty,-\infty$を含んでいることに注意する。</p>
+
+<p class="content-paragraph">この先、この可測関数に対する積分を定めたいのだが、基本的に積分はリーマン積分の時と同じく何かしらその関数に近い、積分の値っぽいものが定め易そうな関数を持ってきて、それを徐々に本当の関数に近づけていくという方法をとる。この時必要になるのが、まず定義関数というもの。</p>
+<div class="content-def"><p><span class="content-def-name">定義関数</span></p><p class="content-paragraph">集合$\Omega$のある部分集合$A$に紐づく関数</p>
+$$I_A(\omega) = \begin{cases}
+  1 & \omega \in \Omega  \\
+  0 & \omega \not \in \Omega
+\end{cases}$$
+<p class="content-paragraph">を定義関数と呼ぶ。</p></div>
+<p class="content-paragraph">そして、その定義関数を有限個組み合わせて作る単関数というものである。</p>
+<div class="content-def"><p><span class="content-def-name">単関数</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$上の実数値関数$X$に対して、互いに共通部分を持たない可測集合族</p>
+$$A_1, A_2, \cdots, A_n \in \mathcal{B}$$
+<p class="content-paragraph">と、実数$a_1, a_2, \cdots, a_n \in \mathbb{R}$が存在して</p>
+$$X(\omega) = \sum_{k=1}^n a_k I_{A_k}(\omega)$$
+<p class="content-paragraph">となるならば、$X$は単関数であるという。</p></div>
+<p class="content-paragraph">定義からしてカクカクしていて積分の値っぽいものが定め易そうであることがわかると思う。</p>
+
+<p class="content-paragraph">この本ではここから一気に積分の定義にいくわけではなく、その一歩前の段階として可測関数の積分をしたいと思った時に、それに徐々に近くような単関数を作れるのかどうかという点を考えていくことにしている様子。</p>
+<div class="content-def"><p><span class="content-def-name">可測関数列の性質</span></p><p class="content-paragraph">可測関数列$\{X_n\}_{n=1}^{\infty}$が与えられたとき、</p>
+$$\sup_n X_n, \inf_n X_n, \limsup_n X_n, \liminf_n X_n$$
+<p class="content-paragraph">はどれも可測関数である。</p></div>
+<p class="content-paragraph">まず$\sup$に対しての証明を行う。任意の実数$\alpha$に対して</p>
+$$\sup_n X_n(w) > \alpha \iff \exists n, X_n(w) > \alpha$$
+<p class="content-paragraph">であるから、</p>
+$$\{\omega \in \Omega : \sup_n X_n(w) > \alpha\} = \bigcup_n \{\omega \in \Omega : X_n(w) > \alpha\} \in \mathcal{B}$$
+<p class="content-paragraph">よって、$\sup_n X_n$は可測関数である。</p>
+
+<p class="content-paragraph">つぎに$\inf$については、単に同じ議論をしてしまうと</p>
+$$\inf_n X_n(\omega) \ge \alpha \iff \forall n, X_n(\omega) > \alpha$$
+<p class="content-paragraph">となってしまうので、少し工夫して</p>
+$$\exists m, \inf_n X_n(\omega) > \alpha + \frac{1}{m} \iff \exists m, \forall n, X_n(\omega) > \alpha + \frac{1}{m}$$
+<p class="content-paragraph">を証明することにする。必要性は明らかで、十分性は$m$を適切に取った後に</p>
+$$\forall n, X_n(\omega) > \alpha + \frac{1}{m} \Rightarrow \inf_n X_n(\omega) \ge \alpha + \frac{1}{m} > \alpha + \frac{1}{m+1}$$
+<p class="content-paragraph">として示せる。この結果を使えば</p>
+$$\begin{aligned}
+\{\omega \in \Omega : \inf_n X_n(w) > \alpha \} &= \bigcup_m \{\omega \in \Omega : \inf_n X_n(w) > \alpha + \frac{1}{m} \} \\
+&= \bigcup_m \bigcap_n \{\omega \in \Omega : X_n(w) > \alpha + \frac{1}{m} \} \in \mathcal{B}
+\end{aligned}$$
+<p class="content-paragraph">となり、$\inf_n X_n$も可測関数であることがわかる。</p>
+
+<p class="content-paragraph">$\limsup$と$\liminf$は、</p>
+$$\limsup_n X_n = \inf_n \sup_{k \ge n} X_k, \liminf_n X_n = \sup_n \inf_{k \ge n} X_k,$$
+<p class="content-paragraph">であり、$\sup$と$\inf$の組み合わせなので、可測関数である。</p>
+
+<div class="content-def"><p><span class="content-def-name">可測関数列の極限</span></p><p class="content-paragraph">可測関数列$\{X_n\}_{n=1}^{\infty}$が与えられたときに</p>
+$$\limsup_n X_n = \liminf_n X_n$$
+<p class="content-paragraph">となれば、その値を</p>
+$$\lim_n X_n$$
+<p class="content-paragraph">と表すこととする。</p></div>
+
+<p class="content-paragraph">ここまで準備すれば、可測関数に徐々に近づくような単関数を作れるかという点についてある程度の回答を得ることができる。</p>
+<div class="content-def"><p><span class="content-def-name">非負可測関数と単関数の関係</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$上の非負関数$X$が可測となる必要十分条件は、ある非負単関数列$\{X_n\}$で</p>
+$$0 \le X_1 \le X_2 \le \cdots \le X$$
+<p class="content-paragraph">を満たし、かつ</p>
+$$\lim_n X_n = X$$
+<p class="content-paragraph">となるようなものが存在することである。</p></div>
+<p class="content-paragraph">十分性は、単関数が可測であり、可測関数の極限も可測になることから明らかである。必要性は、任意の非負可測関数$X$に対して</p>
+$$\begin{aligned}
+A_0^n &= \{\omega : X(\omega) > n\} \in \mathcal{B} \\
+A_k^n &= \{\omega : \frac{k-1}{2^n} \le X(\omega) < \frac{k}{2^n} \} \in \mathcal{B} \\
+X_n(\omega) &= \sum_{k=1}^{n2^n} \frac{k-1}{2^n} I_{A_k^n}(\omega) + I_{A_0^n}(\omega)
+\end{aligned}$$
+<p class="content-paragraph">とすれば、$\{X_n\}$が上記の条件を満たすことがわかる。</p>
+
+<p class="content-paragraph">最後に一工夫すると、どんな可測関数に対してもそれに近づいていくような単関数列を作ることができることがわかる。</p>
+<div class="content-def"><p><span class="content-def-name">可測関数と単関数の関係</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$上の関数$X$が可測となる必要十分条件は、ある単関数列$\{X_n\}$で</p>
+$$0 \le X_1 \le X_2 \le \cdots \le X$$
+<p class="content-paragraph">を満たし、かつ</p>
+$$\lim_n X_n = X$$
+<p class="content-paragraph">となるようなものが存在することである。</p></div>
+<p class="content-paragraph">十分性は先ほどと同じく明らか。必要性は、</p>
+$$X^+(\omega) = \max(X(\omega), 0) \\
+X^-(\omega) = - \min(X(\omega), 0)$$
+<p class="content-paragraph">とすれば、それらに対して近似単関数列$X^+_n, X^-_n$が取れるが、</p>
+$$X_n = X^+_n - X^-_n$$
+<p class="content-paragraph">とすれば目的の単関数列が得られる。</p>
+
+
+<h1 class="section-title">可測関数と可測写像</h1>
+
+<p class="content-paragraph">可測関数は値域が実数と$+\infty,-\infty$の場合についての話だったが、可測関数とは別に可測写像と呼ばれる、値域が一般の可測空間の場合の話をすることもできる。</p>
+<div class="content-def"><p><span class="content-def-name">可測写像</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$から$(\Omega', \mathcal{B}')$への写像$T$が、任意の$\mathcal{B}'$-可測集合$A$に対して</p>
+$$T^{-1}(A) \in \mathcal{B}$$
+<p class="content-paragraph">となる時、写像$T$は可測写像であるという。</p></div>
+<p class="content-paragraph">ここで注意するべきは、一般に可測関数は可測写像ではないということである。一番それっぽいのは実数と1次元ボレル集合体で作られる可測空間への関数</p>
+$$T: (\Omega, \mathcal{B}) \rightarrow (\mathbb{R}, \bm{B}_1)$$
+<p class="content-paragraph">だが、残念ながらこの関数の値域に$+\infty,-\infty$が含まれない。</p>
+
+<p class="content-paragraph">ただし、可測関数は可測写像っぽい性質を満たしてはいる。</p>
+<div class="content-def"><p><span class="content-def-name">可測関数の逆像に関する性質</span></p><p class="content-paragraph">可測関数$X$について次が成り立つ。</p>
+<ol class="content-ol"><li class="content-ol-item">$X^{-1}(+\infty) \in \mathcal{B}$</li><li class="content-ol-item">$X^{-1}(-\infty) \in \mathcal{B}$</li><li class="content-ol-item">任意の1次元ボレル集合$B \in \bm{B}_1$に対して、$X^{-1}(B) \in \mathcal{B}$</li></ol></div>
+<p class="content-paragraph">一つ目は</p>
+$$\{\omega \subset \Omega : X(\omega) = \infty\} = \bigcap_n \{\omega \subset \Omega : X(\omega) > n \} \in \mathcal{B}$$
+<p class="content-paragraph">より明らか。二つ目も同様に</p>
+$$\{\omega \subset \Omega : X(\omega) = - \infty\} = \bigcap_n \{\omega \subset \Omega : X(\omega) \le -n \} \in \mathcal{B}$$
+<p class="content-paragraph">より明らか。三つ目は</p>
+$$\mathcal{B}_0 \equiv \{B \subset \mathbb{R} : X^{-1}(B) \in \mathcal{B}\}$$
+<p class="content-paragraph">とすると、任意の$-\infty < a \le b \le \infty$に対して</p>
+$$X^{-1}((a, b]) = X^{-1}((a, \infty] - (b, \infty]) = X^{-1}((a, \infty]) - X^{-1}((b, \infty]) \in \mathcal{B}$$
+<p class="content-paragraph">となるので、</p>
+$$\bm{J}_1 \subset \mathcal{B}_0 \Rightarrow \bm{B}_1 \subset \mathcal{B}_0$$
+<p class="content-paragraph">よって任意の$B \in \bm{B}_1$に対して$X^{-1}(B) \in \mathcal{B}_0$となる。</p>
+
+<p class="content-paragraph">そして実関数に限ればそれらは同じ意味。</p>
+<div class="content-def"><p><span class="content-def-name">実関数における可測関数と可測写像</span></p><p class="content-paragraph">実関数に限れば、それが可測関数であることの必要十分条件は可測写像であることである。そしてそのような関数のことを実可測関数と呼ぶ。</p></div>
+
+
+<h1 class="section-title">実可測関数の性質</h1>
+
+<p class="content-paragraph">実可測関数は足し算したり掛け算したりしても相変わらず実可測関数である。そのことを示すためにまず次を示す。</p>
+<div class="content-def"><p><span class="content-def-name">可測空間から$d$次元ユークリッド空間への写像</span></p><p class="content-paragraph">可測空間$(\Omega, \mathcal{B})$から$(\mathbb{R}, \bm{B}_1)$への可測写像$X_1, X_2, \cdots, X_d$を組み合わせた写像</p>
+$$\bm{X}: \omega \in \Omega \rightarrow (X_1(\omega), X_2(\omega), \cdots, X_d(\omega))$$
+<p class="content-paragraph">は、$(\Omega, \mathcal{B})$から$(\mathbb{R}^d, \bm{B}_d)$への可測写像である。</p></div>
+<p class="content-paragraph">次のような集合族を考える。</p>
+$$\mathcal{B}_0 \equiv \{B \subset \mathbb{R}^d : \bm{X}^{-1}(B) \in \mathcal{B}\}$$
+<p class="content-paragraph">任意の$\bm{J}_d$の元</p>
+$$J = \prod_{j=1}^d (a_j, b_j], a_j, b_j \in \mathbb{R}$$
+<p class="content-paragraph">に対して、その$\bm{X}$による逆像は</p>
+$$\bigcap_{j=1}^d X^{-1}_j((a_j, b_j]) \in \mathcal{B}$$
+<p class="content-paragraph">となるため、</p>
+$$\bm{J}_d \subset \mathcal{B}_0 \Rightarrow \bm{B}_d \subset \mathcal{B}_0$$
+<p class="content-paragraph">よって、任意の$B \in \bm{B}_d$に対して、$\bm{X}^{-1}(B) \in \mathcal{B}$。要するに$\bm{X}$は可測写像。</p>
+
+<p class="content-paragraph">さらにこちらも示す。</p>
+<div class="content-def"><p><span class="content-def-name">$\mathbb{R}^d$から$\mathbb{R}$への連続写像</span></p><p class="content-paragraph">任意の$\mathbb{R}^d$から$\mathbb{R}$への連続写像$X$は可測写像である。</p></div>
+<p class="content-paragraph">次のような集合族を考える。</p>
+$$\mathcal{B}_0 \equiv \{ B \subset \mathbb{R} : X^{-1}(B) \in \bm{B}_d \}$$
+<p class="content-paragraph">この時、$X$は連続であるから、任意の$\mathbb{R}$の開集合$O$の逆像も開集合なので</p>
+$$\mathcal{O} \subset \mathcal{B}_0 \Rightarrow \bm{B}_1 \subset \mathcal{B}_0$$
+<p class="content-paragraph">ここで、$\mathcal{O}$は$\mathbb{R}$の開集合族。よって、任意の1次元ボレル集合$B$に対して、その逆像は$d$次元ボレル集合。要するに$X$は可測写像。</p>
+
+<p class="content-paragraph">これらを組み合わせれば、例えば以下などがわかる。</p>
+<div class="content-def"><p><span class="content-def-name">実可測関数の足し算掛け算</span></p><p class="content-paragraph">実可測関数$X,Y$に対して</p>
+$$X+Y, XY$$
+<p class="content-paragraph">なども実可測関数である。</p></div>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

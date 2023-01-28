@@ -1,0 +1,118 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">Ripserを使ってパーシステント図を作る</h2>
+                                <p class="date">2021-02-20</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">次の本を読んだ。</p>
+<ul class="content-ul"><li class="content-ul-item">平岡裕章著、<a href="https://www.kyoritsu-pub.co.jp/bookdetail/9784320110021">タンパク質構造とトポロジー</a></li></ul>
+<p class="content-paragraph">とりあえずパーシステント図を書いてみたくなったので、Ripserライブラリを使って書いてみた。</p>
+
+<h1 class="section-title">直線データ</h1>
+<p class="content-paragraph">とりあえずは簡単に2次元上の直線のデータを作ってみて</p>
+<div class="code-container"><pre><code>import numpy as np
+from matplotlib import pyplot as plt
+
+# データ生成
+line = np.empty((100,2))
+line[:,0] = np.linspace(0,1,100)
+line[:,1] = np.linspace(0,1,100)
+plt.scatter(line[:,0],line[:,1])
+plt.savefig(&apos;line.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/line.png"></figure>
+<p class="content-paragraph">そのパーシステント図を書いてみる。</p>
+<div class="code-container"><pre><code>from ripser import Rips
+rips = Rips()
+diagrams = rips.fit_transform(line)
+rips.plot(diagrams)
+plt.savefig(&apos;line-ripser.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/line-ripser.png"></figure>
+<p class="content-paragraph">このパーシステント図から読み取れることとしては以下の二つ。</p>
+<ul class="content-ul"><li class="content-ul-item">H0の要素が対角線から離れた左上にあるので、連結成分が存在する</li><li class="content-ul-item">H1の要素が一つも生成されていないので一元ループは存在しない</li></ul>
+<p class="content-paragraph">確かにどちらも直線の特性に一致するが、同時にパーシステント図からは</p>
+<ul class="content-ul"><li class="content-ul-item">H0の要素が二つ存在し、連結成分が二つ存在する</li></ul>
+<p class="content-paragraph">ことになっており、こうなってしまっている原因はよくわからない。この線分の真ん中らへんで、数値誤差によって少し他より離れている点があり、その影響で二つの線分が認識されているのかもしれない。</p>
+
+<h1 class="section-title">円形データ</h1>
+<p class="content-paragraph">円形のデータを作ってみて</p>
+<div class="code-container"><pre><code>import numpy as np
+from matplotlib import pyplot as plt
+
+# データ生成
+circle = np.empty((100,2))
+thetas = np.linspace(0,2*np.pi,100)
+circle[:,0] = np.cos(thetas)
+circle[:,1] = np.sin(thetas)
+plt.scatter(circle[:,0],circle[:,1])
+plt.savefig(&apos;circle.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/circle.png"></figure>
+<p class="content-paragraph">そのパーシステント図を書いてみる。</p>
+<div class="code-container"><pre><code>from ripser import Rips
+rips = Rips()
+diagrams = rips.fit_transform(circle)
+rips.plot(diagrams)
+plt.savefig(&apos;circle-ripser.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/circle-ripser.png"></figure>
+<p class="content-paragraph">このパーシステント図から読み取れることとしては以下の二つ。</p>
+<ul class="content-ul"><li class="content-ul-item">H0の要素が1つ対角線から離れた位置にあるので、一つの連結成分が存在する</li><li class="content-ul-item">H0の要素が1つ対角線から離れた位置にあるので、一つの一次元ループが存在する</li></ul>
+<p class="content-paragraph">今回は円形データの直感と合う結果が得られた。</p>
+
+<h1 class="section-title">二つの円データ</h1>
+<p class="content-paragraph">二つの円データを作ってみて</p>
+<div class="code-container"><pre><code>import numpy as np
+from matplotlib import pyplot as plt
+
+# データ生成
+two_circles = np.empty((100,2))
+thetas = np.linspace(0,2*np.pi,50)
+two_circles[0:50,0] = np.cos(thetas) + 1
+two_circles[0:50,1] = np.sin(thetas)
+two_circles[50:100,0] = (np.cos(thetas) - 1) * 0.5
+two_circles[50:100,1] = np.sin(thetas) * 0.5
+plt.scatter(two_circles[:,0],two_circles[:,1])
+plt.savefig(&apos;two-circle.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/two-circle.png"></figure>
+<p class="content-paragraph">そのパーシステント図を書いてみる。</p>
+<div class="code-container"><pre><code>from ripser import Rips
+rips = Rips()
+diagrams = rips.fit_transform(two_circles)
+rips.plot(diagrams)
+plt.savefig(&apos;two-circle-ripser.png&apos;)
+plt.close()</code></pre></div>
+<figure class="content-figure" style="width:50%"><img class="content-img" src="../static/using-ripser/two-circle-ripser.png"></figure>
+<p class="content-paragraph">このパーシステント図から読み取れることとしては以下の二つ。</p>
+<ul class="content-ul"><li class="content-ul-item">H0の要素が1つ対角線から離れた位置にあるので、一つの連結成分が存在する</li><li class="content-ul-item">H0の要素が2つ対角線から離れた位置にあるので、二つの一次元ループが存在する</li></ul>
+<p class="content-paragraph">今回は円形データの直感と合う結果が得られた。</p>
+
+<h1 class="section-title">備考</h1>
+<ul class="content-ul"><li class="content-ul-item">risperが含まれているscikit-tdaパッケージをインストールしたらいきなりコンパイルで落ちた。べつのTDAライブラリも似たような感じだったので、まともに使う時は自分で開発するかC++などで書かれているもう少しメンテナンスがしっかりしているものを使うべきかもしれない。</li><li class="content-ul-item">二つの円データを試す際には二つの円の半径をことなるようにしたが、同じ半径だとパーシステント図上で同じところに点が打たれてしまって二つの点を認識できない。ライブラリ側で少しくらいずらしてくれれば良いなと思いつつ、特に本質的ではないので今回は半径を異なるようにすることで対応した。</li></ul>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

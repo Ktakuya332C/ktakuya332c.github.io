@@ -1,0 +1,48 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">デバッグをするように機械学習モデルを改善する</h2>
+                                <p class="date">2018-08-27</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph"><a href="../build/how-to-improve-ml-models.html">昨日の記事</a>では結局機械学習モデルを改善する際にも、普通のソフトウェアの開発と同じで、改善のループを回していくのが一番良いのかなという結論になった。とりあえずすぐに適用できそうなアルゴリズムを適用してみて、なぜその学習機がうまくいかないかを考えて、その原因究明の結果を踏まえて次どのように改善していくかを考えて、それを実際に適用することの繰り返しをすることでだんだん良いものができていくという改善のループを回していく。そのループをぐるぐると回していけば十分なパフォーマンスを持つ学習モデルを作り出すことができるだろうという考え。</p>
+
+<p class="content-paragraph">この結論はごく自然だし、後からみれば自明とも取れる結論だったが、では実際にどうやって原因究明をしていけば良いのかという点についてあまり深く考えられていなかった。なのでいざ原因究明だと言って、とりあえず適当に学習させたxgboostとかcnnとかが手元にあった時にそれらがなぜ今時点で十分なパフォーマンスが出せていないのかを解析する方針みたいなものがなかった。もしそれが Logistic Regression だったり比較的簡単なモデルだったのならば直感的に、そのパラメータの大きさを見たり、データの分布を見たりしてどこがパフォーマンスのネックになっているのかを追求することができると思うのだが、どうもxgboostくらい複雑になってくるとどうやってやればいいかが直感的にイメージできないので躊躇してしまっていた。</p>
+
+<p class="content-paragraph">今回どういう方針を持って機械学習モデルのパフォーマンスのネックになっている部分を解析していけばいいのかなとぼんやり考えて見たところ、とりあえずソフトウェア開発のデバッグと同じような工程を経て改善していけば良いのではないかなという結論に至った。要するに、ある機械学習モデルが80%の精度で正解を出してくれるというのは、20%のデータに対しては"バグ"を含んだ結果を返すプログラムであるという考え方をし、その"バグ"を普通のデバッグの方法と同じように原因追求、解決していけば良いのではないかという考え方だ。ここでの"バグ"というのは機械学習アルゴリズムの実装自体に問題があるという意味ではなく、きちんと実装されていても最終的に出てきた予測モデルがきちんと正解を返さないという意味で"バグ"という言葉を使っている。</p>
+
+<p class="content-paragraph">普通のプログラムに対するデバッグは普通こういう感じなのではないかなと思う。とりあえずバグ報告を受けるか自分で発見するかして変な挙動を見つける。次にその変な挙動がどこで起こるのかをそのバグが起こる場合に集中してソースコードをなぞって見て、どのようにして起きるかを探る。最後にそれを起きなくするような変更を追加するところを見つけて、そのバグをなおす。普通はこのような段階を踏んで普通のプログラムはデバッグすると思う。</p>
+
+<p class="content-paragraph">機械学習モデルのパフォーマンス改善、もとい"デバッグ"はこれよりは少し複雑になるだろう。なぜなら機械学習アルゴリズムというのは基本的に、大まかにみれば、予測をするソースコードを作り出すアルゴリズムと見ることができるからだ。例えば Random Forest がわかりやすく、最終的に作られる予測モデル、もとい"ソースコード"はIF文が積み重なったものになるだろうから、それを"機械学習アルゴリズムが生成したコード"と呼んでしまってもそれほど違和感はないはずだ。</p>
+
+<p class="content-paragraph">具体的には次のような作業をすることになるはずだ。まず、現在のモデルが予測を間違える場合を見つける、もといそのモデルの"バグ"を見つける。これはそのモデルが100%の精度を持っていない限りは必ず見つかるはずだ。その次に、その予測モデル、もとい学習アルゴリズムが生成した"ソースコード"が、その予測を間違える場合にどのように間違った出力を出すようになっているかを発見する。普通のソースコードのデバッグなら自分が書いたアルゴリズムを追っていくことになると思うが、機械学習の場合にはアルゴリズムが生成した予測モデル、もとい"ソースコード"を追っていくことになる。そして、原因が見つかったら次はそのミスを回避するような予測モデルを生成するように機械学習アルゴリズムを変更する。普通のソースコードならバグを見つけるために、バグを見つける際に追っていたソースコードを変更することになるが、機械学習の場合にはそれを生成したアルゴリズムの方法を修正することになる。</p>
+
+<p class="content-paragraph">基本的にはこのような作業を続けていくことで精度はよくなるだろうし、適当にいろいろなものを試すよりは改善している感じがあっていいのではないだろうか。まあ、こういう改善のループにはまりすぎて何週もしてきたら、computer vision でCNNが出てくる前に存在した feature engineering 競争みたいなものになってくると思うので、そこまで行ったらそれらの meta solution とも言えるようなもの、deep learning みたいなそこも学習してしまえ見たいな、単純に上記の改善ループを続けていくようなものでない作業に挑戦してみるのも良いはず。</p>
+
+<p class="content-paragraph">こういう作業を前提においていると、以前<a href="../build/improvement-iteration-on-data-science-competition.html">この記事</a>で書いたような、モデルの改善方法はやはりシンプルなモデルから初めて徐々に複雑なモデルに向かっていくほうが、いきなり一般的な複雑なモデルを使っていくよりも良いのだろうなという気はしている。複雑なモデルを使うと"debug"に時間がかかりすぎて改善のループが回らなくなりやすいので、やはりいろいろなところで言われいてるシンプルなモデルから始めろというのは良い戦略なのだなと思う。</p>
+
+<p class="content-paragraph">そして、モデルの"デバッグ"をする段階で、モデルの隅々まで各サンプルに対する挙動を見ることができないとこのような改善方法はできないので、多分機械学習モデルは full scratch で書くか、sklearnとかの裏の実装まで全てを知っていないと難しいのだろうなとは思う。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>

@@ -1,0 +1,101 @@
+        <!doctype html>
+            <html lang="ja">
+            <head><meta charset="UTF-8"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164492761-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-164492761-1");</script><title>Memorandum</title><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/vs.css"><script src="/js/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script><script src="https://unpkg.com/mermaid@8.5.2/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,flowchart:{nodeSpacing:20,rankSpacing:20,curve:"basis"}})</script></head>
+            <body>
+                <div class="container">
+                    <header class="header">
+    <h1 class="logo">
+        <a href="/build">Memorandum</a>
+    </h1>
+    <p class="desc">Ktakuyaのブログ</a>
+</header>
+
+                    <hr class="border">
+                    <main class="main">
+                        <div class="article-wrapper">
+                            <div class="header">
+                                <h2 class="title">「測度から確率へ」の第2章のまとめ</h2>
+                                <p class="date">2020-04-29</h2>
+                            </div>
+                            <div class="content">
+                                <p class="content-paragraph">測度論が色々な場面で使われているのを見つつも基礎から学んだことがなかったので、最近この教科書</p>
+<ul class="content-ul"><li class="content-ul-item"><a href="https://www.kyoritsu-pub.co.jp/bookdetail/9784320014732">はじめての確率論 測度から確率へ</a></li></ul>
+<p class="content-paragraph">で基礎から学んでみている。ただ読んでいくだけでも面白いのだが、せっかくなのでブログにまとめつつ読んでいこうと思う。</p>
+
+<h1 class="section-title">第2章の概観</h1>
+
+<p class="content-paragraph">この本の第1章は、確率論を議論するにあたって測度論のような理論がなぜ必要なのかを説明している章になっている。特に複雑なことは言っていないので、ブログにまとめを書くことはしない。</p>
+<p class="content-paragraph">今回まとめる予定の第2章は、これからの議論のための土台づくりのような章になっている。大まかにいって</p>
+<ol class="content-ol"><li class="content-ol-item">$\sigma$-集合体の定義とその性質</li><li class="content-ol-item">$\sigma$-集合体の具体例の紹介</li></ol>
+<p class="content-paragraph">の二つの内容から構成されているが、それら以外にも少し後の章のための伏線のような事実がいくつか紹介されている。</p>
+
+<h1 class="section-title">$\sigma$-集合体の定義とその性質</h1>
+
+<p class="content-paragraph">いきなりだが$\sigma$-集合体の定義を紹介する。</p>
+<div class="content-def"><p><span class="content-def-name">$\sigma$-集合体</span></p><p class="content-paragraph">空でない集合$\Omega$の部分集合族$\mathcal{B}$が$\Omega$上の$\sigma$-集合体であるとは、$\mathcal{B}$が次の三つの条件を満たすことを指す。</p>
+<ol class="content-ol"><li class="content-ol-item">$\Omega \in \mathcal{B}$</li><li class="content-ol-item">$A \in \mathcal{B} \Rightarrow A^C \in \mathcal{B}$</li><li class="content-ol-item">任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}$ならば、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}$</li></ol></div>
+<p class="content-paragraph">この定義から簡単にわかる$\sigma$-集合体の性質として、例えば次のようなものがある。</p>
+<div class="content-def"><p><span class="content-def-name">$\sigma$-集合体の性質</span></p><p class="content-paragraph">任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}$である時、以下が成り立つ。</p>
+<ol class="content-ol"><li class="content-ol-item">$\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}$</li><li class="content-ol-item">$\limsup_{k \rightarrow \infty} A_k \in \mathcal{B}$</li><li class="content-ol-item">$\liminf_{k \rightarrow \infty} A_k \in \mathcal{B}$</li></ol>
+<p class="content-paragraph">ただしここで、</p>
+$$\begin{aligned}
+\limsup_{k \rightarrow \infty} A_k &= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k \\
+\liminf_{k \rightarrow \infty} A_k &= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k
+\end{aligned}$$
+<p class="content-paragraph">である。</p></div>
+<p class="content-paragraph">1つ目の性質は、次のように順を追って証明することができる。</p>
+<ol class="content-ol"><li class="content-ol-item">$A_k \in \mathcal{B}$より、$A_k^C \in \mathcal{B}$</li><li class="content-ol-item">$A_k^C \in \mathcal{B}$より、$\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}$</li><li class="content-ol-item">$\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}$より、$\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}$</li></ol>
+<p class="content-paragraph">2つ目と3つ目の性質は、すでに$\sigma$-集合体は可算個の合併と交叉に閉じていることがわかっているので明らか。</p>
+
+<p class="content-paragraph">すぐに$\sigma$-集合体の具体例を紹介したいところだが、いくつかの例を作るために次の性質を示しておく必要がある。</p>
+<div class="content-def"><p><span class="content-def-name">$\sigma$-集合体の生成</span></p><p class="content-paragraph">$\Omega$に対する任意の部分集合族$S$に対して、それを含む最小の$\sigma$-集合体が唯一存在する。</p>
+<p class="content-paragraph">このような$\sigma$-集合体を、$S$から生成される$\sigma$-集合体と呼び、$\sigma[S]$と書く。</p></div>
+<p class="content-paragraph">どんな部分集合族$S$も$\Omega$の冪集合$2^{\Omega}$には必ず含まれるので、$S$を含む$\sigma$-集合体は最低でも一つは存在する。$S$を含む$\sigma$-集合体の全体を$\{\mathcal{B}_{\lambda} : \lambda \in \Lambda\}$と表すことにすると、</p>
+$$\begin{aligned}
+\mathcal{B}_1 = \bigcap_{\lambda \in \Lambda} \mathcal{B}_{\lambda}
+\end{aligned}$$
+<p class="content-paragraph">は、$S$を含む任意の$\sigma$-集合体に含まれる。さらにこの集合族は$\sigma$-集合体となる条件三つを満たす。</p>
+<ol class="content-ol"><li class="content-ol-item">$\Omega \in \mathcal{B}_1$</li><li class="content-ol-item">$A \in \mathcal{B}_1$ならば、$A^C \in \mathcal{B}_1$</li><li class="content-ol-item">任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}_1$ならば、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_1$</li></ol>
+<p class="content-paragraph">よって、$\mathcal{B}_1$は$S$を含む最小の$\sigma$-集合体である。また、もし他に同じく$S$を含む最小の$\sigma$-集合体として$\mathcal{B}_2$が存在したとすれば、$\mathcal{B}_1$の定義から</p>
+$$\mathcal{B}_1 \subset \mathcal{B}_2$$
+<p class="content-paragraph">となるが、$\mathcal{B}_2$の最小性から同様に$\mathcal{B}_2 \subset \mathcal{B}_1$となり、結果的に$\mathcal{B}_1 = \mathcal{B}_2$となるため、唯一である。</p>
+
+
+<h1 class="section-title">$\sigma$-集合体の具体例の紹介</h1>
+
+<p class="content-paragraph">この本では$\sigma$-集合体の具体例をいくつか紹介している。</p>
+<div class="content-def"><p><span class="content-def-name">可算集合とその補集合で構成される$\sigma$-集合体</span></p><p class="content-paragraph">$\Omega$を空でない集合として</p>
+$$\mathcal{B}_{\#}(\Omega) = \{A \in \Omega : AまたはAの補集合が高々可算\}$$
+<p class="content-paragraph">とすると、$\mathcal{B}_{\#}(\Omega)$は$\Omega$上の$\sigma$-集合体である。</p></div>
+<p class="content-paragraph">$\sigma$-集合体であることは</p>
+<ol class="content-ol"><li class="content-ol-item">$\phi \in \mathcal{B}_{\#}(\Omega)$より、$\Omega \in \mathcal{B}_{\#}(\Omega)$</li><li class="content-ol-item">$A \in \mathcal{B}_{\#}(\Omega)$なら$A^C \in \mathcal{B}_{\#}(\Omega)$は、明らか</li><li class="content-ol-item">任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}_{\#}(\Omega)$の時、$A_k$が全て可算集合ならその可算個の合併$\bigcup_{k=1}^{\infty} A_k$も可算集合。もし一つでも補集合が可算なものがあれば、$(\bigcup_{k=1}^{\infty} A_k)^C = \bigcap_{k=1}^{\infty} A_k^C$が可算になる。よっていずれにしろ、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_{\#}(\Omega)$</li></ol>
+<p class="content-paragraph">として確認できる。</p>
+
+<div class="content-def"><p><span class="content-def-name">ボレル集合体</span></p><p class="content-paragraph">距離空間$E=(E, \bm{d})$を考える。$E$の開集合全体$\mathcal{O}$から生成される$\sigma$-集合体をボレル集合体と呼び、
+$$\mathcal{B}(E) = \sigma[\mathcal{O}]$$
+と書く。また、その要素をボレル集合と呼ぶ。</p></div>
+<p class="content-paragraph">ボレル集合の要素としては</p>
+<ul class="content-ul"><li class="content-ul-item">$E$の開部分集合全体</li><li class="content-ul-item">$E$の閉部分集合全体</li><li class="content-ul-item">$E$の可算集合全体</li><li class="content-ul-item">$E$の有限集合全体</li></ul>
+<p class="content-paragraph">などが含まれる。</p>
+
+<div class="content-def"><p><span class="content-def-name">$d$次元ボレル集合体</span></p><p class="content-paragraph">距離空間$E$として$d$次元ユークリッド空間$\mathbb{R}^d$を取った場合のボレル集合を$\bm{B}_d$と書き</p>
+$$\bm{B}_d = \mathcal{B}(\mathbb{R}^d)$$
+<p class="content-paragraph">$d$次元ボレル集合体と呼ぶ、また、その要素を$d$次元ボレル集合と呼ぶ。</p></div>
+<p class="content-paragraph">「$d$次元」と入ると一般の距離空間ではなく$d$次元ユークリッド空間を対象にすることに注意。</p>
+
+<h1 class="section-title">備考</h1>
+
+<p class="content-paragraph">この本の2章ではここで記載した内容以外に</p>
+<ul class="content-ul"><li class="content-ul-item">$d$次元ボレル集合体の幾つかの性質の紹介</li><li class="content-ul-item">ボレル集合体と連続関数の関係</li></ul>
+<p class="content-paragraph">について紹介しているのだが、きりが良いので一度ここでこの記事は終わりとして、それらは他の記事に回すことにする。</p>
+                            </div>
+                        </div>
+                    </main>
+                    <hr class="border">
+                    <footer class="footer">
+    <p class="copyright">Copyright@2022 Ktakuya. All rights reserved.</p>
+</footer>
+
+                </div>
+            </body>
+        </html>
