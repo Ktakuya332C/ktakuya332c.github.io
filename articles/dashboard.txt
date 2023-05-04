@@ -7,9 +7,8 @@
 @ul
 {@a{Reddit}{https://www.reddit.com/}}
 {@a{TweetDeck}{https://tweetdeck.twitter.com/}}
-{@a{Metaculus}{https://www.metaculus.com/}}
 {@a{HackerNews}{https://news.ycombinator.com/}}
-{@a{StackOverflow}{https://stackoverflow.com/}}
+{@a{知乎}{https://www.zhihu.com/}}
 
 
 @section{よく使うツール}
