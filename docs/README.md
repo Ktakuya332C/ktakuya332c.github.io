@@ -3,3 +3,8 @@
 - [A little memo on Mamba](20231211-mamba/README.md)
 - [Start using Docsify on my blog](20231121-docsify/README.md)
 - [Websites I often visit](20231121-websites/README.md)
+- [A regret bound of UCBID algorithm](20230703-ucbid/README.md)
+- [NFXPアルゴリズムの簡単な応用例](20201122-nfxp/README.md)
+- [pkg-configについてまとめる](20200622-pkg-config/README.md)
+- [少し複雑なSQLクエリ](20200503-sql/README.md)
+- [このブログについて](20200425-blog/README.md)
