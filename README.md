@@ -1,76 +1,110 @@
-# Blog
-ブログのソースコード
+# Memorandum
 
-## 記事の追加
-`articles/`以下に`<記事の名前>.txt`というファイルを作成し、次のようなファイル構成で記事を作成する
-
-```
-<タイトル>
-<日付(YYYY-MM-DD)>
-<コンテンツ>
-```
-
-コンテンツは以下で説明する独自の書き方になっている。書き終わったらトップディレクトリから
-
-```
-$ python -m main
-```
-
-と実行すれば、`build_{ja,en}/`以下にそれぞれの記事が生成される。
-
-## 独自記法の文法
-通常の文章に加えて、`@`で始まる関数を呼び出すことができるようになっている。例えば
-
-```
-これは@a{テストリンク}{http://example.com}です。
-```
-
-という文章は、`@a`という名前の関数を呼び出すことによって
-
-```
-これは<a href="http://example.com">テストリンク</a>です。
-```
-
-という文章にコンパイルされる。
-
-今定義されている関数は下記の関数である。
-
-| 関数名 | 呼び出し例 | 説明
-| --- | --- | --- |
-| `@p` | `@p{パラグラフ}` | パラグラフ |
-| `@a` | `@a{リンク}{http://example.com}` | リンク |
-| `@rel` | `@rel{/build/document.html}` | ドキュメントルートからのパス |
-| `@ul` | `@ul{アイテム}{他のアイテム}` | 順序なしリスト |
-| `@ol` | `@ol{一つ目}{二つ目}` | 順序ありリスト |
-| `@def` | `@def{定義名}{定義内容}` | 定義 |
-| `@fig` | `@fig{サイズ(e.g. 70)}{@rel{/static/example.png}}` | 画像 |
-| `@table` | `@table{項目1,項目2}{データ1,データ2}` | テーブル |
-| `@section` | `@section{セクション}` | セクション |
-| `@subsection` | `@subsection{サブセクション}` | サブセクション |
-| `@quote` | `@quote{これは引用です}` | 引用 |
-| `@incode` | `@incode{#include <iostream>}` | inlineコード |
-| `@blcode` | `@blcode{int a = 1}` | blockコード |
-| `@pre` | `@pre{これはそのまま出力されます}` | そのまま出力 |
-| `@inmath` | `@inmath{a^t_k}` | inline-math |
-| `@blmath` | `@blmath{\sum_{n=1}^10 = 55}` | block-math |
-| `@mermaid` | `@mermaid{graph TD; A-->B;}` | [mermaid](http://mermaid-js.github.io/mermaid/)の出力 |
-
-
-## 開発
-unittestを実行する場合
-
-```
-$ python -m unittest discover tests
-```
-
-lintをかける場合
-
-```
-$ autopep8 -iaar .
-```
-
-型チェックをかける場合
-
-```
-$ mypy .
-```
+- [A little memo on Mamba](20231211-mamba/README.md)
+- [数学の効率的な学び方](20231122-learn-math/README.md)
+- [Websites I often vist](20231121-websites/README.md)
+- [Start using Docsify on my blog](20231121-docsify/README.md)
+- [A regret bound of UCBID algorithm](20230703-ucbid/README.md)
+- [POMDPとBeliefMDPの同値性](20230129-equivalence-of-pomdp-and-belief-mdp/README.md)
+- [The Child as Hacker](20220513-child-as-hacker/README.md)
+- [様々な整域の間の関係を整理する](20220416-integral-domains/README.md)
+- [広告オークション関連の論文まとめ](20211226-ad-auction/README.md)
+- [様々な可換環の具体例](20211028-chars-of-rings/README.md)
+- [条件付き最適化における最急降下法](20211023-sgd-on-opt/README.md)
+- [機械学習はどのように塾考するか?](20210829-can-ml-ponder/README.md)
+- [数論入門第3章2節のまとめ](20210508-intro-number-theory-chap3-2/README.md)
+- [Athey & Nekipelov (2011) の紹介](20210503-athey-nekipelov/README.md)
+- [最適メカニズムの導出](20210430-auction-theory-chapter-5/README.md)
+- [クリシュナ本の2章のまとめ](20210425-auction-theory-chapter-2/README.md)
+- [不完備情報ゲームの均衡の計算例](20210418-imcomplete-information-game-example/README.md)
+- [不完備情報ゲームの均衡概念](20210417-imcomplete-information-game/README.md)
+- [古代中東のデータを分析した論文の紹介](20210223-g-barjamovic-et-al-2019/README.md)
+- [なぜブログを書くか、どのように書くか](20210223-why-blog/README.md)
+- [Ripserを使ってパーシステント図を作る](20210220-using-ripser/README.md)
+- [中東の中世までの歴史をまとめる](20201228-world-history-chap2/README.md)
+- [ヨーロッパの中世までの歴史をまとめる](20201227-world-history-chap1/README.md)
+- [計量時系列分析の4章の数値計算](20201225-time-series-analysis-ex4/README.md)
+- [計量時系列分析の2章の数値計算](20201222-time-series-analysis-ex2/README.md)
+- [計量時系列分析の1章の数値計算](20201222-time-series-analysis-ex1/README.md)
+- [エクセンダールの第三章のまとめ](20201212-oksendal-chap3/README.md)
+- [エクセンダールの第四章のまとめ](20201212-oksendal-chap4/README.md)
+- [エクセンダールの第二章のブラウン運動周辺のまとめ](20201206-oksendal-chap2/README.md)
+- [色々な時系列データをプロットしてみる](20201201-plot-timeseries/README.md)
+- [Covid19の新規感染者数](20201129-covid19/README.md)
+- [jaxを使ってNFXPアルゴリズムを実行してみる](20201123-nfxp/README.md)
+- [Rust(1987)のデータを再現する](20201123-rust1987/README.md)
+- [NFXPアルゴリズムの簡単な応用例](20201122-nfxp/README.md)
+- [確率微分方程式(1)](20201115-basic-prob/README.md)
+- [hdr-histogramの基本的な発想](20200801-hdr-histogram/README.md)
+- [javascriptのモジュール機構](20200719-js-modules/README.md)
+- [diffとpatch](20200703-diff-and-patch/README.md)
+- [arrowのcmakeファイルを読む](20200628-read-arrow-cmake/README.md)
+- [docker上でapache-arrowのビルドをする](20200623-build-arrow-on-docker/README.md)
+- [pkg-configについてまとめる](20200622-pkg-config/README.md)
+- [よくみるブログ](20200610-interesting-blogs/README.md)
+- [DL関連文献調査](20200530-read-dl-papers/README.md)
+- [PythonライブラリRichを試す](20200505-intro-rich/README.md)
+- [優収束定理](20200505-dominated-convergence-theorem/README.md)
+- [確率変数の平均値](20200504-avg-random/README.md)
+- [確率変数についてのまとめ](20200504-random-variable/README.md)
+- [可測関数の定義とその性質](20200503-measurable-functions/README.md)
+- [少し複雑なSQLクエリ](20200503-sql/README.md)
+- [ルベーグ測度の定義](20200502-lebesgue-measure/README.md)
+- [Awkのサンプルスクリプト](20200502-awk/README.md)
+- [ボレル-カンテリの補題](20200502-borel-cantelli/README.md)
+- [「測度から確率へ」の第2章のまとめ](20200429-measure-theory/README.md)
+- [多変量正規分布について](20200426-multivariate-normal/README.md)
+- [ガウス過程の簡単な例](20200426-gaussian-process/README.md)
+- [Google Analytics を追加してみた](20200426-google-analytics/README.md)
+- [このブログについて](20200425-blog/README.md)
+- [perlのtr演算子](20200320-perl-tr/README.md)
+- [宮川本の推論ルールの証明](20200228-proof-of-causal-inference-rules/README.md)
+- [東京周辺開催の Tech Conference 系のまとめ](20191220-tech-confs/README.md)
+- [企業の Tech Blog へのリンク](20191219-links-engineering/README.md)
+- [アナリストは何をしている?](20191208-analyst/README.md)
+- [データサイエンス関連の仕事リスト](20191201-data-scientists/README.md)
+- [好きな趣味系データサイエンスプロジェクト集め](20191201-data-science-projects/README.md)
+- [検索エンジンの設計をしてみた](20191124-design-search-engine/README.md)
+- [pyarrowのデバッグの仕方](20190616-debug-arrow/README.md)
+- [PIOを使ってハードディスクを読む](20190316-bootloader/README.md)
+- [またもqemu上で動くbootloaderのA20ラインを調べる](20190316-qemu-a20-line-with-gas/README.md)
+- [bootloaderからC言語のコードを呼ぶ](20190316-call-c-in-bootloader/README.md)
+- [bootloaderからcのkernel関数を呼び出す](20190310-call-kernel-from-bootloader/README.md)
+- [32bit protected mode に移行](20190310-32bit-protected-mode/README.md)
+- [Macでbootloader周辺をデバッグする方法](20190309-debug-bootloader-on-mac/README.md)
+- [qemu-A20-line](20190302-qemu-a20-line/README.md)
+- [Macで簡単に定期通知をする](20190211-notif-on-mac/README.md)
+- [どのようにして機械学習モデルの精度を上げていけば良いか](20190126-improve-ml-models/README.md)
+- [nonparametric統計検定手法の導出へのリンク](20190114-links-to-proof-of-nonparametrics/README.md)
+- [最近見つけた Data Science 関連の良い本の紹介](20181230-good-books-online/README.md)
+- [データ分析コンペの取り組み方](20181230-ds-comp/README.md)
+- [R for Data Science が良い](20181226-r-for-datascience/README.md)
+- [data.tableとxgboostをMacに入れる際の問題](20181215-install-data.table-and-lightgbm/README.md)
+- [Unzipされたファイルのpermission](20181215-unzipped-file/README.md)
+- [Rのuninstall方法](20181214-uninstallation-of-r/README.md)
+- [Rのパッケージimagerを入れる](20181210-install-imager-in-r/README.md)
+- [Rのインストール方法](20181210-installation-of-r/README.md)
+- [C++のCUIコードをMacでプロファイリングする](20181202-profiling-cpp-on-mac/README.md)
+- [OpenBLASで行列とベクトルの計算](20181130-openblas/README.md)
+- [backpropgationのまとめ](20181129-backprop/README.md)
+- [OpenBLASをMacで使う](20181126-use-openblas-on-mac/README.md)
+- [Berry's inversion](20181115-berrys-inversion/README.md)
+- [Rust(1987)におけるMDPの推定方法](20181028-mdp-estimation-in-rust1987/README.md)
+- [ガンベル分布の性質](20181027-gumbel/README.md)
+- [多項ロジットモデルとガンベル分布](20181021-multinomial-logit/README.md)
+- [強化学習の基礎](20181020-basic-rl/README.md)
+- [Markov決定過程とBelleman方程式](20181020-mdp/README.md)
+- [構造的因果モデルとは](20181008-scm/README.md)
+- [D-Separationと独立性の関係](20181008-d-sep/README.md)
+- [良い因果推論の授業を見つけた](20181007-causal-inference/README.md)
+- [MOOC関連のリンク集](20180930-links-mooc/README.md)
+- [「現代経済学 ゲーム理論・行動経済学・制度論」を読んだ](20180930-history-of-econ/README.md)
+- [データサイエンス中心のリンク集](20180930-links-data-science/README.md)
+- [Screencastの作り方](20180930-screencast/README.md)
+- [HTTPリクエストの遮断の仕方](20180930-disrupt-http-conn/README.md)
+- [学術関連のリンク集](20180930-links-academic/README.md)
+- [雑多なリンク集](20180930-links-others/README.md)
+- [デバッグをするように機械学習モデルを改善する](20180827-improve-ml-like-debug/README.md)
+- [機械学習モデルはデータ+形式知+暗黙知で成り立っている](20180826-ml-model/README.md)
+- [「実証分析のための計量経済学」の1章の分析の再現](20180316-chap1-econometrics/README.md)
+- [傾向スコアマッチングのPython実装](20180311-propensity-score/README.md)
