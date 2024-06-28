@@ -1,5 +1,9 @@
 # Memorandum
 
+## About
+- [About Me](about-me/README.md)
+
+## Posts
 - [A little memo on Mamba](20231211-mamba/README.md)
 - [数学の効率的な学び方](20231122-learn-math/README.md)
 - [Websites I often vist](20231121-websites/README.md)
