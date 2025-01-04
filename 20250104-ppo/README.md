@@ -30,7 +30,7 @@ See article like [this one](https://iclr-blog-track.github.io/2022/03/25/ppo-imp
 ## Take the gradient of the objective
 Since the PPO algorithm is one of the policy gradient algorithms, we will take the gradient of the objective function, expected cumulative reward $J_\pi$. The gradient will settle in this easy-to-understand form
 $$ \partial J_\pi = \mathbb{E}_\pi[Q \partial \ln \pi]. $$
-This fact is called the policy gradient theorem. "Just taking gradient" of $J_\pi$ seems like an easy step, but without some neat notations, it is a little hard to see this result. See [this article](https://lilianweng.github.io/posts/2018-04-08-policy-gradient/) for the details.
+This fact is called the policy gradient theorem. "Just taking gradient" of $J_\pi$ seems like an easy step, but without some neat notations, it is a little hard to reach this result. See [this article](https://lilianweng.github.io/posts/2018-04-08-policy-gradient/) for the details.
 
 ## Reduce variance of the estimate
 To reduce the variance of the gradient estimate, we introduce baseline $b(s)$ to the estimate like this
