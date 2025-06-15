@@ -1,11 +1,13 @@
 # 条件付き最適化における最急降下法
 
 古いNeurIPSで発表されていた次の論文
+
 - [Constrained differential optimization for neural networks](https://proceedings.neurips.cc/paper/1987/file/a87ff679a2f3e71d9181a67b7542122c-Paper.pdf)
 
 で紹介されている、条件付き最適化問題を最急降下法で解く方法の概要を説明する。
 
 ## 問題設定
+
 $n$次元実変数$x$が、ある実関数$g(x)$を用いた式
 $$
 g(x) = 0
@@ -14,6 +16,7 @@ $$
 を満たす範囲で、別の実関数$f(x)$の極小値を求めよ。
 
 ## 最急降下法による解法
+
 実変数$\lambda$を導入し、ラグランジアン
 $$
 L = f + \lambda g
@@ -66,6 +69,7 @@ $$
 これはこの停留点が、ラグランジアン$L$に対する未定乗数法の結果と一致することを示す。
 
 ## 適用例
+
 二変数関数
 $$
 f(x, y) = \frac{1}{2}(x^2 + y^2)
@@ -90,7 +94,9 @@ $$
 に従って停留点を求めることで解が得られる。
 
 ただし実際に数値的な実験を行ってみると数値的な安定性がなく微分方程式を解くことができなかった。
+
 - [条件付き最適化問題を最急降下法で解く](https://gist.github.com/Ktakuya332C/3e2103d876d1bfb19299a3b2662b8c23)
 
 この論文などで述べられているPID制御などを行わないと数値的には不安定な様子。
+
 - [Responsive Safety in Reinforcement Learning by PID Lagrangian Methods](https://arxiv.org/abs/2007.03964)

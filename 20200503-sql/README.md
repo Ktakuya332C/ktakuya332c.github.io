@@ -1,6 +1,7 @@
 # 少し複雑なSQLクエリ
 
 こんな記事を見つけた}
+
 - [The best medium-hard data analyst SQL interview quetions](https://quip.com/2gwZArKuWk7W)
 
 紹介されているクエリはすぐには思いつかなさそうなものばかりだったので、手元で少し試してみようと思う。
@@ -8,6 +9,7 @@
 ## 事前準備
 
 とりあえずMySQLを使って試してみようと思うので、MySQLをインストールして実行してみる。
+
 ```
 $ brew install mysql
 $ mysql.server start
@@ -15,12 +17,13 @@ $ mysql -u root
 mysql> CREATE DATABASE example;
 mysql> USE example;
 ```
+
 使えることは確認できた。
 
-
-# MoM Percent Change
+## MoM Percent Change
 
 実際に試してみるためにデータを用意する。
+
 ```
 $ vim gen.py
 $ cat gen.py
@@ -60,9 +63,11 @@ mysql> SELECT * FROM logins LIMIT 2;
 |    8744 | 2019-01-01 |
 +---------+------------+
 ```
+
 データはできた。
 
 今回の課題はMAUの変化を見ること。とりあえず回答例をMySQLに書き直してみる。
+
 ```
 WITH maus AS (
   SELECT
@@ -85,7 +90,9 @@ ON
   prev.month = next.month - 1
 ;
 ```
+
 実行してみると
+
 ```
 +----------------+------------+---------+
 | previous_month | next_month | mom     |
@@ -103,12 +110,13 @@ ON
 |             11 |         12 |  0.0000 |
 +----------------+------------+---------+
 ```
+
 となった。データの作り方的に毎月ほとんど同じMAUになってしまっていたのが残念だが、とりあえず計算はできた。
 
-
-# Tree Structure Labeling
+## Tree Structure Labeling
 
 まずはデータの準備から行う。今回はデータが大きくても確認しづらいだけなので、適当に手で作成する。
+
 ```
 $ vim data.csv
 $ cat data.csv
@@ -142,6 +150,7 @@ mysql> SELECT * FROM tree;
 ```
 
 今回の目的はそれぞれのノードをLeafとInnerとRootにラベルづけすること。
+
 ```
 WITH join_table AS (
   SELECT
@@ -171,6 +180,7 @@ FROM
 ```
 
 クエリの結果は次のようになった。
+
 ```
 +------+-------+
 | node | label |
@@ -182,11 +192,13 @@ FROM
 |    4 | Left  |
 +------+-------+
 ```
+
 確かにきちんとラベルづけできていそう。
 
-# Retained users per month
+## Retained users per month
 
 対象の月と前の月に連続してログインしているユーザーの数を計算する。
+
 ```
 WITH logins_month AS (
   SELECT
@@ -209,8 +221,9 @@ GROUP BY
   current.month
 ;
 ```
+
 クエリの書き方が悪かったのか、投げても結果が返ってこない。@incode{DISTINCT}が悪いのかなと思ってそれを取ってみてもうまく動かないので原因は良く分からない。
 
-# その他
+## その他
 
 その他にもいくつか問題が書いてあるので、気になったらやってみても面白そうだが、今回はそろそろ飽きてきたのでここまでにしておくことにする。どの例も実際に使いそうなクエリ例だったので、単に索引としても使えそうな気がした。

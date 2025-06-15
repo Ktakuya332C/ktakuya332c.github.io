@@ -14,7 +14,6 @@
 
 > 「金融」「保険」は以前からデータ分析が使われているし、近年増えたのは「広告」「ゲーム」
 
-
 この文章を読んだ時、確かになという感じだった。人が直感的にはどちらが良いのか迷うような問題、どの広告を上の方に持ってくるのがいいのか見たいな問題、に対してこの手法だと売り上げがそれだけ上がらないだろうけどこの手法だと売り上げがとても上がると予測できました、と言われたらそれは当然その判断結果を使うしかない。保険金をどれくらいにしておけば将来的に安定的に事業が行えるかなんて直感的にはわからないけど、それをミスると財務が破産する。一方で、マーケティングの分析をしてここら辺の人たちに売り込みに行ったほうがやりやすいかもよ? なんて予測を複雑そうに見えるロジックを使って他の人から提案されたところでそれを使って行動を起こそうとは思わないだろう。
 
 その点でやはり事例としてはお金に強く結びつくものが多くなった感触があった。
@@ -27,7 +26,6 @@
 - [データ分析/機械学習エンジニア](https://career.signate.jp/job_offers/128)。主にCTR予測、広告オークションでの入札価格調整など。
 - [Data Scientist, Analytics](https://www.facebook.com/careers/jobs/2684152194968293/)。主に広告ランキングの改善など。
 
-
 やはりデータサイエンティスト、機械学習エンジニア、アナリスト、色々と呼び方が異なっているようだ。
 
 次はプロダクトの改善のためのアナリティクス。ユーザースケールの小さいものだとあまり分析する必要はなさそうだが、スケールが大きくなってくると直感的にどちらが良いか分からないくらいの差異が大きく影響してくるので数理モデリングの機会が現れる様子。
@@ -36,13 +34,11 @@
 - [Principal Data Scientist](https://careers.microsoft.com/us/en/job/706810/Principal-Data-Scientist)。主にUI/UX改善のための分析を行う様子。
 - [Data Scientist, Product](https://www.facebook.com/careers/jobs/258086204716409/)。要件から何をするかは良くわからないが、[この動画](https://www.youtube.com/watch?v=8LucP1wiX1g)で解説されていたような、Product Manager について、どの product feature が良いかを分析する役割でかろうか。
 
-
 この仕事内容だと大抵がデータサイエンティストという名前にしておくようだ。多分仕事内容としては[このブログ](http://www.unofficialgoogledatascience.com/2015/10/data-scientist-as-scientist.html)に書かれているように、A/Bテストなどを行なって効果を見るみたいなのが多いのだろうと予想する。
 
 後はサービスの健全性を担保するための異常検知を行う職種。
 
 - [Data Scientist, Analytiscs](https://www.facebook.com/careers/jobs/2391068027803653/)。SNSに投稿された危ないコメントなどを検知したありする役割。
-
 
 他にもデータサイエンティストとして多くの job description に入っているのをみた。具体的にやっていることは[このブログ](http://www.unofficialgoogledatascience.com/2019/08/estimating-prevalence-of-rare-events.html)などで紹介されていることをやっているのだろうと想像する。
 
@@ -52,7 +48,6 @@
 - [クオンツアナリスト](https://career.signate.jp/job_offers/426)。運用アルゴリズムの開発。
 - [FXクオンツ](https://www.linkedin.com/jobs/view/1627253621/)。取引業務の自動化など。
 
-
 基本的にはクオンツという括りになるらしく、クオンツで調べればいっぱい出てくる。
 
 その他にも色々とあるが、どれもお金に強く結びついている領域であることだけは見て取れる。
@@ -61,6 +56,5 @@
 - [アナリスト](https://career.signate.jp/job_offers/127)。自然災害による保険会社のリスク定量化。
 - [データサイエンティスト](https://www.linkedin.com/jobs/view/1527384157/?alternateChannel=search&refId=d5189076-d976-4183-9797-fcd040b53c9f&trk=flagship3_search_srp_jobs)。モデリングを使って色々な業種の問題を解決する。例えば小売業に置ける需要予測、金融業における不正検知など。
 - [Data Scientist](https://www.facebook.com/careers/jobs/2317389711632457/)。データセンターの運用効率化のための分析かなと思われる。
-
 
 やはりお金に強く結びつく金融や保険などの業界は、この[DataRobotのケース](https://blog.datarobot.com/jp/2017/10/27/insurance_reference)や、[JDDのケース](https://www.slideshare.net/secret/wizbi1mbopIdXD)などを見ても有用なようだ。

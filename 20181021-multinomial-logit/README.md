@@ -17,13 +17,11 @@ z &= (x - \mu) / \beta
 \end{aligned}
 $$
 
-
 このような分布を仮定すると選択肢$i \in \{1, 2, \cdots, N\}$の選択確率が次のようになることが知られている。
 
 $$
 P_i = \frac{\exp(V_i)}{\sum_i \exp(V_i)}
 $$
-
 
 この形は経済の方面では多項ロジット分布と呼ばれている分布、機械学習の方面ではsoftmaxと呼ばれている分布で、解析計算との相性がとても良いことが知られている。このような選択確率になってくれることがあり違いことはよくわかるのでガンベル分布自体に正当性があるのかはよく知らないが、たとえなくても使いたいものであることはわかる。
 
@@ -43,7 +41,6 @@ F(a) &= \int^a_{-\infty} \frac{1}{\beta}\exp(-z - e^{-z}) dx \\
 \end{aligned}
 $$
 
-
 ただしここで変数変換$y = e^{-z}$を途中で使用している。
 
 ある選択肢$i$が選ばれるためには、その選択肢の選好がノイズを含めて他の全ての選択肢よりも大きくなければならない。全ての選択肢に対する選好$V_1, V_2, \cdots, V_N$と選択肢$i$に対するノイズ$\epsilon_i$が与えられた時、選択肢$j \ne i$が選ばれない確率は
@@ -52,13 +49,11 @@ $$
 V_j + \epsilon_j < V_i + \epsilon_i \iff \epsilon_j < V_i - V_j + \epsilon_i
 $$
 
-
 より、
 
 $$
 F(V_i - V_j + \epsilon_i)
 $$
-
 
 となる。ノイズ項はそれぞれ独立だと仮定しているため、選択肢$i$以外全ての選好が選択肢$i$よりも低くなる確率は
 
@@ -66,13 +61,11 @@ $$
 \prod_{j \ne i} F(V_i - V_j + \epsilon_i)
 $$
 
-
 となる。これはノイズ$\epsilon_i$を固定した場合の話なので、実際には選択肢$i$が選ばれる確率は
 
 $$
 P_i = \int d\epsilon_i f(\epsilon_i) \prod_{j \ne i} F(V_i - V_j + \epsilon_i)
 $$
-
 
 となる。あとはこれをゴリゴリ計算するだけ。まずは$\xi = - e^{-\epsilon_i}$と変換して
 
@@ -86,7 +79,6 @@ P_i &= \int^{\infty}_{-\infty} d\epsilon_i f(\epsilon_i) \prod_{j \ne i} F(V_i -
 &= \frac{1}{1 + \sum_{j \ne i} \exp(V_j - V_i)} \\ &= \frac{\exp(V_i)}{\sum_j \exp(V_j)}
 \end{aligned}
 $$
-
 
 確かに多項ロジットになった。
 

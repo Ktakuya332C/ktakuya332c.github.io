@@ -9,18 +9,15 @@
 - [Bayesian Cognitive Modeling](https://bayesmodels.com/)
 - [Statistical Methods for Environmental Epidemiology with R](https://www.springer.com/jp/book/9780387781662)
 
-
 Rを使っている人はどのような人たちで、どのように使っているのだろうというのを調べるために探したときの本一覧。上二つはonlineで無料公開されていて素晴らしい。下二つはonlineで公開されていないが、確かサンプルがonlineで読めたはず。R色々な分野で使用されているが、多分これらの本を読んでみればどうやって使われているのかがわかるのではないかなと思う。kaggleなどを行っている人たちとはクラスタが違う気がしていて、別の視点からデータサイエンス的なものをみることができて面白い。
 
 あとは今日twitter上で見つけた本を二つ。一つはデータ可視化のための本
 
 - [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 
-
 でまだ読んでいないが、色々な可視化の方法を教えてくれそうな本。無料でonlineで公開されている。どうやっても3次元になってしまいそうなデータとかはよくあるので、それをどのようにして綺麗に、可能なら二次元で見せることができるのかなどを探るために読んでみたいなと思っている。もう一つは機械学習系の本
 
 - [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/index.html)
-
 
 こちらも無料でonlineで公開されている。学習モデルの解釈性の問題というのはよく聞くテーマなので、それをまとめてくれている本があるというのは嬉しい。いつか読むかも。
 

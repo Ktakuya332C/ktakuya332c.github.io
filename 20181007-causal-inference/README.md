@@ -1,8 +1,8 @@
 # 良い因果推論の授業を見つけた
 
 最近の因果推論についてとてもうまくまとめてくれている授業がカリフォルニア大バークレー校であったらしいと聞いた。
-- Maya Peterson and Laura Balzer, [Introduction to Causal Inference](http://www.ucbbiostat.com/)
 
+- Maya Peterson and Laura Balzer, [Introduction to Causal Inference](http://www.ucbbiostat.com/)
 
 見てみると非常によくまとめられており、自分が知らないような概念も多くあった。授業用のスライドやその時に使用したのであろう演習問題なども公開されていて非常に参考になる。ただ一つ残念なのが、授業自体は公開されておらず授業自身についてはその時使用されたスライドが公開されるのみとなっている点だ。授業を録画したビデオなどがあれば最高だったのだが教える方の負担が非常に重くなるのだろうからそこはまあ致し方ない。
 

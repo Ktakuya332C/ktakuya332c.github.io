@@ -5,6 +5,7 @@
 ## C++のための開発環境整備
 
 Dockerfileとセットアップスクリプトを用意する
+
 ```
 $ mkdir arrow-env
 $ cd arrow-env
@@ -28,20 +29,21 @@ docker run -it --rm -v $CUR_DIR:/root arrow-env bash
 ```
 
 あとはセットアップをして開発をする。
-```
-$ bash setup.sh
-$ git clone https://github.com/apache/arrow.git
-$ cd arrow/cpp
-$ mkdir release
-$ cd release
-$ cmake ..
-$ make
-```
 
+```
+bash setup.sh
+git clone https://github.com/apache/arrow.git
+cd arrow/cpp
+mkdir release
+cd release
+cmake ..
+make
+```
 
 ## Pythonのための開発環境整備
 
 Dockerfileを次のように変更する。apt-getで導入できるcmakeはビルドパスなどを引数で指定できないので、新しめのものを導入しておく。
+
 ```
 $ vim Dockerfile
 $ cat Dockerfile
@@ -65,6 +67,7 @@ CMD ["bash"]
 ```
 
 セットアップスクリプトは変更せず
+
 ```
 $ vim setup.sh
 $ cat setup.sh
@@ -76,23 +79,27 @@ docker run -it --rm -v $CUR_DIR:/root arrow-env bash
 ```
 
 dockerを立ち上げる。
+
 ```
-$ bash setup.sh
+bash setup.sh
 ```
 
 arrowのソースコードを持ってきて
+
 ```
-$ git clone https://github.com/apache/arrow.git
+git clone https://github.com/apache/arrow.git
 ```
 
 ビルドの成果物を入れるディレクトリとインストール先のディレクトリを決める。ここではデフォルトの設定どおり`/usr/local`以下にインストールするのではなく、`/root/dist`にインストールすることにする
+
 ```
-$ mkdir dist build
-$ export ARROW_HOME=/root/dist
-$ export LD_LIBRARY_PATH=$ARROW_HOME/lib:$LD_LIBRARY_PATH
+mkdir dist build
+export ARROW_HOME=/root/dist
+export LD_LIBRARY_PATH=$ARROW_HOME/lib:$LD_LIBRARY_PATH
 ```
 
 まずはC++のライブラリをビルドする
+
 ```
 $ cmake -DCMAKE_INSTALL_PREFIX=$ARROW_HOME \
         -DARROW_PYTHON=ON \
@@ -102,6 +109,7 @@ $ cmake --build build --target install
 ```
 
 最後にpythonのライブラリをビルドする
+
 ```
 $ pip3 install --upgrade pip
 $ pip3 install \

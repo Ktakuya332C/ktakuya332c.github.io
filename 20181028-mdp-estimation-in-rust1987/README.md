@@ -4,11 +4,9 @@
 
 - M.Igami (2015), [Estimating the Innovotr's Dilemma: Structual Analysis of Creative Destruction in the Hard Disk Drive Industry](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1733174)
 
-
 を読むために、その解析の核心の部分を作り上げた論文
 
 - J.Rust (1987), [Optimal Replacement of GMC Bus Engines: An Empirical Model of Harold Zucher](https://www.jstor.org/stable/1911259?seq=1#page_scan_tab_contents)
-
 
 を読んでいる。この論文の題名で調べるとその論文を読んでみましたとか授業で解説しましたなどの記事を多く見かけるので、多分有名な論文なのではないかと思う。
 
@@ -36,7 +34,6 @@
 - 遷移確率と呼ばれる、MDPがある状態$s \in S$の時に行動主体が行動$a \in A$をとった時にMDPの状態が$s'$に遷移する確率$P(s' | s, a)$
 - MDPが状態$s \in S$である時に行動主体が行動$a \in A$をとった時に行動主体が得られる報酬$R(s, a)$
 
-
 ついで、MDPがどの状態を最初に取り得るかどうかを表す確率分布$q(s)$を仮定することが多い。このようなMDPと相互作用する行動主体は次のように定義される。
 
 > *行動主体*  
@@ -44,7 +41,6 @@
 
 - 戦略と呼ばれる、MDPの各状態$s \in S$でどの行動$a \in A$をとるかを表す関数$\pi: S \rightarrow A$
 - 割引率$\gamma \in [0, 1]$
-
 
 行動主体の目的は次の期待報酬$J_\pi$を最大化するような戦略$\pi$を見つけることである。
 
@@ -54,13 +50,11 @@ J_\pi &= \sum_{s \in S} q(s) V_\pi (s) \\
 V_\pi (s) &= \mathbb{E}_\pi [ \sum_{t=0}^{\infty} \beta^t R(s_t, a_t) | s_0 = s] \end{aligned}
 $$
 
-
 ただしここでの期待値$\mathbb{E}$は戦略$\pi$をとった際に起こりうる全てのMDPと行動主体の時間発展に対してとっている。このような期待報酬を最大化させる戦略$\pi^*$は最適価値関数
 
 $$
 V(s) = \max_\pi V_\pi (s)
 $$
-
 
 を使用して
 
@@ -70,7 +64,6 @@ $$
 EV(s, a) &= \sum_{s' \in S} P(s' | s, a) V(s')
 \end{aligned}
 $$
-
 
 と表現できることが知られている。以降の議論では行動主体はこのような期待報酬を最大化するような戦略(最適戦略)を常にとっていると仮定して議論を進めていく。
 
@@ -86,6 +79,7 @@ $$
 - 遷移確率$P(s'|s,a)$は次のように分解でき、$P(s'_o | s_o, a)$は何らかのパラメトリックな分布$P(s'_o | s_o, a ; \theta_p)$で表現される。
 
   $$
+
 \begin{aligned}
   P(s' | s, a) &= P(s'_o, s'_u | s_o, s_u, a) \\
   &= P(s'_u ) P(s'_o | s_o, a)
@@ -98,7 +92,6 @@ R(s, a) = R_o(s_o, a) + R_u(s_u, a)
 $$
 - 行動主体は常に最適戦略をとっている。
 
-
 ここでいくつかこれらの仮定に対して注意しておくことをあげておく。まず遷移確率が分解できることについてだが、$P(s'_u)$の部分は依存性を少し残して$P(s'_u | s'_o)$としても以下の多くの議論は成り立つ。しかし今回は議論を簡潔にするために依存性を外してある。また、観測できない報酬$R_u$がガンベル分布をとるという仮定は単純に議論を簡潔にするためのものなので、他の分布になると仮定しても問題はない。ただし、この分布を使用すると議論が非常に簡潔になるため多くの文献で使用されている。
 
 以上の仮定を置いた上で、観察者はMDPと行動主体を観察して得られたデータからMDPの情報を推定する。整理すれば以下のようになる。
@@ -110,9 +103,7 @@ $$
 s_{o0}, a_0, s_{o1}, a_1, s_{o2}, a_2, \cdots, s_{oT}, a_T
 $$
 
-
 から遷移確率のパラメータ$\theta_p$と観察できる報酬のパラメータ$\theta_r$を推定する。ただしここで$s_{ot}$は時刻$t$での観察可能なMDPの状態を表し、$a_t$は同じく時刻$t$で行動主体がとった行動を表す。
-
 
 ## 観察者によるMDPの推定方法
 
@@ -120,18 +111,16 @@ MDPの推定は最尤推定を用いて行う。最尤推定であるから、MD
 
 $$
 \begin{aligned}
-L(\{ s_{ot}, a_t\}_{t=0}^T) &= \prod_{t=0}^T P(s_{ot}, a_t | \{ s_{ot}, a_t\}_{t=0}^{t-1}; \theta) \\
-&= \prod_{t=0}^T P(s_{ot}, a_t | s_{o(t-1)}, a_{t-1}; \theta)\\
+L(\{ s_{ot}, a_t\}*{t=0}^T) &= \prod*{t=0}^T P(s_{ot}, a_t | \{ s_{ot}, a_t\}*{t=0}^{t-1}; \theta) \\
+&= \prod*{t=0}^T P(s_{ot}, a_t | s_{o(t-1)}, a_{t-1}; \theta)\\
 &= \prod_{t=0}^T P(a_t | s_{ot}; \theta) P(s_{ot} | s_{o(t-1)}, a_{t-1}; \theta_p) \end{aligned}
 $$
-
 
 と分解できる。ここで一行目から二行目の式変形には遷移確率に対する仮定を使っている。よってlogにすれば
 
 $$
-\ln L(\{ s_{ot}, a_t\}_{t=0}^T) = \sum_{t=0}^T \ln P(a_t | s_{ot}; \theta) + \sum_{t=0}^T \ln P(s_{ot} | s_{o(t-1)}, a_{t-1}; \theta_p)
+\ln L(\{ s_{ot}, a_t\}*{t=0}^T) = \sum*{t=0}^T \ln P(a_t | s_{ot}; \theta) + \sum_{t=0}^T \ln P(s_{ot} | s_{o(t-1)}, a_{t-1}; \theta_p)
 $$
-
 
 となり、まず$\theta_p$を2項目を最適化することで推定し、その次にその結果を使って1項目を推定することでどちらのパラメータも推測して行くことができそうである。
 
@@ -140,18 +129,16 @@ $$
 次に1項目を使用した$\theta_r$の推定であるが、これは少し複雑だ。そもそも$P(a_t | s_{ot}; \theta)$がどのように定まるものだったかというと、行動主体は最適戦略を常にとっているはずであるから必ず
 
 $$
-\begin{aligned} a_t &= {\rm argmax}_{a \in A} (R(s_t, a; \theta_r) + \gamma EV(s_t, a; \theta)) \\ &= {\rm argmax}_{a \in A} (R_o(s_{ot}, a; \theta_r) + R_u(s_{ut}, a) + \gamma EV(s_t,a; \theta)) \\ &= {\rm argmax}_{a \in A} (R_o(s_{ot}, a; \theta_r) + R_u(s_{ut}, a) + \gamma EV(s_{ot} ,a; \theta)) \end{aligned}
+\begin{aligned} a_t &= {\rm argmax}*{a \in A} (R(s_t, a; \theta_r) + \gamma EV(s_t, a; \theta)) \\ &= {\rm argmax}*{a \in A} (R_o(s_{ot}, a; \theta_r) + R_u(s_{ut}, a) + \gamma EV(s_t,a; \theta)) \\ &= {\rm argmax}*{a \in A} (R_o(s*{ot}, a; \theta_r) + R_u(s_{ut}, a) + \gamma EV(s_{ot} ,a; \theta)) \end{aligned}
 $$
-
 
 となり決定論的に定まりそうだが、$R_u$が標準ガンベル分布にしたがう変数であるため決定論的には定まらなくなる。ただし2行目から3行目への式変形で
 
 $$
 \begin{aligned}
-EV(s, a) &= \sum_{s' \in S} P(s' | s, a) V(s') \\ &= \sum_{s'_u \in S_u} P(s'_u) \sum_{s'_o \in S_o} P(s'_o | s_o, a) V(s'_o, s'_u) \\ &= \sum_{s'_u \in S_u} P(s'_u) \sum_{s'_o \in S_o} P(s'_o | s_o, a) V(s'_o) \\ &= \sum_{s'_o \in S_o} P(s'_o | s_o, a) V(s'_o) \\ &= EV(s_o, a)
+EV(s, a) &= \sum_{s' \in S} P(s' | s, a) V(s') \\ &= \sum_{s'_u \in S_u} P(s'*u) \sum*{s'_o \in S_o} P(s'_o | s_o, a) V(s'_o, s'*u) \\ &= \sum*{s'_u \in S_u} P(s'*u) \sum*{s'_o \in S_o} P(s'_o | s_o, a) V(s'*o) \\ &= \sum*{s'_o \in S_o} P(s'_o | s_o, a) V(s'_o) \\ &= EV(s_o, a)
 \end{aligned}
 $$
-
 
 と書けることを使用している。導出が煩雑になりすぎるのでここでは最適価値関数から$s'_u$への依存性が消せることは示さずに使わせてもらった。具体的には$P(a_t | s_{ot}; \theta)$は[この記事](../build/basics-of-reinforcement-learning.html)で示したようにガンベル分布の性質から多項ロジットとなる
 
@@ -159,16 +146,14 @@ $$
 P(a_t | s_{ot}; \theta) = \frac{\exp(R_o(s_{ot}, a_t; \theta_r) + \gamma EV(s_{ot}, a_t; \theta))}{\sum_{a \in A} \exp(R_o(s_{ot}, a_t; \theta_r) + \gamma EV(s_{ot}, a_t; \theta))}
 $$
 
-
 基本的にはこれの最尤推定を行えばいいのだが、ひとつわからないパラメータとして$EV(s_{ot}, a; \theta)$がある。この推定方法はいろいろあるだろうが、とりあえず次の性質を使用する方法がある。
 
 > *期待最適価値関数についての性質*  
 > 次の作用素$\mathcal{F}_\theta$を適当な実数関数$f: S_o \times A \rightarrow \mathbb{R}$に作用し続けると、$f$は期待最適価値関数$EV$に収束していく。
 
 $$
-\mathcal{F}_\theta f(s_o, a) = \sum_{s'_o \in S} P(s'_o | s_o, a; \theta_p) \ln [ \sum_{a' \in A} \exp(R_o(s'_o, a'; \theta_r) + \gamma f(s'_o, a'))]
+\mathcal{F}*\theta f(s_o, a) = \sum*{s'_o \in S} P(s'*o | s_o, a; \theta_p) \ln [ \sum*{a' \in A} \exp(R_o(s'_o, a'; \theta_r) + \gamma f(s'_o, a'))]
 $$
-
 
 証明は長いので省略。いつか書くかも。とりあえず以前の記事の内容を使えば簡単なはず。
 
@@ -194,7 +179,6 @@ Algorithm:
   end
   return $\theta_p, \theta_r$
 ```
-
 
 このような$\theta_r$の推定方法を Nested Fixed Point Algrithm と呼ぶらしい。
 

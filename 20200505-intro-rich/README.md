@@ -1,12 +1,13 @@
 # PythonライブラリRichを試す
 
 hackernewsでこんなライブラリが紹介されているのを見つけた
+
 - [Rich is a Python library for rich text and beautiful formatting in the terminal.](https://github.com/willmcgugan/rich)
 
 とりあえず試してみる。スクショを取りまくるのも面倒なので、色とか文字の装飾がメインなのでこのページでは表現できないので残念だが、`README.md`で紹介されているコードと少しを実際に書いてみた結果を貼っていってみる。
 
-
 ## Print
+
 ```
 >>> from rich import print
 >>> print("Hello, [bold magenta]World[/bold magenta]!")
@@ -29,6 +30,7 @@ Hello, World!
 綺麗な色付けとフォーマットになるので、`pprint`よりも良いかもしれない。
 
 ## Console
+
 ```
 >>> from rich.console import Console
 >>> console = Console()
@@ -40,8 +42,8 @@ Bold Cyan underline italic
 [11:05:53] This is a pen
 ```
 
-
 ## Logging Handler
+
 ```
 >>> import logging
 >>> from rich.logging import RichHandler
@@ -53,16 +55,16 @@ Bold Cyan underline italic
 [05/05/20 11:13:26] INFO     INFO:__main__:Hello World                 <stdin>:
 ```
 
-
 ## Progress Bars
+
 ```
 >>> import time
 >>> from rich.progress import track
 >>> for step in track(range(100)): time.sleep(1)
 ```
 
-
 ## Markdown
+
 ```
 >>> import textwrap
 >>> from rich.console import Console
@@ -77,8 +79,8 @@ Bold Cyan underline italic
 """)))
 ```
 
-
 ## Syntax
+
 ```
 >>> import textwrap
 >>> from rich.console import Console
@@ -89,8 +91,8 @@ Bold Cyan underline italic
 """), "python"))
 ```
 
-
 ## Tables
+
 ```
 >>> from rich.console import Console
 >>> from rich.table import Column, Table

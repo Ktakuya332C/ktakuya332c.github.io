@@ -14,7 +14,6 @@ MacBook-Pro$ vagrant up
 MacBook-Pro$ vagrant ssh
 ```
 
-
 今の所bootloaderはos-tutorialになぞってnasmで開発しているので、とりあえずnasmは開発に必須。
 
 ```
@@ -22,20 +21,17 @@ vagrant@vagrant-ubuntu-trusty-32:~$ sudo apt update
 vagrant@vagrant-ubuntu-trusty-32:~$ sudo apt install nasm
 ```
 
-
 あとはbootloaderを実行するための仮想環境を用意してくれるqemuを入れておく。
 
 ```
 vagrant@vagrant-ubuntu-trusty-32:~$ sudo apt install qemu
 ```
 
-
 最後にデバッグ用のgdbを入れておく
 
 ```
 vagrant@vagrant-ubuntu-trusty-32:~$ sudo apt install gdb
 ```
-
 
 これで開発に必要な最低限の環境は整った。
 
@@ -54,7 +50,6 @@ times 510 - ($-$$) db 0
 dw 0xaa55
 ```
 
-
 このコードは [Bios interrupt call](https://en.wikipedia.org/wiki/BIOS_interrupt_call)を使って画面に'A'という文字を出力するプログラムになっている[1]。
 
 実際にbootloaderを動かしてみて、文字が出力されていることを確認したい場合には
@@ -63,7 +58,6 @@ dw 0xaa55
 vagrant@vagrant-ubuntu-trusty-32:~$ nasm -f bin -o boot boot.asm
 vagrant@vagrant-ubuntu-trusty-32:~$ qemu-system-i386 -nographic -curses boot
 ```
-
 
 とすれば画面がbootloaderの画面(TUI)に変わり、こんな感じの画面が出力されることになると思う。
 
@@ -74,7 +68,6 @@ Booting from Hard Disk...
 A
 ```
 
-
 そして、確かに'A'という文字が出力されているのがわかる。bootloaderを閉じたい場合にはその画面上で一度ESCと2をおし、次にqを押せば終了することができる[2]。
 
 ここで注意しないければならないのが、qemuのオプションの順番には気をつけなければならないようだということだ。上記のように'-curses'を後に持って来れば問題ないのだが、先に持ってくる
@@ -82,7 +75,6 @@ A
 ```
 vagrant@vagrant-ubuntu-trusty-32:~$ qemu-system-i386 -curses -nographic boot
 ```
-
 
 とTUIに変わらず停止してしまう。理由はよくわからないがそのような挙動をすることだけは確認してある。このようにしてvagrantによる仮想環境上で開発を行っていくことができる。
 
@@ -95,7 +87,6 @@ MacBook-Pro$ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-32:~$ qemu-system-i386 boot -nographic -s -S
 ```
 
-
 '-S'オプションをつけることで起動プロセスが勝手に進んでしまうのを防ぎ、'-s'オプションをつけることで1234ポートでgdbからの接続を待つことができる。ただしデバッグ中に'-curses'オプションを使ってTUIを開くことはできなさそうなので、そのオプションはつけていない。もう一つのTerminal画面を開いてvagrant上でgdbを使用して、その1234ポートに接続する。
 
 ```
@@ -106,14 +97,12 @@ Remote debugging using localhost:1234
 0x0000fff0 in ?? ()
 ```
 
-
 最後にデバッグ対象のarchitectureを設定して、どのようにdisassembleをするかなどを定めておく。今回はbootloaderがデバッグ対象なので、[Intel 8086 CPU](https://en.wikipedia.org/wiki/Intel_8086)と同じ動き方をされる前提で起動するはずなので
 
 ```
 (gdb) set architecture i8086
 The target architecture is assumed to be i8086
 ```
-
 
 と設定しておく。
 
@@ -125,24 +114,23 @@ gdbを使って内部の動きをさまざま追うことができる。
 
 ```
 (gdb) info registers
-  eax            0x0	0
-  ecx            0x0	0
+  eax            0x0 0
+  ecx            0x0 0
   ...
 ```
 
-
 とすれば全てのレジスタの中身の値を見ることができる。それぞれの行はレジスタの名前、16進数の値、10進数の値の順番で表示されている。同様に`info reg`などと省略することもできる。
+
 - プログラム上でどのような指示が出されているかはdisassembleコマンドを使って確認することができる。例えば、今現在のCSレジスタの値が`0xf000`で、EIPレジスタの値が`0xfff0`の時
 
 ```
 (gdb) info reg
   ...
-  eip            0xfff0	0xfff0
+  eip            0xfff0 0xfff0
   ...
-  cs             0xf000	61440
+  cs             0xf000 61440
   ...
 ```
-
 
 に、次に実行される指示を確認したい場合を考える。bootloaderの最初の方では、次に実行される指示の番地は
 
@@ -150,23 +138,21 @@ gdbを使って内部の動きをさまざま追うことができる。
 <次の指示の番地>; = cs * 0x10 + ip
 ```
 
-
 と計算されるので、この場合に次に実行される番地は`0xffff0`となる。そこから次の一バイト分の指示を取り出して、disassembleして見ると
 
 ```
 (gdb) disassemble 0xffff0,+0x01
 Dump of assembler code from 0xffff0 to 0xffff1:
-   0x000ffff0:	ljmp   $0xf000,$0xe05b
+   0x000ffff0: ljmp   $0xf000,$0xe05b
 ```
 
-
 となり、次に実行される指示は`0xf000 * 0x10 + 0xe05b = 0xfe05b`番地にjumpせよという指示であることがわかる。
+
 - 他には break point を設定することができる。例えば`0x7c00`番地にくるまで実行して見たい場合に、まず break point を設定して
 
 ```
 (gdb) b *0x7c00
 ```
-
 
 そこにくるまで実行すると、実際にその番地の指示が実行される前まで実行されることがわかる。
 
@@ -174,12 +160,11 @@ Dump of assembler code from 0xffff0 to 0xffff1:
 (gdb) c
 (gdb) info reg
 ...
-eip            0x7c00	0x7c00
+eip            0x7c00 0x7c00
 ...
-cs             0x0	0
+cs             0x0 0
 ...
 ```
-
 
 ## Mac上で直接bootloaderを開発する際の難点
 
@@ -188,11 +173,10 @@ cs             0x0	0
 - gdbをMac上にインストールするのが難しい。比較的新しいMacOSならば基本的にgdbを使うことは推奨されておらず、lldbを使用することが推奨されている。gdbを無理やり使おうと思うとgdbに対してセキュリティ的な認証をせねばらなず手間がかかる[3]。その上、新しいgdbはMac上では動かず少し古いバージョンのものを強制的に入れる必要がある[4]。色々と手間がかかりすぎる上に明らかにMac上でgdbを動かせるようにできていないのであまり無理やり動かせるようにしても将来どうなるかはわからない。
 - lldbでqemuと連携する方法がわからない。lldbとqemuを連携させる方法がどこにも書かれておらず、考えつく方法を色々と試して見たが全てうまくいかなかった。関連しそうなリソースとしてはこのlldbのメーリングリストのスレッド[5]などがあったが、あまり参考にはならない。
 
-
 ## 参考
 
-1. https://github.com/cfenollosa/os-tutorial/blob/master/02-bootsector-print/boot_sect_hello.asm
-1. https://serverfault.com/questions/730355/qemu-running-in-ssh-how-to-exit
-1. https://qiita.com/yuzu_afro/items/988020dd65fb4f43962a
-1. https://stackoverflow.com/questions/49222683/how-do-i-install-gdb-on-macos-10-13-3-high-sierra
-1. http://lists.llvm.org/pipermail/lldb-dev/2014-February/003318.html
+1. <https://github.com/cfenollosa/os-tutorial/blob/master/02-bootsector-print/boot_sect_hello.asm>
+1. <https://serverfault.com/questions/730355/qemu-running-in-ssh-how-to-exit>
+1. <https://qiita.com/yuzu_afro/items/988020dd65fb4f43962a>
+1. <https://stackoverflow.com/questions/49222683/how-do-i-install-gdb-on-macos-10-13-3-high-sierra>
+1. <http://lists.llvm.org/pipermail/lldb-dev/2014-February/003318.html>

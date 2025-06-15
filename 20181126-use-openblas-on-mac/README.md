@@ -5,10 +5,9 @@ OpenBLASをMacで使用する方法のまとめ。
 まずはインストールから。インストールは基本的に[brew](https://brew.sh/)を使って行う。
 
 ```
-$ brew search openblas
-$ brew install openblas
+brew search openblas
+brew install openblas
 ```
-
 
 [このページ](http://mayah.jp/posts/2016/blas/)などはどうも`homebrew/science/openblas`などから取ってきている様子だが、自分がローカル環境(MacOS High Sierra)で行ったところ、上記の方法でインストールできた。インストールが終了すると最後に`/usr/local/opt/openblas`以下にソースコードの実態を入れた旨と、そもそもMacにはAccelerateフレームワークによってBLASが入っているので、勝手に`/usr/local`に何かをsymlinkしたりはしないよというお知らせが出てきた。
 
@@ -39,7 +38,6 @@ for (int i=0; i<m*k; i++) a[i] = dist(mt);
 for (int i=0; i<k*n; i++) b[i] = dist(mt);
 ```
 
-
 まずは、普通にループで行列積をとって見る。
 
 ```
@@ -52,14 +50,12 @@ for (int i = 0; i < m; i++) {
 }
 ```
 
-
 次に、OpenBLASを使って行列積をとって見る。
 
 ```
 cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
             m, n, k, 1.0, a, k, b, n, 0.0, c, n);
 ```
-
 
 以上の作業を行なった後に、それぞれの行列積がどれくらいの時間かかったのかを測るスクリプトを書くと以下のようになった。
 
@@ -110,7 +106,6 @@ int main() {
 }
 ```
 
-
 このスクリプトを`measure.cpp`として保存して次のようにコンパイルして実行すると、計測ができる。
 
 ```
@@ -120,6 +115,5 @@ $ ./a.out
 Ordinary loop took 2.47567 second
 BLAS loop took 0.276661 second
 ```
-
 
 やはりBLASの行列計算は、普通のループに比べて10倍くらいは早いようだ。

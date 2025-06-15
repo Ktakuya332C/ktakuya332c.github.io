@@ -26,82 +26,82 @@ start:
   ljmp $PROT_MODE_CSEG, $protcseg
 
 gdt:
-	# Null segment
-	.word 0x0, 0x0
-	.byte 0x0, 0x0, 0x0, 0x0
-	# Code segment
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0b10011010
-	.byte 0b11001111
-	.byte 0x0
-	# Data segment
-	.word 0xffff
-	.word 0x0
-	.byte 0x0
-	.byte 0b10010010
-	.byte 0b11001111
-	.byte 0x0
+ # Null segment
+ .word 0x0, 0x0
+ .byte 0x0, 0x0, 0x0, 0x0
+ # Code segment
+ .word 0xffff
+ .word 0x0
+ .byte 0x0
+ .byte 0b10011010
+ .byte 0b11001111
+ .byte 0x0
+ # Data segment
+ .word 0xffff
+ .word 0x0
+ .byte 0x0
+ .byte 0b10010010
+ .byte 0b11001111
+ .byte 0x0
 gdtdesc:
-	.word 0x17
-	.long gdt
+ .word 0x17
+ .long gdt
 
-	.code32
+ .code32
 protcseg:
-	# Setup the 32-bit protected mode data segment registers
-	movw $PROT_MODE_DSEG, %ax
-	movw %ax, %ds
-	movw %ax, %es
-	movw %ax, %fs
-	movw %ax, %gs
-	movw %ax, %ss
+ # Setup the 32-bit protected mode data segment registers
+ movw $PROT_MODE_DSEG, %ax
+ movw %ax, %ds
+ movw %ax, %es
+ movw %ax, %fs
+ movw %ax, %gs
+ movw %ax, %ss
 
-	# Wait for the disk to be ready
-	call waitdisk
+ # Wait for the disk to be ready
+ call waitdisk
 
-	# Prepare to read the disk
-	movw $0x1f2, %dx
-	movb $0x1, %al
-	outb %al, %dx
-	movw $0x1f3, %dx
-	movb $0x1, %al
-	outb %al, %dx
-	movw $0x1f4, %dx
-	movb $0x0, %al
-	outb %al, %dx
-	movw $0x1f5, %dx
-	movb $0x0, %al
-	outb %al, %dx
-	movw $0x1f6, %dx
-	movb $0xe0, %al
-	outb %al, %dx
-	movw $0x1f7, %dx
-	movb $0x20, %al
-	outb %al, %dx
+ # Prepare to read the disk
+ movw $0x1f2, %dx
+ movb $0x1, %al
+ outb %al, %dx
+ movw $0x1f3, %dx
+ movb $0x1, %al
+ outb %al, %dx
+ movw $0x1f4, %dx
+ movb $0x0, %al
+ outb %al, %dx
+ movw $0x1f5, %dx
+ movb $0x0, %al
+ outb %al, %dx
+ movw $0x1f6, %dx
+ movb $0xe0, %al
+ outb %al, %dx
+ movw $0x1f7, %dx
+ movb $0x20, %al
+ outb %al, %dx
 
-	# Wait for the disk to be ready
-	call waitdisk
+ # Wait for the disk to be ready
+ call waitdisk
 
-	# Read the disk
-	movw $0x1f0, %dx
-	movl $0x100000, %edi
-	mov $0x1, %cx
-	repne insl
+ # Read the disk
+ movw $0x1f0, %dx
+ movl $0x100000, %edi
+ mov $0x1, %cx
+ repne insl
 
 spin:
   jmp spin
 
 waitdisk:
-	movw $0x1f7, %dx
+ movw $0x1f7, %dx
 waitdisk_loop:
-	inb %dx, %al
-	andb $0xc0, %al
-	cmpb $0x40, %al
-	jnz waitdisk_loop
-	ret
+ inb %dx, %al
+ andb $0xc0, %al
+ cmpb $0x40, %al
+ jnz waitdisk_loop
+ ret
 
-	# Bootloader Magic Number
+ # Bootloader Magic Number
   . = start + 510
   .byte 0x55
   .byte 0xaa
@@ -115,14 +115,12 @@ waitdisk_loop:
   .byte 0x05
 ```
 
-
 全体的には次のような処理を行っている。
 
 1. 16-bit real mode で起動したbootloaderの動作方法を 32-bit protected mode での動作に変更する
 1. PIOを用いて、ハードディスクが読み込み可能になるまで待つ
 1. PIOを用いて、ハードディスクにどの部分の情報をどのくらい読み出すかを設定する
 1. PIOを用いて、実際にハードディスクから情報を読み出す
-
 
 PIOを使用する際には、まずそのPIOがその時点でコマンドを受け付けているかどうかを確認しなければならない。PIOの状態は0x1f7番ポートの状態を読み取れば良く[2]、0x1f7番ポートの情報を読むためにはDXレジスタにそのポート番号0x1f7を入力してからinb命令を実行すれば良い[4]。読み取り結果はALレジスタに保存される[4]。
 
@@ -131,14 +129,12 @@ movw $0x1f7, %dx
 inb %dx, %al
 ```
 
-
 読み取り結果の中でコマンドを受け付けているかどうかがわかるのは上位二つのビット、最上位のBSYビット(何かしらの作業中なら0)と次点のRDYビット(コマンドを受け付ける準備ができているなら0)である[2]。それら上位にビットを次のように確認する。
 
 ```
 andb $0xc0, %al # 0xc0 = 0b11000000
 cmpb $0x40, %al # 0x40 = 0b1000000
 ```
-
 
 PIOがコマンドを受け付けられる状態になったら、次はハードディスクのどの部分の情報をどれくらい読み出す可能性があるかを伝える。今回はハードドライブから一つのセクターを
 
@@ -147,7 +143,6 @@ movw $0x1f2, %dx
 movb $0x1, %al
 outb %al, %dx
 ```
-
 
 28-bit [LBA(Logical Block Address)](https://en.wikipedia.org/wiki/Logical_block_addressing)で0始まりで1つめのセクター(普通に数えれば2つめ)を起点として、0番目のハードドライブからLBA方式で読み出す予定ですと
 
@@ -166,7 +161,6 @@ movb $0xe0, %al # 0xe0 = 0b11100000, 下4bitはLBAに使用される
 outb %al, %dx
 ```
 
-
 伝えている[2]。
 
 ```
@@ -175,13 +169,11 @@ movb $0x20, %al
 outb %al, %dx
 ```
 
-
 どのような情報を読み取るか伝えてハードディスクが読み取っても良いと言ったら実際に読み取ることになる。読み取り用のポートを設定し[2]
 
 ```
 movw $0x1f0, %dx
 ```
-
 
 読み取り先のメモリのアドレスをEDXに指定し[4]
 
@@ -189,14 +181,12 @@ movw $0x1f0, %dx
 movl $0x100000, %edi
 ```
 
-
 1度だけinslコマンドを使って4byteを読み込む(inslのlによってlong=4byteが読まれることが指定される)。
 
 ```
 mov $0x1, %cx # repneに渡す引数
 repne insl
 ```
-
 
 ## 調査内容
 
@@ -208,7 +198,6 @@ vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 07c00 --oformat=binary --en
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ qemu-system-i386 boot.bin -nographic -s -S
 ```
 
-
 別のTerminalでgdbを使って最後まで実行してみる。
 
 ```
@@ -218,14 +207,12 @@ vagrant@vagrant-ubuntu-trusty-32:~$ gdb
 Continuing.
 ```
 
-
 適当なところでCtrl-Cなどを押して処理を止める。多くの場合は最後の処理まで言っているはずなので、実際にハードディスクを読み取った先のアドレス0x10000には読み取った値が記録されているはずである。
 
 ```
 (gdb) x/5bx 0x100000
-0x100000:	0x01	0x02	0x03	0x04	0x00
+0x100000: 0x01 0x02 0x03 0x04 0x00
 ```
-
 
 実際に読み取りを行なった4byteは確かに読み取れていることがわかる。今回はinsl命令を一度しか行なっていないため4byteしか読み込まれず、5byte目の0x05は読み取られていないことがわかる。
 

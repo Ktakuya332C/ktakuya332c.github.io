@@ -1,6 +1,7 @@
 # Awkのサンプルスクリプト
 
 ackernewsを漁っていたらこんな記事を見つけた
+
 - [Awk in 20 minutes](https://ferd.ca/awk-in-20-minutes.html)
 
 この記事はAwkの使い方をとても明確に説明してくれていてとても助かる。ざっと読んでAwkの文法が大体理解できた気がするので、説明してあった内容について一つ一つ試して行こうかと思う。
@@ -8,6 +9,7 @@ ackernewsを漁っていたらこんな記事を見つけた
 ## Code Structure
 
 まずは基本的なAwkスクリプトの構造から。スクリプトは入力された内容を一行ずつ処理してくらしい。
+
 ```
 $ vim input.txt
 $ cat input.txt
@@ -29,6 +31,7 @@ interlude
 ## Patterns
 
 中括弧の前に色々な条件を指定することでいつそのスクリプトが発火するかを決めることができる様子。
+
 ```
 $ vim input.txt
 $ cat input.txt
@@ -46,6 +49,7 @@ $ awk -f script.awk input.txt
 ```
 
 対象の行の一部を使って条件分岐や計算もできる様子。
+
 ```
 $ vim script.awk
 $ cat script.awk
@@ -56,10 +60,10 @@ $ awk -f script.awk input.txt
 2
 ```
 
-
 ## Actions
 
 IF分やFOR文、関数なども使えるらしい。
+
 ```
 $ vim script.awk
 $ cat script.awk
@@ -93,6 +97,7 @@ END OUTPUT
 ## その他
 
 以前tclコマンドの一部を抜き出すという事例があった記憶があるので、それをやってみたい。こんな入力があったときに
+
 ```
 $ vim input.txt
 $ cat input.txt
@@ -103,6 +108,7 @@ command1 {argument1=2345} {argument2=string2} {argument3=0987}
 ```
 
 `command1`の`argument1`だけを取り出したいという場合のAwkスクリプトは
+
 ```
 $ vim script.awk
 $ cat script.awk

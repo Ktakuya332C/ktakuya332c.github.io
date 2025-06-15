@@ -34,7 +34,6 @@ spin:
   .byte 0xaa
 ```
 
-
 ## 調査内容
 
 [Macでbootloader周辺をデバッグする方法](../build/debug-bootloader-on-mac.html)の通りに環境構築を行った後に、次のように先の調査コードをコンパイルして行く。
@@ -45,7 +44,6 @@ vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 0x7c00 --oformat=binary --entry start boot.o -o boot.bin
 ```
 
-
 これでboot.binと名付けられたbootloaderが作成できるはず。そして今コンパイルしたbootloaderをqemuを使ってデバッグモードで起動して、gdbでデバッグして行く。
 
 ```
@@ -54,7 +52,6 @@ vagrant@vagrant-ubuntu-trusty-32:/vagrant$ gdb
 (gdb) target remote :1234
 (gdb) set architecture i8086
 ```
-
 
 とりあえずbootloaderが始まる0x7c00番地まで処理を進めておく
 
@@ -66,19 +63,18 @@ Continuing.
 Breakpoint 1, 0x00007c00 in ?? ()
 ```
 
-
 bootloaderが始まったら調査のための準備をし始めるので、そのような調査の準備が終わったところまで処理を進める。
 
 ```
 (gdb) disassemble 0x7c00,+0x12
 Dump of assembler code from 0x7c00 to 0x7c12:
-=> 0x00007c00:	mov    $0x0,%ax
-   0x00007c03:	mov    %ax,%es
-   0x00007c05:	mov    $0x500,%di
-   0x00007c08:	mov    $0xffff,%ax
-   0x00007c0b:	mov    %ax,%ds
-   0x00007c0d:	mov    $0x510,%si
-   0x00007c10:	movb   $0x0,%es:(%di)
+=> 0x00007c00: mov    $0x0,%ax
+   0x00007c03: mov    %ax,%es
+   0x00007c05: mov    $0x500,%di
+   0x00007c08: mov    $0xffff,%ax
+   0x00007c0b: mov    %ax,%ds
+   0x00007c0d: mov    $0x510,%si
+   0x00007c10: movb   $0x0,%es:(%di)
 (gdb) b *0x7c10
 Breakpoint 2 at 0x7c10
 (gdb) c
@@ -86,42 +82,38 @@ Continuing.
 Breakpoint 2, 0x00007c10 in ?? ()
 ```
 
-
 ここからが実際の調査となる。まずはES:DI番地(0x500番地)に0x00をいれておく。
 
 ```
 (gdb) disassemble 0x7c10,+0x1
 Dump of assembler code from 0x7c10 to 0x7c11:
-=> 0x00007c10:	movb   $0x0,%es:(%di)
+=> 0x00007c10: movb   $0x0,%es:(%di)
 End of assembler dump.
 (gdb) si
 (gdb) x/1bx 0x500
-0x500:	0x00
+0x500: 0x00
 ```
-
 
 次に、DS:SI番地(0x100500番地)に0xffを入れる。
 
 ```
 (gdb) info reg eip
-eip            0x7c14	0x7c14
+eip            0x7c14 0x7c14
 (gdb) disassemble 0x7c14,+0x1
 Dump of assembler code from 0x7c14 to 0x7c15:
-=> 0x00007c14:	movb   $0xff,(%si)
+=> 0x00007c14: movb   $0xff,(%si)
 End of assembler dump.
 (gdb) si
 0x00007c17 in ?? ()
 (gdb) x/1bx 0x100500
-0x100500:	0xff
+0x100500: 0xff
 ```
-
 
 そしてこの操作がES:DI番地(0x500番地)の値を上書きしたかどうかを見る。
 
 ```
 (gdb) x/1bx 0x500
-0x500:	0x00
+0x500: 0x00
 ```
-
 
 上書きしていないようなので、すでにA20ラインはonになっていると思って良い。

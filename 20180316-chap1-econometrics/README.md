@@ -13,7 +13,6 @@
 | 北海道 | 男性 | 227349 | 155491 |
 | 青森県 | 男性 | 233967 | 175207 |
 
-
 取り出したデータをRに取り込み、支出と収入のプロットを行います。
 
 ```
@@ -22,11 +21,9 @@ data <- read_csv("data.csv", na="NA")
 ggplot(data, aes(x = income, y = expense)) + geom_point()
 ```
 
-
-
 横軸が所得(income)、縦軸が消費(expense)のグラフになります。
 
-<img src="/20180316-chap1-econometrics/result.png">
+<img src="/20180316-chap1-econometrics/result.png" alt="imcome-expence">
 
 比較的明確に所得と消費の間に線形の関係が見えますが、参考にしている本[2]のグラフ(図表1-6)とは少し異なる結果となりました。調べてみるとほとんどの点が同じ値を取っているのですが、グラフ上で収入(income)が$4 \times 10^5$を超えている点である、奈良県女性の値だけが本[2]になく、さらに値が大きく他とは異なっていることがわかりました。この点が本[2]のグラフ(図表1-6)にない理由は今の所自分はわかっていません。本[2]が書かれたのちに何らかの修正があって足されたのか、それともどこかに自分が見落としている脚注があって奈良県の女性だけは他とは異なる扱いをされているのか、明確ではありません。
 
@@ -37,7 +34,6 @@ lm(expense ~ income, data[-76, ])
 Call: lm(formula = expense ~ income, data = data[-76, ])
 Coefficients: (Intercept) income 7.868e+04 4.472e-01
 ```
-
 
 ## 参考文献
 

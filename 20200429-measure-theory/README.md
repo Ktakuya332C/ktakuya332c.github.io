@@ -1,6 +1,7 @@
 # 「測度から確率へ」の第2章のまとめ
 
 測度論が色々な場面で使われているのを見つつも基礎から学んだことがなかったので、最近この教科書
+
 - [はじめての確率論 測度から確率へ](https://www.kyoritsu-pub.co.jp/bookdetail/9784320014732)
 
 で基礎から学んでみている。ただ読んでいくだけでも面白いのだが、せっかくなのでブログにまとめつつ読んでいこうと思う。
@@ -9,6 +10,7 @@
 
 この本の第1章は、確率論を議論するにあたって測度論のような理論がなぜ必要なのかを説明している章になっている。特に複雑なことは言っていないので、ブログにまとめを書くことはしない。
 今回まとめる予定の第2章は、これからの議論のための土台づくりのような章になっている。大まかにいって
+
 1. $\sigma$-集合体の定義とその性質
 1. $\sigma$-集合体の具体例の紹介
 
@@ -19,6 +21,7 @@
 いきなりだが$\sigma$-集合体の定義を紹介する。
 > *$\sigma$-集合体*  
 > 空でない集合$\Omega$の部分集合族$\mathcal{B}$が$\Omega$上の$\sigma$-集合体であるとは、$\mathcal{B}$が次の三つの条件を満たすことを指す。
+
 1. $\Omega \in \mathcal{B}$
 1. $A \in \mathcal{B} \Rightarrow A^C \in \mathcal{B}$
 1. 任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}$ならば、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}$
@@ -26,6 +29,7 @@
 この定義から簡単にわかる$\sigma$-集合体の性質として、例えば次のようなものがある。
 > *$\sigma$-集合体の性質*  
 > 任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}$である時、以下が成り立つ。
+
 1. $\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}$
 1. $\limsup_{k \rightarrow \infty} A_k \in \mathcal{B}$
 1. $\liminf_{k \rightarrow \infty} A_k \in \mathcal{B}$
@@ -41,6 +45,7 @@ $$
 である。
 
 1つ目の性質は、次のように順を追って証明することができる。
+
 1. $A_k \in \mathcal{B}$より、$A_k^C \in \mathcal{B}$
 1. $A_k^C \in \mathcal{B}$より、$\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}$
 1. $\bigcup_{k=1}^{\infty} A_k^C \in \mathcal{B}$より、$\bigcap_{k=1}^{\infty} A_k \in \mathcal{B}$
@@ -60,6 +65,7 @@ $$
 $$
 
 は、$S$を含む任意の$\sigma$-集合体に含まれる。さらにこの集合族は$\sigma$-集合体となる条件三つを満たす。
+
 1. $\Omega \in \mathcal{B}_1$
 1. $A \in \mathcal{B}_1$ならば、$A^C \in \mathcal{B}_1$
 1. 任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}_1$ならば、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_1$
@@ -70,7 +76,6 @@ $$
 $$
 
 となるが、$\mathcal{B}_2$の最小性から同様に$\mathcal{B}_2 \subset \mathcal{B}_1$となり、結果的に$\mathcal{B}_1 = \mathcal{B}_2$となるため、唯一である。
-
 
 ## $\sigma$-集合体の具体例の紹介
 
@@ -84,6 +89,7 @@ $$
 とすると、$\mathcal{B}_{\#}(\Omega)$は$\Omega$上の$\sigma$-集合体である。
 
 $\sigma$-集合体であることは
+
 1. $\phi \in \mathcal{B}_{\#}(\Omega)$より、$\Omega \in \mathcal{B}_{\#}(\Omega)$
 1. $A \in \mathcal{B}_{\#}(\Omega)$なら$A^C \in \mathcal{B}_{\#}(\Omega)$は、明らか
 1. 任意の$k \in \mathbb{N}$に対して$A_k \in \mathcal{B}_{\#}(\Omega)$の時、$A_k$が全て可算集合ならその可算個の合併$\bigcup_{k=1}^{\infty} A_k$も可算集合。もし一つでも補集合が可算なものがあれば、$(\bigcup_{k=1}^{\infty} A_k)^C = \bigcap_{k=1}^{\infty} A_k^C$が可算になる。よっていずれにしろ、$\bigcup_{k=1}^{\infty} A_k \in \mathcal{B}_{\#}(\Omega)$
@@ -99,6 +105,7 @@ $$
 と書く。また、その要素をボレル集合と呼ぶ。
 
 ボレル集合の要素としては
+
 - $E$の開部分集合全体
 - $E$の閉部分集合全体
 - $E$の可算集合全体
@@ -119,6 +126,7 @@ $d$次元ボレル集合体と呼ぶ、また、その要素を$d$次元ボレ�
 ## 備考
 
 この本の2章ではここで記載した内容以外に
+
 - $d$次元ボレル集合体の幾つかの性質の紹介
 - ボレル集合体と連続関数の関係
 

@@ -1,6 +1,7 @@
 # 検索エンジンの設計をしてみた
 
 三連休があり時間もあったので、いくつかきになる本を読んでいた。
+
 - [検索エンジン自作入門](https://gihyo.jp/book/2014/978-4-7741-6753-4)、山田浩之，末永匡著
 - [Clean Architecture](https://www.oreilly.com/library/view/clean-architecture-a/9780134494272/)、Robert C. Martin 著
 - [システム設計の謎を解く](https://www.sbcr.jp/product/4797393514/)、高安厚思著
@@ -8,21 +9,20 @@
 一つ目の本は検索エンジン自作入門という名前の通り、検索エンジンの裏にあるアルゴリズムを解説してくれている本で、この本に従っていけば実際に手元で日本語wikipediaの検索エンジンを作ることができる。二つ目の本はソフトウェアシステムの設計方法の一つであるクリーンアーキテクチャを解説した本で、変更に強いソフトウェアの設計方法の方針が説明されている。三つ目の本はシステム設計全般に関する入門書として、初心者向けにシステム設計のいろはを教えてくれる。
 せっかくこの三つの本を読んだので、この記事では検索エンジンの設計をしてみたいと思う。とは言っても実際に作ろうと思ったら作れるくらいのものにしておきたいので、お題としては検索エンジン自作入門と同じく日本語wikipediaのデータを検索するというお題にして、手元のパソコンでコマンドラインとして使えるようなものを想定して作っていきたい。それほど大きいシステムを作るわけでもなく、他の人に提供するようなソフトウェアを作るわけでもないので要求定義などをする必要はないはず。ということで今回は外部設計をざっくり行った後に内部設計としてクラス図とシークエンス図だけ作っていきたい。
 
-
 ## 外部設計
 
 日本語wikipediaを検索することのできるコマンドラインツール`wikisearch`を提供する。
 日本語wikipedia内を検索する前に、日本語wikipediaデータに対してindexを作成する必要がある。日本語wikipediaのダンプデータを取得したのちに
+
 ```
 wikisearch load <日本語wikipediaのダンプデータ>
 ```
 
 として日本語wikipediaのデータに対してindexを作成する。indexの作成が終了したら次のように検索を行うことができる。
+
 ```
 wikisearch search '天気'
 ```
-
-
 
 ## 内部設計
 
@@ -30,26 +30,26 @@ wikisearch search '天気'
 
 ### クラス図
 
-<img src="/20191124-design-search-engine/class_diagram.png">
+<img src="/20191124-design-search-engine/class_diagram.png" alt="class diagram">
 
 このクラス図を書くにあたっては Clean Architecture のSOLID原則を可能な限り守れるように考えた。検索エンジンとしてその存在自体が不必要になることはないであろう、DocumentやPostingなどのデータ構造を最も多く使用される構造体として設計し、データベースとして何を使うかなどの選定については可能な限り後回しにできるように選んだ。そのほかの点については
+
 - `KeyValueDB`インターフェイスを`DocumentDB`と`IndexDB`のそれぞれに用意した。この点は共通化してしまっても良いかどうかとても悩んだのだが、`DocumentDB`と`IndexDB`の使用するDBが同じインターフェイスを持っている必要性は必ずしもないので、たまたま今回は同じ内容のインターフェイスを持ってしまってはいるが、分離することにした。これによってSOLIDE原則の解放閉鎖の原則(OCP)を守れれるようになっているのではないかと思う。
 - `Indexer`と`Searcher`のどちらにも存在する、`IndexDB`という名前のインターフェイスはインターフェイス分離の原則(ISP)に従って、それぞれ`Indexer`と`Searcher`が独自のものを持つように設計した。これによって`Indexer`と`Searcher`が別のDBを持つことにして、その間をバッチ処理で繋ぐようになったりした時にも既存のクラスには変更を及ぼさずに行うことができる。
-
 
 ### シークエンス図
 
 まずは日本語wikipediaデータに対してindexを作成する際のシークエンス図を書いてみる。
 
-<img class="content-img" src="/20191124-design-search-engine/sequence_diagram_load.png">
+<img class="content-img" src="/20191124-design-search-engine/sequence_diagram_load.png" alt="sequence diagram load">
 
 次にそのindexを使って検索をする場合のシークエンス図を書いてみる。
 
-<img src="/20191124-design-search-engine/sequence_diagram_search.png">
+<img src="/20191124-design-search-engine/sequence_diagram_search.png" alt="sequence diagram search">
 
 どちらもシークエンス図もそれほど複雑ではなく、誰が考えても同じようなものになるとは思う。
 
-
 ## 参考文献
+
 - [Clean Architecture and Design](https://www.youtube.com/watch?v=2dKZ-dWaCiU)は Robert C. Martin さんによるプレゼンで、Clean Architecture 重視されている考え方をとてもよく説明してくれている。ただし最初の数分は Clean Architecture とは全く関係のない話が続くので、本題に入るまでは飛ばしたほうがいいかもしれない。
 - この記事で書いたクラス図やシークエンス図はこの無料ツール[draw.io](https://www.draw.io/)で書かせてもらった。無料なのに全く問題なくどちらの図も書くことができたので素晴らしい。いつまで無料のままでいるかはわからないが使ってみる価値はあると思う。

@@ -1,11 +1,13 @@
 # エクセンダールの第三章のまとめ
 
 次の本を読み進めている。
+
 - [確率微分方程式](https://www.amazon.co.jp/dp/4621061763)
 
 今回は第三章についてまとめていく。少し確率過程一般の前提知識を紹介した後に、伊藤積分の定義とその性質を紹介していく章である。
 
 ## 確率過程に関する前提知識
+
 伊藤積分の紹介に入る前に、いくつか確率過程を語る上で欠かせない概念の紹介をする。
 > *フィルトレーション*  
 > 可測空間$(\Omega, \mathcal{F})$上のフィルトレーションとは$\mathcal{F}$の部分完全加法族の増大列のことである。すなわち、$\mathcal{M}_t \subset \mathcal{F}$であって、
@@ -27,6 +29,7 @@ $$
 さらに強く確立過程とフィルトレーションの関係を見ることができるのはマルチンゲールの定義においてである。
 > *マルチンゲール*  
 > 確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\}_{t \ge 0}$がフィルトレーション$\{\mathcal{M}_t\}_{t \ge 0}$に対して次の3条件を満たす時マルチンゲールであるという。
+
 1. $\{X_t\}$は$\{\mathcal{M}_t\}$-適合である
 1. 全ての$t \ge 0$について$\{X_t\}$は可積分
 1. $0 \le s \le t$ならば$\textbf{E}[X_t | \mathcal{M_s}] = X_s$
@@ -42,11 +45,12 @@ $$
 \textbf{P}[\sup_{0 \le t \le T} |M_t| \ge \lambda] \le \frac{1}{\lambda^p} \textbf{E}[|M_T|^p]
 $$
 
-
 ## 伊藤積分の定義
+
 結論から言えば、伊藤積分は次の様な確率過程に対してのみ定義される。
 > *伊藤積分可能性*  
 > 確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\}$で、次の三つの条件を満たすものの集合を$\mathcal{V}(S, T)$と表す。
+
 1. $(t, \omega) \rightarrow X_t(\omega)$は$\mathcal{B} \times \mathcal{F}$-可測
 1. あるフィルトレーション$\{\mathcal{H}_t\}$が存在し、ブラウン運動$\{B_t\}$が$\{\mathcal{H}_t\}$-マルチンゲールであり、かつ$\{X_t\}$が$\{\mathcal{H}_t\}$-適合
 1. $\textbf{E}[\int_S^T X_t^2 dt] < \infty$
@@ -87,11 +91,12 @@ $$
 
 として定義する。ただし極限は$L^2(\textbf{P})$の意味でとる。
 
-
 ## 伊藤積分の性質
+
 いくつかの基本的な性質を列挙する。
 > *基本的な性質*  
 > 確率空間$(\Omega, \mathcal{F}, \textbf{P})$上の確率過程$\{X_t\},\{Y_t\} \in \mathcal{V}(0, T)$とした時、$0 \le S \le T$として
+
 - ほとんど確実に$\int_S^T X_t dB_t = \int_S^U X_t dB_t + \int_U^T X_t dB_t$
 - ほとんど確実に$\int_S^T (cX_t + Y_t) dB_t = c \int_S^T X_t dB_t + \int_S^T Y_t dB_t$
 - $\textbf{E}[\int_S^T X_t dB_t] = 0$

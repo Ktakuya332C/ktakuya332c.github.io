@@ -8,13 +8,11 @@ OpenBLASで行列とベクトルの計算を行うための関数`cblas_dgemv`�
 - サイズ$M$のベクトル$x$
 - サイズ$N$のベクトル$y$
 
-
 の三つを使って
 
 $$
 y = \alpha A x + \beta y
 $$
-
 
 と書けるものを計算することができる。ただしここで、$\alpha, \beta$は適当な実数である。
 
@@ -32,7 +30,6 @@ double A[] = {
 double x[] = { -1, 2, -1, 1, 2 };
 ```
 
-
 $y = Ax$を計算したい場合は
 
 ```
@@ -42,6 +39,5 @@ double beta = 1.0;
 cblas_dgemv(CblasRowMajor, CblasNoTrans, n_rows, n_cols,
     alpha, A, n_cols, x, 1, beta, y, 1);
 ```
-
 
 とすれば計算できる。

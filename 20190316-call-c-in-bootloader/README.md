@@ -12,7 +12,6 @@ bootloader内でassemblyからC言語のコードを呼ぶことができたの�
 - main.c: 無限ループをする関数bootmainを定義しているスクリプト。
 - sign.pl: 任意のバイナリファイルを読み取り、510バイト以下なら510バイトになるように0を付け足した上で最後にbootloaderであることを示すマジックナンバーであるAA55を付け足すスクリプト。
 
-
 ## 調査準備
 
 まず、[Macでbootloader周辺をデバッグする方法](../build/debug-bootloader-on-mac.html)の通りに環境構築を行う。
@@ -23,20 +22,17 @@ bootloader内でassemblyからC言語のコードを呼ぶことができたの�
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ as boot.S -o boot.o
 ```
 
-
 次に、C言語のスクリプトであるmain.cをコンパイルする。この時`-ffreestanding`フラグをつけることで標準ライブラリなどが入り込まないようにし、コンパイルしている環境に依存しないようにする。
 
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ gcc -ffreestanding -c main.c -o main.o
 ```
 
-
 そしてそれら二つのオブジェクトファイル(boot.oとmain.o)をリンクする。bootloaderは必ず0x7c00番地からロードされるので引数には`-Ttext 0x7c00`を渡している。
 
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant$ ld -Ttext 0x7c00 --oformat=binary --entry start boot.o main.o -o boot.bin
 ```
-
 
 以上の操作でbootloaderの処理が書かれたバイナリファイル`boot.bin`ができたわけだが、bootloaderとして認識されるためには510と511番地にマジックナンバーを書かなければならない。これを書くために`sign.pl`が存在する。
 
@@ -59,7 +55,6 @@ vagrant@vagrant-ubuntu-trusty-32:/vagrant$ hexdump boot.bin
 0000200
 ```
 
-
 最後にaa55の文字が見えるので、きちんと書き込まれたことがわかる。
 
 ## 調査内容
@@ -73,7 +68,6 @@ vagrant@vagrant-ubuntu-trusty-32:~$ gdb
 (gdb) set architecture i8086
 ```
 
-
 とりあえずbootloaderの処理が始まる0x7c00まで処理を進める。
 
 ```
@@ -84,19 +78,18 @@ Continuing.
 Breakpoint 1, 0x00007c00 in ?? ()
 ```
 
-
 次に 16-bit real mode から 32-bit protected mode に切り替わるところまで処理を進める。
 
 ```
 (gdb) disassemble 0x7c00,+0x12
 Dump of assembler code from 0x7c00 to 0x7c12:
-=< 0x00007c00:	cli
-   0x00007c01:	cld
-   0x00007c02:	lgdtw  0x7c2e
-   0x00007c07:	mov    %cr0,%eax
-   0x00007c0a:	or     $0x1,%eax
-   0x00007c0e:	mov    %eax,%cr0
-   0x00007c11:	ljmp   $0x8,$0x7c34
+=< 0x00007c00: cli
+   0x00007c01: cld
+   0x00007c02: lgdtw  0x7c2e
+   0x00007c07: mov    %cr0,%eax
+   0x00007c0a: or     $0x1,%eax
+   0x00007c0e: mov    %eax,%cr0
+   0x00007c11: ljmp   $0x8,$0x7c34
 End of assembler dump.
 (gdb) b *0x7c11
 Breakpoint 2 at 0x7c11
@@ -106,26 +99,24 @@ Breakpoint 2, 0x00007c11 in ?? ()
 (gdb) si
 ```
 
-
 切り替わったら次はbootmainを呼び出す前まで処理を進める。
 
 ```
 (gdb) set architecture i386
 (gdb) info reg eip
-eip            0x7c34	0x7c34
+eip            0x7c34 0x7c34
 (gdb) disassemble 0x7c34,+0x14
 Dump of assembler code from 0x7c34 to 0x7c48:
-=< 0x00007c34:	mov    $0x10,%ax
-   0x00007c38:	mov    %eax,%ds
-   0x00007c3a:	mov    %eax,%es
-   0x00007c3c:	mov    %eax,%fs
-   0x00007c3e:	mov    %eax,%gs
-   0x00007c40:	mov    %eax,%ss
-   0x00007c42:	mov    $0x7c00,%esp
-   0x00007c47:	call   0x7c4e
+=< 0x00007c34: mov    $0x10,%ax
+   0x00007c38: mov    %eax,%ds
+   0x00007c3a: mov    %eax,%es
+   0x00007c3c: mov    %eax,%fs
+   0x00007c3e: mov    %eax,%gs
+   0x00007c40: mov    %eax,%ss
+   0x00007c42: mov    $0x7c00,%esp
+   0x00007c47: call   0x7c4e
 End of assembler dump.
 ```
-
 
 この0x7c47番地のcall処理が`call bootmain`に当たることになる。実際にcall処理を呼び出すところまで進めて見る。
 
@@ -138,20 +129,18 @@ Breakpoint 3, 0x00007c47 in ?? ()
 (gdb) si
 0x00007c4e in ?? ()
 (gdb) info reg eip
-eip            0x7c4e	0x7c4e
+eip            0x7c4e 0x7c4e
 ```
-
 
 ここからの処理がどのようになっているのかを見て見る。
 
 ```
 (gdb) disassemble 0x7c4e,+0x4
 Dump of assembler code from 0x7c4e to 0x7c52:
-=< 0x00007c4e:	push   %ebp
-   0x00007c4f:	mov    %esp,%ebp
-   0x00007c51:	jmp    0x7c51
+=< 0x00007c4e: push   %ebp
+   0x00007c4f: mov    %esp,%ebp
+   0x00007c51: jmp    0x7c51
 End of assembler dump.
 ```
-
 
 ここからの処理は、C言語の関数の通常処理と無限ループになっていることがわかる。確かにbootmainを呼ぶことができているようだ。

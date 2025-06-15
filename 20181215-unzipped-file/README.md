@@ -3,9 +3,8 @@
 kaggleからzip化されたトレーニングデータ`train.csv.zip`をダウンロードしてきて、次のようにunzipして
 
 ```
-$ unzip train.csv.zip
+unzip train.csv.zip
 ```
-
 
 Rから読み込もうとしたところエラーが出た。
 
@@ -14,7 +13,6 @@ Rから読み込もうとしたところエラーが出た。
 > tr <- fread("../input/train.csv")
 Error in fread("../input/train.csv") : file not found: ../input/train.csv
 ```
-
 
 少なくともパスが間違ってはいないことは
 
@@ -26,7 +24,6 @@ Error in fread("../input/train.csv") : file not found: ../input/train.csv
 [4] "train.csv"
 [5] "train.csv.zip"
 ```
-
 
 などとして確かめたので別の原因のはずだ。
 
@@ -42,13 +39,11 @@ total 19139328
 -rw-r--r--@ 1 ktakuya  staff   771141062 Dec 14 22:01 train.csv.zip
 ```
 
-
 なのでpermissionを適切に設定して
 
 ```
-$ chmod 644 train.csv
+chmod 644 train.csv
 ```
-
 
 再度Rから読み込めば、読み込めた。
 

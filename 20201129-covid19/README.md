@@ -2,12 +2,14 @@
 
 寒いと風邪は流行りやすいが、Covid19も流行りやすいという話をよく聞く。本当かどうかを見てみるために実際にデータを取ってきてその相関関係を見てみようと思ったのだが、意外と新規感染者数のグラフを出すだけである程度時間が掛かってしまったので、そこで一旦終わりにすることにした。温度との相関はまた別の機会にグラフにしようと思う。
 
-## Covid19の新規感染者数
+## Covid19の新規感染者数の取得
 
 まずはCovid19の新規感染者数の情報をどこかから持ってくる必要がある。今回は有名な次のデータソースを使うことにした。
+
 - [COVID-19 Data Repository by the CSSE](https://github.com/CSSEGISandData/COVID-19)
 
 今回は国別の感染者数がわかればそれで良い。
+
 ```
 $ REPO=https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master
 $ RPATH=csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
@@ -23,6 +25,7 @@ $ r
 ```
 
 とりあえず国別の新規感染者数をグラフにしてみる。
+
 ```
 > library(zoo)
 > notable_regions <- data %>%
@@ -48,19 +51,22 @@ $ r
 > ggsave(`new_cases.png`, plot)
 ```
 
-<img src="/20201129-covid19/new_cases.png"></figure>
+<img src="/20201129-covid19/new_cases.png" alt="new cases"></figure>
 
 ## 温度のデータ
 
 温度のデータとしては次のサイトの情報が使えそうだった。
+
 - [Open Weather](https://openweathermap.org/)
 
 無料でも提供されているAPIを一秒に一回程度までなら叩いても良いらしいので十分に使えるはず。
 
 ちょうど先のデータに経度と緯度の情報が含まれていたので、その情報を使って例えば次のAPIを叩けば
+
 - [Historical weather API](https://openweathermap.org/history)
 
 温度のデータは取れるはず。もちろんその時期の平均などとなると大変だが、簡単にみるだけならその日のデータを取ってくるだけでもある程度の傾向は見ることができるはず。
 
 ## 参考
+
 1. [How to calculate a rolling average in R](https://www.storybench.org/how-to-calculate-a-rolling-average-in-r/)

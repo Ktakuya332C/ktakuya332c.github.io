@@ -1,18 +1,21 @@
 # 計量時系列分析の2章の数値計算
 
 引き続き次の本を読んでいる。
-- [経済・ファイナンスデータの計量時系列分析](https://www.amazon.co.jp/dp/4254127928)、	沖本竜義著
+
+- [経済・ファイナンスデータの計量時系列分析](https://www.amazon.co.jp/dp/4254127928)、 沖本竜義著
 
 今回は2章の演習問題のうち、数値計算部分を次の記事を参考にしながら解いてみる。
+
 - [【第2章】pythonで「経済・ファイナンスデータの計量時系列分析」の章末問題を解く](https://qiita.com/mckeeeen/items/a0126a20116dd27ecba9)
 
-
 ## 問題2.5
+
 データは引き続き以下の記事でダウンロードしたものを使う
+
 - [計量時系列分析の1章の数値計算](/20201222-time-series-analysis-ex1/)
 
-
 まずはindprodの対数差分系列の標本自己相関と標本偏自己相関関数を計算する。
+
 ```
 import numpy as np
 import pandas as pd
@@ -37,9 +40,10 @@ plt.savefig('figure-2-5-1.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex2/figure-2-5-1.png">
+<img src="/20201222-time-series-analysis-ex2/figure-2-5-1.png" alt="figure-2-5-1">
 
 次に、AR(4)モデルとARMA(1,2)モデルの、モデル残差のLjung-BoxのQ統計量とそのp値を計算する。
+
 ```
 from statsmodels.tsa.arima_model import ARMA
 
@@ -59,12 +63,14 @@ plt.savefig('figure-2-5-2.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex2/figure-2-5-2.png">
+<img src="/20201222-time-series-analysis-ex2/figure-2-5-2.png" alt="figure-2-5-2">
 
 自己相関がないという帰無仮説に対してP値が大きいので、その帰無仮説を棄却することができない。よってAR(4)モデルとARMA(1,2)モデルのどちらに対しても、この検定においては特に矛盾は検出されない。
 
 ## 問題2.6
+
 標本自己相関と標本偏自己相関を計算する。
+
 ```
 data = pd.read_excel('arma.xls')
 acf_y1 = acf(data.y1.values, nlags=41)[1:]
@@ -83,11 +89,12 @@ plt.savefig('figure-2-6-1.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex2/figure-2-6-1.png">
+<img src="/20201222-time-series-analysis-ex2/figure-2-6-1.png" alt="figure-2-6-1">
 
 標本自己相関が徐々に減少しているのに対して標本偏自己相関は差が3程度までしか値がない。
 
 よって、候補としてはAR(p)過程なので、幾つかのpに対して推定をしてAICとSICを比べてみる。
+
 ```
 aics = list()
 sics = list()
@@ -107,11 +114,12 @@ plt.savefig('figure-2-6-2.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex2/figure-2-6-2.png">
+<img src="/20201222-time-series-analysis-ex2/figure-2-6-2.png" alt="figure-2-6-2">
 
 両方の指標を考慮すると$p=3$が最適となりそうだ。
 
 AR(3)過程に対する残差のLjung-BoxのQ統計量とそのp値を計算する。
+
 ```
 model = ARMA(data.y1.values, [3, 0]).fit()
 acfvalues, qvalues, pvalues = acf(model.resid, qstat=True, nlags=20)

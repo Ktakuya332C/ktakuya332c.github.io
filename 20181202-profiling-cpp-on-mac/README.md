@@ -10,7 +10,6 @@ a.out
 $ instruments -t "Time Profiler" ./a.out
 ```
 
-
 とすれば同じディレクトリに`instrumentscli0.trace`などの、プロファイリング結果が書かれたファイルが生成される。これを
 
 ```
@@ -18,7 +17,6 @@ $ ls
 instrumentscli0.trace
 $ open instrumentscli0.trace
 ```
-
 
 としてひらけばGUIのinstrumentsアプリが開いて、プロファイリング結果を見ることができる。
 

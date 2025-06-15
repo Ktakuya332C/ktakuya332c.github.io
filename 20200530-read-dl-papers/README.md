@@ -3,6 +3,7 @@
 最近一年くらい deep learning 関連の文献を漁っていなかったので久しぶりに見てみる。フォーマットとしては、なぜかよくみる[落合教授の論文まとめフォーマット](http://lafrenze.hatenablog.com/entry/2015/08/04/120205)に沿ってまとめていくことにする。あまり他の人が読むようには書いていないが、消えてしまうのももったいない気がしたのでここで供養しておく。
 
 > *BERT: Pre-training of Deep Bidirectional Transformers for　Language Understanding*  
+>
 > - どんなもの?
 >   - 言語モデルにおけるあるpre-trainedモデルを作成した
 > - 先行研究と比べてどこがすごい?
@@ -14,9 +15,8 @@
 > - 議論はある?
 > - 次に読むべき論文は?
 
-
-
 > *Efficient Net: Rethinking Model Scaling for Convolutional Neural Networks*  
+>
 > - どんなもの?
 >   - 畳み込みニューラルネットワークのサイズを大きくする際の指針を示している
 > - 先行研究と比べてどこがすごい?
@@ -29,8 +29,8 @@
 >   - 実験による観察から導かれた経験則である点が少し懸念
 > - 次に読むべき論文は?
 
-
 > *Big Transfer (BiT): General Visual Representation Learning*  
+>
 > - どんなもの?
 >   - 画像認識におけるBERTにあたるpre-trainedモデルの作成
 > - 先行研究と比べてどこがすごい?
@@ -49,8 +49,8 @@
 >   - Fixing the train-test resolution discrepancy
 >   - RetinaNet: Focal Loss for Dense Object Detection</pre></div>
 
-
 > *Group Normalization*  
+>
 > - どんなもの?
 >   - batch norm の計算コストを削減した group norm の提案
 > - 技術や手法のキモはどこ?
@@ -61,8 +61,8 @@
 >   - group size が32と定められているが、それが良いかどうかは不明
 > - 次に読むべき論文は?
 
-
 > *Weight standardization*  
+>
 > - どんなもの?
 >   - batch size がとても小さくても group norm と使用すれば batch size が大きいときのパフォーマンスを上回ることのできる手法 weight standardization を提案
 > - 技術や手法のキモはどこ?
@@ -72,10 +72,10 @@
 >   - 理論的に予測される Lipshitz constant の減少を実験的に確かめる
 > - 議論はある?
 > - 次に読むべき論文は?
->   -  How does batch normalization help optimization?</pre></div>
-
+>   - How does batch normalization help optimization?</pre></div>
 
 > *Fixing the train-test resolution discrepancy*  
+>
 > - どんなもの?
 >   - train時の data augmentation の方法を誤ると精度が逆に落ちることを示した
 >   - その欠点を克服するようなネットワークの学習方法の提案
@@ -89,8 +89,8 @@
 >   - Aggregated Residual Transformations for Deep Neural Networks
 >   - MultiGrain: a unified image embedding for classes and instances</pre></div>
 
-
 > *Full-Gradient Representation for Neural Network Visualization*  
+>
 > - どんなもの?
 >   - CNNに対する良い saliency map の作成方法FullGradを作成した
 > - 技術や手法のキモはどこ?
@@ -102,8 +102,8 @@
 > - 議論はある?
 > - 次に読むべき論文は?
 
-
 > *Emergence of Object Segmentation in Perturbed Generative Models*  
+>
 > - どんなもの?
 >   - 教師なしでsegmentationする方法を開発した
 > - 技術や手法のキモはどこ?
@@ -114,8 +114,8 @@
 > - 次に読むべき論文は?
 >   - A Style-Based Generator Architecture for Generative Adversarial Networks
 
-
 > *A Style-Based Generator Architecture for Generative Adversarial Networks*  
+>
 > - どんなもの?
 >   - style transfer 周辺領域の研究結果を援用してさらに現実的な画像を作成できるGANを作った
 > - 技術や手法のキモはどこ?
@@ -128,8 +128,8 @@
 > - 次に読むべき論文は?
 >   - GANs trained by a two time-scale update rule converge to a local Nash equilibrium
 
-
 > *GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism*  
+>
 > - どんなもの?
 >   - サイズが大きくてメモリに乗り切らないようなネットワークの学習を手助けする一般的なフレームワークを作成した
 > - 技術や手法のキモはどこ?

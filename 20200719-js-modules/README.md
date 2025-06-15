@@ -5,6 +5,7 @@ javascriptのモジュールの機構として`require`だと`exports`だの同�
 ## commonJSとECMAScript
 
 まずは最初のバージョンのJavascriptにはモジュールやそれに類する機能は存在しなかったという点を認識しておく必要がありそう。基本的にはHTMLの上でいくつかのjsファイルをscriptタグでロードしていく方法
+
 ```
 <script src="lib1.js"></script>
 <script src="lib2.js"></script>
@@ -13,9 +14,9 @@ javascriptのモジュールの機構として`require`だと`exports`だの同�
 でしか他のファイルに存在するjsのコードを参照する方法はなかったらしい[2]
 
 ただしJavascriptは基本的にはブラウザー上で実行される言語だったので、普通のプログラミング言語のようにその開発者が一人でモジュールの作成方法を決めることができない。そこでいろいろな人がそこら中でJavascriptのモジュールはこのようにすると良いのではないかと考えて色々な仕様を策定し始めた結果、今でもそれなりに有名になっているのが次の二つの仕様ということらしい
+
 - [commonJS](https://en.wikipedia.org/wiki/CommonJS)
 - [ECMAScript](https://ja.wikipedia.org/wiki/ECMAScript)
-
 
 commonJSはnodejsに基本的なモジュールの仕様として採用されたので、基本的にはサーバーサイドの開発で使われることになるモジュールの仕様となっているようす。ただし各種ブラウザーに採用されることがなかったので主にはサーバーサイドの開発用のモジュール構成となっている
 
@@ -26,6 +27,7 @@ ECMAScriptはブラウザにおけるJavascriptのモジュール仕様として
 ## commonJSのモジュールの使い方
 
 名前付きexportの場合は
+
 ```
 $ vim module.js
 $ cat module.js
@@ -42,6 +44,7 @@ $ node index.js
 
 として使うことができる。
 デフォルトexportの場合は
+
 ```
 $ vim module.js
 $ cat module.js
@@ -68,6 +71,7 @@ $ node index.js
 
 nodejsでのサポートは十分ではないこともあるのでブラウザで試す。
 名前付きexportの場合は
+
 ```
 $ vim module.js
 $ cat module.js
@@ -99,6 +103,7 @@ $ python -m http.server
 
 としてそのページにアクセスすると左上に`4`と出てくる。
 同じものをデフォルトexportで書き下すと
+
 ```
 $ vim module.js
 $ cat module.js
@@ -128,5 +133,6 @@ $ python -m http.server
 として同じ結果が得られる。
 
 ## 参考
+
 1. [CommonJS と ES6の import/export で迷うなら](https://qiita.com/rooooomania/items/4c999d93ae745e9d8657)
 1. [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/)

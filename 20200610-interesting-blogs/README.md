@@ -3,6 +3,7 @@
 よくみるブログをとりあえず適当にリストしてみる。
 
 ## エンジニアリング一般
+
 - [Dropbox Tech Blog](https://dropbox.tech/)
 - [Facebook Engineering](https://engineering.fb.com/)
 - [Google Cloud Blog](https://cloud.google.com/blog/)
@@ -21,8 +22,8 @@
 - [Danluu](https://danluu.com/)
 - [SOTA](https://deeeet.com/)
 
-
 ## データサイエンス系
+
 - [Goolge AI Blog](https://ai.googleblog.com/)
 - [Facebook AI Blog](https://ai.facebook.com/blog/)
 - [NYT Open](https://open.nytimes.com/)
@@ -33,8 +34,8 @@
 - [大トロ](https://blog.otoro.net/)
 - [rushter/data-science-blogs](https://github.com/rushter/data-science-blogs)
 
-
 ## その他
+
 - [The morning paper](https://blog.acolyer.org/)
 - [LWN.net](https://lwn.net/)
 - [34歳からの数学博士](https://blog.taketo1024.jp/)

@@ -66,7 +66,6 @@ Unexpected static libraries:
   /usr/local/lib/libtkstub8.6.a
 ```
 
-
 仕方ないので一度uninstallして、再度brewからインストールしようと思う。
 
 uninstallは基本的には[このRの公式ページ](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Uninstalling-under-macOS)に乗っている記事にしたがって削除して行けばいいはずだ。まずはR本体を消す
@@ -76,16 +75,14 @@ $ sudo rm -Rf /Library/Frameworks/R.framework /Applications/R.app \
    /usr/local/bin/R /usr/local/bin/Rscript
 ```
 
-
 次にAppleパッケージを削除する。
 
 ```
-$ sudo pkgutil --forget org.r-project.R.el-capitan.fw.pkg
-$ sudo pkgutil --forget org.r-project.R.el-capitan.GUI.pkg
-$ sudo pkgutil --forget org.r-project.x86_64.tcltk.x11
-$ sudo pkgutil --forget org.r-project.x86_64.texinfo
+sudo pkgutil --forget org.r-project.R.el-capitan.fw.pkg
+sudo pkgutil --forget org.r-project.R.el-capitan.GUI.pkg
+sudo pkgutil --forget org.r-project.x86_64.tcltk.x11
+sudo pkgutil --forget org.r-project.x86_64.texinfo
 ```
-
 
 あとはwarningに出ているファイルを全て消していくだけで良さそう。少なくともRを直接公式サイトのpkgファイルからインストールするまでは`brew doctor`はなんのエラーも履いていなかったので、エラーが吐かれているファイルは全てRが原因だと思って良さそうなので。
 

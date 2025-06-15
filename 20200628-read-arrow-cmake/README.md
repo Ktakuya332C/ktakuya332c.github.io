@@ -2,12 +2,15 @@
 
 arrowのcmakeファイルを読んで変数の依存関係をまとめてみる。
 読む対象は今リリースされている中で一番最新のブランチ
+
 - [maint-0.17.x](https://github.com/apache/arrow/tree/maint-0.17.x)
 
 として、`cpp/CMakeLists.txt`をまとめてみる。
 
 ## 概観
+
 このファイルは一つの長いcmakeファイルになっているが、実際にはいくつかのパートに分かれている。
+
 | 対象の行 | 内容 | ラベル |
 | --- | --- | --- |
 | L21-L57 | バージョン関連設定 | Version |
@@ -22,13 +25,16 @@ arrowのcmakeファイルを読んで変数の依存関係をまとめてみる�
 以降はそれぞれのパート毎に変数の依存関係を図にしていく。
 
 依存関係の表し方としては
+
 ```mermaid
 graph LR
   target([target]) --> variable --> subroutine[[subroutine]] & subpart{{subpart}}
 ```
+
 という形で、ノードの形状でそれぞれの役割を分類することにしている。
 
 ## バージョン関連設定(Version)
+
 ```mermaid
 graph LR
   project[[project]] --> ARROW_BASE_VERSION
@@ -44,7 +50,9 @@ graph LR
 ```
 
 ## グローバルな変数の設定(BuildGlobal)
+
 ここでstartはcmakeがデフォルトで生成する変数を生成するプロセス。
+
 ```mermaid
 graph LR
   CMAKE_BUILD_TYPE --> start[[start]]
@@ -60,7 +68,9 @@ graph LR
 ```
 
 ## ビルドオプションの設定(BuildOptions)
+
 ここでanyが依存している変数は任意のターゲットが依存している変数であることを示す。
+
 ```mermaid
 graph LR
   PYTHON_EXECUTABLE --> CMAKE_VERSION --> start[[start]]
@@ -76,7 +86,9 @@ graph LR
 ```
 
 ## 開発用のターゲット設定(DevelopTargets)
+
 DUMMYから始まるノードはいくつかの変数をまとめるために導入したダミー変数。
+
 ```mermaid
 graph LR
   LINT_EXCLUSIONS_FILE --> BUILD_SUPPORT_DIR --> BuildGlobal{{BuildGlobal}}
@@ -102,6 +114,7 @@ graph LR
 ```
 
 ## オプション間の依存関係設定(OptionDependencies)
+
 ```mermaid
 graph LR
   ARROW_BUILD_BENCHMARKS --> DefineOptions[[DefineOptions]]
@@ -142,6 +155,7 @@ graph LR
 ```
 
 ## コンパイラフラグの設定(CompilerFlags)
+
 ```mermaid
 graph LR
   CXX_COMMON_FLAGS --> SetupCxxFlags[[SetupCxxFlags]]
@@ -158,6 +172,7 @@ graph LR
 ```
 
 ## ビルド成果物のディレクトリ設定(BuildDirectory)
+
 ```mermaid
 graph LR
   BUILD_SUBDIR_NAME --> CMAKE_BUILD_TYPE --> start[[start]]
@@ -171,6 +186,7 @@ graph LR
 ```
 
 ## リンカフラグの設定(LinkerFlags)
+
 ```mermaid
 graph LR
   ARROW_USE_OPENSSL --> DefineOptions[[DefineOptions]]

@@ -6,7 +6,6 @@
 1. 16bit real mode から 32bit protected mode にスイッチ
 1. C言語で書かれたカーネルに書かれた処理を実行する
 
-
 これはos-tutorialにおける13-kernel-barebonesまでと同じ機能を持っていることになる。
 
 ## 実装本体
@@ -24,7 +23,6 @@ vagrant@vagrant-ubuntu-trusty-32:~$ ls
 boot.asm  entry.asm  kernel.c  Makefile
 ```
 
-
 開発環境が全て整っていれば次のコマンドで実行イメージ(image.bin)を作成できるはずである。
 
 ```
@@ -37,7 +35,6 @@ ld: warning: cannot find entry symbol _start; defaulting to 0000000000001000
 cat boot.bin kernel.bin > image.bin
 ```
 
-
 リンカーの警告が一つ出ているがこれは今の所無視して良い。
 
 実行は次のようにqemuを使って実行する
@@ -45,7 +42,6 @@ cat boot.bin kernel.bin > image.bin
 ```
 vagrant@vagrant-ubuntu-trusty-32:~$ qemu-system-i386 -nographic -curses image.bin
 ```
-
 
 実行すれば画面がTUIに切り替わり、次のような文字列が出力されるはずである。
 
@@ -57,14 +53,12 @@ Started in 16-bit Real Mode
 Loading kernel into memory
 ```
 
-
 この画面は今回実行したbootloaderがいくつかの出力を画面に行なった結果である。
 
 1. bootloaderが処理を始めたときに BIOS interrupt call を使って'Started in 16-bit Real Mode'と出力する
 1. bootloadreがkernelをdiskからロードし始めたときに BIOS interrupt call を使って'Loading kernel into memory'と出力する
 1. bootloadeが 16bit real mode での動作から　32bit protected mode への動作に移った際に、VGAメモリに直接書き込むことで'Landed in 32-bit Protected Mode'と出力する。Offsetを計算する処理を入れていないため、TUIの一番上に出力されてしまう。
 1. bootloaderがC言語で書かれたkernelを呼び出した際に、VGAメモリに直接'A'と書き込むことで左上の文字がAに書き換わる。
-
 
 ## コメント
 

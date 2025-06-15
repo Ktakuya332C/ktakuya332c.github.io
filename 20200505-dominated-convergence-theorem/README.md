@@ -61,7 +61,6 @@ $$
 \lim_{n \rightarrow \infty} \bm{E}[X_n] = \bm{E}[X] = \bm{E}[\lim_{n \rightarrow \infty} X_n]
 $$
 
-
 この定理から導かれることとして次の補題がある。
 > *Fatouの補題*  
 > 非負確率変数列$\{X_n\}$に対して
@@ -89,9 +88,8 @@ $$
 \bm{E}[\liminf_{n \rightarrow \infty} X_n] = \lim_{n \rightarrow \infty} \bm{E}[\inf_{k \ge n} X_k] \le \liminf_{n \rightarrow \infty} \bm{E}[X_n]
 $$
 
-
-
 ## 証明
+
 ではまず定理を述べておく。
 > *優収束定理*  
 > 慨収束する確率変数列$\{X_n\}$に対して、

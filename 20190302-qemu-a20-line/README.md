@@ -8,29 +8,28 @@ qemu-system-i386では A20 line が最初からonになっていることを発�
 bits 16
 
 start:
-	xor ax, ax
+ xor ax, ax
   mov es, ax
-	mov di, 0x0500
-	mov ax, 0xffff
-	mov ds, ax
+ mov di, 0x0500
+ mov ax, 0xffff
+ mov ds, ax
   mov si, 0x0510
-	mov byte [es:di], 0x00
-	mov byte [ds:si], 0xff
-	cmp byte [es:di], 0xff
-	jz owrtn
-	mov al, 0x42
-	mov ah, 0x0e
-	int 0x10
-	jmp $
+ mov byte [es:di], 0x00
+ mov byte [ds:si], 0xff
+ cmp byte [es:di], 0xff
+ jz owrtn
+ mov al, 0x42
+ mov ah, 0x0e
+ int 0x10
+ jmp $
 owrtn:
-	mov al, 0x41
-	mov ah, 0x0e
-	int 0x10
-	jmp $
+ mov al, 0x41
+ mov ah, 0x0e
+ int 0x10
+ jmp $
 times 510 - ($-$$) db 0
 dw 0xaa55
 ```
-
 
 結果としてはBと出た。要するにonになっているようだ。
 

@@ -1,19 +1,23 @@
 # 計量時系列分析の1章の数値計算
 
 次の本を読んでいる。
-- [経済・ファイナンスデータの計量時系列分析](https://www.amazon.co.jp/dp/4254127928)、	沖本竜義著
+
+- [経済・ファイナンスデータの計量時系列分析](https://www.amazon.co.jp/dp/4254127928)、 沖本竜義著
 
 今回は1章の演習問題のうち、数値計算部分を次の記事を参考にしながら解いてみる。
+
 - [【第1章】pythonで「経済・ファイナンスデータの計量時系列分析」の章末問題を解く](https://qiita.com/mckeeeen/items/666e14c94e1548130646)
 
-
 ## 問題1.5
+
 まずはデータをダウンロードしてくる。書かれているリンクからはデータが取得できないので、次のページからダウンロードする。
+
 - [朝倉書店｜経済・ファイナンスデータの 計量時系列分析](http://www.asakura.co.jp/books/isbn/978-4-254-12792-8/)
 
-
 ### 問題(1)
+
 まずはそれぞれのデータを単純にプロットしていく。
+
 ```
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -32,10 +36,12 @@ plt.savefig('figure-1-5-1.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex1/figure-1-5-1.png">
+<img src="/20201222-time-series-analysis-ex1/figure-1-5-1.png" alt="figure-1-5-1">
 
 ### 問題(2)と(3)
+
 topix、exrate、indprodの対数差分系列を計算する。
+
 ```
 import numpy as np
 
@@ -56,10 +62,12 @@ plt.savefig('figure-1-5-2.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex1/figure-1-5-2.png">
+<img src="/20201222-time-series-analysis-ex1/figure-1-5-2.png" alt="figure1-5-2">
 
 ### 問題(4)
+
 まずは標本自己相関をプロットする
+
 ```
 from statsmodels.tsa.stattools import acf
 autocorr, confint, qstat, pvalues = acf(indprod_cr, nlags=20, qstat=True, alpha=0.95)
@@ -68,9 +76,10 @@ plt.savefig('figure-1-5-4-1.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex1/figure-1-5-4-1.png">
+<img src="/20201222-time-series-analysis-ex1/figure-1-5-4-1.png" alt="figure-1-5-4-1">
 
 次にLjung-BoxのQ統計量とそのp値をプロットする。
+
 ```
 _, ax = plt.subplots(nrows=2, ncols=1)
 ax[0].plot(qstat)
@@ -82,6 +91,6 @@ plt.savefig('figure-1-5-4-2.png')
 plt.close()
 ```
 
-<img src="/20201222-time-series-analysis-ex1/figure-1-5-4-2.png">
+<img src="/20201222-time-series-analysis-ex1/figure-1-5-4-2.png" alt="figure-1-5-4-2">
 
 常にp値は$10^{-8}$程度であり自己相関がないという帰無仮説は棄却できる。

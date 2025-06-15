@@ -21,7 +21,6 @@ $ nasm -f bin -o boot boot.asm
 $ qemu-system-i386 boot -curses -nographic
 ```
 
-
 するとTerminalの画面が別の画面に切り替わり、
 
 ```
@@ -30,7 +29,6 @@ iPXE (http://ipxe.org) 00:03.0 C900 PCI2.10 PnP PMM+07FC10F0+07F210F0 C900
 Booting from Hard Disk...
 Started in 16-bit read mode
 ```
-
 
 のような文字列が出力されるはずである。一番下の'Started in 16-bit real mode'という文章が、最初に 16bit real mode で起動した際に bios interrupt call を使用して出力された文章で、一番上の行の'Started in 32-bit protected mode'という文章が 32bit protected mode に変わってから出力された文章である。
 
@@ -42,12 +40,10 @@ gdbでデバッグをするときに16bitのときには
 (gdb) set architecture i8086
 ```
 
-
 としていたと思うが、32bitのコードをdisassembleする場合には
 
 ```
 (gdb) set architecture i386
 ```
-
 
 として、32bitで動いていることを示さないと正しいdisassemble結果が返ってこなくなる。

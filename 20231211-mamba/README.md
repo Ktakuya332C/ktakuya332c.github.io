@@ -1,10 +1,11 @@
 # A little memo on Mamba
 
-I found it intriguing to read the paper presenting a new neural network architecture called [Mamba](https://arxiv.org/abs/2312.00752), which was shown to perform comparable to the well-known transformer network. Though most of the contents were easy to read, the most crucial part of the paper describing the S6 algorithm (Algorithm 2) was a little confusing. 
+I found it intriguing to read the paper presenting a new neural network architecture called [Mamba](https://arxiv.org/abs/2312.00752), which was shown to perform comparable to the well-known transformer network. Though most of the contents were easy to read, the most crucial part of the paper describing the S6 algorithm (Algorithm 2) was a little confusing.
 
 Here, I will describe the details of the algorithm with the subscript notation, instead of conventional matrix notation, to clarify its meaning. Because the algorithm described in Algorithm 2 and its implementation in [github repository](https://github.com/state-spaces/mamba) slightly differs in detail, I chose to rely primarily on the code to show the algorithm.
 
 The algorithm accepts the following input and parameters.
+
 - Input
   - $x$ in size $(L, D)$
 - Parameters
