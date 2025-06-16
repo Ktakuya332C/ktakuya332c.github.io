@@ -8,9 +8,13 @@ Rougly speaking, the implementation of the distributed checkpoint mainly consist
 
 I will try to describe the saving procedure first, and later loading side.
 
-## Saving procedure
+## Saving
 
-TBWcd 
+TBW
+
+## Loading
+
+TBW
 
 ## Notes
 - This document is based on [PyTorch 2.7.1](https://github.com/pytorch/pytorch/tree/v2.7.1/torch/distributed/checkpoint). All the paths are relative to `torch/distributed/checkpoint` except explicitly mentioned otherwise. 
