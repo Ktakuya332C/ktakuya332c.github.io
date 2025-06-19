@@ -1,5 +1,6 @@
 # Memorandum
 
+- [Pytorch Distributed Checkpoint Internals](20250616-dcp-internals/README.md)
 - ["Derivation" of PPO algorithm](20250104-ppo/README.md)
 - [A little memo on Mamba](20231211-mamba/README.md)
 - [数学の効率的な学び方](20231122-learn-math/README.md)
