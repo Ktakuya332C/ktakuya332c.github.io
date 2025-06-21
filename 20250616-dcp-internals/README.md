@@ -18,9 +18,9 @@ When the user calls the `save` function (in `state_dict_saver.py`), the planner 
 
 Initially, each process sets itself up via the `set_up_planner` method of `Planner` and the `set_up_storage_writer` method of `StorageWriter`. These setup methods do very little. For instance, `DefaultSavePlanner` sets up metadata for the `state_dict`, while `FileSystemWriter` does essentially nothing at this stage.
 
-Next, each process generates a `SavePlan` — essentially a proposal describing which parts of the model it will be responsible for saving. This is created using the `create_local_plan` method. A `SavePlan` is a list of `WriteItem`s, each of which defines a segment of the model (by path, offset, and size) that the process will write.
+Next, each process generates a `local_plan` of type `SavePlan` — essentially a proposal describing which parts of the model it will be responsible for saving. This is created using the `create_local_plan` method. A `SavePlan` is essentially a list of `WriteItem`s, each of which defines a segment of the model (by path, offset, and size) that the process will write.
 
-The coordinator process (typically rank 1, as shown in the diagram) then gathers all the `local_plan`s, refines them, and creates global metadata. For example, `DefaultSavePlanner.create_global_plan` deduplicates `WriteItem`s and generates a `Metadata` object (from `metadata.py`) that will later be used during loading. Meanwhile, `FileSystemWriter.prepare_global_plan` assigns unique file prefixes (e.g. `__{i}_` for rank `i`) to ensure there are no conflicts.
+The coordinator process (typically rank 1, as shown in the diagram) then gathers all the `local_plan`s, refines them, and creates global metadata. For example, `DefaultSavePlanner.create_global_plan` deduplicates `WriteItem`s and generates a `Metadata` (from `metadata.py`) that will later be used during loading. Meanwhile, `FileSystemWriter.prepare_global_plan` assigns unique file prefixes (e.g. `__{i}_` for rank `i`) to ensure there are no conflicts.
 
 Once the plans are finalized, the coordinator redistributes them to each process. At this point, each process may further adjust its plan using the `finish_plan` method (though usually this step is a no-op). The `StorageWriter` then begins writing tensors and bytes to disk according to its assigned `SavePlan`. If `FileSystemWriter` is used, this step is multi-threaded. After writing completes, the coordinator collects the results and writes a final `.metadata` file to mark the end of the checkpoint.
 
@@ -36,7 +36,7 @@ When the user invokes the `load` function (in `state_dict_loader.py`), the plann
 
 The process begins by reading the metadata file via `read_metadata`. This file contains information about the stored tensors and bytes, including their structure, types, and how they were split across processes when saving. Since distributed checkpointing can save a single tensor in chunks across multiple processes, this metadata is essential for proper reconstruction.
 
-After a minimal setup via `set_up_planner` and `set_up_storage_reader`, each process calls `create_local_plan` to propose how it will load its assigned data. This plan, of type `LoadPlan`, is a list of `ReadItem`s, each of which describes which part of the checkpoint should be loaded into which part of the model’s `state_dict`.
+After a minimal setup via `set_up_planner` and `set_up_storage_reader`, each process calls `create_local_plan` to propose how it will load its assigned data. This plan, of type `LoadPlan`, is essentially a list of `ReadItem`s, each of which describes which part of the checkpoint should be loaded into which part of the model’s `state_dict`.
 
 Although `create_global_plan` and `prepare_global_plan` exist to modify plans with global awareness, the default implementations (`DefaultLoadPlanner` and `FileSystemReader`) do nothing in these methods. Instead, they simply aggregate the `local_plans`, approve them, and send them back to each process.
 
