@@ -10,9 +10,17 @@ I will try to describe the saving procedure first, and later the loading side.
 
 To save a model with distributed checkpointing, each process must instantiate one subclass of StorageWriter (storage.py) and SavePlanner (planner.py) each before starting the actual saving. Usually, FileSystemWriter (filesystem.py) and DefaultSavePlanner (default_planner.py) would be chosen automatically when the caller didn't specify instances explicitly. From here on, I suppose the caller didn't specify the instances explicitly, and FileSystemWriter and DefaultSavePlanner are chosen and instantiated.
 
-When a caller kicks `save` function (state_dict_saver.py), the planner and storage writer on each process coordinates to save the model roughly following the next diagram.
+When a caller kicks `save` function (state_dict_saver.py), the planner and storage writer on each process coordinates to save the model. Usually, the caller only passes the state dict of the model and checkpoint_id to the `save` function. The procedure roughly follows the next diagram.
 
 <img src="/20250616-dcp-internals/figure1.png" width="50%" />
+
+At first, each process starts to setup themselves by calling `set_up_planner` of Planner and `set_up_storage_writer` of StorageWriter. These methods usually do a very little : `set_up_planner` of DefaultSavePlanner setup metadata of the state dict for later use, and `set_up_storage_writer` of FileSystemWriter does nothing.
+
+Then, they proceed to create an object so called `local_plan` of type SavePlan (planner.py). `local_plan` essentially is a proposal by each process that specifies which parts of the model parameters the process is responsible to save. This proposal will be revised by the coordinator (Process 1 in the above figure) in a later step. The proposal is expressed as an instance of SavePlan (planner.py), which basically is a list of WriteItem (planner.py). WriteItem expresses a portion of the state dict, specifying the path to the tensor in the state dict, and its offset and size of the sub-tensor the WriteItem is responsible for.
+
+The coordinator process (Process 1 in the above figure) then gathers the `local_plan`s each process created, adjust each plan, and create some metadata that requires global view of the whole plans. For example, `create_global_plan` of DefaultSavePlanner deduplicates the WriteItems, and creates Metadata (metadata.py) that will be used in the loading procedure. `prepare_global_plan` of FileSystemWriter assigns a prefix each process use to save a file (`__{i}_` with rank i), that requires global view of the whole plans because it must be different from each other.
+
+Lastly, the coordinator distributes the adjusted plan to each process, and each process starts the actual saving of the state dict. Planner in each process is allowed to modify the plan once again at this time, but usually they do little. StorageWriter kicks the actual saving process, which writes tensors and bytes following the SavePlan each process is assigned to. After the writing completes, the result of all the writes are gathered into the coordinator, and the coordinator puts some end marks to the checkpoint, which is `.metadata` file in case of FileStorageWriter.
 
 ## Loading procedure
 
