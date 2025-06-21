@@ -4,9 +4,9 @@ Distributed checkpoint is a feature introduced to PyTorch some time ago, allowin
 
 Rougly speaking, the implementation of the distributed checkpoint mainly consists of two classes, namely Planner (planner.py) and Storage (storage.py). Each process in a distributed process group has its own planner and storage, and they coordinate to save/load a checkpoint. The responsiblity of Planner is to determine what to save/load in each process by exchanging information globally across all the planners, and the one of Storage is to actually save/load tensors or bytes onto the disk/memory. These classes exchange information by some structs (dataclass) like SavePlan, LoadPlan, WriteItem, ReadItem, Metadata, and others.
 
-I will try to describe the saving procedure first, and later the loading side.
+I will try to describe the saving process first, and later the loading side.
 
-## Saving procedure
+## Saving side
 
 To save a model with distributed checkpointing, each process must instantiate one subclass of StorageWriter (storage.py) and SavePlanner (planner.py) each before starting the actual saving. Usually, FileSystemWriter (filesystem.py) and DefaultSavePlanner (default_planner.py) would be chosen automatically when the caller didn't specify instances explicitly. From here on, I suppose the caller didn't specify the instances explicitly, and FileSystemWriter and DefaultSavePlanner are chosen and instantiated.
 
@@ -18,13 +18,25 @@ At first, each process starts to setup themselves by calling `set_up_planner` of
 
 Then, they proceed to create an object so called `local_plan` of type SavePlan (planner.py). `local_plan` essentially is a proposal by each process that specifies which parts of the model parameters the process is responsible to save. This proposal will be revised by the coordinator (Process 1 in the above figure) in a later step. The proposal is expressed as an instance of SavePlan (planner.py), which basically is a list of WriteItem (planner.py). WriteItem expresses a portion of the state dict, specifying the path to the tensor in the state dict, and its offset and size of the sub-tensor the WriteItem is responsible for.
 
-The coordinator process (Process 1 in the above figure) then gathers the `local_plan`s each process created, adjust each plan, and create some metadata that requires global view of the whole plans. For example, `create_global_plan` of DefaultSavePlanner deduplicates the WriteItems, and creates Metadata (metadata.py) that will be used in the loading procedure. `prepare_global_plan` of FileSystemWriter assigns a prefix each process use to save a file (`__{i}_` with rank i), that requires global view of the whole plans because it must be different from each other.
+The coordinator process (Process 1 in the above figure) then gathers the `local_plan`s each process created, adjust each plan, and create some metadata that requires global view of the whole plans. For example, `create_global_plan` of DefaultSavePlanner deduplicates the WriteItems, and creates Metadata (metadata.py) that will be used in the loading procedure. `prepare_global_plan` of FileSystemWriter assigns a prefix each process use to save a file (`__{i}_` for rank i), that requires global view of the whole plans because it must be different from each other.
 
-Lastly, the coordinator distributes the adjusted plan to each process, and each process starts the actual saving of the state dict. Planner in each process is allowed to modify the plan once again at this time, but usually they do little. StorageWriter kicks the actual saving process, which writes tensors and bytes following the SavePlan each process is assigned to. After the writing completes, the result of all the writes are gathered into the coordinator, and the coordinator puts some end marks to the checkpoint, which is `.metadata` file in case of FileStorageWriter.
+Lastly, the coordinator distributes the adjusted plan to each process, and each process starts the actual saving of the state dict. Planner in each process is allowed to modify the plan once again at this time (`finish_plan`), but usually they do little. StorageWriter kicks the actual saving process (`write_data`), which writes tensors and bytes following the SavePlan each process is assigned to. The saving process is thread-level parallelized when the StorageWriter is FileSystemWriter. After the writing completes, the result of all the writes are gathered into the coordinator, and the coordinator puts some end marks to the checkpoint, which is `.metadata` file in case of FileStorageWriter.
 
-## Loading procedure
+## Loading side
+
+The loading side also requires one instance of subclass for LoadPlanner (planner.py) and StorageReader (storage.py) each. Usually, DefaultLoaderPlanner (default_planner.py) and FileSystemReader (filesystem.py) would be chosen automatically if not specified explicitly. 
+
+When a caller invokes `load` function (state_dict_loader.py), LoadPlanner and StorageReader coordinates to load the model parameters into the memory as in the following diagram. As you can see, the overall loading process is quite similar to the saving process, except the fact that the last `finish` step of the saving process is replaced by the first `read_metadata` step of reading process.
 
 <img src="/20250616-dcp-internals/figure2.png" width="50%" />
+
+`read_metadata` step literally reads Metadata (metadata.py), which contains infomation about the kind of tensors and bytes stored in the checkpoint, and how they are stored. Since the checkpoints are saved by multipe processes in parallel, one tensor might have been splitted up and saved by multiple processes chunk by chunk. The metadata holds not only the path, size, dtype of the tensors and bytes in the saved state dict, but also the information about the chunks these tensors were splitted into.
+
+After the calls of `set_up_planner` and `set_up_storage_reader` (these methods do very little), LoadPlanner calls `create_local_plan` to create a proposal that expresses how each process plans to read the model parameters they are responsible for. To create the `local_plan`, each process checks which tensors and bytes they are responsible to maintain, and plan from which chunks it should load the values into which tensors. The proposal is in type LoadPlan (planner.py), essentially a list of ReadItem (planner.py). ReadItem specifies which offsets of tensors in which paths in the checkpoint should be loaded into which offsets of tensors in which paths in the state dicts the process tries to load into. 
+
+The next `create_global_plan` and `prepare_global_plan` are supposed to adjust the `local_plans` each process created by considering the global view of the whole plans, but DefaultLoadPlanner and FileSystemReader does nothing in these methods. They just gathers all the plans, approves the `local_plans` each process created, and redistribute it to each process.
+
+Finally, LoadPlanner `finish_plan` (which also does nothing in case of DefaultLoadPlanner), and StorageReader starts the actual reading of the checkpoint following the LoadPlan it is assigned to. Each process reads the checkpoint in parallel, but the reading  of each process is single-threaded. Once all the read finishes, the `load` function returns, and the passed state dict should be filled with the values loaded from the checkpoint.
 
 ## Notes
 - This document is based on [PyTorch 2.7.1](https://github.com/pytorch/pytorch/tree/v2.7.1/torch/distributed/checkpoint). All the paths are relative to `torch/distributed/checkpoint` except explicitly mentioned otherwise. 

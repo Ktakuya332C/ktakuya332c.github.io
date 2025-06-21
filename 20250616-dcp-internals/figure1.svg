@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="0.67438438"
-     inkscape:cx="306.20519"
-     inkscape:cy="490.81801"
+     inkscape:zoom="0.71550968"
+     inkscape:cx="322.84679"
+     inkscape:cy="461.20969"
      inkscape:window-width="1368"
      inkscape:window-height="821"
      inkscape:window-x="0"
@@ -161,7 +161,7 @@
        xml:space="preserve"
        transform="scale(0.26458333)"
        id="text1"
-       style="fill:#ff6600;text-orientation:auto;stroke-width:0.86842209;-inkscape-font-specification:Monaco;font-family:Monaco;text-align:center;font-size:17.33333333px;stroke:none;stroke-dasharray:3.47368836, 0.86842209;writing-mode:lr-tb;direction:ltr;fill-opacity:1;white-space:pre;shape-inside:url(#rect2);stroke-dashoffset:0" />
+       style="font-size:17.3333px;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);display:inline;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.868422;stroke-dasharray:3.47369, 0.868422;stroke-dashoffset:0" />
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
@@ -197,25 +197,14 @@
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-       x="147.52171"
-       y="70.243233"
-       id="text3-2-3-3-8"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-         x="148.32787"
-         y="70.243233"
-         id="tspan6-3-01-6">Planner </tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-       x="147.9606"
-       y="49.571953"
+       x="153.13544"
+       y="49.369968"
        id="text3-2-3-3-8-0"><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-         x="148.76675"
-         y="49.571953"
-         id="tspan6-3-01-6-0">Planner </tspan></text>
+         x="153.94159"
+         y="49.369968"
+         id="tspan6-3-01-6-0">SavePlanner </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
@@ -249,17 +238,6 @@
          x="154.21022"
          y="59.083649"
          id="tspan6-3-01-6-0-2-1"> StorageWriter</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-       x="142.77724"
-       y="109.54269"
-       id="text3-2-3-3-8-0-97"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-         x="143.58339"
-         y="109.54269"
-         id="tspan6-3-01-6-0-3">Planner </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
@@ -317,14 +295,14 @@
        x="47.658798"
        y="40.612133" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6"
        width="6.652524"
        height="5.3853765"
        x="52.866722"
        y="45.074753" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1"
        width="6.652524"
        height="5.3853765"
@@ -347,7 +325,7 @@
          y="58.977699"
          id="tspan6-8">set_up_storage_writer</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6"
        width="6.652524"
        height="5.3853765"
@@ -393,7 +371,7 @@
        x="48.55677"
        y="100.93201" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-0"
        width="6.652524"
        height="5.3853765"
@@ -416,14 +394,14 @@
          y="119.35543"
          id="tspan6-8-7">prepare_global_plan</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6-0"
        width="6.652524"
        height="5.3853765"
        x="53.644344"
        y="115.24805" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1-2"
        width="6.652524"
        height="5.3853765"
@@ -446,14 +424,14 @@
          y="69.007401"
          id="tspan6-8-9">create_local_plan</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6-5"
        width="6.652524"
        height="5.3853765"
        x="53.242146"
        y="64.900017" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1-2-9"
        width="6.652524"
        height="5.3853765"
@@ -528,14 +506,14 @@
          y="184.85568"
          id="tspan6-8-9-3-0-9-3">list[WriteResult]</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6-5-1"
        width="6.652524"
        height="5.3853765"
        x="53.395332"
        y="74.698059" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1-2-9-0"
        width="6.652524"
        height="5.3853765"
@@ -562,17 +540,6 @@
          x="96.172203"
          y="154.64745"
          id="tspan7-49">finish_plan</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-       x="149.11505"
-       y="154.97916"
-       id="text3-2-3-3-8-0-5"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
-         x="149.9212"
-         y="154.97916"
-         id="tspan6-3-01-6-0-069">Planner </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
@@ -603,14 +570,14 @@
        x="48.757175"
        y="145.96324" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-09"
        width="6.652524"
        height="5.3853765"
        x="54.021187"
        y="150.48196" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1-5"
        width="6.652524"
        height="5.3853765"
@@ -633,14 +600,14 @@
          y="164.3849"
          id="tspan6-8-98">write_data</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6-9"
        width="6.652524"
        height="5.3853765"
        x="53.842976"
        y="160.27753" />
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-1-2-1"
        width="6.652524"
        height="5.3853765"
@@ -692,11 +659,44 @@
          y="199.33778"
          id="tspan6-8-98-5">finish</tspan></text>
     <rect
-       style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.432935;stroke-dasharray:0.432935, 0.432935;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6-6-9-8"
        width="6.652524"
        height="5.3853765"
        x="52.927876"
        y="195.23041" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+       x="153.10205"
+       y="69.490807"
+       id="text3-2-3-3-8-0-3"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+         x="153.9082"
+         y="69.490807"
+         id="tspan6-3-01-6-0-26">SavePlanner </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+       x="148.40216"
+       y="108.52394"
+       id="text3-2-3-3-8-0-3-8"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+         x="149.20831"
+         y="108.52394"
+         id="tspan6-3-01-6-0-26-3">SavePlanner </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:0;font-family:Monaco;-inkscape-font-specification:Monaco;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+       x="153.51439"
+       y="155.09061"
+       id="text3-2-3-3-8-0-3-3"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#1a1a1a;stroke-width:0.22977;stroke-dasharray:0.919081, 0.22977;stroke-dashoffset:0"
+         x="154.32054"
+         y="155.09061"
+         id="tspan6-3-01-6-0-26-6">SavePlanner </tspan></text>
   </g>
 </svg>
