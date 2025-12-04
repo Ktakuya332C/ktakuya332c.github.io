@@ -1,7 +1,7 @@
 # Memorandum
 
 2025
-- [Distributed Training References](20251204-distributed-training-references/README.md)
+- [Distributed Training Resources](20251204-distributed-training-resources/README.md)
 - [Pytorch Distributed Checkpoint Internals](20250616-dcp-internals/README.md)
 - ["Derivation" of PPO algorithm](20250104-ppo/README.md)
 

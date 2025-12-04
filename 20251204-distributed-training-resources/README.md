@@ -1,4 +1,4 @@
-# Distribueted Training References
+# Distribueted Training Resources
 
 A list of documents and videos useful for understanding distributed training systems.
 
