@@ -1,14 +1,21 @@
 # Memorandum
 
+2025
 - [Pytorch Distributed Checkpoint Internals](20250616-dcp-internals/README.md)
 - ["Derivation" of PPO algorithm](20250104-ppo/README.md)
+
+2023
 - [A little memo on Mamba](20231211-mamba/README.md)
 - [Websites I often vist](20231121-websites/README.md)
 - [Start using Docsify on my blog](20231121-docsify/README.md)
 - [A regret bound of UCBID algorithm](20230703-ucbid/README.md)
 - [POMDPとBeliefMDPの同値性](20230129-equivalence-of-pomdp-and-belief-mdp/README.md)
+
+2022
 - [The Child as Hacker](20220513-child-as-hacker/README.md)
 - [様々な整域の間の関係を整理する](20220416-integral-domains/README.md)
+
+2021
 - [広告オークション関連の論文まとめ](20211226-ad-auction/README.md)
 - [様々な可換環の具体例](20211028-chars-of-rings/README.md)
 - [条件付き最適化における最急降下法](20211023-sgd-on-opt/README.md)
@@ -20,6 +27,8 @@
 - [不完備情報ゲームの均衡概念](20210417-imcomplete-information-game/README.md)
 - [古代中東のデータを分析した論文の紹介](20210223-g-barjamovic-et-al-2019/README.md)
 - [Ripserを使ってパーシステント図を作る](20210220-using-ripser/README.md)
+
+2020
 - [中東の中世までの歴史をまとめる](20201228-world-history-chap2/README.md)
 - [ヨーロッパの中世までの歴史をまとめる](20201227-world-history-chap1/README.md)
 - [計量時系列分析の4章の数値計算](20201225-time-series-analysis-ex4/README.md)
@@ -58,6 +67,8 @@
 - [このブログについて](20200425-blog/README.md)
 - [perlのtr演算子](20200320-perl-tr/README.md)
 - [宮川本の推論ルールの証明](20200228-proof-of-causal-inference-rules/README.md)
+
+2019
 - [東京周辺開催の Tech Conference 系のまとめ](20191220-tech-confs/README.md)
 - [企業の Tech Blog へのリンク](20191219-links-engineering/README.md)
 - [アナリストは何をしている?](20191208-analyst/README.md)
@@ -74,6 +85,8 @@
 - [Macで簡単に定期通知をする](20190211-notif-on-mac/README.md)
 - [どのようにして機械学習モデルの精度を上げていけば良いか](20190126-improve-ml-models/README.md)
 - [nonparametric統計検定手法の導出へのリンク](20190114-links-to-proof-of-nonparametrics/README.md)
+
+2018
 - [最近見つけた Data Science 関連の良い本の紹介](20181230-good-books-online/README.md)
 - [データ分析コンペの取り組み方](20181230-ds-comp/README.md)
 - [R for Data Science が良い](20181226-r-for-datascience/README.md)
