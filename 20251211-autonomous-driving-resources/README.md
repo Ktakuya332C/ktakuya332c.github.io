@@ -1,0 +1,26 @@
+# Autonomous Driving Resources
+
+A list of documents and videos useful for understanding autonomous driving.
+
+General
+- (2025, Book) [Closed-Loop で実現するデータ中心の自動運転モデル](https://zenn.dev/riita10069/books/ad-adas-closed-loop)
+- (2024, Video) [Waabi CVPR 24 Tutorial on Self-Driving Cars](https://www.youtube.com/playlist?list=PLb2zgvIwtM-5JxKqS9_3CpZX2_7Uj8jG6)
+- (2023, Video) [Self-Driving Cars, University of Tubingen](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/lectures/self-driving-cars/)
+
+End-to-end
+- (2022, Paper) [Planning-oriented Autonomous Driving](https://arxiv.org/abs/2212.10156)
+
+VLA-based
+- (2025, Paper) [Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail](https://arxiv.org/abs/2511.00088)
+
+Computer Vision
+- (2024, Vidoe) [Deformable DETR](https://www.youtube.com/watch?v=9UG4amweIjk)
+- (2023, Video) [TrackFormer: Multi-Object Tracking with Transformers](https://www.youtube.com/watch?v=q1OaqRj-Pmo)
+- (2020, Vidoe) [DETR: End-to-End Object Detection with Transformers](https://www.youtube.com/watch?v=T35ba_VXkMY)
+
+Blogs
+- [Waymo](https://waymo.com/blog)
+- [Wayve](https://wayve.ai/thinking/)
+- [Tesla](https://www.tesla.com/en_th/blog)
+- [Zoox](https://zoox.com/journal)
+- [NVIDIA](https://blogs.nvidia.com/blog/category/auto/)
