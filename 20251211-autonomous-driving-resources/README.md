@@ -1,4 +1,4 @@
-# Autonomous Driving Resources
+# Autonomous Driving Resources [WIP]
 
 A list of documents and videos useful for understanding autonomous driving.
 
@@ -19,8 +19,9 @@ VLA-based
 - (2025, Paper) [Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail](https://arxiv.org/abs/2511.00088)
 - (2025, Paper) [SimLingo: Vision-Only Closed-Loop Autonomous Driving with Language-Action Alignment](https://arxiv.org/abs/2503.09594)
 
-World model
+Simulator
 - (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
+- (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
 - (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
 
 Computer Vision

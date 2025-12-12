@@ -1,6 +1,7 @@
 # Memorandum
 
 2025
+- [Autonomous Driving Resources](20251211-autonomous-driving-resources/README)
 - [Distributed Training Resources](20251204-distributed-training-resources/README.md)
 - [Pytorch Distributed Checkpoint Internals](20250616-dcp-internals/README.md)
 - ["Derivation" of PPO algorithm](20250104-ppo/README.md)
