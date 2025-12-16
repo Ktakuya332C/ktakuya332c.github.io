@@ -17,9 +17,19 @@ End-to-end
 
 VLA-based
 - (2025, Paper) [Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail](https://arxiv.org/abs/2511.00088)
+- (2025, Paper) [S4-Driver: Scalable Self-Supervised Driving Multimodal Large Language Modelwith Spatio-Temporal Visual Representation](https://arxiv.org/abs/2505.24139)
 - (2025, Paper) [SimLingo: Vision-Only Closed-Loop Autonomous Driving with Language-Action Alignment](https://arxiv.org/abs/2503.09594)
 
+Prediction & Planning
+- (2025, Paper) [Scaling Laws of Motion Forecasting and Planning](https://arxiv.org/abs/2506.08228)
+- (2023, Paper) [MotionLM: Multi-Agent Motion Forecasting as Language Modeling](https://arxiv.org/abs/2309.16534)
+
+Validation
+- (2024, Paper) [Rate-Informed Discovery via Bayesian Adaptive Multifidelity Sampling](https://arxiv.org/abs/2411.17826)
+- (2024, Paper) [Foundation Models for Rapid Autonomy Validation](https://arxiv.org/abs/2411.03328)
+
 Simulator
+- (2025, Paper) [SceneDiffuser++: City-Scale Traffic Simulation via a Generative World Model](https://arxiv.org/abs/2506.21976v1)
 - (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
 - (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
 - (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
@@ -28,7 +38,7 @@ Computer Vision
 - (2024, Paper) [Depth from Videos in the Wild: Unsupervised Monocular Depth Learning from Unknown Cameras](https://arxiv.org/abs/1904.04998)
 - (2024, Vidoe) [Deformable DETR](https://www.youtube.com/watch?v=9UG4amweIjk)
 - (2023, Video) [TrackFormer: Multi-Object Tracking with Transformers](https://www.youtube.com/watch?v=q1OaqRj-Pmo)
-- (2020, Vidoe) [DETR: End-to-End Object Detection with Transformers](https://www.youtube.com/watch?v=T35ba_VXkMY)
+- (2020, Video) [DETR: End-to-End Object Detection with Transformers](https://www.youtube.com/watch?v=T35ba_VXkMY)
 
 Physics
 - (2021, Video) [Camera Calibration](https://www.youtube.com/playlist?list=PL2zRqk16wsdoCCLpou-dGo7QQNks1Ppzo)
