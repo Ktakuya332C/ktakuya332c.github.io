@@ -22,7 +22,9 @@ VLA-based
 
 Prediction & Planning
 - (2025, Paper) [Scaling Laws of Motion Forecasting and Planning](https://arxiv.org/abs/2506.08228)
+- (2024, Paper) [PLUTO: Pushing the Limit of Imitation Learning-based Planning for Autonomous Driving](https://arxiv.org/abs/2404.14327)
 - (2023, Paper) [MotionLM: Multi-Agent Motion Forecasting as Language Modeling](https://arxiv.org/abs/2309.16534)
+- (2022, Paper) [Safe Real-World Autonomous Driving by Learning to Predict and Plan with a Mixture of Experts](https://arxiv.org/abs/2211.02131)
 
 Validation
 - (2024, Paper) [Rate-Informed Discovery via Bayesian Adaptive Multifidelity Sampling](https://arxiv.org/abs/2411.17826)
@@ -44,8 +46,10 @@ Physics
 - (2021, Video) [Camera Calibration](https://www.youtube.com/playlist?list=PL2zRqk16wsdoCCLpou-dGo7QQNks1Ppzo)
 - (2020, Video) [Vehicle Dynamics and Control](https://www.youtube.com/playlist?list=PLW3FM5Kyc2_4PGkumkAHNXzWtgHhaYe1d)
 
-Conferences
+Conferences & Workshops
 - [CVPR 2025 Workshop on Autonomous Driving](https://cvpr2025.wad.vision/)
+- [Distillation of Foundation Models for Autonomous Driving](https://wdfm-ad.github.io/)
+- [Machine Learning for Autonomous Driving](https://ml4ad.github.io/)
 
 Blogs
 - [Waymo](https://waymo.com/blog)
@@ -53,3 +57,8 @@ Blogs
 - [Tesla](https://www.tesla.com/en_th/blog)
 - [Zoox](https://zoox.com/journal)
 - [NVIDIA](https://blogs.nvidia.com/blog/category/auto/)
+- [Rivian](https://stories.rivian.com/)
+- [Motional](https://motional.com/news)
+- [Nuro](https://www.nuro.ai/blog)
+- [Comma](https://blog.comma.ai/)
+- [Turing](https://zenn.dev/p/turing_motors)
