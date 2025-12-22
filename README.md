@@ -1,6 +1,7 @@
 # Memorandum
 
 2025
+- [上野代数幾何の例1.26](20251222-ueno-example1.26/README)
 - [Autonomous Driving Resources](20251211-autonomous-driving-resources/README)
 - [Distributed Training Resources](20251204-distributed-training-resources/README.md)
 - [Pytorch Distributed Checkpoint Internals](20250616-dcp-internals/README.md)
