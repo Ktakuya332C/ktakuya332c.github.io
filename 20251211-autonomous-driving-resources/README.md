@@ -9,6 +9,7 @@ General
 - (2023, Video) [Self-Driving Cars, University of Tubingen](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/lectures/self-driving-cars/)
 
 End-to-end
+- (2025, Paper) [Future-Aware End-to-End Driving: Bidirectional Modeling of Trajectory Planning and Scene Evolution](https://arxiv.org/abs/2510.11092)
 - (2023, Paper) [Policy Pre-training for Autonomous Driving via Self-supervised Geometric Modeling](https://arxiv.org/abs/2301.01006)
 - (2022, Paper) [Planning-oriented Autonomous Driving](https://arxiv.org/abs/2212.10156)
 - (2021, Paper) [NEAT: Neural Attention Fields for End-to-End Autonomous Driving](https://arxiv.org/abs/2109.04456)

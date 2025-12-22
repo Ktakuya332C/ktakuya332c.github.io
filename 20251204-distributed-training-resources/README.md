@@ -32,6 +32,7 @@ Mixed Precision
 - (2019, Paper) [Hybrid 8-bit Floating Point (HFP8) Training and Inference for Deep Neural Networks](https://papers.nips.cc/paper_files/paper/2019/hash/65fc9fb4897a89789352e211ca2d398f-Abstract.html)
 
 Long Context Training
+- (2025, Blog) [CAD: Disaggregating Core Attention for Efficient Long-context Language Model Training](https://hao-ai-lab.github.io/blogs/distca/)
 - (2025, Paper) [ByteScale: Efficient Scaling of LLM Training with a 2048K Context Length on More Than 12,000 GPUs](https://arxiv.org/abs/2502.21231)
 - (2025, Paper) [HelixPipe: Efficient Distributed Training of Long Sequence Transformers with Attention Parallel Pipeline Parallelism](https://arxiv.org/abs/2507.00394)
 - (2024, Paper) [When Precision Meets Position: BFloat16 Breaks Down RoPE in Long-Context Training](https://arxiv.org/abs/2411.13476)
