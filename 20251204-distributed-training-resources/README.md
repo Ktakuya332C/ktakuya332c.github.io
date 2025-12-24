@@ -63,6 +63,7 @@ Infrastructure
 - (2022, Paper) [Pathways: Asynchronous Distributed Dataflow for ML](https://arxiv.org/abs/2203.12533)
 
 Practical Tips
+- (2025, Blog) [Optimizing Large-Scale Pretraining at Character.ai](https://blog.character.ai/squinch/)
 - (2024, Blog) [A practitioner's guide to testing and running large GPU clusters for training generative AI models](https://www.together.ai/blog/a-practitioners-guide-to-testing-and-running-large-gpu-clusters-for-training-generative-ai-models)
 - (Github) [Machine Learning Engineering Open Book](https://github.com/stas00/ml-engineering)
 - (2024, Blog) [Training great LLMs entirely from ground up in the wilderness as a startup](https://www.yitay.net/blog/training-great-llms-entirely-from-ground-zero-in-the-wilderness)
