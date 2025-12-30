@@ -30,23 +30,21 @@ Prediction & Planning
 - (2024, Paper) [PLUTO: Pushing the Limit of Imitation Learning-based Planning for Autonomous Driving](https://arxiv.org/abs/2404.14327)
 - (2023, Paper) [MotionLM: Multi-Agent Motion Forecasting as Language Modeling](https://arxiv.org/abs/2309.16534)
 - (2022, Paper) [Safe Real-World Autonomous Driving by Learning to Predict and Plan with a Mixture of Experts](https://arxiv.org/abs/2211.02131)
+- (2021, Paper) [Large Scale Interactive Motion Forecasting for Autonomous Driving : The Waymo Open Motion Dataset](https://arxiv.org/abs/2104.10133)
 
-Validation
-- (2024, Paper) [Rate-Informed Discovery via Bayesian Adaptive Multifidelity Sampling](https://arxiv.org/abs/2411.17826)
-- (2024, Paper) [Foundation Models for Rapid Autonomy Validation](https://arxiv.org/abs/2411.03328)
-
-Simulator
-- (2025, Paper) [SceneDiffuser++: City-Scale Traffic Simulation via a Generative World Model](https://arxiv.org/abs/2506.21976v1)
-- (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
-- (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
-- (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
-
-Computer Vision
+Perception
 - (2024, Paper) [3D Open-Vocabulary Panoptic Segmentation with 2D-3D Vision-Language Distillation](https://waymo.com/research/3d-open-vocabulary-panoptic-segmentation-with-2d-3d-vision-language/)
 - (2024, Paper) [Depth from Videos in the Wild: Unsupervised Monocular Depth Learning from Unknown Cameras](https://arxiv.org/abs/1904.04998)
 - (2024, Vidoe) [Deformable DETR](https://www.youtube.com/watch?v=9UG4amweIjk)
 - (2023, Video) [TrackFormer: Multi-Object Tracking with Transformers](https://www.youtube.com/watch?v=q1OaqRj-Pmo)
+- (2020, Paper) [Scalability in Perception for Autonomous Driving: Waymo Open Dataset](https://arxiv.org/abs/1912.04838)
 - (2020, Video) [DETR: End-to-End Object Detection with Transformers](https://www.youtube.com/watch?v=T35ba_VXkMY)
+
+Simulation
+- (2025, Paper) [SceneDiffuser++: City-Scale Traffic Simulation via a Generative World Model](https://arxiv.org/abs/2506.21976v1)
+- (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
+- (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
+- (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
 
 Physics
 - (2021, Video) [Camera Calibration](https://www.youtube.com/playlist?list=PL2zRqk16wsdoCCLpou-dGo7QQNks1Ppzo)
@@ -61,6 +59,7 @@ Competitions
 - [Waymo Open Dataset Challenges](https://waymo.com/open/challenges/)
 - [nuPlan Challenge](https://www.nuscenes.org/)
 - [CARLA AD Challenge](https://leaderboard.carla.org/)
+- [Artoverse Challenge](https://www.argoverse.org/index.html)
 
 Blogs
 - [Waymo](https://waymo.com/blog)
