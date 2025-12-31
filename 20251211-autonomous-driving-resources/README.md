@@ -28,6 +28,7 @@ Prediction & Planning
 - (2024, Paper) [Scaling Motion Forecasting Models with Ensemble Distillation](https://waymo.com/research/scaling-motion-forecasting-models-with-ensemble-distillation/)
 - (2024, Paper) [MoST: Multi-modality Scene Tokenization for Motion Prediction](https://waymo.com/research/most-multi-modality-scene-tokenization-for-motion-prediction/)
 - (2024, Paper) [PLUTO: Pushing the Limit of Imitation Learning-based Planning for Autonomous Driving](https://arxiv.org/abs/2404.14327)
+- (2024, Paper) [Towards learning-based planning:The nuPlan benchmark for real-world autonomous driving](https://arxiv.org/abs/2403.04133v1)
 - (2023, Paper) [MotionLM: Multi-Agent Motion Forecasting as Language Modeling](https://arxiv.org/abs/2309.16534)
 - (2022, Paper) [Safe Real-World Autonomous Driving by Learning to Predict and Plan with a Mixture of Experts](https://arxiv.org/abs/2211.02131)
 - (2021, Paper) [Large Scale Interactive Motion Forecasting for Autonomous Driving : The Waymo Open Motion Dataset](https://arxiv.org/abs/2104.10133)
@@ -45,6 +46,10 @@ Simulation
 - (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
 - (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
 - (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
+
+Control
+- (2025, Paper) [A comparative study on trajectory tracking control methods for automated vehicles](https://www.nature.com/articles/s41598-025-01365-9)
+- (2021, Paper) [Simulation Performance Evaluation of Pure Pursuit, Stanley, LQR, MPC Controller for Autonomous Vehicles](https://ieeexplore.ieee.org/document/9517448)
 
 Physics
 - (2021, Video) [Camera Calibration](https://www.youtube.com/playlist?list=PL2zRqk16wsdoCCLpou-dGo7QQNks1Ppzo)
