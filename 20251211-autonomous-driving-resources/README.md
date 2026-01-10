@@ -49,6 +49,7 @@ Simulation
 
 Control
 - (2025, Paper) [A comparative study on trajectory tracking control methods for automated vehicles](https://www.nature.com/articles/s41598-025-01365-9)
+- (2024, Book) [Chapter 17. Optimal Control](https://motion.cs.illinois.edu/RoboticSystems/OptimalControl.html) of [Robotic Systems](https://motion.cs.illinois.edu/RoboticSystems/Book.html)
 - (2021, Paper) [Simulation Performance Evaluation of Pure Pursuit, Stanley, LQR, MPC Controller for Autonomous Vehicles](https://ieeexplore.ieee.org/document/9517448)
 
 Physics
