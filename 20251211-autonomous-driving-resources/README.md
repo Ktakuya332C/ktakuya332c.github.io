@@ -56,16 +56,20 @@ Physics
 - (2021, Video) [Camera Calibration](https://www.youtube.com/playlist?list=PL2zRqk16wsdoCCLpou-dGo7QQNks1Ppzo)
 - (2020, Video) [Vehicle Dynamics and Control](https://www.youtube.com/playlist?list=PLW3FM5Kyc2_4PGkumkAHNXzWtgHhaYe1d)
 
-Conferences & Workshops
-- [CVPR 2025 Workshop on Autonomous Driving](https://cvpr2025.wad.vision/)
-- [Distillation of Foundation Models for Autonomous Driving](https://wdfm-ad.github.io/)
-- [Machine Learning for Autonomous Driving](https://ml4ad.github.io/)
-
 Competitions
 - [Waymo Open Dataset Challenges](https://waymo.com/open/challenges/)
 - [nuPlan Challenge](https://www.nuscenes.org/)
 - [CARLA AD Challenge](https://leaderboard.carla.org/)
 - [Artoverse Challenge](https://www.argoverse.org/index.html)
+
+Conferences (Computer Vision & Robotics)
+- CVPR : Computer Vision and Pattern Recognition
+- ICCV : International Conference on Computer Vision
+- ECCV : European Computer Vision Association
+- ICRA : International Conference on Robotics & Automation
+- IROS : International Conference on Intelligent Robots and Systems
+- CoRL : Conference on Robot Learning
+- RSS : Robotics Science and Systems
 
 Blogs
 - [Waymo](https://waymo.com/blog)
