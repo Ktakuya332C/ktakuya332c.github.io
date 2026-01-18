@@ -100,7 +100,9 @@ u_t(x) &= \int u_t(x | z) \frac{p_t(x | z) p_{data}(z)}{p_t(x)} dz \\
 Here, $u_t^{target}$ is the marginal vector field
 $$ u_t^{target}(x) = \int u_t^{target}(x | z) \frac{p_t(x | z) p_{data}(z)}{p_t(x)} dz, $$
 
-and $\nabla \ln p_t(x) $ is the "marginal score function" .
+and $\nabla \ln p_t(x) $ is the "marginal score function"
+
+$$ \ln p_t(x) = \int \nabla \ln p_t(x | z) \frac{p_t(x | z) p_{data}(z)}{p_t(x)} dz. $$
 
 Thus, the solution in the general case $u_t(x | t)$ is given a linear combination of the marginal vector field $u_t^{target}$ and the marginal score field $\nabla \ln p_t(x)$.
 
