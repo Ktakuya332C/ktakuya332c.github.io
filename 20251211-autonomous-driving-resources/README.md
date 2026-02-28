@@ -44,6 +44,7 @@ Perception
 Simulation
 - (2025, Paper) [SceneDiffuser++: City-Scale Traffic Simulation via a Generative World Model](https://arxiv.org/abs/2506.21976v1)
 - (2025, Blog) [GAIA-2, Wayve](https://wayve.ai/thinking/gaia-2/)
+- (2024, Paper) [Bench2Drive: Towards Multi-Ability Benchmarking of Closed-Loop End-To-End Autonomous Driving](https://arxiv.org/abs/2406.03877)
 - (2023, Paper) [Waymax: An Accelerated, Data-Driven Simulator forLarge-Scale Autonomous Driving Research](https://waymo.com/research/waymax/)
 - (2023, Paper) [DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving](https://arxiv.org/abs/2309.09777)
 
@@ -60,7 +61,7 @@ Competitions
 - [Waymo Open Dataset Challenges](https://waymo.com/open/challenges/)
 - [nuPlan Challenge](https://www.nuscenes.org/)
 - [CARLA AD Challenge](https://leaderboard.carla.org/)
-- [Artoverse Challenge](https://www.argoverse.org/index.html)
+- [Argoverse Challenge](https://www.argoverse.org/index.html)
 
 Conferences (Computer Vision & Robotics)
 - CVPR : Computer Vision and Pattern Recognition
